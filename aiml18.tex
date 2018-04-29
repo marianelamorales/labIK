@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
+\usepackage{color}
 \floatstyle{boxed} 
 \restylefloat{figure}
 
@@ -54,6 +55,8 @@ One possible-world semantics was established as a solid base to define modal log
 
 Labelled deduction has been more generally proposed by Gabbay in the 80’s as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics. For modal logics it can also take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson \cite{Simpson}, Vigano \cite{Vigano} and Negri\cite{Negri}. These formalisms make explicit use not only of labels, but also of relational atoms. 
 
+\section{Preliminaries}
+
 Labelled sequents are formed from by labelled formulas of the form $x \colon A$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\G \Rightarrow \Right$ where $\G$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
 
 \begin{figure}[h]
@@ -75,21 +78,96 @@ $\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$
 \caption{System labK}
 \end{figure}
 These rule schemes can occur in different contexts and different calculi. The context that interests us is when it is applied to modal logic.
+\\
 
-Echoing to the definition of bi-relational structures, the straightforward extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation R and another one for the intuitionistic relation $\leq$. This is the approach developed by Maffezioli, Naibo and Negri in \cite{Maffezioli}. Therefore, the idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $x$R$y$, and preorder atoms of the form $x \leq y$, where x, y range over a set of labels and A is an intuitionistic modal formula.
+The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
 
-A two-sided intuitionistic labelled sequent would be of the form $\G$, $\Left $ $\Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. We then obtain a proof system lab$\heartsuit $IK (\textbf{Fig. 2}) for intuitionistic modal logic in this formalism.
+The Kripke semantics for intuitionistic modal logic combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
 
-\section{Capturing intuitionistic modal logics with labels}
-As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
+\begin{definition}
+A bi-relational frame $\F$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds W with two binary relations: $R$ $\subseteq$ $W \times W$ and $\le$ a preorder relation on $W$ satysfing the conditions:\\
 
-\begin{theorem}
-A formula $A$ is provable in the calculus lab$\heartsuit$IK if and only if $A$ is valid in every bi-relational frame.
+(F1) For all worlds $u, v, v'$, if $u$R$v$ and $v \le v'$, there exists a $u'$ such that $u \le u'$ and $u'$R$v'$.\\
+
+(F2) For all worlds $u', u, v$, if $u \le v$, there exists a $v'$ such that $u'$R$v'$ and $v\le v'$.\\
+\end{definition}
+
+\begin{definition}
+A bi-relational model $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V$ a monotone valuation function $V: W$$\rightarrow$ $2^{A}$ which is a function that maps each world $w$ to the subset of propositional atoms that are true in $w$, subject to:
+\begin{center}
+$w \le w'$ $\Rightarrow$ $V(w)$ $\subseteq$ $V(w')$
+\end{center}
+
+\end{definition}
+
+\vspace{4mm}
+
+As in the classical case, we write $w \Vdash a$ iff $a \in V(w)$ and we extend this relation to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+
+$w \Vdash \bot$ iff
+
+$w \Vdash \vls(A.B)$ iff $w \Vdash A$ and $w \Vdash B$
+
+$w \Vdash \vls[A.B]$ iff $w \Vdash A$ or $w \Vdash B$
+
+$w \Vdash A \vljm B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
+
+$w \Vdash \square A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'$R$u$, $u \Vdash A$
+
+$w \Vdash \lozenge A$ iff there exists a world $u \in W$ such that $w$R$u$ and $u \Vdash A$.
+
+We write $w \not \Vdash A$  if it is not the case that $w\Vdash A$.\\
+
+\begin{definition}
+A formula $A$ is satisfied in a model $\M = \langle W, R, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
+\end{definition}
+
+\begin{definition}
+A formula $A$ is valid in a frame $\F = \langle W, R, \le \rangle$, if for all valuations $V$, $A$ is satisfied in $\langle W, R, \le, V \rangle$.
+\end{definition}
+
+\begin{figure}[h]
+\begin{center}
+$\vlderivation{\vlinf{\id}{}{\G, \Left, x \colon a \Rightarrow x \colon a }{}}$
+\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\G, \Left, x\colon \bot \Rightarrow z\colon A}{}}$
+\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\G, \Left \Rightarrow x \colon \top}{}}$
+
+\vspace{2mm}
+
+$\vlinf{\andleflab}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\G, \Left, x\colon \vls(A.B,x \colon A, x \colon B \Rightarrow z \colon C)}$\hspace{5mm}$\vliinf{\andriglab}{}{\G,\Left \Rightarrow x \colon \vls(A.B)}{\G, \Left \Rightarrow x \colon A}{\G, \Left \Rightarrow x \colon B}$
+
+\vspace{2mm}
+$\vliinf{\orleflab}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow  \colon C}{\G, \Left, x \colon \vls[A.B], x \colon A \Rightarrow z \colon C}{\G, \Left, x \colon \vls[A.B], x   \colon   B \Rightarrow z \colon C}$
+
+\vspace{2mm}
+
+$\vlinf{\orriglabo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\G, \Left \Rightarrow x   \colon   A}$
+\hspace{7mm}$\vlinf{\orriglabt}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\G, \Left \Rightarrow x \colon  B}$
+
+\vspace{2mm}
+
+$\vliinf{\illab}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\G, \Left, x \colon A \vljm B \Rightarrow x \colon A}{\G, \Left, x \colon A \vljm B, x \colon B \Rightarrow z \colon C}$
+
+\vspace{2mm}
+
+$\vlinf{\irlab}{}{\G, \Left \Rightarrow x \colon A \vljm B}{\G, \Left, x \colon A \Rightarrow x \colon B}$
+
+\vspace{2mm}
+
+\small $\vlderivation {\vlinf{\bllab}{}{\G, x$R$y, \Left x \colon \square A \Rightarrow z \colon B}{\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z \colon B}}$
+\hspace{5mm} \small $\vlinf{\brlab}{$ $y$ fresh$}{\G, \Left \Rightarrow x \colon \square A}{\G, x$R$y, \Left \Rightarrow y \colon A}$
+
+\vspace{2mm}
+
+$\vlinf{\dllab}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\G, x$R$y, \Left, x \colon \lozenge A, y \colon A \Rightarrow z \colon B}$
+\hspace{5mm}$\vlinf{\drlab}{}{\G, x$R$y, \Left,  \Rightarrow x \colon \lozenge A}{\G, x$R$y, \Left \Rightarrow y \colon A}$
+
+\end{center}
+\caption{System labIK}
+\end{figure}
+
+\begin{theorem}(Fischer-Servi \cite{Fischer}, Plotin and Stirling \cite{Plotin})A formula $A$ is a theorem of labIK if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
-
-We show that each rule from our system is sound as we also present a syntactic completeness proof with respect the Hilbert system: we prove all Hilbert axioms using the rules from our system (i.e. proof of all propositional intuitionistic axioms, the five variants of k axiom from the intuitionistic syntax, simulate the necessitation rule and simulate modus ponens). 
-
-Furthermore, we present a completeness proof for our system lab$\heartsuit$IK using the Simpson system. The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. We show the proof by case analysis. Most of the rules from Simpson system are the same as the rules in the system lab$\heartsuit$IK, then we prove for the rules that are different.
 
 \begin{figure}[h]
 \begin{center}
@@ -150,9 +228,59 @@ $\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left, \Right}$
 
 \end{figure}
 
+\section{Capturing intuitionistic modal logics with labels}
+
+Echoing to the definition of bi-relational structures, the straightforward extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation R and another one for the intuitionistic relation $\leq$. This is the approach developed by Maffezioli, Naibo and Negri in \cite{Maffezioli}. Therefore, the idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $x$R$y$, and preorder atoms of the form $x \leq y$, where x, y range over a set of labels and A is an intuitionistic modal formula.
+
+A two-sided intuitionistic labelled sequent would be of the form $\G$, $\Left $ $\Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. We then obtain a proof system lab$\heartsuit $IK (\textbf{Fig. 3}) for intuitionistic modal logic in this formalism.
+
+As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
+
+\begin{theorem}
+A formula $A$ is provable in the calculus lab$\heartsuit$IK if and only if $A$ is valid in every bi-relational frame.
+\end{theorem}
+ 
+\begin{figure}[h]
+
+\begin{center}
+
+$\vlderivation { \vlin {\ids}{}{\G, \Left, x \colon a \Rightarrow x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\G, \Left, x \colon \bot \Rightarrow z\colon A}{\vlhy {}}}$
+
+\vspace{3mm}
+
+$\vlderivation {\vlin {\svlef}{}{\G, \Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A, x \colon B \Rightarrow z \colon C}}}$
+\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\G, \Left, \Rightarrow x \colon \vls(A.B)}{\vlhy {\G, \Left \Rightarrow x \colon A }}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+
+\vspace{3mm}
 
 
-\newpage
+$\vlderivation {\vliin {\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A \Rightarrow z \colon C}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
+\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon A}}}$
+\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+
+\vspace{3mm}
+
+$\vlderivation {\vliin{\sil}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\vlhy {\G, \Left \Rightarrow x \colon A}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
+\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\G,  \Left, x \colon A \Rightarrow x \colon B}{\vlhy {\G, \Left, x \colon A \Rightarrow x \colon B}}}$
+
+\vspace{3mm}
+
+$\vlderivation { \vlin {\sbl}{}{\G, x$R$y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
+\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A}}}$
+
+\vspace{3mm}
+
+$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x$R$y, \Left, y \colon A \Rightarrow z \colon B}}}$
+\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x$R$y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A }}}$
+
+\end{center}
+\caption{Simpson system}
+\end{figure}
+
+We show that each rule from our system is sound as we also present a syntactic completeness proof with respect the Hilbert system: we prove all Hilbert axioms using the rules from our system (i.e. proof of all propositional intuitionistic axioms, the five variants of k axiom from the intuitionistic syntax, simulate the necessitation rule and simulate modus ponens).
+
+Furthermore, we present a completeness proof for our system lab$\heartsuit$IK using the Simpson system. The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. We show the proof by case analysis. Most of the rules from Simpson system are the same as the rules in the system lab$\heartsuit$IK, then we prove for the rules that are different.
+
 
 \begin{thebibliography}{4}
 \bibitem{Maffezioli}
@@ -172,6 +300,13 @@ Luca Viganò. \emph{Labelled Non-Classical Logic}. Kluwer Academic Publisher, 20
 
 \bibitem{Marin}
 Sonia Marin. \emph{Modal proof theory through a focused telescope}. PhD thesis, Université Paris-Saclay, 2017.
+
+\bibitem{Fischer}
+Gisèle Fischer Servi.\emph{ Axiomatizations for some intuitionistic modal logics}. Rendiconti del Seminario Matematico dell’ Universit`a Politecnica di Torino, 42(3):179–194, 1984.
+
+\bibitem{Plotin}
+Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J. Y. Halpern, editor,1st Conference on Theoretical Aspects of Reasoning About Knowledge.
+Morgan Kaufmann, 1986.
 
 \end{thebibliography}
 
