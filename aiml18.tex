@@ -81,6 +81,14 @@ logic). In this short note we propose a system that unifies both, and
 thus gives full credit to the birelational semantics for
 intuitionistic modal logics.
 
+For sequent systems for intuitionistic logics there is always a choice
+to be made: make the system \emph{single conclusion} following
+Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
+Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
+variant because of the closer correspondence to the semantics. In that
+respect, our system is closer to~\cite{kuz:str} than
+to~\cite{Simpson} and~\cite{mar:str}.
+
 \section{Preliminaries}
 
 Labelled sequents are formed from by labelled formulas of the form $x \colon A$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\G \Rightarrow \Right$ where $\G$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
@@ -334,6 +342,12 @@ Gisèle Fischer Servi.\emph{ Axiomatizations for some intuitionistic modal logic
 Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J. Y. Halpern, editor,1st Conference on Theoretical Aspects of Reasoning About Knowledge.
 Morgan Kaufmann, 1986.
 
+\bibitem{kuz:str}
+Roman Kuznets and Lutz Stra{\ss}burger. \emph{Maehara-style Modal Nested Calculi}. Research report, Inria RR-9123, 2017.
+  
+\bibitem{mar:str}
+Sonia Marin and Lutz Stra{\ss}burger. \emph{Label-free Modular Systems for Classical and Intuitionistic Modal Logics}. In Advances in Modal Logics, 2014.
+  
 \end{thebibliography}
 
 \end{document}
