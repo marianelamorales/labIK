@@ -29,19 +29,33 @@
 %The following line defines the page header consisting of the surnames of the authors.
 % Please include only the last names! 
 % Separate by commas except the last two surnames which are separated by an "and".
-\def\lastname{Surname1, Surname2, Surname3, ..., Surname(n-1) and Surname(n)}
+\def\lastname{Marin, Morales, and Stra{\ss}burger}
 
 \begin{document}
 
 \begin{frontmatter}
   \title{Descomposing labelled proof theory for intuitionistic modal logic}
-  \author{Author}
+  \author{Sonia Marin}
   \address{Affiliation \\ Address }
- \author{Author}
+ \author{Marianela Morales}
  \address{Affiliation \\ Address \\ Address}
-  
-  \begin{abstract}
-  We study labelled deduction for intuitionistic modal logic. We show the possibility of extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logic. For this, we obtain a proof system which is complete with respect to Hilbert system.  Also, we present the proof for completeness using Simpson system.
+   \author{Lutz Stra{\ss}burger}
+ \address{Inria Salclay \& LIX, Ecole polytechnique \\ France}
+
+ \begin{abstract}
+   We present a labelled deduction for intuitionistic modal logic that
+   comes with two relation symbols, one for the accessible world
+   relation associated with the Kripke semantics for modal logics, and
+   one for the preorder relation associated with the Kripke semantics
+   for intuitionistic logic. Thus, our labelled system is in close
+   correspondence to the birelational Kripke models.
+
+
+   %% . We show the possibility of extend labelled sequents
+   %% with a preorder relation symbol in order to capture intuitionistic
+   %% modal logic. For this, we obtain a proof system which is complete
+   %% with respect to Hilbert system.  Also, we present the proof for
+   %% completeness using Simpson system.
   \end{abstract}
 
   \begin{keyword}
@@ -51,9 +65,21 @@
 
 
 \section{Introduction}
-One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
+%%One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
 
-Labelled deduction has been more generally proposed by Gabbay in the 80’s as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics. For modal logics it can also take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson \cite{Simpson}, Vigano \cite{Vigano} and Negri\cite{Negri}. These formalisms make explicit use not only of labels, but also of relational atoms. 
+Labelled deduction has been proposed by Gabbay in the 80’s as a
+unifying framework throughout proof theory in order to provide proof
+systems for a wide range of logics. For modal logics it can also take
+the form of labelled natural deduction and labelled sequent systems as
+used, for example, by Simpson \cite{Simpson}, Vigano \cite{Vigano} and
+Negri\cite{Negri}. These formalisms make explicit use not only of
+labels, but also of relational atoms. To our knowledge, all labelled
+system proposed so far had only one relational symbol, either
+representing the \emph{accessible world relation $R$} (for modal
+logics) or the \emph{future relation $\le$} (for intuitionistic
+logic). In this short note we propose a system that unifies both, and
+thus gives full credit to the birelational semantics for
+intuitionistic modal logics.
 
 \section{Preliminaries}
 
