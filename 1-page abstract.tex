@@ -318,7 +318,7 @@ and developing fully the idea of~\cite{Maffezioli}.
 %The Kripke semantics for intuitionistic modal logic combines the one for intuitionistic propositional logic and the one for classical modal logic.%, using two distinct relations on the set of worlds.
 
 %\begin{definition}
-	A \emph{bi-relational frame}~\cite{Fischer} $\B$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with an {accessibility relation} $R$ and a preorder $\le$, satisfying:
+	A \emph{bi-relational frame}~\cite{Fischer, Plotkin} $\B$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with an {accessibility relation} $R$ and a preorder $\le$, satisfying:
 	\begin{itemize}
 		\item[($F_1$)] For all worlds $x$, $y$, $z$, if $xRy$ and $y \le z$, there exists a $u$ such that $x \le u$ and $uRz$.
 		
@@ -345,42 +345,56 @@ $$\vlinf{\BOX_\rn{L}}{}{\B, \Left, x \le y, yRz, x \colon \BOX A \SEQ \Right}{\B
 %
 $$\vlinf{\BOX_\rn{R}}{\text{\footnotesize $y$, $z$ fresh}}{\B, \Left \Rightarrow \Right, x \colon \BOX A}{\B, x \le y, yRz, \Left \Rightarrow \Right, z \colon A}$$
 
-\small
-$$
-\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{A} \SEQ \labels{u}{A}}{
-								\vlhy{}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-$$
+By complementing these rules with the standard labelled rules for intuitionistic modal logic of~\cite{Simpson}, we get a system that is sound and complete wrt.~the birelational semantics.
 
-$$
-\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\blacklozenge_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-$$
+In~\cite{Plotkin}, Plotkin and Sterling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
+\begin{itemize}
+	\item[($\blacklozenge_\rn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
+\end{itemize}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{w \rel v, v \rel u, \Left \SEQ \Right}{w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+
+%\small
+%$$
+%\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+%		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+%			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{A} \SEQ \labels{u}{A}}{
+%								\vlhy{}
+%							}
+%						}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$$
+%
+%$$
+%\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+%		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+%			\vlin{\blacklozenge_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+%						\vlhy{}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$$
 
 
 %
