@@ -190,7 +190,7 @@
 \begin{document}
 
 %% Title information
-\title{Decomposing labelled proof theory\\for intuitionistic modal logic}         %% [Short Title] is optional;
+\title[Decomposing labelled proof theory for intuitionistic modal logic]{Decomposing labelled proof theory\\ for intuitionistic modal logic}         $$[Short Title] is optional;
                                         %% when present, will be used in
                                         %% header instead of Full Title.
 %\titlenote{with title note}             %% \titlenote is optional;
@@ -334,16 +334,17 @@ In this short note we propose a system that unifies both, and
 thus is able to use the full power of the bi-relational semantics for
 intuitionistic modal logics.
 
-\sonia{Removed paragraph. Simpson's system can easily be made multi-conclusion in the style of Maehara without the $\le$-atoms.}
-%For sequent systems for intuitionistic logics there is always a choice
-%to be made: make the system \emph{single conclusion} following
-%Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
-%Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
-%variant because of the closer correspondence to the semantics. In that
-%respect, our system is closer to~\cite{kuz:str} than
-%to~\cite{Simpson} and~\cite{mar:str}.
+\sonia{Removed paragraph. Simpson's system can easily be made multi-conclusion in the style of Maehara without the $\le$-atoms.}\lutz{maybe, but getting all the theorems right is not so easy, we had a hard time in the nested variant}
 
-\section{Preliminaries\todo{give a more informative title}}
+For sequent systems for intuitionistic logics there is always a choice
+to be made: make the system \emph{single conclusion} following
+Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
+Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
+variant because of the closer correspondence to the semantics. In that
+respect, our system is closer to~\cite{kuz:str} than
+to~\cite{Simpson} and~\cite{mar:str}.
+
+\section{Preliminaries on intuitionistic modal logics}
 
 \sonia{Removed the part on the classical labelled calculus. Don't think we need it in a short version.}
 %%Labelled sequents are formed from by labelled formulas of the form $x \colon A$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\G \Rightarrow \Right$ where $\G$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
