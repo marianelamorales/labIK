@@ -66,9 +66,12 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{color}
+\usepackage{bm}
+
 \floatstyle{boxed} 
 \restylefloat{figure}
 %\usepackage{colonequals}
+\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
 
 %% Marianela's macros
 \renewcommand{\G}{\mathcal{G}}
@@ -174,6 +177,15 @@
 \newcommand*{\BOX}{\mathord{\Box}}
 \newcommand*{\DIA}{\mathord{\Diamond}}
 
+
+\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
+\newcommand{\SEQ}{\Rightarrow}
+\newcommand*{\DD}{\mathcal{D}}
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\invr}[1]{#1^\bullet}
+\newcommand*{\rel}{R}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_{L#1}}%^\lab}}
 
 \begin{document}
 
@@ -300,9 +312,7 @@ correspondence to the birelational Kripke models.
 \section{Introduction}
 %%One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
 
-\emph{Labelled deduction} has been proposed by Gabbay 
-\todo{add reference}
-in the 80’s as a unifying framework throughout proof theory in order to provide proof
+\emph{Labelled deduction} has been proposed by Gabbay~\cite{Gabbay} in the 80's as a unifying framework throughout proof theory in order to provide proof
 systems for a wide range of logics. 
 %
 For modal logics it can take
@@ -375,10 +385,16 @@ intuitionistic modal logics.
 	%We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
 }
 
-The Kripke semantics for intuitionistic modal logic combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
+\marianela{is this enough as an introduction of the axiomatisations to present the theorem 2.5?}
+
+The axiomatisation that is now generally accepted as intuitionistic modal logic denoted by IK was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi ~\cite{Fischer}, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. It then was investigated in detail in ~\cite{Simpson}, in which strong arguments are given in favour of this axiomatic definition: it allows for adapting to intuitionistic logic the standard embedding of modal logic into first-order logic, and also provides an extension of the standard Kripke semantics for classical modal logic to the intuitionistic case.
+
+
+The Kripke semantics for IK was first defined by Fischer-Servi in ~\cite{Fischer}.
+This semantics for intuitionistic modal logic combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
 
 \begin{definition}
-	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$: $R$ being the modal \emph{accessibility relation} and $\le$ a preorder, satisfying the following conditions:
+	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$: $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
 	\begin{itemize}
 		\item[(F1)] For all worlds $u, v, v'$, if $u$R$v$ and $v \le v'$, there exists a $u'$ such that $u \le u'$ and $u'$R$v'$.
 		
@@ -412,6 +428,13 @@ $w \Vdash \square A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vd
 $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 %We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
+
+We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \vljm \bot$).
+
+From the monotonicity of the valuation function $V$ , we get a monotonicity property for the relation:\begin{proposition}(Monotonicity) 
+For any formula $A$ and for $w, w' \in W$, if $w \le w'$ and $w \Vdash A$, then $w' \Vdash A$.
+
+\end{proposition}
 
 \begin{definition}
 	A formula $A$ is \emph{satisfied} in a model $\M = \langle W, R, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
@@ -472,6 +495,10 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 \section{Capturing intuitionistic modal logics with labels}
 
 \sonia{I moved Simpson's system $\lab\IK$ here as we need to make explicit that we are aware of his approach and we propose something else.}
+
+Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
+This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system labIK (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
+
 \begin{figure}%[h]
 	
 	\begin{center}
@@ -511,7 +538,9 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 	\label{fig:labIK}
 \end{figure}
 
-\todo{Some background needs to be added}
+
+
+\todo{Some background needs to be added} \marianela{what about the paragraph that I just added before?}
 \begin{theorem}[Simpson~\cite{Simpson}]
 	\label{thm:simpson-sound-compl}
 	A formula $A$ is provable in the calculus $\lab\IK$ if and only if $A$ is valid in every bi-relational frame.
@@ -587,7 +616,7 @@ The idea is to extend labelled sequents with a preorder relation symbol in order
 
 A two-sided intuitionistic labelled sequent would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. 
 %
-We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism.
+We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism. \marianela{I can't put the figure 2 before this!!}
 %
 %As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
@@ -600,7 +629,81 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 
 On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
 %
-On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}.
+On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. \marianela{Sonia, what do you think about mention your result of completeness with cut elimination?}
+
+To show completeness wrt.~Simpson's $\lab\IK$ we obtain the proof for the next proposition:\marianela{I do not know if it is a good idea to add this but...}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item\label{StoM-seq} If there is a proof $\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \labels{z}{C}}}$ in $\lab\IK$ then there is a proof $\vlderivation{\vlhtr{\DD^\rn{m}}{\G, \Left \SEQ \labels{z}{C}}}$ in $\lab\heartsuit\IK$.
+		
+		\item\label{MtoS-seq} If there is a proof $\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \Right}}$ in $\lab\heartsuit\IK$ then there is a proof $\vlderivation{\vlhtr{\DD^\rn{s}}{\G, \Left \SEQ \labels{z}{C}}}$ in $\lab\IK$.
+	\end{enumerate}
+\end{proposition}
+
+\vspace{2mm}
+
+On the other hand, as part of the proof of Theorem~\ref{thm:simpson-sound-compl}, we obtain the proof for different lemmas such as:
+
+\begin{lemma}\label{lem:weak}\hbox{}\quad
+	\begin{enumerate}
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \Right, \labels{x}{\BOT}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\bm\BOT}}{\G, \Left \SEQ \Right}}$
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\G, \Left, \labels{x}{\TOP} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\bm\TOP}}{\G, \Left \SEQ \Right}}$
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\rn w}}{\G, x \rel y, u \le v, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}}$
+	\end{enumerate}
+\end{lemma}
+
+\begin{lemma}\label{lem:inv}\hbox{}\quad
+	\begin{enumerate}
+	\item
+	If there exists a proof 
+	$\vlderivation{\vlhtr{\DD}{\G, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
+	then there exists a proof 
+	$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\G, \Left, \labels{y}{B} \SEQ \Right}}$
+	of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+	
+	\item
+	If there exists a proof 
+	$\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
+	then there exists a proof 
+	$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\G, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
+	of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+	
+	\item 
+	If there exists a proof 
+	$\vlderivation{\vlhtr{\DD}{\G, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
+	then there exists a proof 
+	$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\G, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
+	of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
+	
+	\item 
+	If there exists a proof 
+	$\vlderivation{\vlhtr{\DD}{\G, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
+	then there exists a proof 
+	$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\G, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
+	of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+	
+	\end{enumerate}
+\end{lemma}
+
+
+
+
+
 
 %We show that each rule from our system is sound.
 %
@@ -613,6 +716,9 @@ On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $
 %We show the proof by case analysis. 
 %
 %Most of the rules from Simpson system are the same as the rules in the system lab$\heartsuit$IK, then we prove for the rules that are different.
+
+
+
 
 \begin{thebibliography}{4}
 	\bibitem{Maffezioli}
@@ -640,6 +746,12 @@ On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $
 	Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J. Y. Halpern, editor,1st Conference on Theoretical Aspects of Reasoning About Knowledge.
 	Morgan Kaufmann, 1986.
 	
+	\bibitem{Ewald}
+	W. B. Ewald. \emph{Intuitionistic tense and modal logic}. The Journal of Symbolic Logic, 51(1):166–179, 1986.
+
+	\bibitem{Gabbay}
+	Dov M. Gabbay. \emph{Labelled Deductive Systems}. Clarendon Press, 1996.
+
 	%	\bibitem{kuz:str}
 	%	Roman Kuznets and Lutz Stra{\ss}burger. \emph{Maehara-style Modal Nested Calculi}. Research report, Inria RR-9123, 2017.
 	
