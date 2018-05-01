@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{kripke:mlq63}
+Saul~A. Kripke.
+\newblock Semantical analysis of modal logic {I}: Normal modal propositional
+  calculi.
+\newblock {\em Zeitshrift f{\"u}r mathematische Logik and Grundlagen der
+  Mathematik}, 9(5-6):67--96, 1963.
+
+\bibitem{maffezioli:etal:synthese13}
+Paolo Maffezioli, Alberto Naibo, and Sara Negri.
+\newblock The {C}hurch--{F}itch knowability paradox in the light of structural
+  proof theory.
+\newblock {\em Synthese}, 190(14):2677--2716, 2013.
+
+\bibitem{negri:jpl05}
+Sara Negri.
+\newblock Proof analysis in modal logics.
+\newblock {\em Journal of Philosophical Logic}, 34:507--544, 2005.
+
+\bibitem{plotkin:stirling:86}
+Gordon~D. Plotkin and Colin~P. Stirling.
+\newblock A framework for intuitionistic modal logic.
+\newblock In J.~Y. Halpern, editor, {\em 1st Conference on Theoretical Aspects
+  of Reasoning About Knowledge}. Morgan Kaufmann, 1986.
+
+\bibitem{fischer-servi:84}
+Gis\`ele~Fischer Servi.
+\newblock Axiomatizations for some intuitionistic modal logics.
+\newblock {\em Rendiconti del Seminario Matematico dell' Universit\`a
+  Politecnica di Torino}, 42(3):179--194, 1984.
+
+\bibitem{simpson:phd94}
+Alex Simpson.
+\newblock {\em The Proof Theory and Semantics of Intuitionistic Modal Logic}.
+\newblock PhD thesis, University of Edinburgh, 1994.
+
+\end{thebibliography}

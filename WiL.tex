@@ -436,7 +436,7 @@ The Kripke semantics for IK was first defined by Fischer-Servi in ~\cite{Fischer
 This semantics for intuitionistic modal logic combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
 
 \begin{definition}
-	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$: $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
+	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
 	\begin{itemize}
 		\item[(F1)] For all worlds $u, v, v'$, if $u$R$v$ and $v \le v'$, there exists a $u'$ such that $u \le u'$ and $u'$R$v'$.
 		
@@ -446,14 +446,10 @@ This semantics for intuitionistic modal logic combines the Kripke semantics for 
 \end{definition}
 
 \begin{definition}
-	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V: W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
-	\begin{center}
-		$w \le w'$ $\Rightarrow$ $V(w)$ $\subseteq$ $V(w')$
-	\end{center}
-	
+	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
+$$w \le w' \Rightarrow V(w)\subseteq V(w')$$
 \end{definition}
 
-\vspace{4mm}
 
 We write $w \Vdash a$ iff $a \in V(w)$ and we extend this relation to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
 
@@ -590,7 +586,7 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 \end{theorem}
 
 
-\begin{figure}%[h]
+\begin{figure*}%[h]
 	\begin{center}
 		
 		%$\vlinf{\sbot}{}{\G,\Left, x \colon \bot \Rightarrow \Right}{}$
@@ -647,9 +643,9 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 		
 	\end{center}
 	
-	\caption{System $\lab\heartsuit\IK$}
+	\caption{System $\lab\heartsuit\IK$}% \lutz{that figure should be two-column...}}
 	\label{fig:labHIK}
-\end{figure}
+\end{figure*}
 
 Echoing the definition of bi-relational structures, another extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation $R$ and another one for the intuitionistic relation $\leq$. 
 %
