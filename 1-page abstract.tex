@@ -295,12 +295,12 @@
 
 %\section{Introduction}
 
-\emph{Labelled deduction} has been proposed by Gabbay ~\cite{Gabbay} in the 80's as a unifying framework throughout proof theory in order to provide proof
+\emph{Labelled deduction} has been proposed by Gabbay ~\cite{Gabbay} in the 80s as a unifying framework throughout proof theory in order to provide proof
 systems for a wide range of logics. 
 %
 For modal logics it can take for example
 the form of labelled natural deduction and labelled sequent systems, as
-used by Simpson~\cite{Simpson}, Vigano~\cite{Vigano} and
+used by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano} and
 Negri~\cite{Negri}. 
 
 These formalisms make explicit use not only of
@@ -327,7 +327,7 @@ and developing fully the idea of~\cite{Maffezioli}.
 	
 %\end{definition}
 
-Echoing this construction, we define our two-sided intuitionistic labelled sequents to be of the form $\mathcal{B}, \Left \Rightarrow \Right$ where $\B$ denotes a set of relational atoms $xRy$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multiset of labelled formulas $x \colon A$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
+Reflecting this definition, we define our two-sided intuitionistic labelled sequents to be of the form $\mathcal{B}, \Left \Rightarrow \Right$ where $\B$ denotes a set of relational atoms $xRy$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $x \colon A$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
 %
 
 Furthermore, our system has to incorporate the two semantic conditions into deductive rules as follows:
@@ -347,7 +347,7 @@ $$\vlinf{\BOX_\rn{R}}{\text{\footnotesize $y$, $z$ fresh}}{\B, \Left \Rightarrow
 
 By complementing these rules with the standard labelled rules for intuitionistic modal logic of~\cite{Simpson}, we get a system that is sound and complete wrt.~the birelational semantics.
 
-In~\cite{Plotkin}, Plotkin and Sterling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
 \begin{itemize}
@@ -355,9 +355,11 @@ For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA 
 \end{itemize}
 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{w \rel v, v \rel u, \Left \SEQ \Right}{w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
+$$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+%
+These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
 
 %\small
 %$$
