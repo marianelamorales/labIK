@@ -332,7 +332,8 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 \sonia{I moved Simpson's system $\lab\IK$ here as we need to make explicit that we are aware of his approach and we propose something else.}
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
-This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system labIK (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
+%
+This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system $\lab\IK$ (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
 
 \begin{figure}%[h]
 	
@@ -373,9 +374,10 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 	\label{fig:labIK}
 \end{figure}
 
+\todo{Some background needs to be added} 
+\marianela{what about the paragraph that I just added before?}
+\sonia{Ok}
 
-
-\todo{Some background needs to be added} \marianela{what about the paragraph that I just added before?}
 \begin{theorem}[Simpson~\cite{Simpson}]
 	\label{thm:simpson-sound-compl}
 	A formula $A$ is provable in the calculus $\lab\IK$ if and only if $A$ is valid in every bi-relational frame.
@@ -387,9 +389,9 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 		
 		%$\vlinf{\sbot}{}{\G,\Left, x \colon \bot \Rightarrow \Right}{}$
 		%\hspace{7mm}$\vlinf{\ids}{}{\G, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$ \hspace{7mm}$\vlinf{\Stop}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}$
-		$\vlderivation{\vlinf{\id}{}{\G, \Left, x \colon a \Rightarrow x \colon a }{}}$
-		\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\G, \Left, x\colon \bot \Rightarrow z\colon A}{}}$
-		\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\G, \Left \Rightarrow x \colon \top}{}}$
+		$\vlderivation{\vlinf{\id}{}{\G, \Left, x \colon a \Rightarrow \Right, x \colon a }{}}$
+		\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\G, \Left, x\colon \bot \Rightarrow \Right, z\colon A}{}}$
+		\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}}$
 		
 		\vspace{4mm}
 		
@@ -407,7 +409,7 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 		
 		\vspace{4mm}
 		
-		$\vliinf{\sil}{}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\G, \Left, x \le y, x \colon A \vljm B, y \colon B \Rightarrow \Right}$
+		$\vliinf{\sil}{}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\G, \Left, x \le y, y \colon B \Rightarrow \Right}$
 		
 		\vspace{4mm}
 		
@@ -427,7 +429,7 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 		
 		\vspace{2mm}
 		
-		$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left, \Right}$
+		$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$
 		\hspace{7mm} $\vlinf{\trans}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
 		
 		
@@ -451,7 +453,7 @@ The idea is to extend labelled sequents with a preorder relation symbol in order
 
 A two-sided intuitionistic labelled sequent would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. 
 %
-We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism. \marianela{I can't put the figure 2 before this!!}
+We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism. 
 %
 %As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
@@ -460,13 +462,18 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 	A formula $A$ is provable in the calculus $\lab\heartsuit\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\sonia{Rewrote the last two paragraphs more succinctly. Should we say more?}
+\sonia{Rewrote the last two paragraphs more succinctly.}
 
 On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
 %
-On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. \marianela{Sonia, what do you think about mention your result of completeness with cut elimination?}
+On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
 
-%To show completeness wrt.~Simpson's $\lab\IK$ we obtain the proof for the next proposition:\marianela{I do not know if it is a good idea to add this but...}
+\marianela{Sonia, what do you think about mention your result of completeness with cut elimination?}
+\sonia{Yes, I think the cut-elimination result should be stated; we can have it as one global result as in my notes.}
+
+\marianela{I do not know if it is a good idea to add this but...}
+\sonia{Unfortunately we don't have enough space to include the lemmas, as they are quite technical. But they should appear in the long "technical report" version of course.}
+%To show completeness wrt.~Simpson's $\lab\IK$ we obtain the proof for the next proposition:
 %
 %\begin{proposition}
 %	\begin{enumerate}
