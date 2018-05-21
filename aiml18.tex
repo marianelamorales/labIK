@@ -14,7 +14,7 @@
 % definitions specific to your article
 \newcommand{\ob}{[}
 \newcommand{\cb}{]}
-
+                        
 %% Marianela's macros
 \usepackage{virginialake}
 \usepackage{graphicx}
@@ -27,6 +27,11 @@
 
 \input{aiml_macros}
 
+%% Some recommended packages.
+\usepackage{booktabs}   %% For formal tables:
+                        %% http://ctan.org/pkg/booktabs
+\usepackage{subcaption} %% For complex figures with subfigures/subcaptions
+                        %% http://ctan.org/pkg/subcaption
 
 %% Sonia's macros
 \usepackage{colonequals}
@@ -121,8 +126,7 @@
    one for the preorder relation associated with the Kripke semantics
    for intuitionistic logic. 
    %
-   As such, it is in close
-   correspondence with the birelational Kripke models for intuitionistic modal logic.
+   Thus, our labelled system is in close correspondence to the birelational Kripke models.
 
 
    %% . We show the possibility of extend labelled sequents
@@ -150,18 +154,13 @@ used, for example, by Simpson~\cite{Simpson}, Vigano~\cite{Vigano} and
 Negri~\cite{Negri}. 
 %
 These formalisms make explicit use not only of
-labels, but also of relational atoms. 
+labels, but also of relational atoms referring to the accessibility realtion of a Kripke model.
 %
-To our knowledge, all labelled
-systems proposed so far had only one relational symbol, 
-\sonia{Incorrect. We even cite~\cite{Maffezioli} below}
-either representing the \emph{accessible world relation $R$} (for modal
-logics) or the \emph{future relation $\le$} (for intuitionistic
-logic). 
-%
-In this short note we propose a system that unifies both, and
-thus is able to use the full power of the bi-relational semantics for
-intuitionistic modal logics.
+In this short note we propose a system that represents both the \emph{accessibility relation} (for modal
+logics) and the \emph{preorder relation} (for intuitionistic
+logic), using the full power of the bi-relational semantics for
+intuitionistic modal logics,
+and developing fully the idea of~\cite{Maffezioli}. 
 
 \sonia{Removed paragraph. Simpson's system can easily be made multi-conclusion in the style of Maehara without the $\le$-atoms.}
 \lutz{maybe, but getting all the theorems right is not so easy, we had a hard time in the nested variant}
@@ -177,7 +176,6 @@ to~\cite{Simpson} and~\cite{mar:str}.
 
 \section{Intuitionistic modal logics}
 
-\sonia{Removed the part on the classical labelled calculus. Don't think we need it in a short version.}
 %%Labelled sequents are formed from by labelled formulas of the form $x \colon A$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\G \Rightarrow \Right$ where $\G$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
 %%
 %%\begin{figure}[h]
@@ -216,9 +214,6 @@ to~\cite{Simpson} and~\cite{mar:str}.
 	%
 	%We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
 }
-
-\marianela{is this enough as an introduction of the axiomatisations to present the theorem 2.5?}
-\sonia{no, we would need the formal definition. But the text is good.}
 
 The axiomatisation that is now generally accepted as intuitionistic modal logic denoted by IK was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi ~\cite{Fischer}, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
 %
@@ -318,9 +313,7 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %\end{center}
 %\caption{System labIK}
 %\end{figure}
-
-\sonia{Removed the figure as it has nothing to do with the theorem. Fisher-Servi as well as Plotkin and Sterling only give Hilbert-style axiomatisations for the birelational models, no sequent calculi.
-	Therefore, if we want to present this theorem, the axiomatisations also need to be introduced.}
+\marianela{if we present the next theorem: add axiomatisations. If not, we can delete it}
 
 \begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
@@ -328,8 +321,6 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 
 \section{Capturing intuitionistic modal logics with labels}
-
-\sonia{I moved Simpson's system $\lab\IK$ here as we need to make explicit that we are aware of his approach and we propose something else.}
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
 %
@@ -373,10 +364,6 @@ This worked as well in the labelled setting as in the ordinary sequent case: we 
 	\caption{System $\lab\IK$}
 	\label{fig:labIK}
 \end{figure}
-
-\todo{Some background needs to be added} 
-\marianela{what about the paragraph that I just added before?}
-\sonia{Ok}
 
 \begin{theorem}[Simpson~\cite{Simpson}]
 	\label{thm:simpson-sound-compl}
@@ -462,17 +449,27 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 	A formula $A$ is provable in the calculus $\lab\heartsuit\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\sonia{Rewrote the last two paragraphs more succinctly.}
-
 On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
 %
-On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
+\marianela{Removed completeness wrt. Simpson. To be added?}
+%On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
 
-\marianela{Sonia, what do you think about mention your result of completeness with cut elimination?}
-\sonia{Yes, I think the cut-elimination result should be stated; we can have it as one global result as in my notes.}
+In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
+\begin{itemize}
+	\item[($\blacklozenge_\rn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
+\end{itemize}
 
-\marianela{I do not know if it is a good idea to add this but...}
-\sonia{Unfortunately we don't have enough space to include the lemmas, as they are quite technical. But they should appear in the long "technical report" version of course.}
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\G, w \rel v, v \rel u, \Left \SEQ \Right}{\G, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+%
+These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+
+\marianela{Propositions? Lemmas? It is going to be too long...}
+
 %To show completeness wrt.~Simpson's $\lab\IK$ we obtain the proof for the next proposition:
 %
 %\begin{proposition}
