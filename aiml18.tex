@@ -352,11 +352,16 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Capturing intuitionistic modal logics with labels}
+\section{\todo{}}
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
 %
 This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system $\lab\IK$ (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
+
+\todo{Formal definition of our labelled sequent}
+
+\todo{Description of the rules and comparison with standard calculi in particular Simpson's}
+
 
 %\begin{figure}%[h]
 %	
@@ -496,6 +501,7 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 		\item\label{i} $A$ is a theorem of $\IK$ 
 		%
 		\item\label{ii} $A$ is provable in $\lab\heartsuit\IK +\labrn{cut}$ where $\labrn{cut}$ is\quad
+		\todo{}
 %		\smash{%\fbox{
 %			$\vliinf{\labrn{cut}}{}{\Bx_1, \Bx_2, \Labx \SEQ \Rabx}{\Bx_1, \Labx \SEQ \Rabx, \labels{z}{C}}{\Bx_2, \Labx, \labels{z}{C} \SEQ \Rabx}$}%}
 		%
@@ -511,6 +517,9 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 
 \section{Extensions}
 
+$$\vlinf{\blacksquare_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\G, w \rel v, v \rel u, \Left \SEQ \Right}{\G, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
+
+
 In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
@@ -521,11 +530,11 @@ For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
 $$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\G, w \rel v, v \rel u, \Left \SEQ \Right}{\G, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
 
+
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
 %
 These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
 
-\marianela{Propositions? Lemmas? It is going to be too long...}
 
 %To show completeness wrt.~Simpson's $\lab\IK$ we obtain the proof for the next proposition:
 %
@@ -598,43 +607,43 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %
 
 
-Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
-
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{A} \SEQ \labels{u}{A}}{
-								\vlhy{}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-$
-
-Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
-
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\diasym_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-$
+%Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
+%
+%$\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+%		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+%			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{A} \SEQ \labels{u}{A}}{
+%								\vlhy{}
+%							}
+%						}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$
+%
+%Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+%
+%$\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+%		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+%			\vlin{\diasym_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+%						\vlhy{}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$
 
 
 %We show that each rule from our system is sound.
@@ -649,8 +658,8 @@ $
 %
 %Most of the rules from Simpson system are the same as the rules in the system lab$\heartsuit$IK, then we prove for the rules that are different.
 
-
-
+\bibliographystyle{plain}
+\bibliography{references}
 
 \begin{thebibliography}{4}
 	\bibitem{Maffezioli}
