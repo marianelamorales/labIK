@@ -46,6 +46,7 @@
 
 %%% Systems
 \newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
 \newcommand*{\lab}{\mathsf{lab}}
 \newcommand*{\IK}{\mathsf{IK}}
 
@@ -162,17 +163,21 @@ logic), using the full power of the bi-relational semantics for
 intuitionistic modal logics,
 and developing fully the idea of~\cite{Maffezioli}. 
 
-\sonia{Removed paragraph. Simpson's system can easily be made multi-conclusion in the style of Maehara without the $\le$-atoms.}
-\lutz{maybe, but getting all the theorems right is not so easy, we had a hard time in the nested variant}
-\sonia{I did not mean it like that. I mean that the point of our system is not that it is multi-conclusion (it is that it allows us to give systems for some more logics!). This paragraph is confusing as such because it shifts the attention of the reader. I think that we can actually restrict to single conclusion with no difference.}
+%\sonia{Removed paragraph. Simpson's system can easily be made multi-conclusion in the style of Maehara without the $\le$-atoms.}
+%\lutz{maybe, but getting all the theorems right is not so easy, we had a hard time in the nested variant}
+%\sonia{I did not mean it like that. I mean that the point of our system is not that it is multi-conclusion (it is that it allows us to give systems for some more logics!). This paragraph is confusing as such because it shifts the attention of the reader. I think that we can actually restrict to single conclusion with no difference.}
+%
+%For sequent systems for intuitionistic logics there is always a choice
+%to be made: make the system \emph{single conclusion} following
+%Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
+%Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
+%variant because of the closer correspondence to the semantics. In that
+%respect, our system is closer to~\cite{kuz:str} than
+%to~\cite{Simpson} and~\cite{mar:str}.
 
-For sequent systems for intuitionistic logics there is always a choice
-to be made: make the system \emph{single conclusion} following
-Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
-Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
-variant because of the closer correspondence to the semantics. In that
-respect, our system is closer to~\cite{kuz:str} than
-to~\cite{Simpson} and~\cite{mar:str}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Intuitionistic modal logics}
 
@@ -201,7 +206,7 @@ to~\cite{Simpson} and~\cite{mar:str}.
 %%
 %%The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
 
-\sonia{Formulas need to be defined.
+
 	
 	The language of {intuitionisitic modal logic} is obtained from the one of intuitionistic propositional logic by adding the modal connectives $\BOX$ and $\DIA$. %, standing most generally for \emph{necessity} and \emph{possibility}.
 	%
@@ -213,29 +218,32 @@ to~\cite{Simpson} and~\cite{mar:str}.
 	$$
 	%
 	%We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
-}
 
-\marianela{ What about...?
-
-In the intuitionistic case, we work with a different set of connectives. Starting with a set A of
-atomic propositions still denoted a, formulas are constructed from the following grammar:
-
-	$$
-	A  ::=
-	a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
-	$$
-	
-	When we write $\neg A$ in this case, we mean $A \IMP \BOT$.
-	
 Obtaining the intuitionistic variant of K is more involved than the classical variant. Lacking
 De Morgan duality, there are several variants of k that are classically but not intuitionistically
 equivalent. Five axioms have been considered as primitives in the literature. The intuitionistic
 modal logic IK is obtained from ordinary intuitionistic propositional logic by adding:
 \begin{itemize}
 \item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
-\item TODO: write the five variants of K....
+\item 
+\begin{equation*}
+\label{eq:ik}\hskip-2em
+\begin{array}[t]{r@{\;}l}
+\kax[1]\colon&\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)\\%[1ex]
+\kax[2]\colon&\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)\\%[1ex]
+\end{array}
+\qquad
+\begin{array}[t]{r@{\;}l}
+\kax[3]\colon&\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)\\%[1ex]
+\kax[4]\colon&(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)\\%x[1ex]
+\end{array}
+\qquad
+\begin{array}[t]{r@{\;}l}
+\kax[5]\colon&\DIA\BOT\IMP\BOT
+\end{array}
+\end{equation*}
 \end{itemize}
-}
+
 
 The axiomatisation that is now generally accepted as intuitionistic modal logic denoted by IK was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi ~\cite{Fischer}, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
 %
@@ -335,12 +343,14 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %\end{center}
 %\caption{System labIK}
 %\end{figure}
-\marianela{if we present the next theorem: add axiomatisations. If not, we can delete it}
 
 \begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Capturing intuitionistic modal logics with labels}
 
@@ -348,52 +358,53 @@ Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, name
 %
 This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system $\lab\IK$ (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
 
-\begin{figure}%[h]
-	
-	\begin{center}
-		
-		$\vlderivation { \vlin {\ids}{}{\G, \Left, x \colon a \Rightarrow x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\G, \Left, x \colon \bot \Rightarrow z\colon A}{\vlhy {}}}$
-		
-		\vspace{3mm}
-		
-		$\vlderivation {\vlin {\svlef}{}{\G, \Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A, x \colon B \Rightarrow z \colon C}}}$
-		\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\G, \Left, \Rightarrow x \colon \vls(A.B)}{\vlhy {\G, \Left \Rightarrow x \colon A }}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
-		
-		\vspace{3mm}
-		
-		
-		$\vlderivation {\vliin {\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A \Rightarrow z \colon C}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
-		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon A}}}$
-		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
-		
-		\vspace{3mm}
-		
-		$\vlderivation {\vliin{\sil}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\vlhy {\G, \Left \Rightarrow x \colon A}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
-		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\G,  \Left, x \colon A \Rightarrow x \colon B}{\vlhy {\G, \Left, x \colon A \Rightarrow x \colon B}}}$
-		
-		\vspace{3mm}
-		
-		$\vlderivation { \vlin {\sbl}{}{\G, x$R$y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
-		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A}}}$
-		
-		\vspace{3mm}
-		
-		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x$R$y, \Left, y \colon A \Rightarrow z \colon B}}}$
-		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x$R$y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A }}}$
-		
-	\end{center}
-	
-	\caption{System $\lab\IK$}
-	\label{fig:labIK}
-\end{figure}
-
-\begin{theorem}[Simpson~\cite{Simpson}]
-	\label{thm:simpson-sound-compl}
-	A formula $A$ is provable in the calculus $\lab\IK$ if and only if $A$ is valid in every bi-relational frame.
-\end{theorem}
+%\begin{figure}%[h]
+%	
+%	\begin{center}
+%		
+%		$\vlderivation { \vlin {\ids}{}{\G, \Left, x \colon a \Rightarrow x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\G, \Left, x \colon \bot \Rightarrow z\colon A}{\vlhy {}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation {\vlin {\svlef}{}{\G, \Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A, x \colon B \Rightarrow z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\G, \Left, \Rightarrow x \colon \vls(A.B)}{\vlhy {\G, \Left \Rightarrow x \colon A }}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+%		
+%		\vspace{3mm}
+%		
+%		
+%		$\vlderivation {\vliin {\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A \Rightarrow z \colon C}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon A}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation {\vliin{\sil}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\vlhy {\G, \Left \Rightarrow x \colon A}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
+%		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\G,  \Left, x \colon A \Rightarrow x \colon B}{\vlhy {\G, \Left, x \colon A \Rightarrow x \colon B}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation { \vlin {\sbl}{}{\G, x$R$y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x$R$y, \Left, y \colon A \Rightarrow z \colon B}}}$
+%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x$R$y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A }}}$
+%		
+%	\end{center}
+%	
+%	\caption{System $\lab\IK$}
+%	\label{fig:labIK}
+%\end{figure}
+%
+%\begin{theorem}[Simpson~\cite{Simpson}]
+%	\label{thm:simpson-sound-compl}
+%	A formula $A$ is provable in the calculus $\lab\IK$ if and only if $A$ is valid in every bi-relational frame.
+%\end{theorem}
 
 
 \begin{figure*}%[h]
+	\small
 	\begin{center}
 		
 		%$\vlinf{\sbot}{}{\G,\Left, x \colon \bot \Rightarrow \Right}{}$
@@ -466,15 +477,39 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 %
 %As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
-\begin{theorem}
-	\label{thm:sound-compl}
-	A formula $A$ is provable in the calculus $\lab\heartsuit\IK$ if and only if $A$ is valid in every bi-relational frame.
+%\begin{theorem}
+%	\label{thm:sound-compl}
+%	A formula $A$ is provable in the calculus $\lab\heartsuit\IK$ if and only if $A$ is valid in every bi-relational frame.
+%\end{theorem}
+%
+%On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
+%
+%On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
+
+
+\begin{theorem}\label{thm:cutfree-compl}
+	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
+	%
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{i} $A$ is a theorem of $\IK$ 
+		%
+		\item\label{ii} $A$ is provable in $\lab\heartsuit\IK +\labrn{cut}$ where $\labrn{cut}$ is\quad
+%		\smash{%\fbox{
+%			$\vliinf{\labrn{cut}}{}{\Bx_1, \Bx_2, \Labx \SEQ \Rabx}{\Bx_1, \Labx \SEQ \Rabx, \labels{z}{C}}{\Bx_2, \Labx, \labels{z}{C} \SEQ \Rabx}$}%}
+		%
+		\item\label{iii} $A$ is provable in $\lab\heartsuit\IK$
+		%
+		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
+	\end{enumerate}
 \end{theorem}
 
-On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
-%
-\marianela{Removed completeness wrt. Simpson. To be added?}
-%On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensions}
 
 In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
