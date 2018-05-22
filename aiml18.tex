@@ -215,6 +215,28 @@ to~\cite{Simpson} and~\cite{mar:str}.
 	%We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
 }
 
+\marianela{ What about...?
+
+In the intuitionistic case, we work with a different set of connectives. Starting with a set A of
+atomic propositions still denoted a, formulas are constructed from the following grammar:
+
+	$$
+	A  ::=
+	a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
+	$$
+	
+	When we write $\neg A$ in this case, we mean $A \IMP \BOT$.
+	
+Obtaining the intuitionistic variant of K is more involved than the classical variant. Lacking
+De Morgan duality, there are several variants of k that are classically but not intuitionistically
+equivalent. Five axioms have been considered as primitives in the literature. The intuitionistic
+modal logic IK is obtained from ordinary intuitionistic propositional logic by adding:
+\begin{itemize}
+\item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
+\item TODO: write the five variants of K....
+\end{itemize}
+}
+
 The axiomatisation that is now generally accepted as intuitionistic modal logic denoted by IK was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi ~\cite{Fischer}, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
 %
 It then was investigated in detail in ~\cite{Simpson}, in which strong arguments are given in favour of this axiomatic definition: 
@@ -633,6 +655,10 @@ $
 	%	\bibitem{mar:str}
 	%	Sonia Marin and Lutz Stra{\ss}burger. \emph{Label-free Modular Systems for Classical and Intuitionistic Modal Logics}. In Advances in Modal Logics, 2014.
 	
+	\bibitem{Gentzen}
+	Gerhard Gentzen. \emph{Untersuchungen ¨uber das logische Schließen}. I. Mathematische
+Zeitschrift, 39:176–210, 1934
+
 \end{thebibliography}
 
 
