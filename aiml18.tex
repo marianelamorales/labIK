@@ -225,7 +225,7 @@ equivalent. Five axioms have been considered as primitives in the literature. Th
 modal logic IK is obtained from ordinary intuitionistic propositional logic by adding:
 \begin{itemize}
 \item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
-\item 
+\item the following five variants of the $\kax$ axiom. 
 \begin{equation*}
 \label{eq:ik}\hskip-2em
 \begin{array}[t]{r@{\;}l}
@@ -352,11 +352,15 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{\todo{}}
+\section{\todo{title}}
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
 %
 This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system $\lab\IK$ (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
+
+\begin{definition}
+Labelled sequents are formed from by labelled formulas of the form $x \colon A$ and relational or equality atoms of the form $xRy$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\G \SEQ \Right$ where $\G$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
+\end{definition}
 
 \todo{Formal definition of our labelled sequent}
 
@@ -474,7 +478,7 @@ Echoing the definition of bi-relational structures, another extension of labelle
 %
 This is the approach developed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
 %
-The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $x$R$y$, and preorder atoms of the form $x \leq y$, where x, y range over a set of labels and $A$ is an intuitionistic modal formula.
+The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $xRy$, and preorder atoms of the form $x \leq y$, where $x$, $y$ range over a set of labels and $A$ is an intuitionistic modal formula.
 
 A two-sided intuitionistic labelled sequent would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. 
 %
@@ -662,26 +666,26 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 \bibliography{references}
 
 \begin{thebibliography}{4}
-	\bibitem{Maffezioli}
-	Paolo Maffezioli, Alberto Naibo, and Sara Negri. \emph{The Church-Fitch knowability paradox in the light of structural proof theory}. Synthese, 190(14):2677-2716, 2013. 
+	%\bibitem{Maffezioli}
+	%Paolo Maffezioli, Alberto Naibo, and Sara Negri. \emph{The Church-Fitch knowability paradox in the light of structural proof theory}. Synthese, 190(14):2677-2716, 2013. 
 	
 	%	\bibitem{Fitch}
 	%	Frederic B Fitch. \emph{Tree proofs in modal logic}. Journal of Symbolic Logic, 31(1):152, 1966.
 	
-	\bibitem{Negri}
-	Sara Negri. \emph{Proof analysis in modal logics}. Journal of Philosophical Logic, 34:507-544, 2005. 
+	%\bibitem{Negri}
+	%Sara Negri. \emph{Proof analysis in modal logics}. Journal of Philosophical Logic, 34:507-544, 2005. 
 	
-	\bibitem{Simpson}
-	Alex Simpson. \emph{The Proof Theory and Semantics of Intuitionistic Modal Logic}. PhD thesis, University of Edinburgh, 1994. 
+	%\bibitem{Simpson}
+	%Alex Simpson. \emph{The Proof Theory and Semantics of Intuitionistic Modal Logic}. PhD thesis, University of Edinburgh, 1994. 
 	
-	\bibitem{Vigano}
-	Luca Vigan\`o. \emph{Labelled Non-Classical Logic}. Kluwer Academic Publisher, 2000. 
+	%\bibitem{Vigano}
+	%Luca Vigan\`o. \emph{Labelled Non-Classical Logic}. Kluwer Academic Publisher, 2000. 
 	
 	%	\bibitem{Marin}
 	%	Sonia Marin. \emph{Modal proof theory through a focused telescope}. PhD thesis, Université Paris-Saclay, 2017.
 	
-	\bibitem{Fischer}
-	Gis\`ele Fischer-Servi.\emph{ Axiomatizations for some intuitionistic modal logics}. Rendiconti del Seminario Matematico dell’ Universit`a Politecnica di Torino, 42(3):179-194, 1984.
+	%\bibitem{Fischer}
+	%Gis\`ele Fischer-Servi.\emph{ Axiomatizations for some intuitionistic modal logics}. Rendiconti del Seminario Matematico dell’ Universit`a Politecnica di Torino, 42(3):179-194, 1984.
 	
 	\bibitem{Plotkin}
 	Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J. Y. Halpern, editor,1st Conference on Theoretical Aspects of Reasoning About Knowledge.
