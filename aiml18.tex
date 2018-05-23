@@ -49,6 +49,7 @@
 \newcommand*{\kax}[1][]		{\ax{k_{#1}}}
 \newcommand*{\lab}{\mathsf{lab}}
 \newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\labIKp}{\lab\IK_{\le}}
 
 %%% Connectives
 \newcommand*{\NOT}{\neg}
@@ -334,41 +335,42 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 		&
 		$\vlinf{\rlabrn\OR}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
 		\\\\
+%		\multicolumn{2}{c}{
 		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
-		&
-		$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \G$}}{\G, \Left, x \colon A \vljm B \Rightarrow \Right}{\G, \Left \Rightarrow \Right, y \colon A}{\G, \Left, y \colon B \Rightarrow \Right}$
+%		}
+%		\\\\
+%		\multicolumn{2}{c}{
+% 		$\vliinf{\rlabrn\IMP}{}{\G, x \le y, \Left, x \colon A \vljm B \Rightarrow \Right}{\G, x \le y, \Left \Rightarrow \Right, y \colon A}{\G, x \le y, \Left, y \colon B \Rightarrow \Right}$ 
+ 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \G$}}{\G, \Left, x \colon A \vljm B \Rightarrow \Right}{\G, \Left \Rightarrow \Right, y \colon A}{\G, \Left, y \colon B \Rightarrow \Right}$
+% 		}
 		\\\\
 		$\vlinf{\llabrn\BOX}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
 		&
 		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y$R$z \Rightarrow \Right, z \colon A}$
-		
+		\\\\
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x$R$y, y \colon A \Rightarrow \Right}$
+		&
+		$\vlinf{\rlabrn\DIA}{}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
+		\\
+		\multicolumn{2}{c}{
+		$\mbox{\hbox to .9\linewidth{\dotfill}}$
+		}
+		\\
+		$\vlinf{\rn{refl}}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$
+		&
+		$\vlinf{\rn{trans}}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+		\\\\
+		\multicolumn{2}{c}{
+		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\G, xRy, y \le z, \Left \SEQ \Right}{\G, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+		}
+		\\\\
+		\multicolumn{2}{c}{
+		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\G, xRy,x \le z, \Left \SEQ \Right}{\G, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+		}
 	\end{tabular}		
 	
-
-	
-	
-	\vspace{4mm}
-	
-	$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x$R$y, y \colon A \Rightarrow \Right}$
-	\hspace{5mm}$\vlinf{\sdr}{}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
-	
-	
-	\vspace{2mm}
-	
-	
-	\vspace{2mm}
-	
-	$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$
-	\hspace{7mm} $\vlinf{\trans}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
-	
-	
-	\vspace{2mm}
-	
-	$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\G, xRy, y \le z, \Left \SEQ \Right}{\G, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
-	%
-	$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\G, xRy,x \le z, \Left \SEQ \Right}{\G, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
-	\caption{System $\lab\IK_{\le}$}
-	\label{fig:labHIK}
+	\caption{System $\labIKp$}
+	\label{fig:labIKp}
 \end{figure}
 
 \todo{change following paragraph accordingly}
@@ -397,18 +399,18 @@ The idea is to extend labelled sequents with a preorder relation symbol in order
 
 A two-sided intuitionistic labelled sequent would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. 
 %
-We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism. 
+We then obtain a proof system $\labIKp$ (\ref{fig:labHIK}) for intuitionistic modal logic in this formalism. 
 %
-%As we mentioned, we obtain a proof system lab$\heartsuit$IK which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
+%As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
 %\begin{theorem}
 %	\label{thm:sound-compl}
-%	A formula $A$ is provable in the calculus $\lab\heartsuit\IK$ if and only if $A$ is valid in every bi-relational frame.
+%	A formula $A$ is provable in the calculus $\labIKp$ if and only if $A$ is valid in every bi-relational frame.
 %\end{theorem}
 %
 %On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
 %
-%On the other hand, we show that $\lab\heartsuit\IK$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
+%On the other hand, we show that $\labIKp$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
 
 
 \begin{theorem}\label{thm:cutfree-compl}
@@ -419,17 +421,32 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 	\begin{enumerate}
 		\item\label{i} $A$ is a theorem of $\IK$ 
 		%
-		\item\label{ii} $A$ is provable in $\lab\heartsuit\IK +\labrn{cut}$ where $\labrn{cut}$ is %\quad
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ where $\labrn{cut}$ is %\quad
 %		\todo{}
 %		\smash{%\fbox{
 			$$\vliinf{\labrn{cut}}{}{\G_1, \G_2, \Left \SEQ \Right}{\G_1, \Left \SEQ \Right, z \colon C}{\G_2, \Left, z \colon C \SEQ \Right}$$
 %		}%}
 		%
-		\item\label{iii} $A$ is provable in $\lab\heartsuit\IK$
+		\item\label{iii} $A$ is provable in $\labIKp$
 		%
 		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
 	\end{enumerate}
 \end{theorem}
+
+%We show that each rule from our system is sound.
+%
+%We also present a syntactic completeness proof with respect the Hilbert system: we prove all Hilbert axioms using the rules from our system (i.e. proof of all propositional intuitionistic axioms, the five variants of k axiom from the intuitionistic syntax, simulate the necessitation rule and simulate modus ponens).
+%
+%We present a completeness proof for our system $\labIKp$ using the Simpson system. 
+%
+%The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. 
+%
+%We show the proof by case analysis. 
+%
+%Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
+
+
+\todo{In the course of the proof we have to derive the five $\kax$ axioms. As an example, we display the derivation of $\kax[4]$ which illustrates the need of having the rule corresponding to $F_1$ in the system.}
 
 \hspace*{-1.5cm}
 %\scalebox{.9}{
@@ -467,6 +484,9 @@ $
 }$
 %}
 
+\todo{This derivation uses a general version of the identity rule that applies to generic formulas rather than atomic ones. We therefore have to show that such a rule is admissible in our system.
+We display one step of this admissibility proof tat illustrates the need for the rule $F_2$, the other cases are standard.}
+
 $
 \vlderivation{
 	\vlin{\llabrn\DIA}{}{\G, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
@@ -482,17 +502,6 @@ $
 $
 
 
-%We show that each rule from our system is sound.
-%
-%We also present a syntactic completeness proof with respect the Hilbert system: we prove all Hilbert axioms using the rules from our system (i.e. proof of all propositional intuitionistic axioms, the five variants of k axiom from the intuitionistic syntax, simulate the necessitation rule and simulate modus ponens).
-%
-%We present a completeness proof for our system lab$\heartsuit$IK using the Simpson system. 
-%
-%The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. 
-%
-%We show the proof by case analysis. 
-%
-%Most of the rules from Simpson system are the same as the rules in the system lab$\heartsuit$IK, then we prove for the rules that are different.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -675,6 +684,6 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %		%
 %		$\vlinf{\rn{F_2}}{\text{\footnotesize $u$ fresh}}{\G, xRy,x \le z, \Left \SEQ \Right}{\G, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
 %	
-%	\caption{System $\lab\heartsuit\IK$}
+%	\caption{System $\labIKp$}
 %	\label{fig:labHIK}
 %\end{figure}
