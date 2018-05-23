@@ -419,10 +419,11 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 	\begin{enumerate}
 		\item\label{i} $A$ is a theorem of $\IK$ 
 		%
-		\item\label{ii} $A$ is provable in $\lab\heartsuit\IK +\labrn{cut}$ where $\labrn{cut}$ is\quad
-		\todo{}
+		\item\label{ii} $A$ is provable in $\lab\heartsuit\IK +\labrn{cut}$ where $\labrn{cut}$ is %\quad
+%		\todo{}
 %		\smash{%\fbox{
-%			$\vliinf{\labrn{cut}}{}{\Bx_1, \Bx_2, \Labx \SEQ \Rabx}{\Bx_1, \Labx \SEQ \Rabx, \labels{z}{C}}{\Bx_2, \Labx, \labels{z}{C} \SEQ \Rabx}$}%}
+			$$\vliinf{\labrn{cut}}{}{\G_1, \G_2, \Left \SEQ \Right}{\G_1, \Left \SEQ \Right, z \colon C}{\G_2, \Left, z \colon C \SEQ \Right}$$
+%		}%}
 		%
 		\item\label{iii} $A$ is provable in $\lab\heartsuit\IK$
 		%
@@ -430,6 +431,55 @@ We then obtain a proof system lab$\heartsuit$IK (\ref{fig:labHIK}) for intuition
 	\end{enumerate}
 \end{theorem}
 
+\hspace*{-1.5cm}
+%\scalebox{.9}{
+$
+\vlderivation{
+	\vlin{\sir}{\text{\scriptsize $y$ fresh}} {\Rightarrow x \colon (\lozenge A \vljm \square B) \vljm \square (A \vljm B)}{
+		\vlin{\sbr}{\text{\scriptsize $z, w$ fresh}}{x \le y, y\colon \lozenge A \vljm \square B \Rightarrow y \colon \square (A \vljm B)}{
+			\vlin {\sir}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, y \colon \lozenge A \vljm \square B \Rightarrow w \colon A \vljm B }{
+				\vlin {\fone}{}{x \le y, y \le z, w \le u, z \rel w, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
+					\vlin {\trans}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
+						\vliin {\sil}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
+							\vlin {\sdr}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A}{
+								\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
+									\vlin {\ids}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
+										\vlhy {}
+										}
+									}
+								}
+							}{
+%						\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A, t \colon \square B \Rightarrow u \colon B}{
+%							\vlin {\sbl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A, t \colon \square B \Rightarrow u \colon B}{
+%								\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A, t \colon \square B, u \colon B \Rightarrow u \colon B}{
+%									\vlin {\ids}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A, t \colon \square B, u \colon B \Rightarrow u \colon B}{
+										\vlhy {\qquad\vdots\qquad}
+%										}
+%									}
+%								}
+%							}
+						}
+					}
+				}
+			}
+		}
+	}
+}$
+%}
+
+$
+\vlderivation{
+	\vlin{\llabrn\DIA}{}{\G, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+		\vlin{\color{red}{F_2}}{}{\G, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\rlabrn\DIA}{}{\G, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\labrn{id_g}}{}{\G, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+					\vlhy{}
+				}
+			}
+		}
+	}
+}
+$
 
 
 %We show that each rule from our system is sound.
