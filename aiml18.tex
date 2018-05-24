@@ -258,11 +258,11 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 \begin{definition}
 	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ 
 %	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
-	of a set of worlds $W$ equipped with an {accessibility relation} $R$ and a preorder $\le$ satisfying:
+	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ satisfying:
 	\begin{enumerate}
-		\item[(F1)] For $u, v, v' \in W$, if $u$R$v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' R v'$.
+		\item[(F1)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
 		
-		\item[(F2)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' R v'$ and $v\le v'$.
+		\item[(F2)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
 	\end{enumerate}
 	
 \end{definition}
@@ -346,11 +346,11 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 		\\\\
 		$\vlinf{\llabrn\BOX}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
 		&
-		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y$R$z \Rightarrow \Right, z \colon A}$
+		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y \rel z \Rightarrow \Right, z \colon A}$
 		\\\\
-		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x$R$y, y \colon A \Rightarrow \Right}$
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x \rel y, y \colon A \Rightarrow \Right}$
 		&
-		$\vlinf{\rlabrn\DIA}{}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
+		$\vlinf{\rlabrn\DIA}{}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
 		\\
 		\multicolumn{2}{c}{
 		$\mbox{\hbox to .9\linewidth{\dotfill}}$
@@ -558,13 +558,13 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %
 %\vspace{2mm}
 %
-% $\vlderivation {\vlinf{\bllab}{}{\G, x$R$y, \Left x \colon \square A \Rightarrow z \colon B}{\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z \colon B}}$
-%\hspace{5mm}  $\vlinf{\brlab}{$ $y$ fresh$}{\G, \Left \Rightarrow x \colon \square A}{\G, x$R$y, \Left \Rightarrow y \colon A}$
+% $\vlderivation {\vlinf{\bllab}{}{\G, x \rel y, \Left x \colon \square A \Rightarrow z \colon B}{\G, x \rel y, \Left, x \colon \square A, y \colon A \Rightarrow z \colon B}}$
+%\hspace{5mm}  $\vlinf{\brlab}{$ $y$ fresh$}{\G, \Left \Rightarrow x \colon \square A}{\G, x \rel y, \Left \Rightarrow y \colon A}$
 %
 %\vspace{2mm}
 %
-%$\vlinf{\dllab}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\G, x$R$y, \Left, x \colon \lozenge A, y \colon A \Rightarrow z \colon B}$
-%\hspace{5mm}$\vlinf{\drlab}{}{\G, x$R$y, \Left,  \Rightarrow x \colon \lozenge A}{\G, x$R$y, \Left \Rightarrow y \colon A}$
+%$\vlinf{\dllab}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\G, x \rel y, \Left, x \colon \lozenge A, y \colon A \Rightarrow z \colon B}$
+%\hspace{5mm}$\vlinf{\drlab}{}{\G, x \rel y, \Left,  \Rightarrow x \colon \lozenge A}{\G, x \rel y, \Left \Rightarrow y \colon A}$
 %
 %\end{center}
 %\caption{System labIK}
@@ -598,13 +598,13 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation { \vlin {\sbl}{}{\G, x$R$y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x$R$y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
-%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A}}}$
+%		$\vlderivation { \vlin {\sbl}{}{\G, x \rel y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x \rel y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x \rel y, \Left \Rightarrow y \colon A}}}$
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x$R$y, \Left, y \colon A \Rightarrow z \colon B}}}$
-%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x$R$y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x$R$y, \Left \Rightarrow y \colon A }}}$
+%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x \rel y, \Left, y \colon A \Rightarrow z \colon B}}}$
+%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x \rel y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x \rel y, \Left \Rightarrow y \colon A }}}$
 %		
 %	\end{center}
 %	
@@ -654,14 +654,14 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %		
 %		\vspace{4mm}
 %		
-%		$\vlderivation {\vlinf{\sbl}{}{\G, \Left, x \le y, y$R$z, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, y$R$z, x \colon \square A, z \colon A \Rightarrow \Right}}$
-%		\hspace{5mm} $\vlinf{\sbr}{$ $y, z$ fresh$}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y$R$z \Rightarrow \Right, z \colon A}$
+%		$\vlderivation {\vlinf{\sbl}{}{\G, \Left, x \le y, y \rel z, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, y \rel z, x \colon \square A, z \colon A \Rightarrow \Right}}$
+%		\hspace{5mm} $\vlinf{\sbr}{$ $y, z$ fresh$}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y \rel z \Rightarrow \Right, z \colon A}$
 %		
 %		
 %		\vspace{4mm}
 %		
-%		$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x$R$y, y \colon A \Rightarrow \Right}$
-%		\hspace{5mm}$\vlinf{\sdr}{}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x$R$y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
+%		$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x \rel y, y \colon A \Rightarrow \Right}$
+%		\hspace{5mm}$\vlinf{\sdr}{}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
 %		
 %		
 %		\vspace{2mm}
