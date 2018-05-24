@@ -281,7 +281,7 @@ $w \Vdash \vls(A.B)$ iff $w \Vdash A$ and $w \Vdash B$
 
 $w \Vdash \vls[A.B]$ iff $w \Vdash A$ or $w \Vdash B$
 
-$w \Vdash A \vljm B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
+$w \Vdash A \SEQ B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
 
 $w \Vdash \square A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$
 
@@ -289,7 +289,7 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 %We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
 
-%We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$.%, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \vljm \bot$).
+%We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$.%, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \SEQ \bot$).
 
 %From the monotonicity of the valuation function $V$ , we get a monotonicity property for the relation:
 %\begin{proposition}(Monotonicity) 
@@ -336,12 +336,12 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 		$\vlinf{\rlabrn\OR}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
 		\\\\
 %		\multicolumn{2}{c}{
-		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\G, \Left \Rightarrow \Right, x \colon A \SEQ B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
 %		}
 %		\\\\
 %		\multicolumn{2}{c}{
-% 		$\vliinf{\rlabrn\IMP}{}{\G, x \le y, \Left, x \colon A \vljm B \Rightarrow \Right}{\G, x \le y, \Left \Rightarrow \Right, y \colon A}{\G, x \le y, \Left, y \colon B \Rightarrow \Right}$ 
- 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \G$}}{\G, \Left, x \colon A \vljm B \Rightarrow \Right}{\G, \Left \Rightarrow \Right, y \colon A}{\G, \Left, y \colon B \Rightarrow \Right}$
+% 		$\vliinf{\rlabrn\IMP}{}{\G, x \le y, \Left, x \colon A \SEQ B \Rightarrow \Right}{\G, x \le y, \Left \Rightarrow \Right, y \colon A}{\G, x \le y, \Left, y \colon B \Rightarrow \Right}$ 
+ 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \G$}}{\G, \Left, x \colon A \SEQ B \Rightarrow \Right}{\G, \Left \Rightarrow \Right, y \colon A}{\G, \Left, y \colon B \Rightarrow \Right}$
 % 		}
 		\\\\
 		$\vlinf{\llabrn\BOX}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
@@ -380,7 +380,7 @@ Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, name
 This worked as well in the labelled setting as in the ordinary sequent case: we present Simpson's sequent system $\lab\IK$ (\ref{fig:labIK}) where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
 
 \begin{definition}
-Labelled sequents are formed from by labelled formulas of the form $x \colon A$ and relational or equality atoms of the form $xRy$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\G \SEQ \Right$ where $\G$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
+Labelled sequents are formed from by labelled formulas of the form $x \colon A$ and relational or equality atoms of the form $x \rel y$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\G \SEQ \Right$ where $\G$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
 \end{definition}
 
 \todo{Formal definition of our labelled sequent}
@@ -391,11 +391,11 @@ Labelled sequents are formed from by labelled formulas of the form $x \colon A$ 
 
 
 
-Echoing the definition of bi-relational structures, another extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation $R$ and another one for the intuitionistic relation $\leq$. 
-%
+Echoing the definition of bi-relational structures, another extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$. 
+
 This is the approach developed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
 %
-The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $xRy$, and preorder atoms of the form $x \leq y$, where $x$, $y$ range over a set of labels and $A$ is an intuitionistic modal formula.
+The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics, that is to define intuitionistic labelled sequents from labelled formulas $x \colon A$, relational atoms $x \rel y$, and preorder atoms of the form $x \leq y$, where $x$, $y$ range over a set of labels and $A$ is an intuitionistic modal formula.
 
 A two-sided intuitionistic labelled sequent would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational and preorder atoms, and $\Left$ and $\Right$ are multiset of labelled formulas. 
 %
@@ -452,12 +452,12 @@ We then obtain a proof system $\labIKp$ (\ref{fig:labHIK}) for intuitionistic mo
 %\scalebox{.9}{
 $
 \vlderivation{
-	\vlin{\sir}{\text{\scriptsize $y$ fresh}} {\Rightarrow x \colon (\lozenge A \vljm \square B) \vljm \square (A \vljm B)}{
-		\vlin{\sbr}{\text{\scriptsize $z, w$ fresh}}{x \le y, y\colon \lozenge A \vljm \square B \Rightarrow y \colon \square (A \vljm B)}{
-			\vlin {\sir}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, y \colon \lozenge A \vljm \square B \Rightarrow w \colon A \vljm B }{
-				\vlin {\fone}{}{x \le y, y \le z, w \le u, z \rel w, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
-					\vlin {\trans}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
-						\vliin {\sil}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \vljm \square B, u \colon A \Rightarrow u \colon B}{
+	\vlin{\sir}{\text{\scriptsize $y$ fresh}} {\Rightarrow x \colon (\lozenge A \SEQ \square B) \SEQ \square (A \SEQ B)}{
+		\vlin{\sbr}{\text{\scriptsize $z, w$ fresh}}{x \le y, y\colon \lozenge A \SEQ \square B \Rightarrow y \colon \square (A \SEQ B)}{
+			\vlin {\sir}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, y \colon \lozenge A \SEQ \square B \Rightarrow w \colon A \SEQ B }{
+				\vlin {\fone}{}{x \le y, y \le z, w \le u, z \rel w, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
+					\vlin {\trans}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
+						\vliin {\sil}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
 							\vlin {\sdr}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A}{
 								\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
 									\vlin {\ids}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
