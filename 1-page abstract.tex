@@ -207,7 +207,9 @@
 
 %% Author with single affiliation.
 \author{Sonia Marin}
-\authornote{Funded by the Qatar National Research Council project MetaCLF nb. xxx. }          %% \authornote is optional;
+\authornote{This publication was made possible in part by NPRP Grant \#7-988-1-178 from the Qatar National
+	Research Fund (a member of Qatar Foundation). The statements made herein are
+	solely the responsibility of the authors.}          %% \authornote is optional;
                                         %% can be repeated if necessary
 %\orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
 \affiliation{
@@ -293,15 +295,15 @@
 \maketitle
 
 
-%\section{Introduction}
+\todo{Introduce proof theory of intuitionistic modal logic more generally to cire \cite{Strassburger} and \cite{Marin}.}
 
 \emph{Labelled deduction} has been proposed by Gabbay ~\cite{Gabbay} in the 80s as a unifying framework throughout proof theory in order to provide proof
 systems for a wide range of logics. 
 %
-For modal logics it can take for example
+For intuitionistic modal logics it can take for example
 the form of labelled natural deduction and labelled sequent systems, as
-used by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano} and
-Negri~\cite{Negri}. 
+used by Simpson~\cite{Simpson}.
+%, Vigan\`o~\cite{Vigano} and Negri~\cite{Negri}. 
 
 These formalisms make explicit use not only of
 labels, but also of relational atoms referring to the accessibility relation of a Kripke model. 
@@ -327,7 +329,7 @@ and developing fully the idea of~\cite{Maffezioli}.
 	
 %\end{definition}
 
-Reflecting this definition, we define our two-sided intuitionistic labelled sequents to be of the form $\mathcal{B}, \Left \Rightarrow \Right$ where $\B$ denotes a set of relational atoms $xRy$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $x \colon A$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
+Reflecting this definition, we define our two-sided intuitionistic labelled sequents similarly to~\cite{Maffezioli} to be of the form $\mathcal{B}, \Left \Rightarrow \Right$ where $\B$ denotes a set of relational atoms $xRy$ or $x = y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $x \colon A$ (for $x$ and $y$ taken from a set of labels and $A$ an intuitionistic modal formula).
 %
 
 Furthermore, our system has to incorporate the two semantic conditions into deductive rules as follows:
@@ -621,29 +623,32 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 
 
 \begin{thebibliography}{4}
+	%	\bibitem{Brunnler}
+	%	Kai Br{\"u}nnler. \emph{Deep Sequent Systems for Modal Logic}. Archive for Mathematical Logic, 48(6):551-577, 2009.
+
 	\bibitem{Maffezioli}
 	Paolo Maffezioli, Alberto Naibo, and Sara Negri. \emph{The Church-Fitch knowability paradox in the light of structural proof theory}. Synthese, 190(14):2677-2716, 2013. 
 	
 	%	\bibitem{Fitch}
 	%	Frederic B Fitch. \emph{Tree proofs in modal logic}. Journal of Symbolic Logic, 31(1):152, 1966.
 	
-	\bibitem{Negri}
-	Sara Negri. \emph{Proof analysis in modal logics}. Journal of Philosophical Logic, 34:507-544, 2005. 
+%	\bibitem{Negri}
+%	Sara Negri. \emph{Proof analysis in modal logics}. Journal of Philosophical Logic, 34:507-544, 2005. 
 	
 	\bibitem{Simpson}
 	Alex Simpson. \emph{The Proof Theory and Semantics of Intuitionistic Modal Logic}. PhD thesis, University of Edinburgh, 1994. 
 	
-	\bibitem{Vigano}
-	Luca Vigan\`o. \emph{Labelled Non-Classical Logic}. Kluwer Academic Publisher, 2000. 
+%	\bibitem{Vigano}
+%	Luca Vigan\`o. \emph{Labelled Non-Classical Logic}. Kluwer Academic Publisher, 2000. 
 	
-	%	\bibitem{Marin}
-	%	Sonia Marin. \emph{Modal proof theory through a focused telescope}. PhD thesis, Université Paris-Saclay, 2017.
+	\bibitem{Marin}
+	Sonia Marin. \emph{Modal proof theory through a focused telescope}. PhD thesis, Universit\'e Paris-Saclay, 2018.
 	
 	\bibitem{Fischer}
 	Gis\`ele Fischer-Servi.\emph{ Axiomatizations for some intuitionistic modal logics}. Rendiconti del Seminario Matematico della Universit\`a Politecnica di Torino, 42(3):179-194, 1984.
 	
 	\bibitem{Plotkin}
-	Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J. Y. Halpern, editor, 1st Conference on Theoretical Aspects of Reasoning About Knowledge.
+	Gordon D. Plotkin and Colin P. Stirling. \emph{A framework for intuitionistic modal logic}. In J.~Y.~Halpern, editor, 1st Conference on Theoretical Aspects of Reasoning About Knowledge.
 	Morgan Kaufmann, 1986.
 	
 	\bibitem{Gabbay}
@@ -654,6 +659,11 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 	
 	%	\bibitem{mar:str}
 	%	Sonia Marin and Lutz Stra{\ss}burger. \emph{Label-free Modular Systems for Classical and Intuitionistic Modal Logics}. In Advances in Modal Logics, 2014.
+	
+	\bibitem{Strassburger}
+	Lutz Stra{\ss}burger. \emph{Cut Elimination in Nested Sequents for Intuitionistic Modal Logics}. In F.~Pfenning, editor, 16th International Conference on Foundations of Software Science and Computation Structures.
+	Springer, LNCS, 7794:209-224, 2013.
+	
 	
 \end{thebibliography}
 
