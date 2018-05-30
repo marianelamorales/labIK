@@ -2,7 +2,6 @@
 
 \usepackage{aiml18macro}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Setting the correct page numbers                      
 % Ignore the next two commented lines                   
@@ -12,37 +11,65 @@
 %\numbering{../aiml18db}{paper}
 
 % definitions specific to your article
-\newcommand{\ob}{[}
-\newcommand{\cb}{]}
+%\newcommand{\ob}{[}
+%\newcommand{\cb}{]}
                         
-%% Marianela's macros
-\usepackage{virginialake}
-\usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{float}
+
+\usepackage{virginialake}
+\vlnosmallleftlabels
+
+\usepackage{graphicx}
 \usepackage{color}
+
+\usepackage{float}
 \floatstyle{boxed} 
 \restylefloat{figure}
 
-\input{aiml_macros}
-
-%% Some recommended packages.
-\usepackage{booktabs}   %% For formal tables:
-                        %% http://ctan.org/pkg/booktabs
-\usepackage{subcaption} %% For complex figures with subfigures/subcaptions
-                        %% http://ctan.org/pkg/subcaption
-
-%% Sonia's macros
 \usepackage{colonequals}
 \usepackage{bm}
 
-\vlnosmallleftlabels
+%%% Extracting symbols from MnSymbol 
+\DeclareFontFamily{U} {MnSymbolC}{}
+%
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+	<-6>  MnSymbolC5
+	<6-7>  MnSymbolC6
+	<7-8>  MnSymbolC7
+	<8-9>  MnSymbolC8
+	<9-10> MnSymbolC9
+	<10-12> MnSymbolC10
+	<12->   MnSymbolC12}{}
+\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+	<-6>  MnSymbolC-Bold5
+	<6-7>  MnSymbolC-Bold6
+	<7-8>  MnSymbolC-Bold7
+	<8-9>  MnSymbolC-Bold8
+	<9-10> MnSymbolC-Bold9
+	<10-12> MnSymbolC-Bold10
+	<12->   MnSymbolC-Bold12}{}
+%
+\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%
+\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
 
+
+%%% Comments  
 \newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
 \newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
 \newcommand{\lutz}[1]{{\color{green}[Lutz: #1]}}
 \newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+
+%%% General
+%\input{aiml_macros}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+%\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Left}{\mathcal{L}}
+\newcommand{\Right}{\mathcal{R}}
 
 %%% Systems
 \newcommand*{\ax}[1]{\mathsf{#1}}
@@ -57,7 +84,7 @@
 \newcommand*{\TOP}{\mathord{\top}}
 \newcommand*{\OR}{\mathbin{\vee}}
 \newcommand*{\BOT}{\mathord{\bot}}
-\newcommand*{\IMP}{\mathbin{\supset}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
 
 \newcommand*{\BOX}{\mathord{\Box}}
 \newcommand*{\DIA}{\mathord{\Diamond}}
@@ -75,32 +102,11 @@
 \newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
 \newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
 %
-%\DeclareFontShape{U}{MnSymbolC}{m}{n}{
-%	<-6>  MnSymbolC5
-%	<6-7>  MnSymbolC6
-%	<7-8>  MnSymbolC7
-%	<8-9>  MnSymbolC8
-%	<9-10> MnSymbolC9
-%	<10-12> MnSymbolC10
-%	<12->   MnSymbolC12}{}
-%\DeclareFontShape{U}{MnSymbolC}{b}{n}{
-%	<-6>  MnSymbolC-Bold5
-%	<6-7>  MnSymbolC-Bold6
-%	<7-8>  MnSymbolC-Bold7
-%	<8-9>  MnSymbolC-Bold8
-%	<9-10> MnSymbolC-Bold9
-%	<10-12> MnSymbolC-Bold10
-%	<12->   MnSymbolC-Bold12}{}
+\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
 %
-%\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
-%%
-%\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
-%\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
-%
-\newcommand*{\brsym}{\mathord{\scalebox{.8}{$\blacksquare$}}}
-\newcommand*{\boxbrn}[1]{\rn{\brsym_\rn{#1}}}%^{\lab}}}
-\newcommand*{\diasym}{\mathord{\blacklozenge}}
-\newcommand*{\diabrn}[1][]{\rn{\diasym_\rn{#1}}}
+\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
+\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,17 +188,17 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 
 \section{Intuitionistic modal logics}
 
-%%Labelled sequents are formed from by labelled formulas of the form $x \colon A$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\G \Rightarrow \Right$ where $\G$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
+%%Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$  and relational atoms of the form $x$R$y$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\textbf{Fig. 1}). 
 %%
 %%\begin{figure}[h]
 %%\begin{center}
 %%
-%%$\vlderivation {\vlinf{\id}{}{\G \Rightarrow \Right, x: a, x: \vls-a}{}}$
+%%$\vlderivation {\vlinf{\id}{}{\B \SEQ \Right, x: a, x: \vls-a}{}}$
 %%\hspace{7mm}$\vlderivation {\vlinf{\tolab}{}{\toprule}{}}$
 %%
 %%
-%%$\vliinf{\vlab}{}{\G \Rightarrow \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$
-%%\hspace{7mm}$\vlinf{\olab}{}{\G \Rightarrow \Right, x \colon \vls[A.B]}{\olabr}$
+%%$\vliinf{\vlab}{}{\B \SEQ \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$
+%%\hspace{7mm}$\vlinf{\olab}{}{\B \SEQ \Right, x \colon \vls[A.B]}{\olabr}$
 %%
 %%
 %%$\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$
@@ -264,28 +270,27 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 		
 		\item[(F2)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
 	\end{enumerate}
-	
+%	
 \end{definition}
 
 \begin{definition}
 	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
-	$$w \le w' \Rightarrow V(w)\subseteq V(w')$$
+	if $w \le w'$ then $V(w)\subseteq V(w')$.
 \end{definition}
-
 
 We write $w \Vdash a$ if $a \in V(w)$, and by definition, we always have $w \Vdash \top$ and never that $w \Vdash \bot$. 
 %
 Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
 
-$w \Vdash \vls(A.B)$ iff $w \Vdash A$ and $w \Vdash B$
+$w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
 
-$w \Vdash \vls[A.B]$ iff $w \Vdash A$ or $w \Vdash B$
+$w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
 
-$w \Vdash A \SEQ B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
+$w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
 
-$w \Vdash \square A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$
 
-$w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
+$w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 %We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
 
@@ -294,8 +299,9 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %From the monotonicity of the valuation function $V$ , we get a monotonicity property for the relation:
 %\begin{proposition}(Monotonicity) 
 %For any formula $A$ and for $w, w' \in W$, if $w \le w'$ and $w \Vdash A$, then $w' \Vdash A$.
-
 %\end{proposition}
+
+
 
 \begin{definition}
 	A formula $A$ is \emph{satisfied} in a model $\M = \langle W, R, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
@@ -303,13 +309,16 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 	A formula $A$ is \emph{valid} in a frame $\F = \langle W, R, \le \rangle$, if for all valuations $V$, $A$ is satisfied in $\langle W, R, \le, V \rangle$.
 \end{definition}
 
+
+
 %It then was investigated in detail in~\cite{Simpson}, in which strong arguments are given in favour of this axiomatic definition: 
 %
 %it allows for adapting to intuitionistic logic the standard embedding of modal logic into first-order logic, and also provides an extension of the standard Kripke semantics for classical modal logic to the intuitionistic case.
 
+\todo{Maybe say something about this theorem}
+
 \begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
-	\todo{Maybe say something about this theorem above}
 \end{theorem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -321,51 +330,51 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 	\small
 	\centering
 	\begin{tabular}{@{\!}c@{\quad}c}
-		$\vlinf{\rn{id}}{}{\G, \Left, x \colon a \Rightarrow \Right, x \colon a }{}$
+		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
 		&
-		$\vlinf{\llabrn\bot}{}{\G, \Left, x\colon \bot \Rightarrow \Right}{}$
+		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
 		\quad
-		$\vlinf{\rlabrn\top}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}$
+		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
 		\\\\
-		$\vlinf{\llabrn\AND}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+		$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
 		&
-		$\vliinf{\rlabrn\AND}{}{\G,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+		$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}$
 		\\\\
-		$\vliinf{\llabrn\OR}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\G, \Left, x   \colon   A \Rightarrow \Right}{\G, \Left, x\colon B \Rightarrow \Right}$
+		$\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\OR}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 		\\\\
 %		\multicolumn{2}{c}{
-		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\G, \Left \Rightarrow \Right, x \colon A \SEQ B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, x \le y, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
 %		}
 %		\\\\
 %		\multicolumn{2}{c}{
-% 		$\vliinf{\rlabrn\IMP}{}{\G, x \le y, \Left, x \colon A \SEQ B \Rightarrow \Right}{\G, x \le y, \Left \Rightarrow \Right, y \colon A}{\G, x \le y, \Left, y \colon B \Rightarrow \Right}$ 
- 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \G$}}{\G, \Left, x \colon A \SEQ B \Rightarrow \Right}{\G, \Left \Rightarrow \Right, y \colon A}{\G, \Left, y \colon B \Rightarrow \Right}$
+% 		$\vliinf{\rlabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
 % 		}
 		\\\\
-		$\vlinf{\llabrn\BOX}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+		$\vlinf{\llabrn\BOX}{}{\B, \Left, x \le y, yRz, \labels{x}{\BOX A} \SEQ \Right}{\B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y \rel z \Rightarrow \Right, z \colon A}$
+		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \Left, x \le y, y \rel z \SEQ \Right, \labels{z}{A}}$
 		\\\\
-		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x \rel y, y \colon A \Rightarrow \Right}$
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \Left, x \rel y, \labels{y}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\DIA}{}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
+		$\vlinf{\rlabrn\DIA}{}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
 		\\
 		\multicolumn{2}{c}{
 		$\mbox{\hbox to .9\linewidth{\dotfill}}$
 		}
 		\\
-		$\vlinf{\rn{refl}}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$
+		$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
 		&
-		$\vlinf{\rn{trans}}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+		$\vlinf{\rn{trans}}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\G, xRy, y \le z, \Left \SEQ \Right}{\G, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\G, xRy,x \le z, \Left \SEQ \Right}{\G, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
 		}
 	\end{tabular}		
 	
@@ -375,22 +384,22 @@ $w \Vdash \lozenge A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
 %
-This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\G, \Left \SEQ z \colon C$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\G$. 
+This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
 
 Echoing the definition of bi-relational structures, another extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$. This is the approach developed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
 %
 
-The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics:
+%The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics:
 
 \begin{definition}
-A two-sided intuitionistic \emph{labelled sequents} would be of the form $\G, \Left \Rightarrow \Right$ where $\G$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $x \colon A$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
+A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
 
 
 \todo{Description of the rules and comparison with standard calculi in particular Simpson's}
 
 
-%Labelled sequents are formed from by labelled formulas of the form $x \colon A$ and relational or equality atoms of the form $x \rel y$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\G \SEQ \Right$ where $\G$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
+%Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$ and relational or equality atoms of the form $x \rel y$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
 
 
 %
@@ -419,7 +428,7 @@ We then obtain a proof system $\labIKp$ (\ref{fig:labIKp}) for intuitionistic mo
 		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ where $\labrn{cut}$ is %\quad
 %		\todo{}
 %		\smash{%\fbox{
-			$$\vliinf{\labrn{cut}}{}{\G_1, \G_2, \Left \SEQ \Right}{\G_1, \Left \SEQ \Right, z \colon C}{\G_2, \Left, z \colon C \SEQ \Right}$$
+			$$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$$
 %		}%}
 		%
 		\item\label{iii} $A$ is provable in $\labIKp$
@@ -440,31 +449,33 @@ We then obtain a proof system $\labIKp$ (\ref{fig:labIKp}) for intuitionistic mo
 %
 %Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
 
-
 \todo{In the course of the proof we have to derive the five $\kax$ axioms. As an example, we display the derivation of $\kax[4]$ which illustrates the need of having the rule corresponding to $F_1$ in the system.}
 
-\hspace*{-1.5cm}
-%\scalebox{.9}{
+\begin{example}
+	
+$$
+\hspace*{-.5cm}
+\scalebox{.9}{
 $
 \vlderivation{
-	\vlin{\sir}{\text{\scriptsize $y$ fresh}} {\Rightarrow x \colon (\lozenge A \SEQ \square B) \SEQ \square (A \SEQ B)}{
-		\vlin{\sbr}{\text{\scriptsize $z, w$ fresh}}{x \le y, y\colon \lozenge A \SEQ \square B \Rightarrow y \colon \square (A \SEQ B)}{
-			\vlin {\sir}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, y \colon \lozenge A \SEQ \square B \Rightarrow w \colon A \SEQ B }{
-				\vlin {\fone}{}{x \le y, y \le z, w \le u, z \rel w, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
-					\vlin {\trans}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
-						\vliin {\sil}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A \Rightarrow u \colon B}{
-							\vlin {\sdr}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A}{
-								\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
-									\vlin {\ids}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, u \colon A \Rightarrow u \colon B, t \colon \lozenge A, u \colon A}{
+	\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
+		\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
+			\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
+				\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+					\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+						\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+							\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
+								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
 										\vlhy {}
 										}
 									}
 								}
 							}{
-%						\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A, t \colon \square B \Rightarrow u \colon B}{
-%							\vlin {\sbl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A, t \colon \square B \Rightarrow u \colon B}{
-%								\vlin {\refl}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A, t \colon \square B, u \colon B \Rightarrow u \colon B}{
-%									\vlin {\ids}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, y \colon \lozenge A \SEQ \square B, u \colon A, t \colon \square B, u \colon B \Rightarrow u \colon B}{
+%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
 										\vlhy {\qquad\vdots\qquad}
 %										}
 %									}
@@ -477,17 +488,21 @@ $
 		}
 	}
 }$
-%}
+}$$
+\end{example}
 
 \todo{This derivation uses a general version of the identity rule that applies to generic formulas rather than atomic ones. We therefore have to show that such a rule is admissible in our system.
 We display one step of this admissibility proof tat illustrates the need for the rule $F_2$, the other cases are standard.}
 
+\begin{example}
+$$
+\scalebox{.9}{
 $
 \vlderivation{
-	\vlin{\llabrn\DIA}{}{\G, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-		\vlin{\color{red}{F_2}}{}{\G, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-			\vlin{\rlabrn\DIA}{}{\G, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\labrn{id_g}}{}{\G, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+	\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+		\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
 					\vlhy{}
 				}
 			}
@@ -495,8 +510,9 @@ $
 	}
 }
 $
-
-
+}
+$$
+\end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -504,18 +520,18 @@ $
 
 \section{Extensions}
 
-$$\vlinf{\blacksquare_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\G, w \rel v, v \rel u, \Left \SEQ \Right}{\G, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
+$$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
 
 
 In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
 \begin{itemize}
-	\item[($\blacklozenge_\rn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
+	\item[($\boxbrn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
 \end{itemize}
 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\vlinf{\blacklozenge_\rn{4}}{\text{\footnotesize $u'$ fresh}}{\G, w \rel v, v \rel u, \Left \SEQ \Right}{\G, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
+$$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
 
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
@@ -532,39 +548,39 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 
 %\begin{figure}[h]
 %\begin{center}
-%$\vlderivation{\vlinf{\id}{}{\G, \Left, x \colon a \Rightarrow x \colon a }{}}$
-%\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\G, \Left, x\colon \bot \Rightarrow z\colon A}{}}$
-%\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\G, \Left \Rightarrow x \colon \top}{}}$
+%$\vlderivation{\vlinf{\id}{}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{A} }{}}$
+%\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\B, \Left, x\colon \bot \SEQ z\colon A}{}}$
+%\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\B, \Left \SEQ x \colon \top}{}}$
 %
 %\vspace{2mm}
 %
-%$\vlinf{\andleflab}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\G, \Left, x\colon \vls(A.B,x \colon A, x \colon B \Rightarrow z \colon C)}$\hspace{5mm}$\vliinf{\andriglab}{}{\G,\Left \Rightarrow x \colon \vls(A.B)}{\G, \Left \Rightarrow x \colon A}{\G, \Left \Rightarrow x \colon B}$
+%$\vlinf{\andleflab}{}{\B,\Left, x \colon \vls(A.B) \SEQ z \colon C}{\B, \Left, x\colon \vls(A.B,\labels{x}{A}, \labels{x}{B} \SEQ z \colon C)}$\hspace{5mm}$\vliinf{\andriglab}{}{\B,\Left \SEQ x \colon \vls(A.B)}{\B, \Left \SEQ \labels{x}{A}}{\B, \Left \SEQ \labels{x}{B}}$
 %
 %\vspace{2mm}
-%$\vliinf{\orleflab}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow  \colon C}{\G, \Left, x \colon \vls[A.B], x \colon A \Rightarrow z \colon C}{\G, \Left, x \colon \vls[A.B], x   \colon   B \Rightarrow z \colon C}$
-%
-%\vspace{2mm}
-%
-%$\vlinf{\orriglabo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\G, \Left \Rightarrow x   \colon   A}$
-%\hspace{7mm}$\vlinf{\orriglabt}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\G, \Left \Rightarrow x \colon  B}$
+%$\vliinf{\orleflab}{}{\B, \Left, x \colon \vls[A.B] \SEQ  \colon C}{\B, \Left, x \colon \vls[A.B], \labels{x}{A} \SEQ z \colon C}{\B, \Left, x \colon \vls[A.B], x   \colon   B \SEQ z \colon C}$
 %
 %\vspace{2mm}
 %
-%$\vliinf{\illab}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\G, \Left, x \colon A \vljm B \Rightarrow x \colon A}{\G, \Left, x \colon A \vljm B, x \colon B \Rightarrow z \colon C}$
+%$\vlinf{\orriglabo}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\B, \Left \SEQ x   \colon   A}$
+%\hspace{7mm}$\vlinf{\orriglabt}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\B, \Left \SEQ x \colon  B}$
 %
 %\vspace{2mm}
 %
-%$\vlinf{\irlab}{}{\G, \Left \Rightarrow x \colon A \vljm B}{\G, \Left, x \colon A \Rightarrow x \colon B}$
+%$\vliinf{\illab}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\B, \Left, \labels{x}{A} \vljm B \SEQ \labels{x}{A}}{\B, \Left, \labels{x}{A} \vljm B, \labels{x}{B} \SEQ z \colon C}$
 %
 %\vspace{2mm}
 %
-% $\vlderivation {\vlinf{\bllab}{}{\G, x \rel y, \Left x \colon \square A \Rightarrow z \colon B}{\G, x \rel y, \Left, x \colon \square A, y \colon A \Rightarrow z \colon B}}$
-%\hspace{5mm}  $\vlinf{\brlab}{$ $y$ fresh$}{\G, \Left \Rightarrow x \colon \square A}{\G, x \rel y, \Left \Rightarrow y \colon A}$
+%$\vlinf{\irlab}{}{\B, \Left \SEQ \labels{x}{A} \vljm B}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}$
 %
 %\vspace{2mm}
 %
-%$\vlinf{\dllab}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\G, x \rel y, \Left, x \colon \lozenge A, y \colon A \Rightarrow z \colon B}$
-%\hspace{5mm}$\vlinf{\drlab}{}{\G, x \rel y, \Left,  \Rightarrow x \colon \lozenge A}{\G, x \rel y, \Left \Rightarrow y \colon A}$
+% $\vlderivation {\vlinf{\bllab}{}{\B, x \rel y, \Left x \colon \BOX A \SEQ z \colon B}{\B, x \rel y, \Left, x \colon \BOX A, y \colon A \SEQ z \colon B}}$
+%\hspace{5mm}  $\vlinf{\brlab}{$ $y$ fresh$}{\B, \Left \SEQ x \colon \BOX A}{\B, x \rel y, \Left \SEQ y \colon A}$
+%
+%\vspace{2mm}
+%
+%$\vlinf{\dllab}{$ $y$ fresh $}{\B, \Left, x \colon \DIA A \SEQ z \colon B}{\B, x \rel y, \Left, x \colon \DIA A, y \colon A \SEQ z \colon B}$
+%\hspace{5mm}$\vlinf{\drlab}{}{\B, x \rel y, \Left,  \SEQ x \colon \DIA A}{\B, x \rel y, \Left \SEQ y \colon A}$
 %
 %\end{center}
 %\caption{System labIK}
@@ -577,34 +593,34 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %	
 %	\begin{center}
 %		
-%		$\vlderivation { \vlin {\ids}{}{\G, \Left, x \colon a \Rightarrow x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\G, \Left, x \colon \bot \Rightarrow z\colon A}{\vlhy {}}}$
+%		$\vlderivation { \vlin {\ids}{}{\B, \Left, \labels{x}{A} \SEQ x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\B, \Left, x \colon \bot \SEQ z\colon A}{\vlhy {}}}$
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation {\vlin {\svlef}{}{\G, \Left, x \colon \vls(A.B) \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A, x \colon B \Rightarrow z \colon C}}}$
-%		\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\G, \Left, \Rightarrow x \colon \vls(A.B)}{\vlhy {\G, \Left \Rightarrow x \colon A }}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+%		$\vlderivation {\vlin {\svlef}{}{\B, \Left, x \colon \vls(A.B) \SEQ z \colon C}{\vlhy {\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\B, \Left, \SEQ x \colon \vls(A.B)}{\vlhy {\B, \Left \SEQ \labels{x}{A} }}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
 %		
 %		\vspace{3mm}
 %		
 %		
-%		$\vlderivation {\vliin {\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow z \colon C}{\vlhy {\G, \Left, x \colon A \Rightarrow z \colon C}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
-%		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon A}}}$
-%		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\G, \Left \Rightarrow x \colon \vls[A.B]}{\vlhy {\G, \Left \Rightarrow x \colon B}}}$
+%		$\vlderivation {\vliin {\solef}{}{\B, \Left, x \colon \vls[A.B] \SEQ z \colon C}{\vlhy {\B, \Left, \labels{x}{A} \SEQ z \colon C}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation {\vliin{\sil}{}{\G, \Left, x \colon A \vljm B \Rightarrow z \colon C}{\vlhy {\G, \Left \Rightarrow x \colon A}}{\vlhy {\G, \Left, x \colon B \Rightarrow z \colon C}}}$
-%		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\G,  \Left, x \colon A \Rightarrow x \colon B}{\vlhy {\G, \Left, x \colon A \Rightarrow x \colon B}}}$
+%		$\vlderivation {\vliin{\sil}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\B,  \Left, \labels{x}{A} \SEQ \labels{x}{B}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}}}$
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation { \vlin {\sbl}{}{\G, x \rel y, \Left, x \colon \square A \Rightarrow z\colon B}{\vlhy {\G, x \rel y, \Left, x \colon \square A, y \colon A \Rightarrow z\colon B}}}$
-%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\G, \Left \Rightarrow x \colon \square A}{\vlhy {\G, x \rel y, \Left \Rightarrow y \colon A}}}$
+%		$\vlderivation { \vlin {\sbl}{}{\B, x \rel y, \Left, x \colon \BOX A \SEQ z\colon B}{\vlhy {\B, x \rel y, \Left, x \colon \BOX A, y \colon A \SEQ z\colon B}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\B, \Left \SEQ x \colon \BOX A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A}}}$
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\G, \Left, x \colon \lozenge A \Rightarrow z \colon B}{\vlhy {\G, x \rel y, \Left, y \colon A \Rightarrow z \colon B}}}$
-%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\G,x \rel y, \Left \Rightarrow x \colon \lozenge A}{\vlhy {\G, x \rel y, \Left \Rightarrow y \colon A }}}$
+%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\B, \Left, x \colon \DIA A \SEQ z \colon B}{\vlhy {\B, x \rel y, \Left, y \colon A \SEQ z \colon B}}}$
+%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\B,x \rel y, \Left \SEQ x \colon \DIA A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A }}}$
 %		
 %	\end{center}
 %	
@@ -625,43 +641,43 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %	\small
 %	\centering
 %
-%		$\vlinf{\rn{id}}{}{\G, \Left, x \colon a \Rightarrow \Right, x \colon a }{}$
+%		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
 %		\hspace{5mm}
-%		$\vlinf{\llabrn\bot}{}{\G, \Left, x\colon \bot \Rightarrow \Right}{}$
+%		$\vlinf{\llabrn\bot}{}{\B, \Left, x\colon \bot \SEQ \Right}{}$
 %		\hspace{5mm}
-%		$\vlinf{\rlabrn\top}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}$
+%		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, x \colon \top}{}$
 %%		
 %%		\vspace{4mm}
 %		\\[1.5ex]
 %%		
-%		$\vlinf{\llabrn\AND}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+%		$\vlinf{\llabrn\AND}{}{\B,\Left, x \colon \vls(A.B) \SEQ \Right}{\conjlef}$
 %		\hspace{7mm}
-%		$\vliinf{\rlabrn\AND}{}{\G,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+%		$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
 %		
 %		\vspace{4mm}
 %		
-%		$\vliinf{\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\G, \Left, x   \colon   A \Rightarrow \Right}{\G, \Left, x   \colon   B \Rightarrow \Right}$
+%		$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \SEQ \Right}{\B, \Left, x   \colon   A \SEQ \Right}{\B, \Left, x   \colon   B \SEQ \Right}$
 %		\hspace{7mm}
-%		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+%		$\vlinf{\sorig}{}{\B, \Left \SEQ \Right, x \colon \vls[A.B]}{\B, \Left \SEQ \Right, x   \colon   A, x   \colon   B}$
 %		
 %		\vspace{4mm}
 %		
-%		$\vlinf{\sir}{$ $y$ fresh$}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+%		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \SEQ \Right, \labels{x}{A} \vljm B}{\B, \Left, x \le y, y \colon A \SEQ \Right, y \colon B}$
 %		
 %		\vspace{4mm}
 %		
-%		$\vliinf{\sil}{}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\G, \Left, x \le y, y \colon B \Rightarrow \Right}$
+%		$\vliinf{\sil}{}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right, y \colon A}{\B, \Left, x \le y, y \colon B \SEQ \Right}$
 %		
 %		\vspace{4mm}
 %		
-%		$\vlderivation {\vlinf{\sbl}{}{\G, \Left, x \le y, y \rel z, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, y \rel z, x \colon \square A, z \colon A \Rightarrow \Right}}$
-%		\hspace{5mm} $\vlinf{\sbr}{$ $y, z$ fresh$}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, y \rel z \Rightarrow \Right, z \colon A}$
+%		$\vlderivation {\vlinf{\sbl}{}{\B, \Left, x \le y, y \rel z, x \colon \BOX A \SEQ \Right}{\B,\Left, x \le y, y \rel z, x \colon \BOX A, z \colon A \SEQ \Right}}$
+%		\hspace{5mm} $\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \SEQ \Right, x \colon \BOX A}{\B, \Left, x \le y, y \rel z \SEQ \Right, z \colon A}$
 %		
 %		
 %		\vspace{4mm}
 %		
-%		$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \lozenge A \Rightarrow \Right}{\G, \Left, x \rel y, y \colon A \Rightarrow \Right}$
-%		\hspace{5mm}$\vlinf{\sdr}{}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A}{\G, \Left, x \rel y \Rightarrow \Right, x \colon \lozenge A, y \colon A}$
+%		$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \DIA A \SEQ \Right}{\B, \Left, x \rel y, y \colon A \SEQ \Right}$
+%		\hspace{5mm}$\vlinf{\sdr}{}{\B, \Left, x \rel y \SEQ \Right, x \colon \DIA A}{\B, \Left, x \rel y \SEQ \Right, x \colon \DIA A, y \colon A}$
 %		
 %		
 %		\vspace{2mm}
@@ -669,15 +685,15 @@ These systems enjoy cut-elimination via usual arguments, the generality of the r
 %		
 %		\vspace{2mm}
 %		
-%		$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$
-%		\hspace{7mm} $\vlinf{\trans}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+%		$\vlinf{\refl}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
+%		\hspace{7mm} $\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$
 %		
 %		
 %		\vspace{2mm}
 %		
-%		$\vlinf{\rn{F_1}}{\text{\footnotesize $u$ fresh}}{\G, xRy, y \le z, \Left \SEQ \Right}{\G, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+%		$\vlinf{\rn{F_1}}{\text{\footnotesize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
 %		%
-%		$\vlinf{\rn{F_2}}{\text{\footnotesize $u$ fresh}}{\G, xRy,x \le z, \Left \SEQ \Right}{\G, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+%		$\vlinf{\rn{F_2}}{\text{\footnotesize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
 %	
 %	\caption{System $\labIKp$}
 %	\label{fig:labHIK}
