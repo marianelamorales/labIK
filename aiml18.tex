@@ -288,7 +288,7 @@ $w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
 
 $w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
 
-$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ $(\ast)$
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ \hfill $(\ast)$
 
 $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
@@ -389,12 +389,9 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 %%
 %This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
 
-Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
+Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
 
-Simpson's labelled sequents make use only of relational atoms referring to the accessibility relation of a Kripke model. 
-
-
-Simpson~\cite{Simpson} proposed a labelled sequent system for intuitionistic modal logic representing explicitly the accessibility relation in the syntax.
+Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
 %
 Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
 %
@@ -432,7 +429,7 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 %
 %On the other hand, we show that $\labIKp$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
 
-Finally we can prove the following theorem ensuring soundness and (cut-free) completeness of $\labIKp$.
+%Finally we can prove the following theorem ensuring soundness and (cut-free) completeness of $\labIKp$.
 
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
@@ -442,11 +439,12 @@ Finally we can prove the following theorem ensuring soundness and (cut-free) com
 	\begin{enumerate}
 		\item\label{i} $A$ is a theorem of $\IK$ 
 		%
-		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ where $\labrn{cut}$ is %\quad
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with %\quad
+%		
 %		\todo{}
-%		\smash{%\fbox{
-			$$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$$
-%		}%}
+		\smash{%\fbox{
+			\scalebox{.9}{$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$}
+		}%}
 		%
 		\item\label{iii} $A$ is provable in $\labIKp$
 		%
@@ -472,8 +470,7 @@ In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to 
 %
 As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
 
-%\begin{example}
-	
+\vspace*{-.9cm}
 $$
 \hspace*{-.5cm}
 \scalebox{.9}{
@@ -512,12 +509,15 @@ $
 }$$
 %\end{example}
 
+%\vspace*{-.5cm}
+
 Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
 %
 We therefore have to show that such a rule is admissible in our system.
 %
-As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$ (the other cases are standard).
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
 
+\vspace*{-.5cm}
 %\begin{example}
 $$
 \scalebox{.9}{
@@ -544,18 +544,22 @@ $$
 
 \section{Extensions}
 
-%$$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
+In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
-
-In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin} for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
-\begin{itemize}
-	\item[($\diabrn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
-\end{itemize}
+%\begin{center}
+	($\diabrn{4}$) if $w \rel v$ and $v \rel u$, there exists a $u'\in W$ s.t.~$u \le u'$ and $wRu'$.
+%\end{center}
 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$$
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
 
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
