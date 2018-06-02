@@ -23,9 +23,9 @@
 \usepackage{graphicx}
 \usepackage{color}
 
-\usepackage{float}
-\floatstyle{boxed} 
-\restylefloat{figure}
+%\usepackage{float}
+%\floatstyle{boxed} 
+%\restylefloat{figure}
 
 \usepackage{colonequals}
 \usepackage{bm}
@@ -158,7 +158,7 @@ systems for a wide range of logics.
 %
 For modal logics it can take
 the form of labelled natural deduction and labelled sequent systems as
-used, for example, by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano} and
+used, for example, by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano}, and
 Negri~\cite{Negri}. 
 %
 These formalisms make explicit use not only of
@@ -266,9 +266,9 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 %	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ satisfying:
 	\begin{enumerate}
-		\item[(F1)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
+		\item[($F_1$)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
 		
-		\item[(F2)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
+		\item[($F_2$)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
 	\end{enumerate}
 %	
 \end{definition}
@@ -288,7 +288,7 @@ $w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
 
 $w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
 
-$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ $(\ast)$
 
 $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
@@ -315,20 +315,22 @@ $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 %
 %it allows for adapting to intuitionistic logic the standard embedding of modal logic into first-order logic, and also provides an extension of the standard Kripke semantics for classical modal logic to the intuitionistic case.
 
-\todo{Maybe say something about this theorem}
+Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
 
-\begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]
+\begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]\label{thm:plotkin}
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{\todo{title}}
+\section{Labelled sequent calculi with $\rel$ and $\le$}
 
 \begin{figure}%[h]
-	\small
 	\centering
+	\small
+	\fbox{
+	\begin{minipage}{.95\textwidth}
 	\begin{tabular}{@{\!}c@{\quad}c}
 		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
 		&
@@ -344,14 +346,14 @@ $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 		&
 		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 		\\\\
-%		\multicolumn{2}{c}{
+		\multicolumn{2}{c}{
 		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, x \le y, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
-%		}
-%		\\\\
-%		\multicolumn{2}{c}{
-% 		$\vliinf{\rlabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
- 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
-% 		}
+		}
+		\\\\
+		\multicolumn{2}{c}{
+ 		$\vliinf{\rlabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+% 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
+ 		}
 		\\\\
 		$\vlinf{\llabrn\BOX}{}{\B, \Left, x \le y, yRz, \labels{x}{\BOX A} \SEQ \Right}{\B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
 		&
@@ -377,33 +379,47 @@ $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
 		}
 	\end{tabular}		
-	
+\end{minipage}
+}		
 	\caption{System $\labIKp$}
 	\label{fig:labIKp}
 \end{figure}
 
-Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
-%
-This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
+%Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
+%%
+%This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
 
-Echoing the definition of bi-relational structures, another extension of labelled deduction to the intuitionistic setting would be to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$. This is the approach developed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
+Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
+
+Simpson's labelled sequents make use only of relational atoms referring to the accessibility relation of a Kripke model. 
+
+
+Simpson~\cite{Simpson} proposed a labelled sequent system for intuitionistic modal logic representing explicitly the accessibility relation in the syntax.
+%
+Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
+%
+The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
 %
 
-%The idea is to extend labelled sequents with a preorder relation symbol in order to capture intuitionistic modal logics:
 
 \begin{definition}
 A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
 
 
-\todo{Description of the rules and comparison with standard calculi in particular Simpson's}
 
 
 %Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$ and relational or equality atoms of the form $x \rel y$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
 
 
 %
-We then obtain a proof system $\labIKp$ (\ref{fig:labIKp}) for intuitionistic modal logic in this formalism. 
+We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
+%
+Most rules are similar to the ones of Simpson~\cite{Simpson}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
+%
+In particular, the rules introducing the $\BOX$-operator correspond to the definition $(\ast)$.
+%
+Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
 %
 %As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
@@ -416,6 +432,7 @@ We then obtain a proof system $\labIKp$ (\ref{fig:labIKp}) for intuitionistic mo
 %
 %On the other hand, we show that $\labIKp$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
 
+Finally we can prove the following theorem ensuring soundness and (cut-free) completeness of $\labIKp$.
 
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
@@ -449,9 +466,13 @@ We then obtain a proof system $\labIKp$ (\ref{fig:labIKp}) for intuitionistic mo
 %
 %Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
 
-\todo{In the course of the proof we have to derive the five $\kax$ axioms. As an example, we display the derivation of $\kax[4]$ which illustrates the need of having the rule corresponding to $F_1$ in the system.}
+The proof is a careful adaptation of standard techniques.
+%
+In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%
+As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
 
-\begin{example}
+%\begin{example}
 	
 $$
 \hspace*{-.5cm}
@@ -489,12 +510,15 @@ $
 	}
 }$
 }$$
-\end{example}
+%\end{example}
 
-\todo{This derivation uses a general version of the identity rule that applies to generic formulas rather than atomic ones. We therefore have to show that such a rule is admissible in our system.
-We display one step of this admissibility proof tat illustrates the need for the rule $F_2$, the other cases are standard.}
+Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
+%
+We therefore have to show that such a rule is admissible in our system.
+%
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$ (the other cases are standard).
 
-\begin{example}
+%\begin{example}
 $$
 \scalebox{.9}{
 $
@@ -512,7 +536,7 @@ $
 $
 }
 $$
-\end{example}
+%\end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -520,14 +544,14 @@ $$
 
 \section{Extensions}
 
-$$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
+%$$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$$
 
 
-In~\cite{Plotkin}, Plotkin and Stirling give a correspondence result for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin} for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
 \begin{itemize}
-	\item[($\boxbrn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
+	\item[($\diabrn{4}$)] if $w \rel v$ and $v \rel u$, there exists a $u'$ s.t.~$u \le u'$ and $wRu'$.
 \end{itemize}
 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
