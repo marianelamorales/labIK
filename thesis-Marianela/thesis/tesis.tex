@@ -1,0 +1,175 @@
+\documentclass[a4paper,12pt,oneside,spanish]{book}
+
+\usepackage[left=2.3cm,top=3cm,right=2.3cm,bottom=3cm]{geometry} 
+\usepackage[noxy]{virginialake}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath,amsthm} 
+\usepackage{mathtools}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc} 
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{pgf}
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\usepackage[textwidth=0.89in,textsize=scriptsize]{todonotes}
+\usetikzlibrary{babel} 
+\usepackage{pgffor}
+\usepackage{named}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{quotes,arrows.meta}
+
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\pax}[2]		{\ax{p_{#1#2}}}
+\newcommand*{\gax}[4]		{\ax{g_{#1#2#3#4}}}
+
+\tikzset{
+	annotated cuboid/.pic={
+		\tikzset{%
+			every edge quotes/.append style={midway, auto},
+			/cuboid/.cd,
+			#1
+		}
+		\draw [every edge/.append style={pic actions, opacity=.5}, pic actions]
+		(0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
+		(o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
+		(o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
+		
+		;
+	},
+	/cuboid/.search also={/tikz},
+	/cuboid/.cd,
+	width/.store in=\cubex,
+	height/.store in=\cubey,
+	depth/.store in=\cubez,
+	units/.store in=\cubeunits,
+	scale/.store in=\cubescale,
+	width=10,
+	height=10,
+	depth=10,
+	units=cm,
+	scale=.1,
+}
+%tikz parameters
+\usepgflibrary{arrows}
+\tikzstyle{point}=[circle,draw]
+\usetikzlibrary{arrows,automata,shapes,decorations.markings,
+decorations.pathmorphing,backgrounds,fit,snakes,calc}
+%\usepackage[nottoc]{tocbibind}
+\newlength{\crestheight}
+\setlength{\crestheight}{0.15\paperheight} 
+\input{macros}
+\input{k4_macro}
+\input{then2_macro}
+
+
+\begin{document}
+
+%\renewcommand{\proofname}{Demostración}
+%\providecommand{\innp}[1]{\langle#1\rangle} 
+%\newcommand{\seno}{\mathrm{sen}}
+%\newcommand{\diff}{\mathrm{d}}
+
+\newtheorem{teo}{Teorema} 
+\newtheorem{lemma}{Lema}
+%\newtheorem{cor}[teo]{Corolario}
+%\newtheorem{lem}[teo]{Lema}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definición}
+
+%\theoremstyle{remark}
+%\newtheorem{obs}[teo]{Observación}
+
+
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large UNIVERSIDAD NACIONAL DE CÓRDOBA}\\[1em]
+\textsc{FACULTAD DE MATEMÁTICA, ASTRONOMÍA, FÍSICA Y COMPUTACIÓN}
+\vspace{4mm}
+%Figura
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\crestheight]{unc.png}
+\end{center}
+\end{figure}
+
+\vspace{4mm}
+
+\textsc{\huge \textbf{Teoría de prueba con etiquetas para lógicas modales intuicionistas}}\\
+
+\vspace{15mm}
+
+\textsc{\Large Marianela Morales}\\[4em]
+
+\textsc{\large Directores:\\\vspace{2mm} Dr. Raul Fervari \\ Dr. Lutz Stra$\ss$burger}
+
+\vspace{15mm}
+\textsc{\Large Licenciatura en Ciencias de la Computación}\\[1em]
+\bigskip
+\bigskip
+
+\includegraphics[width=0.1\textwidth]{icono.png}
+
+
+Teoría de prueba con etiquetas para lógicas modales intuicionistas por Marianela Morales se distribuye bajo una \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional}
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{Córdoba, Argentina. \hspace*{\fill} 28 de Marzo del 2019}
+
+\end{titlepage}
+
+
+
+\input{chapters/abstract_es}
+\input{chapters/abstract_en}
+
+
+
+%\clearpage\mbox{}\clearpage
+
+\input{chapters/acknow.tex}
+
+\tableofcontents
+
+\clearpage\mbox{}\clearpage
+
+%\chapter*{}
+%\begin{flushright}
+%\textit{DEDICATORIA}
+%\end{flushright}
+
+
+
+%\pagestyle{headings}
+
+
+\input{chapters/introd}
+\input{chapters/logclas}
+\input{chapters/logintuic}
+%\input{chapters/labelledsyst}
+% \input{chapters/mainproblem}
+% \input{chapters/newsyst}
+% \input{chapters/soundness}
+\input{chapters/labik}
+\input{chapters/completeness}
+\input{chapters/futuro}
+%\input{chapters/simpson}
+%\input{chapters/gklmn}
+\input{chapters/conclusion}
+%\addtocontents{toc}{\vspace{2em}} 
+%\appendix 
+
+
+\bibliographystyle{named}
+\addcontentsline{toc}{chapter}{ Bibliografía}
+\bibliography{bibliography}
+
+
+\end{document}

@@ -1,0 +1,182 @@
+\chapter{Lógica modal intuicionista}
+\label{cap:logintuicionista}
+
+El intuicionismo surgió como una escuela de matemáticas fundada por el matemático holandés Brouwer \cite{brouwer1920}. Él rechazaba los métodos matemáticos cuya justificación requería apelar a un concepto abstracto de ``verdad". Más precisamente, Brouwer creía que el significado matemático se originaba en el acto humano de ``hacer" \vspace{0.02mm} las matemáticas. Por lo tanto, para Brouwer, un objeto matemático debía ser dado por una construcción, y no hay un sentido abstracto en el que una declaración pueda ser verdadera a menos que tengamos una prueba de ella (o los medios para encontrar una). Además, los pasos dados en cualquier prueba deben ser legítimos de acuerdo con esta rígida interpretación de las matemáticas. Como se ha mencionado anteriormente, tales consideraciones llevaron a Brouwer a rechazar varios principios clásicos como, por ejemplo, el conocido \emph{Tercero excluído}: $\vls[A.\neg A]$ es válida para cualquier proposición $A$.
+
+En la década de 1930, Heyting desarrolló la lógica intuicionista, una lógica que incorpora los principios subyacentes del razonamiento intuicionista. La lógica intuicionista ha sido enormemente exitosa. En primer lugar, se acepta ampliamente que ha logrado su objetivo original de aislar los métodos de prueba intuicionistas aceptables. En segundo lugar, ha logrado proporcionar una base para la investigación meta-matemática de las matemáticas revelando que las matemáticas intuicionistas son un campo de notable coherencia y de belleza matemática, ya sea que uno acepte o no sus principios filosóficos subyacentes. En tercer lugar, hay conexiones profundas con algunos conceptos de reciente crecimiento dentro de las ciencias de la computación (como ejemplo de dos aplicaciones diferentes ver Martin-L\"of \cite{martin1982} y Scott \cite{scott1980}).  La teoría de prueba de la lógica intuicionista también ha encontrado aplicación filosófica reciente. Dummett ha argumentado que la teoría de prueba justifica la lógica intuicionista como la lógica subyacente de una filosofía anti-realista \cite{dummett1991}. Su argumento da lugar a un intuicionismo que es sustancialmente diferente al de Brouwer y que se aplica tanto al razonamiento no matemático como al razonamiento matemático. Para una introducción general a la filosofía y las matemáticas del intuicionismo y la lógica intuicionista, ver Dummett \cite{dummett1977}.
+
+Dada esta breve introducción a la lógica intuicionista, en este trabajo final, como se dijo en la intruducción, nos centraremos en las lógicas modales intuicionistas. Es decir, nos aprovecharemos de la semántica de Kripke subyacente, para combinar operadores modales con el razonamiento intuicionista. Como veremos más adelante, esta combinación resultará natural a la hora de estudiar su teoría de prueba. En esta sección presentaremos los conceptos y las notaciones de la lógica modal intuicionista que serán necesarios para el desarrollo de nuestro trabajo (para mayor detalle, ver \cite{simpson1994}).
+
+\section{Sintaxis y semántica}
+
+En el caso intuicionista, trabajamos con un conjunto  diferente de conectivos. Empezando con un conjunto de proposiciones atómicas que seguimos denotando con $a$, las fórmulas se construyen a partir de la siguiente gramática:
+
+
+\begin{center}
+	$A ::=  a$ $| $$\top$ $|$ $\bot $ $|$ $\vls(A.A)$ $|$ $\vls[A.A]$ $|$ $A \vljm A$ $|$ $\square A$ $|$ $\Diamond A$ 
+\end{center}
+
+Cuando escribimos $\neg A$, queremos representar $A \vljm \bot$.
+
+La semántica de Kripke para la lógica modal intuicionista combina la semántica de Kripke para la lógica proposicional intuicionista con la de la lógica modal clásica, utilizando dos relaciones distintas en el conjunto de mundos. Para introducir la semántica que es de nuestro interés introducimos las siguientes definiciones:
+
+
+
+\dfn(Frame bi-relacional) Un \emph{frame bi-relacional} $\F$ es una tupla $\langle W, R, \le \rangle$ donde $W$ es un conjunto no vacío y $R$, $\le$ son dos relaciones binarias $R$ $\subseteq$ $W \times W$ y $\le$ $\subseteq$ $W \times W$. Insistimos además que $\le$ sea un pre-orden (es decir, reflexividad y transitividad) que satisface las siguientes condiciones:\\
+
+(F1) Para todo $u, v, v'$ $\in W$, si $uRv$ y $v \le v'$ entonces existe $u'$ tal que $u \le u'$ y $u'Rv'$.\\
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[>=latex]
+		\node (a0) at (-1,0)   [shape=circle,draw,fill, inner sep=1pt,label=left:$u$] {} ;
+		\node (a1) at (-1,2)  [shape=circle,draw,fill, inner sep=1pt, label=left:$u'$] {} ;
+		\node (a2) at (1,0)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v$] {} ;
+		\node (a3) at (1,2)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v'$] {} ;
+		\draw [dotted,->] node[left] at (-1,1){$\le$}(a0) edge [ left] (a1);
+		\draw [ar,->] node[above] at (0,2){$R$}(a0) edge [ right] (a2);
+		\draw [dotted, ->] node[right] at (1,1){$\le$}(a1) edge [ left] (a3);
+		\draw [ar,->] node[above] {$R$} (a2) edge [ left] (a3);
+ ;
+		\end{tikzpicture}
+	\end{center}
+\end{figure}
+
+(F2) Para todo $u', u, v$ $\in W$, si $u \le u'$ y $u R v$ entonces existe $v'$ tal que $u'Rv'$ y $v\le v'$.\\
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[>=latex]
+		\node (a0) at (-1,0)   [shape=circle,draw,fill, inner sep=1pt,label=left:$u$] {} ;
+		\node (a1) at (-1,2)  [shape=circle,draw,fill, inner sep=1pt, label=left:$u'$] {} ;
+		\node (a2) at (1,0)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v$] {} ;
+		\node (a3) at (1,2)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v'$] {} ;
+		\draw [ar,->] node[left] at (-1,1){$\le$}(a0) edge [ left] (a1);
+		\draw [ar,->] node[above] at (0,2){$R$}(a0) edge [ right] (a2);
+		\draw [dotted, ->] node[right] at (1,1){$\le$}(a1) edge [ left] (a3);
+		\draw [dotted,->] node[above] {$R$} (a2) edge [ left] (a3);
+		;
+		\end{tikzpicture}
+	\end{center}
+\end{figure}
+
+De acuerdo al paradigma de Kripke para la lógica intuicionista, los hechos atómicos se acumulan a medida que ascendemos el orden parcial. Es decir, podría razonablemente sostenerse que el hecho de que un mundo $w$ accedía a otro mundo $v$, es un tipo razonable de hecho atómico que debería persistir. Así, cualquier mundo $ w \le w'$ debería también, en efecto, ver $v$; pero es razonable esperar que también hayamos acumulado más datos sobre $v$ que, por lo tanto, pueden haber 'evolucionado' en algún mundo $v \le v'$. Formalizando estas consideraciones, llegamos a obtener la condición (F1). Un argumento dual partiendo de que el mundo $v$ está viendo al mundo $w$ justifica la condición (F2).
+
+\dfn(Modelo bi-relacional) Un \emph{modelo bi-relacional} $\M$ es una cuatro-upla $\langle W, R, \break\le, V \rangle$ donde $\langle W, R, \le \rangle$ es un frame bi-relacional y $V$ una función de valuación monótona $V: W$$\rightarrow$ $2^{\mathsf{PROP}}$ tal que es una función que asigna a cada mundo $w$ el subconjunto de átomos proposicionales que son verdaderos en $w$, sujeto a:
+
+\begin{center}
+	$w \le w'$ $\Rightarrow$ $V(w)$ $\subseteq$ $V(w')$
+\end{center}
+
+De esta manera, obtenemos el \emph{lema de monotonía}:
+
+\begin{lemma} (Lema de monotonía) 
+	Si $w \le w'$ y $\M, w \Vdash A$ entonces $\M, w' \Vdash A$.
+\end{lemma}
+
+Como vimos en el caso de la lógica clásica, escribimos $\M, w \Vdash a$ si y sólo si $a \in V(w)$ y lo extendemos con inducción a todas las fórmulas siguiendo las reglas para los modelos de Kripke tanto intuicionistas como clásicos:
+
+\dfn Sea $\M = \langle W, R, \le, V \rangle $ un modelo bi-relacional, $w \in W$ y $A$ una fórmula, decimos que $\M,w $ satisface $A$ (denotado $\M, w \Vdash A$) si:$$
+\begin{array}{rcl}
+
+%\M, w \Vdash a & \mbox{si y sólo si} & a \in V(w)\\
+
+%\M, w \Vdash \vls-a& \mbox{si y sólo si} & a \not \in V(w)\\
+
+\M, w \Vdash A \vlan B & \mbox{sii} & \M, w \Vdash A\mbox{ y }\M, w \Vdash B \\
+
+\M, w \Vdash A \vlor B & \mbox{sii} & \M, w \Vdash A\mbox{ o }\M, w \Vdash B \\
+
+\M, w \Vdash A \vljm B & \mbox{sii} & \mbox{para todo } w' \mbox{ con } w \le w', \mbox{ si } \M, w' \Vdash A \mbox{ entonces } \M, w' \Vdash B \\
+
+\M, w \Vdash \square A & \mbox{sii} & \mbox{para todo } w' \mbox{ y } u \mbox{ con } w \le w' \mbox{ y } w'Ru \mbox{ entonces } \M, u \Vdash A \\
+
+\M, w \Vdash \Diamond A & \mbox{sii} & \mbox{existe } u \in W \mbox{ tal que } wRu \mbox{ y } \M, u \Vdash A \\
+
+\end{array}$$
+
+ %\male{de nuevo, queda feo, no te parece?}
+ %\hspace{9mm} $\M, w \Vdash \vls(A.B)$ si y sólo si $\M, w \Vdash A$ y $\M, w \Vdash B$
+
+%\hspace{9mm} $\M, w \Vdash \vls[A.B]$ si y sólo si $\M, w \Vdash A$ o $\M, w \Vdash B$
+
+
+%\hspace{9mm} $\M, w \Vdash A \vljm B$  si y sólo si para todo $w'$ con $w \le w'$, si $\M, w' \Vdash A$ entonces $\M, w' \Vdash B$.
+
+
+%\hspace{9mm} $\M, w \Vdash \square A$ si y sólo si para todo $w'$ y $u$ con $w \le w'$ y $w'Ru$ entonces 
+%se tiene que $\M, u \Vdash A$
+
+%\hspace{9mm} $\M, w \Vdash \Diamond A$ si y sólo si existe un mundo $u \in W$ tal que $wRu$ y $\M, u \Vdash A$.
+
+Escribimos $\M, w \not \Vdash A$ si no se da el caso de $\M, w\Vdash A$, en particular $\M, w ,\not \Vdash \bot $.\\
+
+
+\dfn (Satisfabilidad y Validez de una fórmula) Una fórmula $A$ es \textit{satisfacible} en un modelo $\M = \langle W, R, \le, V \rangle$, si existe $w \in W$ tal que $\M, w \Vdash A$. Diremos que una fórmula $A$ es \emph{válida} en un modelo $\M$ si para todo $w \in W$, $\M, w \Vdash A$. Lo denotamos con $\M \vDash A$.
+
+%%%%%%%
+
+\section{Axiomatizaciones para la lógica modal intuicionista}
+La lógica modal intuicionista $\IK$ (una variante intuicionista de la lógica modal $\K$) es una extensión de la lógica proposicional intuicionista \textbf{IPL} \cite{vandalen2004} compuesta por los siguientes axiomas:
+
+\begin{itemize}
+	
+	\item{THEN-1}: $A  \vljm (B \vljm A)$
+	
+	\item{THEN-2}: $(A \vljm (B \vljm C)) \vljm ((A \vljm B) \vljm (A \vljm C))$
+	
+	\item{AND-1}: $\vls(A.B)\vljm A$
+	
+	\item{AND-2}: $\vls(A.B) \vljm B$
+	
+	\item{AND-3}: $A \vljm (B \vljm (\vls(A.B)))$
+	
+	\item{OR-1}: $A \vljm \vls[A.B]$
+	
+	\item{OR-2}: $B \vljm \vls[A.B]$
+	
+	\item{OR-3}: $(A \vljm C) \vljm ((B \vljm C) \vljm (\vls[A.B] \vljm C))$
+	
+	\item{FALSE}: $\bot \vljm A$
+
+\end{itemize}
+
+Una vez introducida la lógica \textbf{IPL}, obtenemos $\IK$ añadiendo los siguientes axiomas y reglas:
+
+\begin{itemize}
+	\item{la \emph{regla de necesitación} ($\mathsf{nec}$)}: si $A$ es un teorema, entonces también $\square A$ es un teorema.
+	\item{las siguientes \emph{cinco variantes del axioma de distributividad $\kaxiom$}}:
+	
+	$\kaxiom_{1}$: $\square(A \vljm B) \vljm (\square A \vljm \square B)$
+	
+	$\kaxiom_{2}$: $\square (A \vljm B) \vljm (\Diamond A \vljm \Diamond B)$
+	
+	$\kaxiom_{3}$: $\Diamond (\vls[A.B]) \vljm (( \vls [\Diamond A. \Diamond B]))$
+	
+	$\kaxiom_{4}$: $(\Diamond A \vljm \square B) \vljm \square(A \vljm B)$
+	
+	$\kaxiom_{5}$: $\Diamond \bot \vljm \bot$ 
+	
+\end{itemize} 
+
+%El sistema modal intuicionista más básico que uno puede pensar sería considerar únicamente la modalidad $\square$ según lo establecido por el axioma $k$, mejor conocido en esta sección como $k_{1}$, obteniendo así el sistema \textbf{IPL+nec+$k_{1}$}. Aunque de aquí no podríamos tener ningún tipo de información acerca de la modalidad $\Diamond$.
+ El sistema modal intuicionista más básico que podría ser considerado, consiste únicamente de la modalidad $\square$, axiomatizada por el axioma $\kaxiom_{1}$. Sin embargo, dicho sistema no contempla la modalidad $\Diamond$.
+Fitch \cite{fitch1948} fue el primero en proponer un sistema intuicionista para trabajar con $\Diamond$ obteniéndolo a partir de \textbf{IPL+nec+$\kaxiom_{1}$+$\kaxiom_{2}$}, el cual muchas veces es conocido como \textbf{CK} por \emph{lógicas modales constructivas} (en inglés \emph{constructive modal logics}). En \cite{wijesekera1990} se introdujo un sistema intuicionista que no contempla la distribuividad de $\Diamond$ sobre $\vlor$; el mismo está compuesto por \textbf{IPL+nec+$\kaxiom_{1}$+$\kaxiom_{2}$+$\kaxiom_{5}$}.
+%: luego obtenemos \textbf{CK} de constructive y de la anteriormente mencioada lógica modal K). Wijekesera \cite{wijesekera1990} propuso un sistema intuicionista que agregaba al sistema de Fitch el axioma $k_{5}$, que establece que $\Diamond$ distribuye sobre disyunciones 0-aria, pero no asumió que siempre distribuiría sobre disyunciones binarias; el sistema que él propuso entonces fue \textbf{IPL+nec+$k_{1}$+$k_{2}$+$k_{5}$}. 
+Estos sistemas fueron diseñados para algunas aplicaciones concretas, tal como analizar algunos sistemas de tipos \cite{benton1998} o para razonar sobre los estados de una máquina bajo información parcial  \cite{wijesekera2005}. Sin embargo, desde un punto de vista estrictamente lógico, no resulta satisfactorio, ya que la adición del principio del Tercero Excluído al sistema no produce la lógica modal clásica $\K$, es decir, en este caso no es posible recuperar la dualidad de De Morgan entre $\square$ y $\Diamond$.
+
+La axiomatización que es ahora generalmente aceptada como \emph{lógica modal intuicionista} denotada como $\IK$ fue introducida por Plotkin y Stirling \cite{plotkin1986} y es equivalente a la propuesta por Fischer-Servi \cite{servi1984} y por Ewald \cite{ewald1986}. Como se mencionó anteriormente, consiste de \textbf{IPL}, la regla de necesitación, y los axiomas $\kaxiom_{1}$, $\kaxiom_{2}$, $\kaxiom_{3}$, $\kaxiom_{4}$, $\kaxiom_{5}$. 
+
+Es posible demostrar que el sistema $\IK$ es correcto y completo con respecto a la clase de modelos indicada.
+
+
+%\dfn (Validez de una fórmula) Una fórmula $A$ es \textit{válida} en un frame $\F = \langle W, R, \le \rangle$, si para toda valuación $V$ se tiene que $A$ es satisfacible en $\langle W, R, \le, V \rangle$.
+
+\begin{teo}
+	 (\cite{servi1984,plotkin1986}) Una fórmula $A$ es un teorema de $\IK$ si y sólo si $A$ es válida en cada frame bi-relacional.
+\end{teo}
+
+Para culminar, notar el paralelismo establecido entre las diferentes axiomatizaciones para la lógica $\K$ (Capítulo 2). En este capítulo, presentamos un sistema \emph{á la Hilbert} para la lógica modal intuicionista. Nuestra contribución consiste en la definición de un sistema \emph{a la Gentzen} para lógica modal intuicionista, y al estudio de las relaciones con otros sistemas existentes. Los siguientes capítulos estarán dedicados a la presentación de dichas contribuciones.
+%Siguiendo Getnzen, un primer intento de cálculo de secuentes para la lógica modal intuicionista \textbf{IK} sería considerar una versión bilateral del cálculo de secuentes clásico para la lógica modal \textbf{K} con la restricción de que sólo una fórmula puede aparecer en el lado derecho. Un cálculo de secuentes intuicionista es un conjunto múltiple de fórmulas 

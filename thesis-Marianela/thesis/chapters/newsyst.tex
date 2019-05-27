@@ -1,0 +1,236 @@
+\section{El sistema $\labIKh$}
+En esta sección buscamos resolver el problema recientemente propuesto a partir del sistema de prueba etiquetado que se observa en la Figura \ref{fig:labIKheart}. Como se dijo anteriormente, para obtener este nuevo sistema, se extendió el cálculo de secuentes etiquetado propuesto por Negri para la lógica modal básica agregando un símbolo de relación de pre-orden. En las siguientes secciones desarrollamos en detalle las reglas que forman parte de este sistema de secuentes etiquetado para la lógica modal intuicionista llamado $\labIKh$.
+
+\subsection{Condiciones para frames}
+
+Para poder capturar la lógica modal intuicionista, en primer lugar, buscamos responder a los requisitos de las definiciones presentadas en el Capítulo 3. La semántica de la lógica modal intuicionista habla de un modelo bi-relacional el cual esta compuesto por dos relaciones binarias $R$ y $\le$, donde exigimos que $\le$ sea una relación de pre-orden, es decir, que sea reflexiva y transitiva. Por lo tanto, el sistema $\labIKh$ debe tener reglas que caractericen tales condiciones (estas reglas se representan con \emph{refl} y \emph{trans}). También debe poseer reglas que caractericen las condiciones F1 y F2 (en el sistema $\labIKh$ estas reglas son $\fone$ y $\ftwo$). Por otra parte, recordemos que la definición de la función de valuación monótona $V$ nos introduce el \emph{lema de monotonía} que será capturado por la regla $\ids$ del sistema. Estas reglas son las siguientes:
+
+\begin{center}
+	$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$\hspace{8mm}
+	$\vlinf{\trans}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+	
+	\vspace{6mm}
+	
+	$\vlinf{\ids}{}{\G, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$
+	
+	\vspace{6mm}
+	
+	$\vlinf{\fone}{$ $u$ fresh$}{\G, \Left, xRy, y \le z \Rightarrow \Right}{\G, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$\hspace{4mm}$\vlinf{\ftwo}{u$ fresh$}{\G, \Left, xRy,x \le z \Rightarrow \Right}{\G, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+		
+\end{center}
+
+\bigskip
+
+A modo de ejemplo, explicaremos en detalle las reglas $\fone$ y $\ftwo$:
+
+\begin{itemize}
+		\item Regla $\fone$.
+		
+		La regla presentada para el cumplimiento de una de las condiciones ($\fone$) de la relación de preorden $\le$ es la siguiente:
+		
+		\begin{center}
+			$\vlinf{\fone}{$ $u$ fresh$}{\G, \Left, xRy, y \le z \Rightarrow \Right}{\G, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+		\end{center}
+		
+		Dado $\G$ un conjunto de átomos relacionales y de pre-orden, y dados $\Left$ y $\Right$ conjuntos de fórmulas etiquetadas, la regla en cuestión expresa la semántica de la condición $\fone$. Leyendo desde la conclusión hacia la premisa tenemos etiquetas $x, y$ tal que $xRy$ y $y \le z$, entonces existe un mundo $u$ tal que $x \le u$ y $uRz$.
+		
+		\item Regla $\ftwo$:
+		
+		Como vimos anteriormente, la regla para el cumplimiento de F2 se presenta de la siguiente manera en $\labIKh$:
+		
+		\begin{center}
+			$\vlinf{\ftwo}{u$ fresh$}{\G, \Left, xRy,x \le z \Rightarrow \Right}{\G, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+		\end{center}
+		
+		Al igual que con F1, sea $\G$ un conjunto de átomos relacionales y de pre-orden, y dados $\Left$ y $\Right$ conjuntos de fórmulas etiquetadas, esta regla expresa semánticamente desde su conclusión hace su premisa, que dadas las etiquetas $x, y$ y $z$, si $xRy$ y $x \le z$, entonces hay una etiqueta (o mundo) $u$ (fresh) tal que $y \le u$ y $zRu$.
+		
+\end{itemize}
+
+\subsection{Conectivos lógicos de la lógica proposicional intuicionista}
+
+Para seguir construyendo un sistema completo y correcto etiquetado para la lógica modal intuicionista, en esta sección presentamos las reglas que expresan la semántica de los conectivos lógicos usuales. Es decir, presentamos reglas para la conjunción y la disjunción que forman parte del sistema $\labIKh$. Las mismas se presentan a continuación:
+
+\begin{center}
+		\hspace{4mm}$\vlinf{\svlef}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
+		$\vliinf{\svrig}{}{\G,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+		
+		
+		\vspace{5mm}
+		
+		$\vliinf{\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\G, \Left, x   \colon   A \Rightarrow \Right}{\G, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
+		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+\end{center}
+
+También el sistema $\labIKh$ debe capturar las constantes proposicionales $\top$ y $\bot$. Para ello, incorpora las siguientes dos reglas al sistema:
+
+\begin{center}
+	$\vlinf{\sbot}{}{\G,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{18mm}
+	$\vlinf{\Stop}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}$
+\end{center}
+
+A continuación explicaremos en detalle la regla de conjunción izquierda $\svlef$ y la regla de disjunción derecha $\sorig$:
+
+\begin{itemize}
+	\item Regla $\svlef$:
+	
+	El sistema $\labIKh$ presenta la siguiente regla para la conjunción en el lado izquierdo:
+	
+	\begin{center}
+		$\vlinf{\svlef}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+	\end{center}
+	
+	Al igual que las reglas presentadas en la sección anterior $\G$ es un conjunto de átomos relacionales y de pre-orden, y $\Left$ y $\Right$ son conjuntos de fórmulas etiquetadas. Desde la conclusión hacia la premisa de esta regla, semánticamente nos dice que si en $x$ se satisface la fórmula $A \vlan B$, entonces en $x$ se satisface la fórmula $A$ y también se satisface la fórmula $B$.
+	
+	\item Regla $\sorig$:
+	
+	Sea la regla presentada en $\labIKh$ para la disjunción en el lado derecho:
+	
+	\begin{center}
+		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+	\end{center}
+	
+	Tenemos que, leyendo desde la conclusión hacia la premisa, si en $x$ se satisface $A \vlor B$ (del lado derecho), entonces en $x$ es verdadera la fórmula $A$ y también la fórmula $B$.
+	
+\end{itemize}
+
+\subsection{Capturando los operadores modales}
+
+En esta sección, introduciremos las reglas que expresan la semántica de los operadores modales $\square$ y $\Diamond$. El sistema $\labIKh$ presenta las siguientes cuatro reglas (dos para el $\square$ y dos para el $\Diamond$): 
+
+\begin{center}
+	\hspace{5mm}$\vlinf{\sbl}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$\hspace{10mm}$\vlinf{\sbr}{$ $y, z$ fresh$}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
+	
+	
+	\vspace{5mm}
+	
+	$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \Diamond A \Rightarrow \Right}{\G, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
+	$\vlinf{\sdr}{}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	
+\end{center}
+
+Expliquemos más en detalle algunas de ellas:
+
+\begin{itemize}
+	\item Regla $\sbl$.
+	
+	Para capturar el $\square$ del lado izquierdo, en nuestro sistema introducimos la siguiente regla:
+	\begin{center}
+		$\vlinf{\sbl}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+	\end{center}
+	Nuevamente dado $\G$ un conjunto de átomos relacionales y de pre-orden, y sean $\Left$ y $\Right$ conjuntos de fórmulas etiquetadas. Esta regla semánticamente expresa, desde su conclusión hacia su premisa, que dado $x, y$ y $z$ tal que $x \le y$ y $yRz$ donde en $x$ se hace verdadera la fórmula $\square A$, entonces en $z$ se hace válida la fórmula $A$.
+	
+	\item Regla $\sdr$.
+	
+	Sea la regla presentada en $\labIKh$ para $\Diamond$ en el lado derecho:	
+	\begin{center}
+		$\vlinf{\sdr}{}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	\end{center}
+	
+	Semánticamente, el diamante establece que en un modelo $\M$ y en un mundo $v$ vale $\Diamond A$ si y sólo si existe un mundo $u$ tal que $vRu$ y en $u$ la fórmula $A$ se satisface. Para capturar esta definición semántica, la regla introducida (leyendo desde la conclusión hacia la premisa) nos dice que, si $xRy$ y en $x$ se satisface $\Diamond A$, luego en $y$ la fórmula $A$ tiene que ser verdadera.
+	
+\end{itemize}
+
+\subsection{Implicación intuicionista}
+
+Por último, nos resta ver que el sistema $\labIKh$ captura la semántica del operador de implicación. Es por ello que este sistema de secuentes etiquetado para que sea completo necesita de las siguientes dos reglas:
+
+\begin{center}
+		$\vlinf{\sir}{$ $y$ fresh$}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+		
+		
+		\vspace{5mm}
+		
+		
+		$\vliinf{\sil}{}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\G, \Left, x \le y, x \colon A \vljm B, y \colon B \Rightarrow \Right}$
+\end{center}
+
+Veamos en detalle el significado de la regla de implicación del lado derecho:
+
+\begin{itemize}
+	\item Regla $\sir$.
+	
+	El sistema $\labIKh$ presenta la siguiente regla para la implicación en el lado derecho:
+	
+	\begin{center}
+		$\vlinf{\sir}{$ $y$ fresh$}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+	\end{center}
+	
+	Dado $\G$ un conjunto de átomos relacionales y de preorden, y dados $\Left$ y $\Right$ conjuntos de fórmulas etiquetadas, esta regla (leyendo desde la conclusión hacia la premisa) semánticamente nos dice que si $A \vljm B$ se satisface en $x$, entonces existe un nuevo (mundo) $y$ tal que $x \le y$ y en $y$ vale $A$, luego en $y$ también $B$ es válida.
+	
+	
+\end{itemize}
+
+%\subsection{\textbf{¿Por qué necesitamos dos reglas para cada operador?}}
+
+\subsection{Uniendo todas las reglas: sistema $\labIKh$}
+Como pudimos ver a lo largo de las subsecciones anteriores, el sistema $\labIKh$ tiene dos reglas para cada operador. Esto se debe a que la sintaxis para la lógica modal intuicionista no presenta la negación $\neg$, por lo que los operadores $\Diamond$ y $\square$ dejan de ser operadores duales como lo eran en el caso clásico.
+
+En la Figura \ref{fig:labIKheart} se puede ver el sistema de secuentes etiquetado $\labIKh$ completo con cada una de las reglas mencionadas anteriormente.
+
+\begin{figure}[!h]
+	\small
+	\begin{center}
+			
+			$\vlinf{\sbot}{}{\G,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{6mm}
+			$\vlinf{\ids}{}{\G, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$\hspace{6mm}
+			$\vlinf{\Stop}{}{\G, \Left \Rightarrow \Right, x \colon \top}{}$
+		
+		\vspace{5mm}
+			
+			$\vlinf{\svlef}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
+			$\vliinf{\svrig}{}{\G,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+
+		
+		\vspace{5mm}
+			
+			$\vliinf{\solef}{}{\G, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\G, \Left, x   \colon   A \Rightarrow \Right}{\G, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
+			$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+
+		
+		\vspace{5mm}
+			
+			$\vlinf{\sir}{$ $y$ fresh$}{\G, \Left \Rightarrow \Right, x \colon A \vljm B}{\G, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+		
+		
+		\vspace{5mm}
+		
+		
+		$\vliinf{\sil}{}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\G, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\G, \Left, x \le y, x \colon A \vljm B, y \colon B \Rightarrow \Right}$
+		
+		\vspace{5mm}
+		
+			
+			$\vlinf{\sbl}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$\hspace{10mm}$\vlinf{\sbr}{$ $y, z$ fresh$}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
+			
+
+		\vspace{5mm}
+		
+			$\vlinf{\sdl}{$ $y$ fresh $}{\G, \Left, x \colon \Diamond A \Rightarrow \Right}{\G, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
+			$\vlinf{\sdr}{}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+			
+		\vspace{5mm}
+		
+				
+		\vspace{2mm}
+			$\vlinf{\refl}{}{\G, \Left \Rightarrow \Right}{\G, x\le x, \Left \Rightarrow \Right}$\hspace{10mm}
+			$\vlinf{\trans}{}{\G, x \le y, y \le z, \Left \Rightarrow \Right}{\G, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+			
+		
+		\vspace{5mm}
+		
+			
+			$\vlinf{\fone}{$ $u$ fresh$}{\G, \Left, xRy, y \le z \Rightarrow \Right}{\G, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$\hspace{4mm}
+			$\vlinf{\ftwo}{u$ fresh$}{\G, \Left, xRy,x \le z \Rightarrow \Right}{\G, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+
+	\end{center}
+	\caption{Sistema $\labIKh$}
+	\label{fig:labIKheart}
+\end{figure}
+
+
+
+
+
+%Veamos un ejemplo en el cual la ausencia de una regla no nos permitiría
+
+%\raul{Completar esta idea, o sacar la subseccion y dejar solo el comentario sin ejemplo.}

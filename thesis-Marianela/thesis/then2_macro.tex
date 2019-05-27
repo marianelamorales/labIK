@@ -1,0 +1,120 @@
+%%%%%%%%THEN-2 MACRO%%%%%%%%%%%%
+\newcommand{\thentwo}{\begin{center}	
+		$\vlderivation {
+			\vlin{\sir}
+			{}
+			{\Rightarrow x \colon (A \vljm (B \vljm C)) \vljm ((A \vljm B)\vljm (A \vljm C))}
+			{\vlin {\sir}
+				{}
+				{x \le y, y \colon A \vljm (B \vljm C)\Rightarrow y \colon (A \vljm B) \vljm (A \vljm C)}
+				{\vlin {\sir}
+					{}
+					{x \le y, y \le z, y \colon A \vljm (B \vljm C), z \colon A \vljm B \Rightarrow z \colon A \vljm C}
+					{\vlin {\trans}
+						{}
+						{x \le y, y \le z, z \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A \Rightarrow w \colon C}
+						{\vliin {\sil}
+							{}
+							{x \le y, y \le z, z \le w, y \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A \Rightarrow w \colon C}
+							{\vlhy{\circledast \hspace{75mm}}}
+							{\vlhy{\star}}}}}
+			}}$
+			
+		\end{center}
+		
+		\bigskip
+		
+		La derivación, luego de aplicar la regla izquierda de la implicación $\sil$, genera dos premisas. La premisa que continua a partir $\circledast$ es de la siguiente forma:
+		
+		\begin{center}
+			
+			$\vlderivation{
+				\vlin{\sil}{}{\circledast}
+				{\vlin {\refl}
+					{}
+					{x \le y, y \le z, z \le w, y \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A \Rightarrow w \colon C, w \colon A}
+					{\vlin {\ids}
+						{}
+						{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A \Rightarrow w \colon C, w \colon A}
+						{\vlhy {}}}}	
+			}$
+			
+		\end{center}
+		
+		Mientras que la premisa que continua en $\star$ es de esta forma:
+		
+		\begin{center}
+			\scalebox{0.96}{
+		$\vlderivation{
+			\vlin{\sil}{}{\star}
+			{\vlin {\trans}
+				{}
+				{x \le y, y \le z, z \le w, y \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C \Rightarrow w \colon C}
+				{\vliin {\sil}
+					{}
+					{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C \Rightarrow w \colon C}
+					{\vlhy{\heartsuit \hspace{75mm}}}
+					{\vlhy{\clubsuit}}}}
+		}$}
+		
+	\end{center}
+	
+		Vemos que en $\star$ al volver aplicar la regla de implicación izquierda $\sil$, genera nuevamente dos premisas que las representamos con $\heartsuit$ y $\clubsuit$ para continuar con nuestra derivación.
+		
+		Por un lado, la derivación correspondiente a $\clubsuit$ está dada por:
+		
+		\begin{center}
+			\scalebox{0.94}{
+		$\vlderivation{
+			\vlin{\sil}{}{\clubsuit}{
+				\vlin {\ids}
+				{}
+				{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C, w \colon C \Rightarrow w \colon C}
+				{\vlhy {}}}
+		}$}
+	\end{center}
+	
+		Por otro lado, de $\heartsuit$ obtenemos la siguiente derivación que de nuevo utiliza $\sil$. Es por ello que volvimos a representar las premisas que se obtienen como resultado de esta regla con $\spadesuit$ (para la premisa que parte del lado izquierdo) y $\dagger$ (para la premisa que parte del lado derecho):
+		
+		\begin{center}
+			\scalebox{0.94}{
+		$\vlderivation{
+			\vlin{\sil}{}{\heartsuit}
+			{\vliin {\sil}
+				{}
+				{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C \Rightarrow w \colon C, w \colon B}
+				{\vlhy{\spadesuit \hspace{105mm}}}
+				{\vlhy{\dagger}}}
+		}$}
+	\end{center}
+		
+	
+		
+		Finalmente por $\spadesuit$ concluye la derivación de esta rama de la siguiente forma:
+		
+		\begin{center}
+		\scalebox{0.90}{
+			$\vlderivation{
+				\vlin{\sil}{}{\spadesuit}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C \Rightarrow w \colon C, w \colon B, w \colon A}
+					{\vlhy {}}}}$
+		}
+	\end{center}
+	
+		Y por $\dagger$, la derivación concluye de esta otra manera:
+		
+		\begin{center}
+		
+		\scalebox{0.90}{
+			$\vlderivation{
+				\vlin{\sil}{}{\dagger}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le z, z \le w, y \le w, w \le w, y \colon A \vljm (B \vljm C), z \colon A \vljm B, w \colon A, w \colon B \vljm C, w \colon B \Rightarrow w \colon C, w \colon B}
+					{\vlhy {}}}
+			}$
+		}
+	\end{center}
+		}
