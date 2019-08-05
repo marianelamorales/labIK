@@ -1,0 +1,911 @@
+\documentclass[twoside]{aiml18}
+
+\usepackage{aiml18macro}
+
+\usepackage[noxy]{virginialake}                        
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath} 
+\usepackage{mathtools}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc} 
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{pgf}
+\usepackage[all]{xy}
+\usepackage{tikz}
+%\usepackage{hyperref}
+\usepackage{pgffor}
+
+\tikzset{
+	annotated cuboid/.pic={
+		\tikzset{%
+			every edge quotes/.append style={midway, auto},
+			/cuboid/.cd,
+			#1
+		}
+		\draw [every edge/.append style={pic actions, opacity=.5}, pic actions]
+		(0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
+		(o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
+		(o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
+		
+		;
+	},
+	/cuboid/.search also={/tikz},
+	/cuboid/.cd,
+	width/.store in=\cubex,
+	height/.store in=\cubey,
+	depth/.store in=\cubez,
+	units/.store in=\cubeunits,
+	scale/.store in=\cubescale,
+	width=10,
+	height=10,
+	depth=10,
+	units=cm,
+	scale=.1,
+}
+%tikz parameters
+
+\tikzstyle{point}=[circle,draw]
+\usetikzlibrary{arrows,automata,shapes,decorations.markings,
+	decorations.pathmorphing,backgrounds,fit,snakes,calc}
+
+%\usepackage{float}
+%\floatstyle{boxed} 
+%\restylefloat{figure}
+
+\usepackage{colonequals}
+\usepackage{bm}
+
+%%% Extracting symbols from MnSymbol 
+\DeclareFontFamily{U} {MnSymbolC}{}
+%
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+	<-6>  MnSymbolC5
+	<6-7>  MnSymbolC6
+	<7-8>  MnSymbolC7
+	<8-9>  MnSymbolC8
+	<9-10> MnSymbolC9
+	<10-12> MnSymbolC10
+	<12->   MnSymbolC12}{}
+\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+	<-6>  MnSymbolC-Bold5
+	<6-7>  MnSymbolC-Bold6
+	<7-8>  MnSymbolC-Bold7
+	<8-9>  MnSymbolC-Bold8
+	<9-10> MnSymbolC-Bold9
+	<10-12> MnSymbolC-Bold10
+	<12->   MnSymbolC-Bold12}{}
+%
+\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%
+\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+
+
+%%% Comments  
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+\newcommand{\lutz}[1]{{\color{green}[Lutz: #1]}}
+\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+
+%%% General
+\input{aiml_macros}
+%\newcommand{\F}{\mathcal{F}}
+%\newcommand{\M}{\mathcal{M}}
+%\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+%\newcommand{\Left}{\mathcal{L}}
+%\newcommand{\Right}{\mathcal{R}}
+
+%%% Systems
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\lab}{\mathsf{lab}}
+\newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\labIKp}{\lab\IK_{\le}}
+
+%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+
+%%% Labelled sequents
+\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
+\newcommand{\SEQ}{\Rightarrow}
+\newcommand*{\DD}{\mathcal{D}}
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\invr}[1]{#1^\bullet}
+\newcommand*{\rel}{R}
+
+%%% Labelled rules
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%
+\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%
+\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
+\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%The following line defines the page header consisting of the surnames of the authors.
+% Please include only the last names! 
+% Separate by commas except the last two surnames which are separated by an "and".
+\def\lastname{Marin, Morales and Stra{\ss}burger}
+
+\begin{document}
+
+\begin{frontmatter}
+  \title{Decomposing labelled proof theory for intuitionistic modal logic}
+  \author{Sonia Marin}
+  \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
+ \author{Marianela Morales}
+ \address{Universidad Nacional de C\'ordoba \\ Argentina}
+   \author{Lutz Stra{\ss}burger}
+ \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
+
+ \begin{abstract}
+   We present a labelled sequent system for intuitionistic modal logic equipped 
+   with two relation symbols, one for the accessibility
+   relation associated with the Kripke semantics for modal logics and
+   one for the preorder relation associated with the Kripke semantics
+   for intuitionistic logic. 
+   %
+   Thus, it is in close correspondence with birelational Kripke semantics for intuitionistic modal logic and can encompass a wider range of intuitionistic logics than state-of-the-art labelled systems.
+
+
+   %% . We show the possibility of extend labelled sequents
+   %% with a preorder relation symbol in order to capture intuitionistic
+   %% modal logic. For this, we obtain a proof system which is complete
+   %% with respect to Hilbert system.  Also, we present the proof for
+   %% completeness using Simpson system.
+  \end{abstract}
+
+  \begin{keyword}
+  Intuitionistic modal logic, Labelled sequents, Proof theory.
+  \end{keyword}
+ \end{frontmatter}
+
+
+\section{Introduction}
+One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
+
+\emph{Labelled deduction} has been proposed by Gabbay~\cite{Gabbay} in the 80s as a unifying framework throughout proof theory in order to provide proof
+systems for a wide range of logics. 
+%
+For modal logics it can take
+the form of labelled natural deduction and labelled sequent systems as
+used, for example, by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano}, and
+Negri~\cite{Negri}. 
+%
+These formalisms make explicit use not only of
+labels, but also of relational atoms referring to the accessibility relation of a Kripke frame.
+%
+In this short note we propose a system that represents both the \emph{accessibility relation} (for modal
+logics) and the \emph{preorder relation} (for intuitionistic
+logic), using the full power of the bi-relational semantics for
+intuitionistic modal logics,
+and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite{Maffezioli}. 
+
+%
+%For sequent systems for intuitionistic logics there is always a choice
+%to be made: make the system \emph{single conclusion} following
+%Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
+%Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
+%variant because of the closer correspondence to the semantics. In that
+%respect, our system is closer to~\cite{kuz:str} than
+%to~\cite{Simpson} and~\cite{mar:str}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Preliminaries}
+\marianela{Depends on how long the paper has to be, we can add a section with preliminaries: labelled sequents for classical modal logic and syntax and semantics of classical modal logic}
+
+Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$  and relational atoms of the form $xRy$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\ref{fig:systemlabK}). 
+\begin{figure}[h]
+\begin{center}
+
+$\vlderivation {\vlinf{\id}{}{\B \SEQ \Right, x: a, x: \vls-a}{}}$
+\hspace{7mm}$\vlderivation {\vlinf{\tolab}{}{\toprule}{}}$
+
+
+$\vliinf{\vlab}{}{\B \SEQ \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$
+\hspace{7mm}$\vlinf{\olab}{}{\B \SEQ \Right, x \colon \vls[A.B]}{\olabr}$
+
+
+$\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$
+\hspace{7mm}$\vlinf{\dlab}{}{\dlabr}{\dlabu}$
+
+\end{center}
+\caption{System $\mathsf{labK}$}
+\label{fig:systemlabK}
+\end{figure}
+
+These rule schemes can occur in different contexts and different calculi. The context that interests us is when it is applied to modal logic.
+The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
+
+
+\section{Intuitionistic modal logics}
+
+	The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
+	%
+	Starting with a set $\mathcal{A}$ of atomic propositions, denoted $a$, modal formulas are constructed from the grammar:
+	%
+	$$
+	A \coloncolonequals
+	a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
+	$$
+	%
+	%We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
+
+%Obtaining the intuitionistic variant of K is more involved than the classical variant. 
+%%
+%Lacking De Morgan duality, there are several variants of k that are classically but not intuitionistically
+%equivalent. 
+%%
+%Five axioms have been considered as primitives in the literature. 
+%
+
+The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi~\cite{Fischer}.
+%, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
+%
+It is obtained from intuitionistic propositional logic by adding:
+\begin{itemize}
+\item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
+\item the following five variants of the \emph{distributivity axiom}:
+\begin{equation*}
+\label{eq:ik}%\hskip-2em
+\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
+\kax[1]\colon&\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)
+&
+\kax[3]\colon&\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)
+&
+\kax[5]\colon&\DIA\BOT\IMP\BOT
+\\
+\kax[2]\colon&\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)
+&
+\kax[4]\colon&(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)\\%x[1ex]
+\end{array}
+\end{equation*}
+\end{itemize}
+
+The relational semantics for $\IK$ was first defined by Fischer-Servi~\cite{Fischer}.
+%
+It combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
+
+\begin{definition}
+	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ 
+%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
+	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.} a reflexive and transitive relation) satisfying:
+	\begin{enumerate}
+		\item[($F_1$)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
+		\marianela{we can add the figures for each condition}
+%	\begin{figure}[h]
+%		\begin{center}
+%			\begin{tikzpicture}[>=latex]
+%			\node (a0) at (-1,0)   [shape=circle,draw,fill, inner sep=1pt,label=left:$u$] {} ;
+%			\node (a1) at (-1,2)  [shape=circle,draw,fill, inner sep=1pt, label=left:$u'$] {} ;
+%			\node (a2) at (1,0)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v$] {} ;
+%			\node (a3) at (1,2)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v'$] {} ;
+%			\draw [dotted,->] node[left] at (-1,1){$\le$}(a0) edge [ left] (a1);
+%			\draw [ar,->] node[above] at (0,2){$R$}(a0) edge [ right] (a2);
+%			\draw [dotted, ->] node[right] at (1,1){$\le$}(a1) edge [ left] (a3);
+%			\draw [ar,->] node[above] {$R$} (a2) edge [ left] (a3);
+%			;
+%			\end{tikzpicture}
+%			\end{center}
+%		\end{figure}
+		
+		\item[($F_2$)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
+	\end{enumerate}
+%	
+\end{definition}
+
+\begin{definition}
+	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
+	if $w \le w'$ then $V(w)\subseteq V(w')$.
+\end{definition}
+
+We write $w \Vdash a$ if $a \in V(w)$, and by definition, we always have $w \Vdash \top$ and never that $w \Vdash \bot$. 
+%
+Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+
+$w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
+
+$w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
+
+$w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
+
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ \hfill $(\ast)$
+
+$w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
+
+%We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
+
+We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \SEQ \bot$).
+
+From the monotonicity of the valuation function $V$ , we get a monotonicity property for the relation:
+\begin{proposition}(Monotonicity) 
+For any formula $A$ and for $w, w' \in W$, if $w \le w'$ and $w \Vdash A$, then $w' \Vdash A$.
+\end{proposition}
+
+
+
+\begin{definition}
+	A formula $A$ is \emph{satisfied} in a model $\M = \langle W, R, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
+%
+	A formula $A$ is \emph{valid} in a frame $\F = \langle W, R, \le \rangle$, if for all valuations $V$, $A$ is satisfied in $\langle W, R, \le, V \rangle$.
+\end{definition}
+
+
+
+%It then was investigated in detail in~\cite{Simpson}, in which strong arguments are given in favour of this axiomatic definition: 
+%
+%it allows for adapting to intuitionistic logic the standard embedding of modal logic into first-order logic, and also provides an extension of the standard Kripke semantics for classical modal logic to the intuitionistic case.
+
+Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
+
+\begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]\label{thm:plotkin}
+	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
+\end{theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Labelled sequent calculi with $\rel$ and $\le$}
+
+\begin{figure}%[h]
+	\centering
+	\small
+	\fbox{
+	\begin{minipage}{.95\textwidth}
+	\begin{tabular}{@{\!}c@{\quad}c}
+		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
+		&
+		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
+		\quad
+		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
+		\\\\
+		$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
+		&
+		$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}$
+		\\\\
+		$\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}$
+		&
+		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
+		\\\\
+		\multicolumn{2}{c}{
+		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, x \le y, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+		}
+		\\\\
+		\multicolumn{2}{c}{
+ 		$\vliinf{\rlabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+% 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
+ 		}
+		\\\\
+		$\vlinf{\llabrn\BOX}{}{\B, \Left, x \le y, yRz, \labels{x}{\BOX A} \SEQ \Right}{\B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
+		&
+		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \Left, x \le y, y \rel z \SEQ \Right, \labels{z}{A}}$
+		\\\\
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \Left, x \rel y, \labels{y}{A} \SEQ \Right}$
+		&
+		$\vlinf{\rlabrn\DIA}{}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
+		\\
+		\multicolumn{2}{c}{
+		$\mbox{\hbox to .9\linewidth{\dotfill}}$
+		}
+		\\
+		$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
+		&
+		$\vlinf{\rn{trans}}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$
+		\\\\
+		\multicolumn{2}{c}{
+		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+		}
+		\\\\
+		\multicolumn{2}{c}{
+		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+		}
+	\end{tabular}		
+\end{minipage}
+}		
+	\caption{System $\labIKp$}
+	\label{fig:labIKp}
+\end{figure}
+
+
+%%
+%This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
+
+Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
+
+Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent. Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
+%
+Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
+%
+The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
+%
+
+
+\begin{definition}
+A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
+\end{definition}
+
+
+
+%
+We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
+%
+Most rules are similar to the ones of Simpson~\cite{Simpson}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
+%
+In particular, the rules introducing the $\BOX$-operator correspond to the definition $(\ast)$.
+%
+Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
+
+As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
+
+%\begin{theorem}
+%	\label{thm:sound-compl}
+%	A formula $A$ is provable in the calculus $\labIKp$ if and only if $A$ is valid in every bi-relational frame.
+%\end{theorem}
+%
+%On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
+%
+%On the other hand, we show that $\labIKp$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
+
+%Finally we can prove the following theorem ensuring soundness and (cut-free) completeness of $\labIKp$.
+
+\begin{theorem}\label{thm:cutfree-compl}
+	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
+	%
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{i} $A$ is a theorem of $\IK$ 
+		%
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with %\quad
+%		
+%		\todo{}
+		\smash{%\fbox{
+			\scalebox{.9}{$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$}
+		}%}
+		%
+		\item\label{iii} $A$ is provable in $\labIKp$
+		%
+		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
+	\end{enumerate}
+\end{theorem}
+
+%We show that each rule from our system is sound.
+%
+%
+%We present a completeness proof for our system $\labIKp$ using the Simpson system. 
+%
+%The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. 
+%
+%We show the proof by case analysis. 
+%
+%Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
+
+The proof is a careful adaptation of standard techniques.
+%
+In particular, in order to prove (i) $\rightarrow$ (ii), we present a syntactic completeness proof with respect the Hilbert system which means that we prove all Hilbert axioms using the rules from our system $\labIKp$: we give a proof for all the axioms of propositional intuionistic logic, for the five variants of $\mathsf{k}$ axiom from the intuitionistic syntax and finally, we simulate the necesssitation rule and modus ponens. As we mentioned, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%
+As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
+
+\vspace*{-.9cm}
+$$
+\hspace*{-.5cm}
+\scalebox{.9}{
+$
+\vlderivation{
+	\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
+		\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
+			\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
+				\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+					\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+						\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+							\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
+								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+										\vlhy {}
+										}
+									}
+								}
+							}{
+%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+										\vlhy {\qquad\vdots\qquad}
+%										}
+%									}
+%								}
+%							}
+						}
+					}
+				}
+			}
+		}
+	}
+}$
+}$$
+%\end{example}
+
+%\vspace*{-.5cm}
+
+Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
+%
+We therefore have to show that such a rule is admissible in our system.
+%
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
+
+\vspace*{-.5cm}
+%\begin{example}
+$$
+\scalebox{.9}{
+$
+\vlderivation{
+	\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+		\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+					\vlhy{}
+				}
+			}
+		}
+	}
+}
+$
+}
+$$
+%\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts and then put the whole system).}
+
+\section{Building $\labIKp$}
+
+As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system has labelled formulas of the form $x \colon A$, the expressions $xRy$ (the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and expressions $x \le y$ were introduced to represent the pre-order relation. In the next sub-sections, we study each rule of the system $\labIKp$ in detail. 
+ 
+\subsection{Frame conditions}
+%In order to capture intuitionistic modal logics, we need to answer the requirements of the de
+The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the $Monoto$ is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
+
+\todo{fix this figure!}
+
+\begin{center}
+	$\vlinf{\refl}{}{\B, \Left \Rightarrow \Right}{\B, x\le x, \Left \Rightarrow \Right}$\hspace{8mm}
+	$\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \Rightarrow \Right}{\B, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+	
+	$\vlinf{\ids}{}{\B, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$
+	
+	\vspace{2mm}
+		
+	$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+	
+	\vspace{2mm}
+	$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+	
+\end{center}
+
+As an example, here there is a small explanation about the rules $\fone$ and $\ftwo$:
+
+
+\begin{itemize}
+	\item Rule $\fone$.
+
+	As we mentioned, the next rule is needed to cover one of the pre-order relation conditions:
+	
+	\begin{center}
+		$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+	\end{center}
+	
+	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, then reading the rule $\fone$ from the conclusion to the premises, we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
+	
+	\item Rule $\ftwo$:
+	
+	The rule that is capturing the frame condition $\rn{F2}$ is represented in the system  $\labIKp$ as the following:
+		
+	\begin{center}
+		$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+	\end{center}
+	
+	
+	As the rule for $\rn{F1}$, given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\ftwo$ expresses semantically from the conclusion to the premise that given the labels $x, y$ and $z$, if $xRy$ and $x \le z$, then there exists a variable $u$ such that $y \le u$ and $zRu$.
+	
+\end{itemize}
+
+
+\subsection{Logical connectives for intuitionistic propositional logic}
+
+To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and dijunction of the system $\labIKp$:
+
+\begin{center}
+	\hspace{4mm}$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
+	$\vliinf{\svrig}{}{B,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+	
+	
+	\vspace{5mm}
+	
+	$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\B, \Left, x   \colon   A \Rightarrow \Right}{\B, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
+	$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+\end{center}
+
+To capture the propositional constants $\top$ and $\bot$, the system $\labIKp$ introduces the next two rules:
+
+\begin{center}
+	$\vlinf{\sbot}{}{\B,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{18mm}
+	$\vlinf{\Stop}{}{B, \Left \Rightarrow \Right, x \colon \top}{}$
+\end{center}
+
+You can find a small explanation about the rules $\svlef$ and  $\sorig$:
+
+\begin{itemize}
+	\item Rule $\svlef$:
+	
+	The system $\labIKp$ presents the next rule for the conjunction left:
+	
+	\begin{center}
+		$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+	\end{center}
+	
+	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if in the $x$ the formula $A \vlan B$ is satisfied, then in $x$ the formula $A$ is satisfied and the formula $B$ too.
+	
+	\item Rule $\sorig$:
+	
+	Let the rule presented in $\labIKp$ for disjunction right:
+	
+	\begin{center}
+		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+	\end{center}
+	
+	From the conclusion to the premise we have: if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
+	
+\end{itemize}
+
+\subsection{Modal operators}
+
+We introduce the rules that represent the semantics of modal operators $\square$ and $\Diamond$. The system $\labIKp$ presents the next four rules (two for $\square$ and two for $\Diamond$): 
+
+\begin{center}
+	$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+		
+	$\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \Rightarrow \Right, x \colon \square A}{\B, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
+	
+	
+	\vspace{5mm}
+	
+	$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \Diamond A \Rightarrow \Right}{\B, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
+	$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	
+\end{center}
+
+A more detailed explanation is below:
+
+\begin{itemize}
+	\item Rule $\sbl$.
+	
+	In order to capture $\square$ left, in our system the next rule is introduced:
+	
+	\begin{center}
+		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+	\end{center}
+	
+	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
+	
+	\item Rule $\sdr$.
+	
+	The rule presented in the system $\labIKp$ for the $\Diamond$ left is the following:
+		
+	\begin{center}
+		$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	\end{center}
+	
+	Semantically, the diamond establish that in a model $\M$ and a world $v$ the formula $\Diamond A$ is valid, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the fomula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
+	
+\end{itemize}
+
+\subsection{Intuitionistic implication}
+
+\todo{complete}
+
+\section{Extensions}
+
+In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
+
+In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
+%\begin{center}
+	($\diabrn{4}$) if $w \rel v$ and $v \rel u$, there exists a $u'\in W$ s.t.~$u \le u'$ and $wRu'$.
+%\end{center}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
+
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+%
+These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+
+
+\bibliographystyle{alpha}
+\bibliography{references}
+
+
+\end{document}
+
+
+%\begin{figure}[h]
+%\begin{center}
+%$\vlderivation{\vlinf{\id}{}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{A} }{}}$
+%\hspace{5mm}$\vlderivation{\vlinf{\botlab}{}{\B, \Left, x\colon \bot \SEQ z\colon A}{}}$
+%\hspace{5mm}$\vlderivation{\vlinf{\toplab}{}{\B, \Left \SEQ x \colon \top}{}}$
+%
+%\vspace{2mm}
+%
+%$\vlinf{\andleflab}{}{\B,\Left, x \colon \vls(A.B) \SEQ z \colon C}{\B, \Left, x\colon \vls(A.B,\labels{x}{A}, \labels{x}{B} \SEQ z \colon C)}$\hspace{5mm}$\vliinf{\andriglab}{}{\B,\Left \SEQ x \colon \vls(A.B)}{\B, \Left \SEQ \labels{x}{A}}{\B, \Left \SEQ \labels{x}{B}}$
+%
+%\vspace{2mm}
+%$\vliinf{\orleflab}{}{\B, \Left, x \colon \vls[A.B] \SEQ  \colon C}{\B, \Left, x \colon \vls[A.B], \labels{x}{A} \SEQ z \colon C}{\B, \Left, x \colon \vls[A.B], x   \colon   B \SEQ z \colon C}$
+%
+%\vspace{2mm}
+%
+%$\vlinf{\orriglabo}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\B, \Left \SEQ x   \colon   A}$
+%\hspace{7mm}$\vlinf{\orriglabt}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\B, \Left \SEQ x \colon  B}$
+%
+%\vspace{2mm}
+%
+%$\vliinf{\illab}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\B, \Left, \labels{x}{A} \vljm B \SEQ \labels{x}{A}}{\B, \Left, \labels{x}{A} \vljm B, \labels{x}{B} \SEQ z \colon C}$
+%
+%\vspace{2mm}
+%
+%$\vlinf{\irlab}{}{\B, \Left \SEQ \labels{x}{A} \vljm B}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}$
+%
+%\vspace{2mm}
+%
+% $\vlderivation {\vlinf{\bllab}{}{\B, x \rel y, \Left x \colon \BOX A \SEQ z \colon B}{\B, x \rel y, \Left, x \colon \BOX A, y \colon A \SEQ z \colon B}}$
+%\hspace{5mm}  $\vlinf{\brlab}{$ $y$ fresh$}{\B, \Left \SEQ x \colon \BOX A}{\B, x \rel y, \Left \SEQ y \colon A}$
+%
+%\vspace{2mm}
+%
+%$\vlinf{\dllab}{$ $y$ fresh $}{\B, \Left, x \colon \DIA A \SEQ z \colon B}{\B, x \rel y, \Left, x \colon \DIA A, y \colon A \SEQ z \colon B}$
+%\hspace{5mm}$\vlinf{\drlab}{}{\B, x \rel y, \Left,  \SEQ x \colon \DIA A}{\B, x \rel y, \Left \SEQ y \colon A}$
+%
+%\end{center}
+%\caption{System labIK}
+%\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{figure}%[h]
+%	
+%	\begin{center}
+%		
+%		$\vlderivation { \vlin {\ids}{}{\B, \Left, \labels{x}{A} \SEQ x\colon a}{\vlhy {}}}$ \hspace{7mm} $\vlderivation { \vlin {\sbot}{}{\B, \Left, x \colon \bot \SEQ z\colon A}{\vlhy {}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation {\vlin {\svlef}{}{\B, \Left, x \colon \vls(A.B) \SEQ z \colon C}{\vlhy {\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vliin {\svrig}{}{\B, \Left, \SEQ x \colon \vls(A.B)}{\vlhy {\B, \Left \SEQ \labels{x}{A} }}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
+%		
+%		\vspace{3mm}
+%		
+%		
+%		$\vlderivation {\vliin {\solef}{}{\B, \Left, x \colon \vls[A.B] \SEQ z \colon C}{\vlhy {\B, \Left, \labels{x}{A} \SEQ z \colon C}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation {\vliin{\sil}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+%		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\B,  \Left, \labels{x}{A} \SEQ \labels{x}{B}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation { \vlin {\sbl}{}{\B, x \rel y, \Left, x \colon \BOX A \SEQ z\colon B}{\vlhy {\B, x \rel y, \Left, x \colon \BOX A, y \colon A \SEQ z\colon B}}}$
+%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\B, \Left \SEQ x \colon \BOX A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A}}}$
+%		
+%		\vspace{3mm}
+%		
+%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\B, \Left, x \colon \DIA A \SEQ z \colon B}{\vlhy {\B, x \rel y, \Left, y \colon A \SEQ z \colon B}}}$
+%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\B,x \rel y, \Left \SEQ x \colon \DIA A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A }}}$
+%		
+%	\end{center}
+%	
+%	\caption{System $\lab\IK$}
+%	\label{fig:labIK}
+%\end{figure}
+%
+%\begin{theorem}[Simpson~\cite{Simpson}]
+%	\label{thm:simpson-sound-compl}
+%	A formula $A$ is provable in the calculus $\lab\IK$ if and only if $A$ is valid in every bi-relational frame.
+%\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{figure}%[h]
+%	\small
+%	\centering
+%
+%		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
+%		\hspace{5mm}
+%		$\vlinf{\llabrn\bot}{}{\B, \Left, x\colon \bot \SEQ \Right}{}$
+%		\hspace{5mm}
+%		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, x \colon \top}{}$
+%%		
+%%		\vspace{4mm}
+%		\\[1.5ex]
+%%		
+%		$\vlinf{\llabrn\AND}{}{\B,\Left, x \colon \vls(A.B) \SEQ \Right}{\conjlef}$
+%		\hspace{7mm}
+%		$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+%		
+%		\vspace{4mm}
+%		
+%		$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \SEQ \Right}{\B, \Left, x   \colon   A \SEQ \Right}{\B, \Left, x   \colon   B \SEQ \Right}$
+%		\hspace{7mm}
+%		$\vlinf{\sorig}{}{\B, \Left \SEQ \Right, x \colon \vls[A.B]}{\B, \Left \SEQ \Right, x   \colon   A, x   \colon   B}$
+%		
+%		\vspace{4mm}
+%		
+%		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \SEQ \Right, \labels{x}{A} \vljm B}{\B, \Left, x \le y, y \colon A \SEQ \Right, y \colon B}$
+%		
+%		\vspace{4mm}
+%		
+%		$\vliinf{\sil}{}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right, y \colon A}{\B, \Left, x \le y, y \colon B \SEQ \Right}$
+%		
+%		\vspace{4mm}
+%		
+%		$\vlderivation {\vlinf{\sbl}{}{\B, \Left, x \le y, y \rel z, x \colon \BOX A \SEQ \Right}{\B,\Left, x \le y, y \rel z, x \colon \BOX A, z \colon A \SEQ \Right}}$
+%		\hspace{5mm} $\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \SEQ \Right, x \colon \BOX A}{\B, \Left, x \le y, y \rel z \SEQ \Right, z \colon A}$
+%		
+%		
+%		\vspace{4mm}
+%		
+%		$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \DIA A \SEQ \Right}{\B, \Left, x \rel y, y \colon A \SEQ \Right}$
+%		\hspace{5mm}$\vlinf{\sdr}{}{\B, \Left, x \rel y \SEQ \Right, x \colon \DIA A}{\B, \Left, x \rel y \SEQ \Right, x \colon \DIA A, y \colon A}$
+%		
+%		
+%		\vspace{2mm}
+%		
+%		
+%		\vspace{2mm}
+%		
+%		$\vlinf{\refl}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
+%		\hspace{7mm} $\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$
+%		
+%		
+%		\vspace{2mm}
+%		
+%		$\vlinf{\rn{F_1}}{\text{\footnotesize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+%		%
+%		$\vlinf{\rn{F_2}}{\text{\footnotesize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+%	
+%	\caption{System $\labIKp$}
+%	\label{fig:labHIK}
+%\end{figure}
+
