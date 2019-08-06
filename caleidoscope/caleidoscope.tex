@@ -91,12 +91,8 @@
 
 %%% General
 \input{aiml_macros}
-%\newcommand{\F}{\mathcal{F}}
-%\newcommand{\M}{\mathcal{M}}
-%\newcommand{\G}{\mathcal{G}}
 \newcommand{\B}{\mathcal{B}}
-%\newcommand{\Left}{\mathcal{L}}
-%\newcommand{\Right}{\mathcal{R}}
+
 
 %%% Systems
 \newcommand*{\ax}[1]{\mathsf{#1}}
@@ -135,6 +131,64 @@
 \newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
 \newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Equation environments
+\newdimen\mydisplayskip
+\mydisplayskip=.4\abovedisplayskip
+\newenvironment{smallequation}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation\endcsname}{\csname endequation\endcsname\egroup}
+\newenvironment{smallequation*}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation*\endcsname}{\csname endequation*\endcsname\egroup}
+\newenvironment{smallalign}
+{\par\nobreak\noindent\bgroup\small\csname align\endcsname}{\csname endalign\endcsname\egroup}
+\newenvironment{smallalign*}
+{\par\nobreak\noindent\bgroup\small\csname align*\endcsname}{\csname endalign*\endcsname\egroup}
+%
+\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
+\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
+%
+%
+\makeatletter
+\newbox\@conclbox
+\newdimen\@conclheight
+%
+%%%%%%
+\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
+\newcommand\vlderiibase[5]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+	}}
+%%
+\newcommand\vlderibase[4]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vlin{#1}{#2}{\box\@conclbox}{#4}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+	}}
+%
+\newcommand\vlderidbase[4]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vlid{#1}{#2}{\box\@conclbox}{#4}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+	}}
+	%
+	\makeatother
+	%
+%%%General maths
+\newcommand*{\reducesto}{\quad{\leadsto}\quad}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -443,7 +497,155 @@ The idea is to use two sorts of relational atoms, one for the modal relation $\r
 A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
 
+\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts and then put the whole system).}
 
+\section{Building $\labIKp$}
+
+As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system has labelled formulas of the form $x \colon A$, the expressions $xRy$ (the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and expressions $x \le y$ were introduced to represent the pre-order relation. In the next sub-sections, we study each rule of the new system $\labIKp$ in details (Figure \ref{fig:labIKp}). 
+
+\subsection{Frame conditions}
+%In order to capture intuitionistic modal logics, we need to answer the requirements of the de
+The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the $Monoto$ is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
+
+\todo{fix this figure!}
+
+\begin{center}
+	$\vlinf{\refl}{}{\B, \Left \Rightarrow \Right}{\B, x\le x, \Left \Rightarrow \Right}$\hspace{8mm}
+	$\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \Rightarrow \Right}{\B, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
+	
+	$\vlinf{\ids}{}{\B, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$
+	
+	\vspace{2mm}
+	
+	$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+	
+	\vspace{2mm}
+	$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+	
+\end{center}
+
+As an example, here there is a small explanation about the rules $\fone$ and $\ftwo$:
+
+
+\begin{itemize}
+	\item Rule $\fone$.
+	
+	As we mentioned, the next rule is needed to cover one of the pre-order relation conditions:
+	
+	\begin{center}
+		$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+	\end{center}
+	
+	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, then reading the rule $\fone$ from the conclusion to the premises, we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
+	
+	\item Rule $\ftwo$:
+	
+	The rule that is capturing the frame condition $\rn{F2}$ is represented in the system  $\labIKp$ as the following:
+	
+	\begin{center}
+		$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+	\end{center}
+	
+	
+	As the rule for $\rn{F1}$, given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\ftwo$ expresses semantically from the conclusion to the premise that given the labels $x, y$ and $z$, if $xRy$ and $x \le z$, then there exists a variable $u$ such that $y \le u$ and $zRu$.
+	
+\end{itemize}
+
+
+\subsection{Logical connectives for intuitionistic propositional logic}
+
+To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and dijunction of the system $\labIKp$:
+
+\begin{center}
+	\hspace{4mm}$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
+	$\vliinf{\svrig}{}{B,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
+	
+	
+	\vspace{5mm}
+	
+	$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\B, \Left, x   \colon   A \Rightarrow \Right}{\B, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
+	$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+\end{center}
+
+To capture the propositional constants $\top$ and $\bot$, the system $\labIKp$ introduces the next two rules:
+
+\begin{center}
+	$\vlinf{\sbot}{}{\B,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{18mm}
+	$\vlinf{\Stop}{}{B, \Left \Rightarrow \Right, x \colon \top}{}$
+\end{center}
+
+You can find a small explanation about the rules $\svlef$ and  $\sorig$:
+
+\begin{itemize}
+	\item Rule $\svlef$:
+	
+	The system $\labIKp$ presents the next rule for the conjunction left:
+	
+	\begin{center}
+		$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+	\end{center}
+	
+	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if in the $x$ the formula $A \vlan B$ is satisfied, then in $x$ the formula $A$ is satisfied and the formula $B$ too.
+	
+	\item Rule $\sorig$:
+	
+	Let the rule presented in $\labIKp$ for disjunction right:
+	
+	\begin{center}
+		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+	\end{center}
+	
+	From the conclusion to the premise we have: if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
+	
+\end{itemize}
+
+\subsection{Modal operators}
+
+We introduce the rules that represent the semantics of modal operators $\square$ and $\Diamond$. The system $\labIKp$ presents the next four rules (two for $\square$ and two for $\Diamond$): 
+
+\begin{center}
+	$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+	
+	$\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \Rightarrow \Right, x \colon \square A}{\B, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
+	
+	
+	\vspace{5mm}
+	
+	$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \Diamond A \Rightarrow \Right}{\B, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
+	$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	
+\end{center}
+
+A more detailed explanation is below:
+
+\begin{itemize}
+	\item Rule $\sbl$.
+	
+	In order to capture $\square$ left, in our system the next rule is introduced:
+	
+	\begin{center}
+		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+	\end{center}
+	
+	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
+	
+	\item Rule $\sdr$.
+	
+	The rule presented in the system $\labIKp$ for the $\Diamond$ left is the following:
+	
+	\begin{center}
+		$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+	\end{center}
+	
+	Semantically, the diamond establish that in a model $\M$ and a world $v$ the formula $\Diamond A$ is valid, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the fomula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
+	
+\end{itemize}
+
+\subsection{Intuitionistic implication}
+
+\todo{complete}
+
+\section{A complete and sound system for intuitionistic modal logics}
 
 %
 We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
@@ -573,156 +775,378 @@ $
 $$
 %\end{example}
 
+
+\begin{proof}[Proof of \ref{ii} $\rightarrow$ \ref{iii}]
+	
+	By induction on number of cuts + (rank,height) of the left-most top-most cut.
+	
+	\textbf{Commutative cases:}\label{commutative-cases}
+	
+	\begin{smallequation*}
+		\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+			\vliin{\llabrn\IMP}{}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
+				\vlhtr{\DD_1}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+			}{
+			\vlhtr{\DD_2}{\B_1, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_3}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-10em}
+	\vlderiibase{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+		}{
+		\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+	}
+}{
+\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{y}{B} \SEQ \Right}{
+	\vlhtr{\DD_2}{\B_1, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+}{
+\vlhtr{\DD_3[v/y]^{\invr{\llabrn\IMP}}}{\B_2, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+We need to make sure that $y$ does not appear in $\DD_3$, before applying Lemma~\ref{lem:inv}.
+%
+If it does we rewrite it with a fresh variable $v$ first.
+
+%\begin{smallequation*}
+%	\reducesto
+%	\vlderibase{\llabrn{cont}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+%		\vliin{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right}{
+%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+%%				\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+%%				}{
+%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+%%				}
+%				\vlhtr{\DD_4}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+%			}{
+%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
+%%				\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%%				}{
+%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%%				}
+%				\vlhtr{\DD_5}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%			}
+%		}
+%\end{smallequation*}
+%
+%\begin{smallalign*}&
+%	\text{with } \DD_4 = \quad
+%	\vlderivation{
+%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+%			\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+%		}{
+%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+%		}
+%	}
+%	\\&
+%	\text{and } \DD_5 = \quad
+%	\vlderivation{
+%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
+%			\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%		}{
+%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%		}
+%	}
+%\end{smallalign*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vlin{\rlabrn\IMP}{\text{\footnotesize $x'$ fresh}}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{A \IMP B}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $x''$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le x'' \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
+			\vlhtr{\DD_1[x''/x']}{\B_1, x \le x'', \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\IMP}}}{\B_2, x \le x'', \Left, \labels{z}{C}, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlin{\llabrn\BOX}{}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{\BOX A}, \labels{z}{C} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\llabrn\BOX}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\rn w}}{\B_2, \Left, \labels{x}{\BOX A}, \labels{v}{A}, \labels{z}{C} \SEQ \Right}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vlin{\rlabrn\BOX}{\text{\footnotesize $x',y'$ fresh}}{\B_1, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', x' \rel y' \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\BOX A}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $u,v$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\BOX}}}{\B_1, x \le u, u \rel v, \Left, \labels{z}{C} \SEQ \Right, \labels{v}{A}}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B_1, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y', \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{\DIA A}, \labels{z}{C} \SEQ \Right}
+}
+\reducesto
+\vlderibase{\llabrn\DIA}{\text{\footnotesize $y''$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right}{
+		\vlhtr{\DD_1[y''/y']}{\B_1, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right, \labels{z}{C}}
+	}{
+	\vlhtr{\DD_2^{\invr{\llabrn\DIA}}}{\B_2, \Left, \labels{y''}{A}, \labels{z}{C} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-10em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+		\vlin{\rlabrn\DIA}{}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}}
+}
+\reducesto
+%	\end{smallequation*}
+%	
+%	\begin{smallequation*}
+\vlderibase{\rlabrn\DIA}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
+		\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+	}{
+	\vlhtr{\DD_2^{\rn w}}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+}
+}
+\end{smallequation*}
+
+\textbf{Key cases:}\label{key-cases}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
+		\vlin{\labrn{id}}{}{\B_1, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+			\vlhy{}	
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
+}
+\reducesto
+\vlderibase{\llabrn{mon}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
+	\vlhtr{\DD_2^{\rn w}}{\B_1, \B_2, x \le y, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
+		\vlhtr{\DD_1}{\B_1, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
+	}{
+	\vlin{\labrn{id}}{}{\B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+		\vlhy{}	
+	}
+}
+\reducesto
+\vlderibase{\rlabrn{mon}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
+	\vlhtr{\DD_1^{\rn w}}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \B_3, x \le y, \Left \SEQ \Right}{
+		\vlin{\rlabrn\IMP}{}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}}
+		}
+	}{
+	\vliin{\llabrn\IMP}{}{\B_2, \B_3, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	}{
+	\vlhtr{\DD_3}{\B_3, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}
+	\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \B_3, x \le y, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlin{\rlabrn\IMP}{}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
+				\vlhtr{\DD_1^{\rn w}}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
+			}
+			%			\vlhtr{\DD_{1\rn w}'}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}
+		}{
+		\vlhtr{\DD_{2}}{\B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	}
+}{
+\vliin{\labrn{cut}}{}{\B_1, \B_3, x \le y, \Left, \labels{y}{A} \SEQ \Right}{
+	\vlhtr{\DD_1[y/x']}{\B_1, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
+}{
+\vlhtr{\DD_3}{\B_3, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B_1, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', x' \rel y', \Left \SEQ \Right, \labels{y'}{A}}	
+		}
+	}{
+	\vlin{\llabrn\BOX}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+	}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right}{
+		%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
+		\vlhtr{\DD_1[u/x',v/y']}{\B_1, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}	
+		%			}{
+		%			\vlin{\llabrn\BOX}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{v}{A}}{
+		%				\vlin{\labrn{id}}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{v}{A}}{
+		%					\vlhy{}
+		%					}
+		%				}
+		%			}
+	}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{v}{A} \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B_1, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B_1, x \le x', x' \rel y', \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right}{
+		\vlin{\rlabrn\DIA}{}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+		}
+	}{
+	\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \rel y',\Left, \labels{y'}{A} \SEQ \Right}
+	}	
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{y}{A}, \labels{x}{\DIA A}}
+		}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B_2, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_2^{\rn w}}{\B_2, x \rel y',\Left, \labels{y'}{A} \SEQ \Right, \labels{y}{A}}
+		}
+	}
+}{
+\vlhtr{\DD_2[y/y']}{\B_2, x \rel y,\Left, \labels{y}{A} \SEQ \Right}
+}
+\end{smallequation*}
+\end{proof}
+
+\begin{lemma}\label{lem:weak}\hbox{}\quad
+	\begin{enumerate}
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOT}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\bm\BOT}}{\B, \Left \SEQ \Right}}$
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\TOP} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\bm\TOP}}{\B, \Left \SEQ \Right}}$
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\rn w}}{\B, x \rel y, u \le v, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}}$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Standard
+\end{proof}
+
+\begin{lemma}\label{lem:inv}\hbox{}\quad
+	\begin{enumerate}
+		\item
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+		\item
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
+		of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+	\end{enumerate}
+\end{lemma}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts and then put the whole system).}
-
-\section{Building $\labIKp$}
-
-As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system has labelled formulas of the form $x \colon A$, the expressions $xRy$ (the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and expressions $x \le y$ were introduced to represent the pre-order relation. In the next sub-sections, we study each rule of the system $\labIKp$ in detail. 
- 
-\subsection{Frame conditions}
-%In order to capture intuitionistic modal logics, we need to answer the requirements of the de
-The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the $Monoto$ is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
-
-\todo{fix this figure!}
-
-\begin{center}
-	$\vlinf{\refl}{}{\B, \Left \Rightarrow \Right}{\B, x\le x, \Left \Rightarrow \Right}$\hspace{8mm}
-	$\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \Rightarrow \Right}{\B, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
-	
-	$\vlinf{\ids}{}{\B, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$
-	
-	\vspace{2mm}
-		
-	$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
-	
-	\vspace{2mm}
-	$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
-	
-\end{center}
-
-As an example, here there is a small explanation about the rules $\fone$ and $\ftwo$:
-
-
-\begin{itemize}
-	\item Rule $\fone$.
-
-	As we mentioned, the next rule is needed to cover one of the pre-order relation conditions:
-	
-	\begin{center}
-		$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
-	\end{center}
-	
-	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, then reading the rule $\fone$ from the conclusion to the premises, we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
-	
-	\item Rule $\ftwo$:
-	
-	The rule that is capturing the frame condition $\rn{F2}$ is represented in the system  $\labIKp$ as the following:
-		
-	\begin{center}
-		$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
-	\end{center}
-	
-	
-	As the rule for $\rn{F1}$, given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\ftwo$ expresses semantically from the conclusion to the premise that given the labels $x, y$ and $z$, if $xRy$ and $x \le z$, then there exists a variable $u$ such that $y \le u$ and $zRu$.
-	
-\end{itemize}
-
-
-\subsection{Logical connectives for intuitionistic propositional logic}
-
-To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and dijunction of the system $\labIKp$:
-
-\begin{center}
-	\hspace{4mm}$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
-	$\vliinf{\svrig}{}{B,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
-	
-	
-	\vspace{5mm}
-	
-	$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\B, \Left, x   \colon   A \Rightarrow \Right}{\B, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
-	$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
-\end{center}
-
-To capture the propositional constants $\top$ and $\bot$, the system $\labIKp$ introduces the next two rules:
-
-\begin{center}
-	$\vlinf{\sbot}{}{\B,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{18mm}
-	$\vlinf{\Stop}{}{B, \Left \Rightarrow \Right, x \colon \top}{}$
-\end{center}
-
-You can find a small explanation about the rules $\svlef$ and  $\sorig$:
-
-\begin{itemize}
-	\item Rule $\svlef$:
-	
-	The system $\labIKp$ presents the next rule for the conjunction left:
-	
-	\begin{center}
-		$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
-	\end{center}
-	
-	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if in the $x$ the formula $A \vlan B$ is satisfied, then in $x$ the formula $A$ is satisfied and the formula $B$ too.
-	
-	\item Rule $\sorig$:
-	
-	Let the rule presented in $\labIKp$ for disjunction right:
-	
-	\begin{center}
-		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
-	\end{center}
-	
-	From the conclusion to the premise we have: if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
-	
-\end{itemize}
-
-\subsection{Modal operators}
-
-We introduce the rules that represent the semantics of modal operators $\square$ and $\Diamond$. The system $\labIKp$ presents the next four rules (two for $\square$ and two for $\Diamond$): 
-
-\begin{center}
-	$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
-		
-	$\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \Rightarrow \Right, x \colon \square A}{\B, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
-	
-	
-	\vspace{5mm}
-	
-	$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \Diamond A \Rightarrow \Right}{\B, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
-	$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
-	
-\end{center}
-
-A more detailed explanation is below:
-
-\begin{itemize}
-	\item Rule $\sbl$.
-	
-	In order to capture $\square$ left, in our system the next rule is introduced:
-	
-	\begin{center}
-		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
-	\end{center}
-	
-	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
-	
-	\item Rule $\sdr$.
-	
-	The rule presented in the system $\labIKp$ for the $\Diamond$ left is the following:
-		
-	\begin{center}
-		$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
-	\end{center}
-	
-	Semantically, the diamond establish that in a model $\M$ and a world $v$ the formula $\Diamond A$ is valid, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the fomula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
-	
-\end{itemize}
-
-\subsection{Intuitionistic implication}
-
-\todo{complete}
 
 \section{Extensions}
 
