@@ -504,7 +504,7 @@ As we mentioned, a labelled sequent calculus for classical modal logic was intro
 
 \subsection{Frame conditions}
 %In order to capture intuitionistic modal logics, we need to answer the requirements of the de
-The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the $Monoto$ is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
+The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the system includes the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the \emph{monotonicity property} is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
 
 \todo{fix this figure!}
 
@@ -523,7 +523,7 @@ The semantics of intuitionistic modal logic introduces a bi-relational model wit
 	
 \end{center}
 
-As an example, here there is a small explanation about the rules $\fone$ and $\ftwo$:
+As an example, a small explanation about the rules $\rn{F1}$ and $\rn{F2}$ is below:
 
 
 \begin{itemize}
@@ -535,7 +535,7 @@ As an example, here there is a small explanation about the rules $\fone$ and $\f
 		$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
 	\end{center}
 	
-	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, then reading the rule $\fone$ from the conclusion to the premises, we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
+	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\rn{F1}$ is read from the conclusion to the premises as following: we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
 	
 	\item Rule $\ftwo$:
 	
@@ -546,14 +546,14 @@ As an example, here there is a small explanation about the rules $\fone$ and $\f
 	\end{center}
 	
 	
-	As the rule for $\rn{F1}$, given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\ftwo$ expresses semantically from the conclusion to the premise that given the labels $x, y$ and $z$, if $xRy$ and $x \le z$, then there exists a variable $u$ such that $y \le u$ and $zRu$.
+	As the rule for $\rn{F1}$, given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\ftwo$ expresses, semantically, from the conclusion to the premise that given the labels $x, y$ and $z$, if $xRy$ and $x \le z$, then there exists a variable $u$ such that $y \le u$ and $zRu$.
 	
 \end{itemize}
 
 
 \subsection{Logical connectives for intuitionistic propositional logic}
 
-To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and dijunction of the system $\labIKp$:
+To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and disjunction of the system $\labIKp$:
 
 \begin{center}
 	\hspace{4mm}$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
@@ -573,7 +573,7 @@ To capture the propositional constants $\top$ and $\bot$, the system $\labIKp$ i
 	$\vlinf{\Stop}{}{B, \Left \Rightarrow \Right, x \colon \top}{}$
 \end{center}
 
-You can find a small explanation about the rules $\svlef$ and  $\sorig$:
+You can find a small explanation about the rules $\svlef$ and  $\sorig$ below:
 
 \begin{itemize}
 	\item Rule $\svlef$:
@@ -584,7 +584,7 @@ You can find a small explanation about the rules $\svlef$ and  $\sorig$:
 		$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
 	\end{center}
 	
-	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if in the $x$ the formula $A \vlan B$ is satisfied, then in $x$ the formula $A$ is satisfied and the formula $B$ too.
+	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if the formula $A \vlan B$ is satisfied in the label $x$ , then the formula $A$ is satisfied  in $x$ and the formula $B$ too.
 	
 	\item Rule $\sorig$:
 	
@@ -626,7 +626,7 @@ A more detailed explanation is below:
 		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
 	\end{center}
 	
-	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
+	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express \marianela{spelling}, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
 	
 	\item Rule $\sdr$.
 	
@@ -641,8 +641,31 @@ A more detailed explanation is below:
 \end{itemize}
 
 \subsection{Intuitionistic implication}
+To finish our system $\labIKp$, we have to introduce the rules that capture the intuitionistic implication:
 
-\todo{complete}
+\begin{center}
+	$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \vljm B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+	
+	
+	\vspace{5mm}
+	
+	
+	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, x \colon A \vljm B, y \colon B \Rightarrow \Right}$
+\end{center}
+
+The meaning of the rule for implication right is below:
+
+\begin{itemize}
+	\item Rule $\sir$.
+	
+	The system $\labIKp$ presents the following rule for implication right:
+	
+	\begin{center}
+		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \vljm B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+	\end{center}
+	
+	Let $\B$ be a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, this rule shows, semantically, that if the formula $A \vljm B$ is satisfied in $x$, then there exists $y$ such that $x \le y$ and the formula $A$ is true in $y$, then the formula $B$ is also true in $y$.
+\end{itemize}
 
 \section{A complete and sound system for intuitionistic modal logics}
 
