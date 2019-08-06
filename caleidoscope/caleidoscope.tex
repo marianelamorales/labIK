@@ -6,8 +6,6 @@
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath} 
 \usepackage{mathtools}
-\usepackage[spanish]{babel}
-\usepackage[utf8]{inputenc} 
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{color}
@@ -92,7 +90,7 @@
 %%% General
 \input{aiml_macros}
 \newcommand{\B}{\mathcal{B}}
-
+\newcommand*{\A}{\mathcal{A}}
 
 %%% Systems
 \newcommand*{\ax}[1]{\mathsf{#1}}
@@ -345,24 +343,22 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.} a reflexive and transitive relation) satisfying:
 	\begin{enumerate}
 		\item[($F_1$)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
-		\marianela{we can add the figures for each condition}
-%	\begin{figure}[h]
-%		\begin{center}
-%			\begin{tikzpicture}[>=latex]
-%			\node (a0) at (-1,0)   [shape=circle,draw,fill, inner sep=1pt,label=left:$u$] {} ;
-%			\node (a1) at (-1,2)  [shape=circle,draw,fill, inner sep=1pt, label=left:$u'$] {} ;
-%			\node (a2) at (1,0)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v$] {} ;
-%			\node (a3) at (1,2)  [shape=circle,draw,fill, inner sep=1pt, label=right:$v'$] {} ;
-%			\draw [dotted,->] node[left] at (-1,1){$\le$}(a0) edge [ left] (a1);
-%			\draw [ar,->] node[above] at (0,2){$R$}(a0) edge [ right] (a2);
-%			\draw [dotted, ->] node[right] at (1,1){$\le$}(a1) edge [ left] (a3);
-%			\draw [ar,->] node[above] {$R$} (a2) edge [ left] (a3);
-%			;
-%			\end{tikzpicture}
-%			\end{center}
-%		\end{figure}
+		
+			\begin{equation*}
+			\xymatrix{
+				u' \ar@{.>}[r]_R  & v' \\
+				u \ar@{.>}[u]^{\le} \ar@{->}[r]_R  & v \ar@{->}[u]_{\le}
+			}
+			\end{equation*}
 		
 		\item[($F_2$)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
+		
+			\begin{equation*}
+			\xymatrix{
+				u' \ar@{.>}[r]^R & v' \\
+				u \ar@{->}[u]^{\le} \ar@{->}[r]^R & v \ar@{.>}[u]_{\le}
+			}
+			\end{equation*}
 	\end{enumerate}
 %	
 \end{definition}
@@ -1172,6 +1168,45 @@ Therefore, we decompose further the formalism of labelled sequents and extend th
 %
 These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
 
+\marianela{add the next proofs as extensions with Scott-Lemmon?}
+
+Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+$
+
+Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\diasym_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$
 
 \bibliographystyle{alpha}
 \bibliography{references}
