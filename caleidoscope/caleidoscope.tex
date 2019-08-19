@@ -200,13 +200,18 @@
 \begin{frontmatter}
   \title{Decomposing labelled proof theory for intuitionistic modal logic}
   \author{Sonia Marin}
+  
+  \todo{New university?}
   \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
  \author{Marianela Morales}
- \address{Universidad Nacional de C\'ordoba \\ Argentina}
+ 
+ \marianela{I think that now I have the same as Lutz, right?}
+ \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
    \author{Lutz Stra{\ss}burger}
  \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
 
  \begin{abstract}
+
    We present a labelled sequent system for intuitionistic modal logic equipped 
    with two relation symbols, one for the accessibility
    relation associated with the Kripke semantics for modal logics and
@@ -230,6 +235,8 @@
 
 
 \section{Introduction}
+\todo{We should work on the introduction}
+
 One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
 
 \emph{Labelled deduction} has been proposed by Gabbay~\cite{Gabbay} in the 80s as a unifying framework throughout proof theory in order to provide proof
@@ -266,7 +273,12 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 \section{Preliminaries}
 \marianela{Depends on how long the paper has to be, we can add a section with preliminaries: labelled sequents for classical modal logic and syntax and semantics of classical modal logic}
 
+\todo{re-build this section since the section \emph{intuitionistic modal logics} is part of the preliminaries}
+
 Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$  and relational atoms of the form $xRy$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\ref{fig:systemlabK}). 
+
+\todo{fix the next figure}
+
 \begin{figure}[h]
 \begin{center}
 
@@ -365,6 +377,7 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 \end{definition}
 
 \begin{definition}
+	\label{model}
 	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
 	if $w \le w'$ then $V(w)\subseteq V(w')$.
 \end{definition}
@@ -379,7 +392,7 @@ $w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
 
 $w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
 
-$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ \hfill $(\ast)$
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ \hfill %$(\ast)$
 
 $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
@@ -411,6 +424,8 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 \begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]\label{thm:plotkin}
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
+
+\todo{Add something else about Fischer-Servi theorem?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -669,12 +684,14 @@ The meaning of the rule for implication right is below:
 
 \section{A complete and sound system for intuitionistic modal logics}
 
+\todo{re-write a small introduction for this section}
+
 %
 We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
 %
 Most rules are similar to the ones of Simpson~\cite{Simpson}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
-In particular, the rules introducing the $\BOX$-operator correspond to the definition $(\ast)$.
+In particular, the rules introducing the $\BOX$-operator correspond to the definition \ref{model}.
 %
 Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
 
@@ -797,6 +814,7 @@ $
 $$
 %\end{example}
 
+\todo{Fix the size of the next proof}
 
 \begin{proof}[Proof of \ref{ii} $\rightarrow$ \ref{iii}]
 	
@@ -1109,6 +1127,10 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \todo{Missing: Proof of iii $\rightarrow$ iv and Proof of iv $\rightarrow$ i}
 
+\todo{soundness sketch: general lemma? explain one or two rules?}
+
+\todo{how to introduce the next lemmas? add small explanation. both are necessary?}
+
 \begin{lemma}\label{lem:weak}\hbox{}\quad
 	\begin{enumerate}
 		\item 
@@ -1131,6 +1153,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 	\end{enumerate}
 \end{lemma}
 
+\todo{Is necessary to write the entire proof?}
 \begin{proof}
 	Standard
 \end{proof}
@@ -1174,7 +1197,11 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \section{Extensions}
 
+\todo{Better explanation about the extensions. Maybe two sections: Simpson and Scott-Lemmon?}
+
 \marianela{Should we add Simpson proof?}
+
+\marianela{Scott-Lemmon with the new rules for the system and the lemma that shows that each rule is admissible?}
 
 In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
