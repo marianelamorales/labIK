@@ -270,36 +270,35 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Preliminaries}
-\marianela{Depends on how long the paper has to be, we can add a section with preliminaries: labelled sequents for classical modal logic and syntax and semantics of classical modal logic}
+%\section{Preliminaries}
+%\marianela{Depends on how long the paper has to be, we can add a section with preliminaries: labelled sequents for classical modal logic and syntax and semantics of classical modal logic}
 
-\todo{re-build this section since the section \emph{intuitionistic modal logics} is part of the preliminaries}
+%\todo{re-build this section since the section \emph{intuitionistic modal logics} is part of the preliminaries}
 
-Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$  and relational atoms of the form $xRy$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\ref{fig:systemlabK}). 
+%\sonia{We should not have the definitions of classical modal logic. Just the intuitionistic part. If we want to say something else about labelled sequents, we should add it before the definition of \emph{a two-sided labelled sequent}}
 
-\todo{fix the next figure}
+%Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$  and relational atoms of the form $xRy$, where $x$, $y$ range over a set of variables and $A$ is a modal formula. A one-sided labelled sequent is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational atoms and $\Right$ a multiset of labelled formulas. A simple proof system for classical modal logic K can be obtained in this formalism (\ref{fig:systemlabK}). 
 
-\begin{figure}[h]
-\begin{center}
+%%\begin{figure}[h]
+%\begin{center}
 
-$\vlderivation {\vlinf{\id}{}{\B \SEQ \Right, x: a, x: \vls-a}{}}$
-\hspace{7mm}$\vlderivation {\vlinf{\tolab}{}{\toprule}{}}$
-
-
-$\vliinf{\vlab}{}{\B \SEQ \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$
-\hspace{7mm}$\vlinf{\olab}{}{\B \SEQ \Right, x \colon \vls[A.B]}{\olabr}$
+%$\vlderivation {\vlinf{\id}{}{\B \SEQ \Right, x: a, x: \vls-a}{}}$
+%\hspace{7mm}$\vlderivation {\vlinf{\tolab}{}{\toprule}{}}$
 
 
-$\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$
-\hspace{7mm}$\vlinf{\dlab}{}{\dlabr}{\dlabu}$
+%$\vliinf{\vlab}{}{\B \SEQ \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$
+%\hspace{7mm}$\vlinf{\olab}{}{\B \SEQ \Right, x \colon \vls[A.B]}{\olabr}$
 
-\end{center}
-\caption{System $\mathsf{labK}$}
-\label{fig:systemlabK}
-\end{figure}
 
-These rule schemes can occur in different contexts and different calculi. The context that interests us is when it is applied to modal logic.
-The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
+%$\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$
+%\hspace{7mm}$\vlinf{\dlab}{}{\dlabr}{\dlabu}$
+
+%\end{center}
+%\caption{System $\mathsf{labK}$}
+%\label{fig:systemlabK}
+%\end{figure}
+
+%These rule schemes can occur in different contexts and different calculi. The context that interests us is when it is applied to modal logic. The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
 
 
 \section{Intuitionistic modal logics}
@@ -638,7 +637,7 @@ A more detailed explanation is below:
 		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
 	\end{center}
 	
-	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule express \marianela{spelling}, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
+	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule expresses, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
 	
 	\item Rule $\sdr$.
 	
@@ -1125,8 +1124,10 @@ If it does we rewrite it with a fresh variable $v$ first.
 \todo{Missing: Proof of iii $\rightarrow$ iv and Proof of iv $\rightarrow$ i}
 
 \todo{soundness sketch: general lemma? explain one or two rules?}
+ 
+\marianela{Yes! Soundness section: explain a box rule and an implication rule. Say that the scheme of the rest of the rules are similar}
 
-\todo{how to introduce the next lemmas? add small explanation. both are necessary?}
+\todo{How to introduce the next lemmas? Add small explanation}
 
 \begin{lemma}\label{lem:weak}\hbox{}\quad
 	\begin{enumerate}
@@ -1149,11 +1150,6 @@ If it does we rewrite it with a fresh variable $v$ first.
 		$\vlderivation{\vlhtr{\DD^{\rn w}}{\B, x \rel y, u \le v, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}}$
 	\end{enumerate}
 \end{lemma}
-
-\todo{Is necessary to write the entire proof?}
-\begin{proof}
-	Standard
-\end{proof}
 
 \begin{lemma}\label{lem:inv}\hbox{}\quad
 	\begin{enumerate}
@@ -1194,11 +1190,11 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \section{Extensions}
 
-\todo{Better explanation about the extensions. Maybe two sections: Simpson and Scott-Lemmon?}
+\marianela{After Skype with Sonia: important section; add the generality of the rules for Scott-Lemmon; Simpson will be introduce in the introduction or/and in the conclusion. }
 
-\marianela{Should we add Simpson proof?}
+\sonia{The idea of this section is to show the things that our system could do (extensions of the logic) and Simpson could not.}
 
-\marianela{Scott-Lemmon with the new rules for the system and the lemma that shows that each rule is admissible?}
+\sonia{Scott-Lemmon with the new rules (general rules for F2, F1, etc) for the system and the lemma that shows that each rule is admissible}
 
 In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
