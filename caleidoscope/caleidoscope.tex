@@ -602,7 +602,7 @@ You can find a small explanation about the rules $\svlef$ and  $\sorig$ below:
 	Let the rule presented in $\labIKp$ for disjunction right:
 	
 	\begin{center}
-		$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+		$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
 	\end{center}
 	
 	From the conclusion to the premise we have: if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
@@ -1121,11 +1121,30 @@ If it does we rewrite it with a fresh variable $v$ first.
 \end{smallequation*}
 \end{proof}
 
-\todo{Missing: Proof of iii $\rightarrow$ iv and Proof of iv $\rightarrow$ i}
+\begin{proof} [Proof for soundness]
+	We need to prove that each sequent rule of our system $\labIKp$ is sound. As the proof is similar for each of the rules, we prove the soundness of some particular rules:
+	
+	\begin{itemize}
+		\item Rule $\sbl$: 
+		
+		We want to prove that the rule for $\sbl$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
+		
+		\begin{center}
+			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$.}
+		\end{center}
+		
+		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\sbl$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+		
+		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash x\colon \square A$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \square A$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0},z \Vdash A$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+		
+		\item Rule
+	\end{itemize}
+\end{proof}
 
-\todo{soundness sketch: general lemma? explain one or two rules?}
+\todo{Missing: Proof of iii $\rightarrow$ iv and Proof of iv $\rightarrow$ i}
  
 \marianela{Yes! Soundness section: explain a box rule and an implication rule. Say that the scheme of the rest of the rules are similar}
+
 
 \todo{How to introduce the next lemmas? Add small explanation}
 
@@ -1192,9 +1211,11 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \marianela{After Skype with Sonia: important section; add the generality of the rules for Scott-Lemmon; Simpson will be introduce in the introduction or/and in the conclusion. }
 
-\sonia{The idea of this section is to show the things that our system could do (extensions of the logic) and Simpson could not.}
+\todo{The idea of this section is to show the things that our system could do (extensions of the logic) and Simpson could not.}
 
-\sonia{Scott-Lemmon with the new rules (general rules for F2, F1, etc) for the system and the lemma that shows that each rule is admissible}
+\todo{Scott-Lemmon with the new rules (general rules for F2, F1, etc) for the system and the lemma that shows that each rule is admissible}
+
+The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
 In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
@@ -1216,9 +1237,7 @@ $$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel 
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
 %
-These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
-
-\marianela{add the next proofs as extensions with Scott-Lemmon?}
+These systems enjoy cut-elimination via usual arguments. Proofs of the the axioms we mentioned are below:
 
 Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
 
@@ -1257,6 +1276,35 @@ $\vlderivation{
 	}
 }
 $
+
+The generality of the result adds a new rule to the system $\labIKp$ in order to capture the \emph{Scott-Lemmon axiom} or \emph{$\agklmn$ axiom}: 
+\begin{center}
+	$\lozenge^{k} \square^{l} A \vljm \square^{m}\lozenge^{n} A$
+\end{center}
+Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
+
+$\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\forall x,y,z ( xR^{k}y \vlan xR^{m}z \rightarrow \exists u yR^{l}u \vlan zR^{n}u)$ 
+
+$\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \vljm \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
+
+See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
+
+\begin{figure}[h]
+	\begin{center}
+		$
+		\xymatrix{
+			& u' \ar@{.>}[ddr]^{R^l} \\
+			& u \ar@{.>}[u]^{\le} \\
+			w \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && x \\
+			& v \ar@{.>}[ur]_{R^n}
+		}
+		$
+	\end{center}
+	\label{fig:gklmn}
+	\caption{$\agklmn$ axiom for intuitionistic case}
+\end{figure}
+
+
 
 \bibliographystyle{alpha}
 \bibliography{references}
