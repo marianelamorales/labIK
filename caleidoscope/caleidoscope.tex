@@ -449,11 +449,11 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\llabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, x \le y, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+		$\vlinf{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
- 		$\vliinf{\rlabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
 % 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
  		}
 		\\\\
@@ -655,13 +655,13 @@ A more detailed explanation is below:
 To finish our system $\labIKp$, we have to introduce the rules that capture the intuitionistic implication:
 
 \begin{center}
-	$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \vljm B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+	$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \IMP B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
 	
 	
 	\vspace{5mm}
 	
 	
-	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \vljm B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, x \colon A \vljm B, y \colon B \Rightarrow \Right}$
+	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, x \colon A \IMP B, y \colon B \Rightarrow \Right}$
 \end{center}
 
 The meaning of the rule for implication right is below:
@@ -672,10 +672,10 @@ The meaning of the rule for implication right is below:
 	The system $\labIKp$ presents the following rule for implication right:
 	
 	\begin{center}
-		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \vljm B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
+		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \IMP B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
 	\end{center}
 	
-	Let $\B$ be a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, this rule shows, semantically, that if the formula $A \vljm B$ is satisfied in $x$, then there exists $y$ such that $x \le y$ and the formula $A$ is true in $y$, then the formula $B$ is also true in $y$.
+	Let $\B$ be a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, this rule shows, semantically, that if the formula $A \IMP B$ is satisfied in $x$, then there exists $y$ such that $x \le y$ and the formula $A$ is true in $y$, then the formula $B$ is also true in $y$.
 \end{itemize}
 
 \section{A complete and sound system for intuitionistic modal logics}
@@ -1279,13 +1279,13 @@ $
 
 The generality of the result adds a new rule to the system $\labIKp$ in order to capture the \emph{Scott-Lemmon axiom} or \emph{$\agklmn$ axiom}: 
 \begin{center}
-	$\lozenge^{k} \square^{l} A \vljm \square^{m}\lozenge^{n} A$
+	$\lozenge^{k} \square^{l} A \IMP \square^{m}\lozenge^{n} A$
 \end{center}
 Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
 
 $\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\forall x,y,z ( xR^{k}y \vlan xR^{m}z \rightarrow \exists u yR^{l}u \vlan zR^{n}u)$ 
 
-$\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \vljm \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
+$\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \IMP \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
 
 See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
 
@@ -1333,11 +1333,11 @@ See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
 %
 %\vspace{2mm}
 %
-%$\vliinf{\illab}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\B, \Left, \labels{x}{A} \vljm B \SEQ \labels{x}{A}}{\B, \Left, \labels{x}{A} \vljm B, \labels{x}{B} \SEQ z \colon C}$
+%$\vliinf{\illab}{}{\B, \Left, \labels{x}{A} \IMP B \SEQ z \colon C}{\B, \Left, \labels{x}{A} \IMP B \SEQ \labels{x}{A}}{\B, \Left, \labels{x}{A} \IMP B, \labels{x}{B} \SEQ z \colon C}$
 %
 %\vspace{2mm}
 %
-%$\vlinf{\irlab}{}{\B, \Left \SEQ \labels{x}{A} \vljm B}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}$
+%$\vlinf{\irlab}{}{\B, \Left \SEQ \labels{x}{A} \IMP B}{\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}$
 %
 %\vspace{2mm}
 %
@@ -1376,7 +1376,7 @@ See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
 %		
 %		\vspace{3mm}
 %		
-%		$\vlderivation {\vliin{\sil}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+%		$\vlderivation {\vliin{\sil}{}{\B, \Left, \labels{x}{A} \IMP B \SEQ z \colon C}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
 %		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\B,  \Left, \labels{x}{A} \SEQ \labels{x}{B}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}}}$
 %		
 %		\vspace{3mm}
@@ -1429,11 +1429,11 @@ See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
 %		
 %		\vspace{4mm}
 %		
-%		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \SEQ \Right, \labels{x}{A} \vljm B}{\B, \Left, x \le y, y \colon A \SEQ \Right, y \colon B}$
+%		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \SEQ \Right, \labels{x}{A} \IMP B}{\B, \Left, x \le y, y \colon A \SEQ \Right, y \colon B}$
 %		
 %		\vspace{4mm}
 %		
-%		$\vliinf{\sil}{}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right}{\B, \Left, x \le y, \labels{x}{A} \vljm B \SEQ \Right, y \colon A}{\B, \Left, x \le y, y \colon B \SEQ \Right}$
+%		$\vliinf{\sil}{}{\B, \Left, x \le y, \labels{x}{A} \IMP B \SEQ \Right}{\B, \Left, x \le y, \labels{x}{A} \IMP B \SEQ \Right, y \colon A}{\B, \Left, x \le y, y \colon B \SEQ \Right}$
 %		
 %		\vspace{4mm}
 %		
