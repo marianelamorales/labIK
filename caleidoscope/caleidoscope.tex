@@ -8,6 +8,7 @@
 \usepackage{mathtools}
 \usepackage{enumerate}
 \usepackage{graphicx}
+\usepackage{bm}
 \usepackage{color}
 \usepackage{pgf}
 \usepackage[all]{xy}
@@ -88,7 +89,7 @@
 \newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
 
 %%% General
-\input{aiml_macros}
+\input{macros}
 \newcommand{\B}{\mathcal{B}}
 \newcommand*{\A}{\mathcal{A}}
 
@@ -490,60 +491,73 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 
 %%
 %This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
+Once possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged.  Labelled deduction has been more generally proposed by Gabbay in the 80's as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics \cite{Gabbay}. For modal logics it can also take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson \cite{Simpson}, Vigano \cite{Vigano}, and Negri\cite{Negri}. These formalisms make explicit use not only of labels, but also of relational atoms (which, to our knowledge, are not commonly used in tableaux systems, except for the pioneering work of Nerode \cite{Nerode}).
 
 Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
 
 Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent. Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
 %
+
 Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
 %
 The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
 %
 
-
 \begin{definition}
 A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $x \rel y$ and preorder atoms $x \le y$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $x$ and $y$ taken from the set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
-
 In the next section, we present the system (called $\labIKp$) that we obtained to capture intuitionistic modal logics (see Figure \ref{fig:labIKp}).
-
-\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts).}
 
 \section{Building $\labIKp$}
 
-As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system has labelled formulas of the form $x \colon A$, the expressions $xRy$ (the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and expressions $x \le y$ were introduced to represent the pre-order relation. In the next sub-sections, we study each rule of the new system $\labIKp$ in details (Figure \ref{fig:labIKp}). 
+As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system is formed from formulas of the form $\labels{x}{A}$ where $A$ is an intuitionistic modal formula, relational atoms $xRy$ ($R$ is the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and preorder atoms of the form $x \le y$. In this section, we study each rule of the system $\labIKp$ (Figure \ref{fig:labIKp}) in details. 
 
 \subsection{Frame conditions}
 %In order to capture intuitionistic modal logics, we need to answer the requirements of the de
-The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a pre-order relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, the system includes the rules that characterized the frame conditions $\rn{F1}$ and $\rn{F2}$. On the other hand, the valuation function $V$ that introduces the \emph{monotonicity property} is captured with the rule $\rn{id}$ in our system. All these rules are the next ones:
+The semantics of intuitionistic modal logic introduces a bi-relational model with two binary relations: $R$ and $\le$, where $\le$ is a preorder relation, i.e, a reflexivity and transitivity relation. For that reason, the system $\labIKp$ contains the rules $\rn{refl}$ and $\rn{trans}$. Furthermore, our system has to incorporate the two semantic conditions into deductive rules as $\rn{F1}$ and $\rn{F2}$ . On the other hand, the valuation function $V$ that introduces the \emph{monotonicity property} is captured with the rule $\rn{id}$ in our system. All these are presented in the system $\labIKp$ as follows:
 
-\todo{fix this figure!}
 
 \begin{center}
-	$\vlinf{\refl}{}{\B, \Left \Rightarrow \Right}{\B, x\le x, \Left \Rightarrow \Right}$\hspace{8mm}
-	$\vlinf{\trans}{}{\B, x \le y, y \le z, \Left \Rightarrow \Right}{\B, x \le y, y \le z, x \le z, \Left \Rightarrow \Right}$
-	
-	$\vlinf{\ids}{}{\B, \Left,x \le y, x \colon a \Rightarrow \Right, y \colon a}{}$
-	
-	\vspace{2mm}
-	
-	$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
-	
-	\vspace{2mm}
-	$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
-	
+		\begin{minipage}{.95\textwidth}
+			\begin{tabular}{@{\!}c@{\quad}c}
+				\multicolumn{2}{c}{
+					\hspace{18mm}
+					$\vlinf{\rn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
+				}
+				\\\\
+				\hspace{15mm}
+				$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
+				&
+				$\vlinf{\rn{trans}}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$				
+				
+				\\\\
+				\multicolumn{2}{c}{
+					\hspace{18mm}
+					$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+				}
+				\\\\
+				\multicolumn{2}{c}{
+					\hspace{18mm}
+					$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+				}
+			\end{tabular}		
+		\end{minipage}
+			
 \end{center}
+	
+\bigskip
 
-As an example, a small explanation about the rules $\rn{F1}$ and $\rn{F2}$ is below:
+
+A small explanation about the rules $\rn{F1}$ and $\rn{F2}$ is below:
 
 
 \begin{itemize}
-	\item Rule $\fone$.
+	\item Rule $\rn{F1}$.
 	
 	As we mentioned, the next rule is needed to cover one of the pre-order relation conditions:
 	
 	\begin{center}
-		$\vlinf{\fone}{$ $u$ fresh$}{\B, \Left, xRy, y \le z \Rightarrow \Right}{\B, \Left, xRy, y \le z, x \le u, uRz \Rightarrow \Right}$
+		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
 	\end{center}
 	
 	Given $\B$ a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, the rule $\rn{F1}$ is read from the conclusion to the premises as following: we have labels $x$, $y$ and $z$ such that $xRy$ and $y \le z$, then there exists a world $u$ such that $x \le u$ and $uRz$.
@@ -553,7 +567,7 @@ As an example, a small explanation about the rules $\rn{F1}$ and $\rn{F2}$ is be
 	The rule that is capturing the frame condition $\rn{F2}$ is represented in the system  $\labIKp$ as the following:
 	
 	\begin{center}
-		$\vlinf{\ftwo}{u$ fresh$}{\B, \Left, xRy,x \le z \Rightarrow \Right}{\B, \Left, xRy, x \le z, y \le u, zRu \Rightarrow \Right }$
+	$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$	
 	\end{center}
 	
 	
@@ -567,129 +581,124 @@ As an example, a small explanation about the rules $\rn{F1}$ and $\rn{F2}$ is be
 To continue building a complete and sound labelled system for intuitionistic modal logic, in this small section we present the rules that are needed to express the semantics of the usual logical connectives. That means, we present the rules for the conjunction and disjunction of the system $\labIKp$:
 
 \begin{center}
-	\hspace{4mm}$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$\hspace{10mm}
-	$\vliinf{\svrig}{}{B,\Left \Rightarrow \Right, x \colon \vls(A.B)}{\conjrig}{\conjrigh}$
-	
-	
-	\vspace{5mm}
-	
-	$\vliinf{\solef}{}{\B, \Left, x \colon \vls[A.B] \Rightarrow \Right}{\B, \Left, x   \colon   A \Rightarrow \Right}{\B, \Left, x   \colon   B \Rightarrow \Right}$\hspace{10mm}
-	$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+	\begin{minipage}{.95\textwidth}
+		\begin{tabular}{@{\!}c@{\quad}c}
+			$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
+			&
+			$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}$
+			\\\\
+			$\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}$
+			&
+			$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
+			\\\\
+		\end{tabular}
+	\end{minipage}
 \end{center}
 
 To capture the propositional constants $\top$ and $\bot$, the system $\labIKp$ introduces the next two rules:
 
 \begin{center}
-	$\vlinf{\sbot}{}{\B,\Left, x \colon \bot \Rightarrow \Right}{}$\hspace{18mm}
-	$\vlinf{\Stop}{}{B, \Left \Rightarrow \Right, x \colon \top}{}$
+		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
+		\hspace{8mm}
+		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
 \end{center}
 
-You can find a small explanation about the rules $\svlef$ and  $\sorig$ below:
+You can find a small explanation about the rules $\llabrn\AND$ and  $\rlabrn\OR$ below:
 
 \begin{itemize}
-	\item Rule $\svlef$:
+	\item Rule $\llabrn\AND$:
 	
-	The system $\labIKp$ presents the next rule for the conjunction left:
+	%The system $\labIKp$ presents the next rule for the conjunction left:
+	
+	%\begin{center}
+	%	$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
+	%\end{center}
+	
+	Following the explanation of the rules presented before, $\B$ is a set of relational and preorder atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if the formula $A \vlan B$ is satisfied in the label $x$, then the formula $A$ is satisfied  in $x$ and the formula $B$ too.
+	
+	\item Rule $\rlabrn\OR$:
+	
+	Let the rule presented in $\labIKp$ for disjunction right be as follows:
 	
 	\begin{center}
-		$\vlinf{\svlef}{}{\B,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 	\end{center}
 	
-	Following the explanation of the rules presented before, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of labelled formulas. From the conclusion to the premise, this rule shows semantically that if the formula $A \vlan B$ is satisfied in the label $x$ , then the formula $A$ is satisfied  in $x$ and the formula $B$ too.
-	
-	\item Rule $\sorig$:
-	
-	Let the rule presented in $\labIKp$ for disjunction right:
-	
-	\begin{center}
-		$\vlinf{\sorig}{}{\B, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\B, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
-	\end{center}
-	
-	From the conclusion to the premise we have: if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
+	From the conclusion to the premise we have that if the formula $A \vlor B$ is satisfied in $x$, then the formula $A$ and the formula $B$ are true in $x$.
 	
 \end{itemize}
 
 \subsection{Modal operators}
 
 We introduce the rules that represent the semantics of modal operators $\square$ and $\Diamond$. The system $\labIKp$ presents the next four rules (two for $\square$ and two for $\Diamond$): 
-
 \begin{center}
-	$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
-	
-	$\vlinf{\sbr}{$ $y, z$ fresh$}{\B, \Left \Rightarrow \Right, x \colon \square A}{\B, \Left, x \le y, yRz \Rightarrow \Right, z \colon A}$
-	
-	
-	\vspace{5mm}
-	
-	$\vlinf{\sdl}{$ $y$ fresh $}{\B, \Left, x \colon \Diamond A \Rightarrow \Right}{\B, \Left, xRy, y \colon A \Rightarrow \Right}$\hspace{10mm}
-	$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
-	
+	\begin{minipage}{.95\textwidth}
+		\begin{tabular}{@{\!}c@{\quad}c}
+			\\\\
+			$\vlinf{\llabrn\BOX}{}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
+			&
+			$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, x \le y, y \rel z, \Left \SEQ \Right, \labels{z}{A}}$
+			\\\\
+			$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}$
+			&
+			$\vlinf{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
+			\\
+		\end{tabular}
+	\end{minipage}
 \end{center}
 
-A more detailed explanation is below:
+\bigskip
+
+A more detailed explanation for some rules is below:
 
 \begin{itemize}
-	\item Rule $\sbl$.
+	\item Rule $\llabrn\BOX$.
+	Continue with the same reasoning, $\B$ is a set of relational and preorder atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule expresses, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
 	
-	In order to capture $\square$ left, in our system the next rule is introduced:
-	
-	\begin{center}
-		$\vlinf{\sbl}{}{\B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
-	\end{center}
-	
-	Continue with the same reasoning, $\B$ is a set of relational and pre-order atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule expresses, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
-	
-	\item Rule $\sdr$.
-	
-	The rule presented in the system $\labIKp$ for the $\Diamond$ left is the following:
-	
-	\begin{center}
-		$\vlinf{\sdr}{}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\B, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
-	\end{center}
-	
-	Semantically, the diamond establish that in a model $\M$ and a world $v$ the formula $\Diamond A$ is valid, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the fomula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
+	\item Rule $\rlabrn\DIA$.
+	Semantically, the diamond establishes that in a model $\M$ and a world $v$ the formula $\Diamond A$ is satisfied, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the formula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
 	
 \end{itemize}
 
 \subsection{Intuitionistic implication}
 To finish our system $\labIKp$, we have to introduce the rules that capture the intuitionistic implication:
 
+\bigskip
+
 \begin{center}
-	$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \IMP B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
-	
-	
-	\vspace{5mm}
-	
-	
-	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, y \colon B \Rightarrow \Right}$
+	\begin{minipage}{.95\textwidth}
+		\begin{tabular}{@{\!}c@{\quad}c}
+			\multicolumn{2}{c}{
+				\hspace{9mm}
+				$\vlinf{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+			}
+			\\
+			\multicolumn{2}{c}{
+				\hspace{10mm}
+				$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, x \le y, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+			}
+		\end{tabular}
+	\end{minipage}
 \end{center}
 
-The meaning of the rule for implication right is below:
+\bigskip
+
+The rule for implication right is explained below:
 
 \begin{itemize}
-	\item Rule $\sir$.
-	
-	The system $\labIKp$ presents the following rule for implication right:
-	
-	\begin{center}
-		$\vlinf{\sir}{$ $y$ fresh$}{\B, \Left \Rightarrow \Right, x \colon A \IMP B}{\B, \Left, x \le y, y \colon A \Rightarrow \Right, y \colon B}$
-	\end{center}
-	
-	Let $\B$ be a set of relational and pre-order atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, this rule shows, semantically, that if the formula $A \IMP B$ is satisfied in $x$, then there exists $y$ such that $x \le y$ and the formula $A$ is true in $y$, then the formula $B$ is also true in $y$.
+	\item Rule $\rlabrn\IMP$.
+	Let $\B$ be a set of relational and preorder atoms, and given $\Left$ and $\Right$ multiset of labelled formulas, this rule shows, semantically, that if the formula $A \IMP B$ is satisfied in $x$, then there exists $y$ such that $x \le y$ and the formula $A$ is true in $y$, then the formula $B$ is also true in $y$.
 \end{itemize}
 
 \section{A complete and sound system for intuitionistic modal logics}
-
-\todo{re-write a small introduction for this section}
-
 %
-We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
+Using the rules that are presented in the previous section, we obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic following the formalism of labelled sequents. 
 %
 Most rules are similar to the ones of Simpson~\cite{Simpson}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
 In particular, the rules introducing the $\BOX$-operator correspond to the definition \ref{model}.
 %
-Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
+Furthermore, our system, unlike Simpson's system, has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
 
 As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
@@ -787,7 +796,7 @@ Note that our system offers only an atomic version of the identity rule, though 
 %
 We therefore have to show that such a rule is admissible in our system.
 %
-As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$. The other cases are standard.
 
 \vspace*{-.5cm}
 %\begin{example}
@@ -811,7 +820,7 @@ $$
 %\end{example}
 
 \todo{Fix the size of the next proof}
-
+\marianela{I will do it at the end when we have the format that we want to submit}
 \begin{proof}[Proof of \ref{ii} $\rightarrow$ \ref{iii}]
 	
 	By induction on number of cuts + (rank,height) of the left-most top-most cut.
@@ -1121,32 +1130,28 @@ If it does we rewrite it with a fresh variable $v$ first.
 \end{smallequation*}
 \end{proof}
 
-\begin{proof} [Proof for soundness]
-	We need to prove that each sequent rule of our system $\labIKp$ is sound. As the proof is similar for each of the rules, we prove the soundness of some particular rules:
+\begin{proof} [Proof of soundness]
+	We need to prove that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. As the proof is similar for each of the rules, we prove the soundness of some particular rules:
 	
 	\begin{itemize}
-		\item Rule $\sbl$: 
+		\item Rule $\llabrn\BOX$: 
 		
-		We want to prove that the rule for $\sbl$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
+		We want to prove that the rule for $\llabrn\BOX$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
 		
 		\begin{center}
-			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$.}
+			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A} \Rightarrow \Right$.}
 		\end{center}
 		
-		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\sbl$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\llabrn\BOX$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, \break yRz, \labels{x}{\BOX A} \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$.
 		
-		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash x\colon \square A$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \square A$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0},z \Vdash A$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.
 		
-		\item Rule
+		\item Rule $\rlabrn\BOX$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$, i.e. $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{\BOX A}$, which is the same as $\M_{0} \Vdash \vlan (\B,\Left)$ and  $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$. From $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$, we have that $\M_{0} \not \Vdash \Right$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}$. Following the semantic definition of $\BOX$, there exists worlds $y, z$ in $\M_{0}$, such that $x \le y, yRz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Therefore, $\M_{0} \not \Vdash premise$, i.e. $\M_{0} \not \Vdash \B, x \le y, yRz, \Left \Rightarrow \Right, \labels{z}{A}$. Then, the rule $\rlabrn\BOX is sound$.
+		
+		\item Rule $\rlabrn\IMP$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{A \IMP B}$, i.e., in particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $y$ such that $x \le y$ and $\M_{0} \Vdash \labels{y}{A}$ but $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, x \le y, \Left, \labels{y}{A} \Rightarrow \labels{y}{B}$. Finally, the rule $\rlabrn\IMP$ is sound.
 	\end{itemize}
+	The other cases are similar.
 \end{proof}
-
-\todo{Missing: Proof of iii $\rightarrow$ iv and Proof of iv $\rightarrow$ i}
- 
-\marianela{Yes! Soundness section: explain a box rule and an implication rule. Say that the scheme of the rest of the rules are similar}
-
-
-\todo{How to introduce the next lemmas? Add small explanation}
 
 \begin{lemma}\label{lem:weak}\hbox{}\quad
 	\begin{enumerate}
@@ -1169,6 +1174,10 @@ If it does we rewrite it with a fresh variable $v$ first.
 		$\vlderivation{\vlhtr{\DD^{\rn w}}{\B, x \rel y, u \le v, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}}$
 	\end{enumerate}
 \end{lemma}
+
+\begin{proof}
+	Standard.
+\end{proof}
 
 \begin{lemma}\label{lem:inv}\hbox{}\quad
 	\begin{enumerate}
@@ -1202,6 +1211,105 @@ If it does we rewrite it with a fresh variable $v$ first.
 		
 	\end{enumerate}
 \end{lemma}
+
+\begin{proof}
+In each case, we reason by induction on the height of $\DD$.
+
+\begin{itemize}
+\item $\llabrn\IMP$:
+For a proof of height $1$, it is straightforward.
+%
+For example, if $\DD = \vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a}, \labels{x}{A \IMP B} \SEQ \Right, \labels{v}{a}}{}$, 
+%
+then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a},\labels{y}{B} \SEQ \Right, \labels{v}{a}}{}$.
+
+For a proof $\DD$ of height greater than $1$ we have two cases, depending on whether the last rule of $\DD$ acts on $\labels{x}{A \IMP B}$ or only on some part of the context.
+
+First let us fix a given index $y$ that does not appear in $\DD$.
+
+If we start with a proof
+\begin{smallequation*}
+	\DD = 
+	\vlderivation{
+		\vlin{\rn{r}}{}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+			\vlhtr{\DD'}{\B', \Left', \labels{x}{A \IMP B} \SEQ \Right'}
+		}	
+	}
+\end{smallequation*}
+
+Then by induction hypothesis there exists a proof 
+\begin{smallequation*}
+	\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}}
+\end{smallequation*}
+of the same (or smaller) height as $\DD'$ (as $y$ also does not appear in $\DD'$).
+
+Therefore, we have the proof
+\begin{smallequation*}
+	\DD^{\invr{\llabrn\IMP}} = 
+	\vlderivation{
+		\vlin{\rn{r}}{}{\B, \Left, \labels{y}{B} \SEQ \Right}{
+			\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}
+		}
+	}
+\end{smallequation*}
+of the same (or smaller) height as $\DD$.
+
+If we start with a proof 
+\begin{smallequation*}
+	\vlderivation{
+		\vliin{\llabrn\IMP}{\text{\footnotesize $x \le z$ appears in $\B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+			\vlhtr{\DD_1}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{A}}
+		}{
+		\vlhtr{\DD_2}{\B, \Left, \labels{z}{B} \SEQ \Right}
+	}
+	}
+\end{smallequation*}
+then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlderivation{\vlhtr{\DD_2[y/z]}{\B, \Left, \labels{y}{B} \SEQ \Right}}$ (as $y$ also does not appear in $\DD_2$) and its height is smaller than the one of $\DD$.
+
+%
+\item $\llabrn\DIA$:
+
+If we start with a proof
+\begin{smallequation*}
+	\DD = 
+	\vlderivation{
+		\vlin{\rn{r}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+			\vlhtr{\DD'}{\B', \Left', \labels{x}{\DIA A} \SEQ \Right'}
+		}	
+	}
+\end{smallequation*}
+
+Then by induction hypothesis there exists a proof 
+\begin{smallequation*}
+	\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}}
+\end{smallequation*}
+of the same (or smaller) height as $\DD'$.
+
+Therefore, we have the proof
+\begin{smallequation*}
+	\DD^{\invr{\llabrn\DIA}} = 
+	\vlderivation{
+		\vlin{\rn{r}}{}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}{
+			\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}
+		}
+	}
+\end{smallequation*}
+of the same (or smaller) height as $\DD$, for any label $y$ that does not appear in $\DD$.
+
+If we start with a proof 
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+			\vlhtr{\DD'}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right}
+		}	
+	}
+\end{smallequation*}
+then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$ for any label $y$ that does not appear in $\DD$.
+
+\item $\rlabrn\IMP$ and $\rlabrn\BOX$ : Similar.
+\end{itemize}
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1287,7 +1395,7 @@ $\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\
 
 $\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \IMP \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
 
-See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label}
+See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label. why??}
 
 \begin{figure}[h]
 	\begin{center}
