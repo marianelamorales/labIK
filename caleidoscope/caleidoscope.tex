@@ -1345,7 +1345,7 @@ $$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel 
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
 %
-These systems enjoy cut-elimination via usual arguments. Proofs of the the axioms we mentioned are below:
+These systems enjoy cut-elimination via usual arguments. Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
 
 Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
 
@@ -1385,17 +1385,16 @@ $\vlderivation{
 }
 $
 
-The generality of the result adds a new rule to the system $\labIKp$ in order to capture the \emph{Scott-Lemmon axiom} or \emph{$\agklmn$ axiom}: 
-\begin{center}
-	$\lozenge^{k} \square^{l} A \IMP \square^{m}\lozenge^{n} A$
-\end{center}
+\bigskip
+
+Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A$ (Figure \ref*{fig:gklmn}).\todo{Wrong label. why??} 
+
 Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
 
 $\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\forall x,y,z ( xR^{k}y \vlan xR^{m}z \rightarrow \exists u yR^{l}u \vlan zR^{n}u)$ 
 
 $\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \IMP \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
 
-See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label. why??}
 
 \begin{figure}[h]
 	\begin{center}
@@ -1412,7 +1411,72 @@ See this axiom in the Figure~\ref{fig:gklmn} \todo{Wrong label. why??}
 	\caption{$\agklmn$ axiom for intuitionistic case}
 \end{figure}
 
+Following the idea to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the next rule:
 
+\bigskip
+
+\begin{center}
+	$\vlderivation { \vlin {\gklmn}{y', u$ fresh$}{\B, xR^{k}y, xR^{m}z, \Left \Rightarrow \Right}{\vlhy {\B, y \le y', xR^{k}y, xR^{m}z, y'R^{l}u, zR^{n}u, \Left\Rightarrow \Right}}}$
+\end{center}
+
+\bigskip
+
+We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
+
+\begin{theorem}
+	The system $\labIKp +\agklmn$ is complete for $\mathsf{k = l = m = n = 1}$.
+\end{theorem}
+
+\begin{proof}
+	\begin{center}
+		\scalebox{0.93}{
+			$\vlderivation {\vlin {\sir}
+				{y$ fresh$}
+				{\Rightarrow x \colon \lozenge \square A \vljm \square \lozenge A}
+				{\vlin {\sbr}
+					{z, w $ fresh $}
+					{x \le y, y \colon \lozenge \square A \Rightarrow y \colon \square \lozenge A}
+					{\vlin {\sdl}
+						{u$ fresh$}
+						{x \le y, y \le z, zRw, y \colon \lozenge \square A \Rightarrow w \colon \lozenge A}
+						{\vlin {\ftwo}
+							{t$ fresh$}
+							{x \le y, y \le z, zRw, yRu, u \colon \square A \Rightarrow w \colon \lozenge A}
+							{\vlin {\gklmn}
+								{t', j$ fresh$}
+								{x \le y, y \le z, u \le t, zRw, yRu, zRt, u \colon \square A \Rightarrow w \colon \lozenge A}
+								{\vlin {\sdr}
+									{}
+									{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A}
+									{\vlin {\trans}
+										{}
+										{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+										{\vlin {\sbl}
+											{}
+											{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+											{\vlin {\refl}
+												{}
+												{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+												{\vlin {\ids}
+													{}
+													{x \le y, y \le z, u \le t, t \le t', u \le t',j \le j, zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+													{\vlhy {}}}}}}}}}}}}$}
+	\end{center}
+\end{proof}
+
+In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
+
+\begin{lemma}\label{lemma:admis} The following rules are admissible in $\labIKp$:
+	\begin{enumerate}
+		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A, z \colon A \Rightarrow \Right}}}$}
+		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, x \colon \square^{k} A}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, y \colon A}}}$}
+		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, x \colon \lozenge^{k} A \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, y \colon A \Rightarrow \Right}}}$ }
+		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A, y \colon A}}}$}
+	\end{enumerate}
+	%\textbf{Probably F2g???}
+\end{lemma}
+
+Our conjecture is that it is possible to prove completeness of the system for the general case by induction in the $k$ parameter. This proof is ongoing study.
 
 \bibliographystyle{alpha}
 \bibliography{references}
