@@ -434,7 +434,7 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 	\fbox{
 	\begin{minipage}{.95\textwidth}
 	\begin{tabular}{@{\!}c@{\quad}c}
-		$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
+		$\vlinf{\rn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
 		&
 		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
 		\quad
@@ -453,17 +453,17 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 		}
 		\\\\
 		\multicolumn{2}{c}{
- 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, x \le y, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
 % 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
  		}
 		\\\\
-		$\vlinf{\llabrn\BOX}{}{\B, \Left, x \le y, yRz, \labels{x}{\BOX A} \SEQ \Right}{\B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
+		$\vlinf{\llabrn\BOX}{}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \Left, x \le y, y \rel z \SEQ \Right, \labels{z}{A}}$
+		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, x \le y, y \rel z, \Left \SEQ \Right, \labels{z}{A}}$
 		\\\\
-		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \Left, x \rel y, \labels{y}{A} \SEQ \Right}$
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\DIA}{}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}}{\B, \Left, x \rel y \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
+		$\vlinf{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
 		\\
 		\multicolumn{2}{c}{
 		$\mbox{\hbox to .9\linewidth{\dotfill}}$
@@ -507,7 +507,7 @@ A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SE
 
 In the next section, we present the system (called $\labIKp$) that we obtained to capture intuitionistic modal logics (see Figure \ref{fig:labIKp}).
 
-\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts and then put the whole system).}
+\marianela{If it is a long paper, we can give us the space to explain the system with details. So we can add something like the next section (presenting the system by parts).}
 
 \section{Building $\labIKp$}
 
@@ -661,7 +661,7 @@ To finish our system $\labIKp$, we have to introduce the rules that capture the 
 	\vspace{5mm}
 	
 	
-	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, x \colon A \IMP B, y \colon B \Rightarrow \Right}$
+	$\vliinf{\sil}{}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right}{\B, \Left, x \le y, x \colon A \IMP B \Rightarrow \Right, y \colon A}{\B, \Left, x \le y, y \colon B \Rightarrow \Right}$
 \end{center}
 
 The meaning of the rule for implication right is below:
