@@ -9,7 +9,7 @@
 \usepackage{enumerate}
 \usepackage{graphicx}
 \usepackage{bm}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{pgf}
 \usepackage[all]{xy}
 \usepackage{tikz}
@@ -83,9 +83,10 @@
 
 
 %%% Comments  
+\definecolor{notgreen}{rgb}{.1,.6,.1}
 \newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
 \newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
-\newcommand{\lutz}[1]{{\color{green}[Lutz: #1]}}
+\newcommand{\lutz}[1]{{\color{notgreen}[Lutz: #1]}}
 \newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
 
 %%% General
@@ -206,8 +207,8 @@
   \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
  \author{Marianela Morales}
  
- \marianela{I think that now I have the same as Lutz, right?}
- \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
+% \marianela{I think that now I have the same as Lutz, right?} No, the other order...
+ \address{ LIX, \'Ecole Polytechnique  \& Inria Saclay\\ France}
    \author{Lutz Stra{\ss}burger}
  \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
 
@@ -258,6 +259,62 @@ intuitionistic modal logics,
 and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite{Maffezioli}. 
 
 \todo{Simpson does not have internal cut-elimination}
+
+
+\lutz{things that should be said explicitely somewhere (maybe intro, maybe somewhere else):
+  \begin{itemize}
+  \item what we do:
+    \begin{itemize}
+    \item first systems (nested and labelled) for intuitionistic modal
+      logic where ``single conclusion'', i.e., only one formula on the
+      right.
+    \item Then ``multiple conclusion'' (Meahara-style) nested sequent.
+    \item Still rules that forced single formula on the right (white implication and white box)
+    \item by allowing both relations of the model in the proof system
+      we go to genuinely multiple conclusion: never ever a formula on
+      the right has to be deleted during proof search.
+    \end{itemize}
+  \item why we do it: 
+    \begin{itemize}
+    \item getting things right: labelled systems for classical modal
+      logics, or plain propositional intuiionistic logic have one
+      binary relation, which is exactly the relation of the standard
+      Kripke semantics. The standard Kripke semantics for
+      intuitionistic modal logic is birelational, with a strong
+      connectiion between the two binary relations. A clean labelled
+      system for these logics should incorporate both relations.
+    \item We get new logics.  In the standard nested sequent
+      or labelled sequent system for intuitionistic modal logic we
+      always have both conjuncts we we add Scott-Lemmon/Geach axioms;
+      but here we can have them separtely.
+    \end{itemize}
+  \item how we do it:
+    \begin{itemize}
+    \item We start from the Maehara nested sequent system (which can
+      be translated straightforwardly into a labelled system with one
+      relation $R$.
+    \item the rules for $\AND$ and $\OR$ are trivial and as expected
+      they can be presented such that they are invertible on the left
+      and the right, they do not concern the relations $R$ and $\le$. 
+    \item So should be the rules for $\IMP$-left and $\BOX$-left and
+      identity, but there is a subtlety; see below...
+    \item the rules for $\DIA$ are also straightforward, as they
+      concern only $R$ but not $\le$.
+    \item The rules $\BOX$-right and $\IMP$-right are the ones that
+      force single conclusion in the Maehara system. This means that
+      here they create a future, using the relation $\le$.
+    \item In order to make everything work together, this forces us to
+      have reflexivity and transitivity of $\le$, explicely as rules
+      in the system, and have rules for the F1 and F2 conditions
+      making the relations $R$ and $\le$ go together.
+    \item As a consequence we also need a rule realizing monotonicity
+      for the formulas on the right.
+    \item However, we designed the system such that monotonicity is
+      admisible by encorporating it into the rules for identity,
+      $\IMP$-left and $\BOX$-left.
+    \end{itemize}
+  \end{itemize}
+}
 %
 %For sequent systems for intuitionistic logics there is always a choice
 %to be made: make the system \emph{single conclusion} following
