@@ -687,7 +687,7 @@ You can find a small explanation about the rules $\llabrn\AND$ and  $\rlabrn\OR$
 
 \subsection{Modal operators}
 
-We introduce the rules that represent the semantics of modal operators $\square$ and $\Diamond$. The system $\labIKp$ presents the next four rules (two for $\square$ and two for $\Diamond$): 
+We introduce the rules that represent the semantics of modal operators $\BOX$ and $\DIA$. The system $\labIKp$ presents the next four rules (two for $\BOX$ and two for $\DIA$): 
 \begin{center}
 	\begin{minipage}{.95\textwidth}
 		\begin{tabular}{@{\!}c@{\quad}c}
@@ -710,10 +710,10 @@ A more detailed explanation for some rules is below:
 
 \begin{itemize}
 	\item Rule $\llabrn\BOX$.
-	Continue with the same reasoning, $\B$ is a set of relational and preorder atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule expresses, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\square A$ is true in $x$, then the formula $A$ is true in $z$.
+	Continue with the same reasoning, $\B$ is a set of relational and preorder atoms and $\Left$ and $\Right$ are multiset of laballed formulas. Semantically, the rule expresses, from the conclusion to the premise, that given $x, y$ and $z$ such that $x \le y$ and $yRz$ where the formula $\BOX A$ is true in $x$, then the formula $A$ is true in $z$.
 	
 	\item Rule $\rlabrn\DIA$.
-	Semantically, the diamond establishes that in a model $\M$ and a world $v$ the formula $\Diamond A$ is satisfied, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the formula $\Diamond A$ is satisfied in $x$, then the formula $A$ is true in $y$.
+	Semantically, the diamond establishes that in a model $\M$ and a world $v$ the formula $\DIA A$ is satisfied, if and only if, there exists a world $u$ such that $vRu$ and the formula $A$ is satisfied in $u$. In order to capture this definition, the rule shows that if $xRy$ and the formula $\DIA A$ is satisfied in $x$, then the formula $A$ is true in $y$.
 	
 \end{itemize}
 
@@ -1483,34 +1483,34 @@ We start proving that our new system is complete with the base case of $\mathsf{
 		\scalebox{0.93}{
 			$\vlderivation {\vlin {\sir}
 				{y$ fresh$}
-				{\Rightarrow x \colon \lozenge \square A \vljm \square \lozenge A}
+				{\Rightarrow \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}
 				{\vlin {\sbr}
 					{z, w $ fresh $}
-					{x \le y, y \colon \lozenge \square A \Rightarrow y \colon \square \lozenge A}
+					{x \le y, \labels{y}{\DIA \BOX A} \Rightarrow \labels{y}{\BOX \DIA A}}
 					{\vlin {\sdl}
 						{u$ fresh$}
-						{x \le y, y \le z, zRw, y \colon \lozenge \square A \Rightarrow w \colon \lozenge A}
+						{x \le y, y \le z, zRw, \labels{y}{\DIA \BOX A} \Rightarrow \labels{w}{\DIA A}}
 						{\vlin {\ftwo}
 							{t$ fresh$}
-							{x \le y, y \le z, zRw, yRu, u \colon \square A \Rightarrow w \colon \lozenge A}
+							{x \le y, y \le z, zRw, yRu, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
 							{\vlin {\gklmn}
 								{t', j$ fresh$}
-								{x \le y, y \le z, u \le t, zRw, yRu, zRt, u \colon \square A \Rightarrow w \colon \lozenge A}
+								{x \le y, y \le z, u \le t, zRw, yRu, zRt, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
 								{\vlin {\sdr}
 									{}
-									{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A}
+									{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
 									{\vlin {\trans}
 										{}
-										{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+										{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
 										{\vlin {\sbl}
 											{}
-											{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+											{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
 											{\vlin {\refl}
 												{}
-												{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+												{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A}, \labels{j}{A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
 												{\vlin {\ids}
 													{}
-													{x \le y, y \le z, u \le t, t \le t', u \le t',j \le j, zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+													{x \le y, y \le z, u \le t, t \le t', u \le t',j \le j, zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A}, \labels{j}{A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
 													{\vlhy {}}}}}}}}}}}}$}
 	\end{center}
 \end{proof}
@@ -1519,10 +1519,10 @@ In order to have a completeness proof for the general case, we need to introduce
 
 \begin{lemma}\label{lemma:admis} The following rules are admissible in $\labIKp$:
 	\begin{enumerate}
-		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A, z \colon A \Rightarrow \Right}}}$}
-		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, x \colon \square^{k} A}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, y \colon A}}}$}
-		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, x \colon \lozenge^{k} A \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, y \colon A \Rightarrow \Right}}}$ }
-		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A, y \colon A}}}$}
+		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}, \labels{z}{A} \Rightarrow \Right}}}$}
+		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, \labels{x}{\BOX^{k} A}}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, \labels{y}{A}}}}$}
+		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, \labels{x}{\DIA^{k} A} \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, \labels{y}{A} \Rightarrow \Right}}}$ }
+		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}, \labels{y}{A}}}}$}
 	\end{enumerate}
 	%\textbf{Probably F2g???}
 \end{lemma}
