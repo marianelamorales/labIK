@@ -2,10 +2,10 @@
 
 %\usepackage{aiml18macro}
 
-\usepackage[margin=3cm]{geometry}
+\usepackage[margin=2cm]{geometry}
 \usepackage[noxy]{virginialake}                        
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath} 
+\usepackage{amssymb,amsmath,amsthm} 
 \usepackage{mathtools}
 \usepackage{enumerate}
 \usepackage{graphicx}
@@ -16,6 +16,26 @@
 \usepackage{tikz}
 %\usepackage{hyperref}
 \usepackage{pgffor}
+
+	%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lem}[theorem]{Lemma}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+	%%
+\theoremstyle{definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{remark}[theorem]{Remark}
+	%%
+
 
 \tikzset{
 	annotated cuboid/.pic={
@@ -257,9 +277,9 @@
    %% completeness using Simpson system.
   \end{abstract}
 
-  \begin{keyword}
-  Intuitionistic modal logic, labelled sequents, cut elimination, proof theory.
-  \end{keyword}
+  %% \begin{keyword}
+  %% Intuitionistic modal logic, labelled sequents, cut elimination, proof theory.
+  %% \end{keyword}
 % \end{frontmatter}
 
   %\maketitle
@@ -352,10 +372,10 @@ form $\futs xy$. Consequently, we can easily translate the frame
 conditions in~\eqref{eq:4frame} into inference rules:
 \begin{equation}
   \label{eq:4rules}
-  \vlinf{\rn{4^\BOX}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-    \B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+  \vlinf{\rn{4^{\BOX}}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+     \B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
   \qquand
-  \vlinf{\rn{4^\DIA}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+  \vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
     \B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
 \end{equation}
 
