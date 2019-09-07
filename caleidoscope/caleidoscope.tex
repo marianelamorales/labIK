@@ -378,8 +378,31 @@ conditions in~\eqref{eq:4frame} into inference rules:
   \vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
     \B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
 \end{equation}
+This allows us to define cut-free deductive systems for a wide range
+of logics that could not be treated before.  Furthermore, the relation
+between syntax and semantics is as one would expect: A sequent is
+provable in our system if and only if it is valid in all models.
 
-\section{Introduction(old version, to be deleted)}
+Besides that, there is another pleasant observation to make about our
+system. Ordinary labelled sequent systems for intuitionistic modal
+logic are single-conclusion~\cite{simpson:phd}. The same is true for
+the corresponding nested sequent
+systems~\cite{str:fossacs13,mar:str:aiml}. It is possible to express
+Maehara style multiple-conclusion systems in nested
+sequents~\cite{kuz:str:maehara}, and therefore also in ordinary
+labelled sequents. However, also in these systems there are rules
+($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
+premise, even though this is not the case in labelled
+systems~\cite{negri:xx} or nested sequents~\cite{fitting:xx} for
+intuitionistic logic. Our system eliminates this
+discrepancy. Consequently, every rule in our system is invertible, as
+we never delete information.\lutz{check, is this really the case?}
+
+\medskip
+
+This paper is organized as follows, In the next section we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cutelim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
+
+\section*{Introduction(old version, to be deleted)}
 \todo{We should work on the introduction}
 
 One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
