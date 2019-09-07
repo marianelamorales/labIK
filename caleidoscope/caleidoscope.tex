@@ -1,7 +1,8 @@
-\documentclass[twoside]{aiml18}
+\documentclass[a4paper]{article}
 
-\usepackage{aiml18macro}
+%\usepackage{aiml18macro}
 
+\usepackage[margin=3cm]{geometry}
 \usepackage[noxy]{virginialake}                        
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath} 
@@ -91,7 +92,10 @@
 
 %%% General
 \input{macros}
-\newcommand{\B}{\mathcal{B}}
+%\newcommand{\B}{\Digamma}
+\newcommand{\B}{\mathcal{R}}
+%\newcommand{\B}{\Xi}
+%\newcommand{\B}{\mathcal{B}}
 \newcommand*{\A}{\mathcal{A}}
 
 %%% Systems
@@ -99,8 +103,13 @@
 \newcommand*{\kax}[1][]		{\ax{k_{#1}}}
 \newcommand*{\lab}{\mathsf{lab}}
 \newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\K}{\mathsf{K}}
 \newcommand*{\labIKp}{\lab\IK_{\le}}
+\newcommand*{\ISfour}{\mathsf{IS4}}
+\newcommand*{\Sfour}{\mathsf{S4}}
 
+
+\newcommand{\fourax}{\mathsf{4}}
 %%% Connectives
 \newcommand*{\NOT}{\neg}
 \newcommand*{\AND}{\mathbin{\wedge}}
@@ -113,13 +122,18 @@
 \newcommand*{\DIA}{\mathord{\Diamond}}
 
 %%% Labelled sequents
-\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
-\newcommand{\SEQ}{\Rightarrow}
+\newcommand*{\fm}[1]{{\color{notgreen}{#1}}}
+\newcommand*{\lb}[1]{{\color{blue}{#1}}}
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\color{blue}{#2}}}
+\newcommand{\SEQ}{\Longrightarrow}
 \newcommand*{\DD}{\mathcal{D}}
 \newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
 \newcommand*{\invr}[1]{#1^\bullet}
 \newcommand*{\rel}{R}
 
+\newcommand{\proviso}[1]{\mbox{\scriptsize #1}}
 %%% Labelled rules
 \newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
 \newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
@@ -190,6 +204,11 @@
 %%%General maths
 \newcommand*{\reducesto}{\quad{\leadsto}\quad}
 
+%%%%%%%%%%%%%%%%%
+
+\newcommand{\qquand}{\qquad\mbox{and}\qquad}
+\newcommand{\quadcm}{\rlap{\quad,}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %The following line defines the page header consisting of the surnames of the authors.
@@ -199,29 +218,37 @@
 
 \begin{document}
 
-\begin{frontmatter}
-  \title{Decomposing labelled proof theory for intuitionistic modal logic}
-  \author{Sonia Marin}
-  
-  \todo{New university?}
-  \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
- \author{Marianela Morales}
- 
+%\begin{frontmatter}
+  \title{A properly labelled proof system for intuitionistic modal logics}
+  \author{Sonia Marin \and %}
+%  \todo{New university?}
+%  \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
+%    \author{
+      Marianela Morales %}
+ \and
 % \marianela{I think that now I have the same as Lutz, right?} No, the other order...
- \address{ LIX, \'Ecole Polytechnique  \& Inria Saclay\\ France}
-   \author{Lutz Stra{\ss}burger}
- \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
+% \address{ LIX, \'Ecole Polytechnique  \& Inria Saclay\\ France}
+%      \author{
+        Lutz Stra{\ss}burger }
+% \address{Inria Saclay \& LIX, \'Ecole Polytechnique \\ France}
 
+  \maketitle
+  
  \begin{abstract}
 
-   We present a labelled sequent system for intuitionistic modal logic equipped 
-   with two relation symbols, one for the accessibility
+   In this paper we present a labelled sequent system for
+   intuitionistic modal logics such that there is not only one, but
+   two relation symbols for the labels: one for the accessibility
    relation associated with the Kripke semantics for modal logics and
    one for the preorder relation associated with the Kripke semantics
-   for intuitionistic logic. 
-   %
-   Thus, it is in close correspondence with birelational Kripke semantics for intuitionistic modal logic and can encompass a wider range of intuitionistic logics than state-of-the-art labelled systems.
-
+   for intuitionistic logic.
+   %%
+   This puts our system in close correspondence with the standard
+   birelational Kripke semantics for intuitionistic modal logic. As a
+   consequence it can encompass a wider range of intuitionistic modal
+   logics than standard labelled systems.
+   %%
+   We also show an internal cut elimination proof for our system.
 
    %% . We show the possibility of extend labelled sequents
    %% with a preorder relation symbol in order to capture intuitionistic
@@ -231,12 +258,108 @@
   \end{abstract}
 
   \begin{keyword}
-  Intuitionistic modal logic, Labelled sequents, Proof theory.
+  Intuitionistic modal logic, labelled sequents, cut elimination, proof theory.
   \end{keyword}
- \end{frontmatter}
+% \end{frontmatter}
 
+  %\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
+\todo{get bib-file right}
+
+\section{Introduction}\label{sec:intro}
+
+Since their introduction in the 1980s by Gabbay~\cite{Gabbay},
+\emph{labelled proof calculi} have been widely used by proof theorist
+to give sound, complete and cut-free deductive system to a broad range
+of logics. Unlike so-called \emph{internal calculi}, like
+hyper-sequents~\cite{avron} or nested
+sequents~\cite{kashima,brunnler,pog} or 2-sequents~\cite{masini},
+labelled calculi have the advantage of beeing more uniform and
+accommodating more logics.
+
+Standard labelled sequent calculi attach to every formula $A$ a label
+$x$, witten as $\labels xA$, and additionally admit so called
+\emph{relational atoms} of the form $\accs xy$ where $\rel$ is a
+binary relation symbol. These calculi work best for logics with
+standard Kripke semantics, as in this case the relation $\rel$ is used
+to encode the accessibility relation in the Kripke models, and the
+frame condition corresponding to the desired logic can be directly
+encoded as inference rules. Prominent examples are classical modal
+logics and intuitionistic propositional logic, where, e.g., the frame
+condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
+inference rule
+\begin{equation}
+  \label{eq:Rtrans}
+  \vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+    \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
+\end{equation}
+where $\B$ stands for a set of relation atoms, and $\Gamma$ and
+$\Delta$ for sets \lutz{or multisets?} of labelled formulas.
+
+However,
+in this paper we are concerned with \emph{intuitionistic modal
+  logics}, whose Kripke semantics is based on \emph{birelational}
+frames, i.e., they have two binary relations instead of one: one
+relation $R$ that corresponds to the accessibility relation in
+ordinary Kripke frames for modal logics, and a relation $\le$ that
+corresponds to the future relation in ordinary Kripke frames for
+intuitionistic logic. Consequently, standard labelled systems for
+these logics have certain shortcomings:
+\begin{enumerate}
+\item The transitivity rule in~\eqref{eq:Rtrans} corresponds to both
+  versions of the $\fourax$-axiom
+  \begin{equation}
+    \label{eq:4ax}
+    \fm{\BOX A\IMP \BOX\BOX A}
+    \qquand
+    \fm{\DIA\DIA A\IMP\DIA A}
+    \quadcm
+  \end{equation}
+  as they are equivalent in classical
+  modal logic. However, in intuiotionistic modal logic they are not
+  equivalent, and even though the logic $\ISfour$, i.e., the
+  intuitionistic version of the modal logic $\Sfour$, contains both
+  axioms, they can be added independently to the logic $\IK$ (the
+  intuitionistic version of $\K$). However, the proof theory of these
+  new logics has not been studied before, as no existing labelled (or
+  label-free) proof system can handle them, even though the
+  corresponding frame conditions
+  \begin{equation}
+    \label{eq:4frame}
+    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
+    \qquand
+    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+  \end{equation}
+  have already been studied
+  in~\cite{Plotkin}.\lutz{check: did they get that wrong in  \cite{Plotkin}?}
+\item The correspondence between the syntax and the semantics is not
+  as clean as one would expect. As only the $R$-relation (and not the
+  $\le$-relation) of the frame is visible in an ordinary labelled
+  sequent, we only have that a sequent $\Gamma$ is provable if and
+  only if is is valid in all \emph{graph-consistent}\footnote{This
+    means that every layer in the model can be lifted to any future of
+    any world in that layer.}\lutz{check terminology} models, as
+  already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
+  and considered as a very unsatisfactory situation\lutz{check what he
+    said exactly} (see also \cite{mar:str:indexed}).
+\end{enumerate}
+In order to address these two issues we propose here to extend the
+notion of labelled sequent by also allowing relational atoms of the
+form $\futs xy$. Consequently, we can easily translate the frame
+conditions in~\eqref{eq:4frame} into inference rules:
+\begin{equation}
+  \label{eq:4rules}
+  \vlinf{\rn{4^\BOX}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+    \B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+  \qquand
+  \vlinf{\rn{4^\DIA}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+    \B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
+\end{equation}
+
+\section{Introduction(old version, to be deleted)}
 \todo{We should work on the introduction}
 
 One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
@@ -260,7 +383,16 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 
 \todo{Simpson does not have internal cut-elimination}
 
-
+\sonia{
+  \begin{itemize}
+  \item internal vs externl calculi
+  \item extesion to axioms are truly intuitionistic (not just the
+    classical versions as in Simpson style)
+  \item connection with semantics compared to graph homomorphism
+    restiction in Simpson and ``indexed nested systems''
+  \end{itemize}
+}
+  
 \lutz{things that should be said explicitely somewhere (maybe intro, maybe somewhere else):
   \begin{itemize}
   \item what we do:
