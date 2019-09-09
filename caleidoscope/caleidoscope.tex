@@ -118,6 +118,8 @@
 %\newcommand{\B}{\mathcal{B}}
 \newcommand*{\A}{\mathcal{A}}
 
+\newcommand{\lseq}[3]{#1 , #2 \SEQ #3}
+
 %%% Systems
 \newcommand*{\ax}[1]{\mathsf{#1}}
 \newcommand*{\kax}[1][]		{\ax{k_{#1}}}
@@ -354,16 +356,16 @@ these logics have certain shortcomings:
     \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
   \end{equation}
   have already been studied
-  in~\cite{Plotkin}.\lutz{check: did they get that wrong in  \cite{Plotkin}?}
+  in~\cite{Plotkin}.\todo{check: did they get that wrong in  \cite{Plotkin}?}
 \item The correspondence between the syntax and the semantics is not
   as clean as one would expect. As only the $R$-relation (and not the
   $\le$-relation) of the frame is visible in an ordinary labelled
   sequent, we only have that a sequent $\Gamma$ is provable if and
   only if is is valid in all \emph{graph-consistent}\footnote{This
     means that every layer in the model can be lifted to any future of
-    any world in that layer.}\lutz{check terminology} models, as
+    any world in that layer.}\todo{check terminology in Simpson} models, as
   already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
-  and considered as a very unsatisfactory situation\lutz{check what he
+  and considered as a very unsatisfactory situation\todo{check what he
     said exactly} (see also \cite{mar:str:indexed}).
 \end{enumerate}
 In order to address these two issues we propose here to extend the
@@ -400,7 +402,10 @@ we never delete information.\lutz{check, is this really the case?}
 
 \medskip
 
-This paper is organized as follows, In the next section we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cutelim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
+This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cutelim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
+
+\todo{maybe paragraph on related work? cite Maffezioli, Naibo and Negri~\cite{Maffezioli}.}
+
 
 \section*{Introduction(old version, to be deleted)}
 \todo{We should work on the introduction}
@@ -533,8 +538,10 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 
 %These rule schemes can occur in different contexts and different calculi. The context that interests us is when it is applied to modal logic. The idea to extend this system to another to capture intuitionistic modal logics allows us to study the Kripke semantics for this type of logics:
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Intuitionistic modal logics}
+\section{Intuitionistic modal logics}\label{sec:intmod}
 
 	The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
 	%
@@ -545,7 +552,8 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 	a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
 	$$
 	%
-	We might sometimes write $\NOT A$ to mean $A \IMP \BOT$.
+        \lutz{why do we have $\TOP$?}
+	We might sometimes write $\NOT A$ to mean $A \IMP \BOT$. \lutz{do we?}
 
 Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
 %%
@@ -557,7 +565,7 @@ The axiomatisation that is now generally accepted as intuitionistic modal logic 
 %
 It is obtained from intuitionistic propositional logic by adding:
 \begin{itemize}
-\item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
+\item the \emph{necessitation rule}: if $A$ is a theorem then $\BOX A$ is also a theorem; and
 \item the following five variants of the \emph{distributivity axiom}:
 \begin{equation*}
 \label{eq:ik}%\hskip-2em
@@ -614,8 +622,10 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 We write $w \Vdash a$ if $a \in V(w)$, and by definition, we always have $w \Vdash \top$ and never that $w \Vdash \bot$. 
 %
 Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
-
-$w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
+\begin{equation}
+  \label{eq:kripke}
+  \parbox{30em}{%
+  $w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
 
 $w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
 
@@ -626,10 +636,13 @@ $w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash
 $w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
 
 %We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
+}
+\end{equation}
+\todo{fix typography}
 
-We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \SEQ \bot$).
+We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \IMP \bot$).
 
-From the monotonicity of the valuation function $V$ , we get a monotonicity property for the relation:
+From the monotonicity of the valuation function $V$, we get a monotonicity property for the relation:
 \begin{proposition}(Monotonicity) 
 For any formula $A$ and for $w, w' \in W$, if $w \le w'$ and $w \Vdash A$, then $w' \Vdash A$.
 \end{proposition}
@@ -654,19 +667,53 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\todo{Add something else about Fischer-Servi theorem?}
+\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The system}\label{sec:system}
+
+In this section we present our properly labelled sequent proof system
+for intuitionistic modal logics. The starting point is the notion of a
+\emph{labelled formula} which is a pair $\labels xA$ of a label $\lb
+x$ and a formula $\fm A$. The intended meaning is that $\fm A$ holds
+at world $\lb x$. A \emph{relation atom} is either an expression
+$\accs xy$ or $\futs xy$ where $\lb x$ and $\lb y$ are labels and the
+intended meaning is that the corresponing relation holds between the
+worlds $\lb x$ and $\lb y$. This is enough to define the notion of
+\emph{(labelled) sequent}, which is a triple $\lseq\B\Left\Right$,
+where $\B$ is a set of relation atoms, and $\Left$ and $\Right$ are
+sets of labelled formulas, all written as list, separated by commas.
+
+Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
+We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$ \todo{$\TOP$ yes/no}, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+\begin{equation}
+  \label{eq:nomon}
+  \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
+  \quad
+  \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A} \IMP B \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
+  \quad
+  \vlinf{\llabrn\BOX}{}{\B, xRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, xRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
+\end{equation}
+that are not sufficient for a complete system, and we will see below why. Before, let us first look at the rules $\rlabrn\IMP$ and $\rlabrn\BOX$. In the  multiple-conlusion nested sequent system of~\cite{kuz:str:maehara}, these are the two rules that force single-conclusion. This is the reason why in our system we need the $\le$ in the relational atoms; we need to go to the future of the current world. 
+In the Kripke-semantics in~\eqref{eq:kripke} the two connectives $\IMP$ and $\BOX$ are the ones that need the future-relation $\le$. This relation is reflexive and transitive. In order to capture that in the proof system, we need to add the rules $\rn{refl}$ and $\rn{trans}$. Finally, in the semantics, the two relations $\rel$ and $\le$ are strongly connected through the two conditions $F_1$ and $F_2$ \todo{proper typography}. These need to be reflected in the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
+
+\todo{monotonicity}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Labelled sequent calculi with $\rel$ and $\le$}
 
-\begin{figure}%[h]
-	\centering
-	\small
+\begin{figure}[!t]
+  \begin{center}
 	\fbox{
-	\begin{minipage}{.95\textwidth}
-	\begin{tabular}{@{\!}c@{\quad}c}
+%	\begin{minipage}{.95\textwidth}
+	\begin{tabular}{c@{\quad}c}
 		$\vlinf{\rn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
 		&
 		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
@@ -714,9 +761,10 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
 		}
 	\end{tabular}		
-\end{minipage}
+%\end{minipage}
 }		
-	\caption{System $\labIKp$}
+  \end{center}
+  \caption{System $\labIKp$}
 	\label{fig:labIKp}
 \end{figure}
 
@@ -960,6 +1008,8 @@ As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an e
 			\scalebox{.9}{$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$}
 		}%}
 		%
+                
+                \lutz{why is that multiplicative on $\B$ and additive on the rest???}
 		\item\label{iii} $A$ is provable in $\labIKp$
 		%
 		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
@@ -1072,7 +1122,7 @@ $$
 \reducesto
 \end{smallequation*}
 
-\begin{smallequation*}\hspace*{-10em}
+\begin{smallequation*}\hspace*{-2em}
 	\vlderiibase{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
 			\vlhtr{\DD_1}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
@@ -1196,7 +1246,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hspace*{-7em}
+\begin{smallequation*}\hspace*{-2em}
 	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
 		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B_1, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B_1, x \rel y', \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
@@ -1214,7 +1264,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hspace*{-10em}
+\begin{smallequation*}\hspace*{-2em}
 	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
 		\vlin{\rlabrn\DIA}{}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
@@ -1281,7 +1331,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 \end{smallequation*}
 
 \begin{smallequation*}
-	\hspace*{-7em}
+	\hspace*{-2em}
 	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \B_3, x \le y, \Left \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{A}}{
 			\vlin{\rlabrn\IMP}{}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
@@ -1373,15 +1423,18 @@ If it does we rewrite it with a fresh variable $v$ first.
 		\begin{center}
 			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A} \Rightarrow \Right$.}
 		\end{center}
-		
+		\lutz{we need to define what that means $\M\Vdash$sequent}
+                
 		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\llabrn\BOX$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, \break yRz, \labels{x}{\BOX A} \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$.
 		
-		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.
+		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.\lutz{that is unclear}
 		
-		\item Rule $\rlabrn\BOX$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$, i.e. $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{\BOX A}$, which is the same as $\M_{0} \Vdash \vlan (\B,\Left)$ and  $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$. From $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$, we have that $\M_{0} \not \Vdash \Right$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}$. Following the semantic definition of $\BOX$, there exists worlds $y, z$ in $\M_{0}$, such that $x \le y, yRz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Therefore, $\M_{0} \not \Vdash premise$, i.e. $\M_{0} \not \Vdash \B, x \le y, yRz, \Left \Rightarrow \Right, \labels{z}{A}$. Then, the rule $\rlabrn\BOX is sound$.
+		\item Rule $\rlabrn\BOX$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$, i.e. $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{\BOX A}$, which is the same as $\M_{0} \Vdash \vlan (\B,\Left)$ and  $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$. From $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$, we have that $\M_{0} \not \Vdash \Right$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}$. Following the semantic definition of $\BOX$, there exists worlds $y, z$ in $\M_{0}$, such that $x \le y, yRz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Therefore, $\M_{0} \not \Vdash premise$, i.e. $\M_{0} \not \Vdash \B, x \le y, yRz, \Left \Rightarrow \Right, \labels{z}{A}$. Then, the rule $\rlabrn\BOX$ is sound.
 		
 		\item Rule $\rlabrn\IMP$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{A \IMP B}$, i.e., in particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $y$ such that $x \le y$ and $\M_{0} \Vdash \labels{y}{A}$ but $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, x \le y, \Left, \labels{y}{A} \Rightarrow \labels{y}{B}$. Finally, the rule $\rlabrn\IMP$ is sound.
 	\end{itemize}
+        \lutz{the arguments are not clear}
+        
 	The other cases are similar.
 \end{proof}
 
