@@ -686,29 +686,6 @@ worlds $\lb x$ and $\lb y$. This is enough to define the notion of
 where $\B$ is a set of relation atoms, and $\Left$ and $\Right$ are
 sets of labelled formulas, all written as list, separated by commas.
 
-Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
-We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
-Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$ \todo{$\TOP$ yes/no}, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
-\begin{equation}
-  \label{eq:nomon}
-  \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
-  \quad
-  \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A} \IMP B \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
-  \quad
-  \vlinf{\llabrn\BOX}{}{\B, xRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, xRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
-\end{equation}
-that are not sufficient for a complete system, and we will see below why. Before, let us first look at the rules $\rlabrn\IMP$ and $\rlabrn\BOX$. In the  multiple-conlusion nested sequent system of~\cite{kuz:str:maehara}, these are the two rules that force single-conclusion. This is the reason why in our system we need the $\le$ in the relational atoms; we need to go to the future of the current world. 
-In the Kripke-semantics in~\eqref{eq:kripke} the two connectives $\IMP$ and $\BOX$ are the ones that need the future-relation $\le$. This relation is reflexive and transitive. In order to capture that in the proof system, we need to add the rules $\rn{refl}$ and $\rn{trans}$. Finally, in the semantics, the two relations $\rel$ and $\le$ are strongly connected through the two conditions $F_1$ and $F_2$ \todo{proper typography}. These need to be reflected in the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
-
-\todo{monotonicity}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Labelled sequent calculi with $\rel$ and $\le$}
-
 \begin{figure}[!t]
   \begin{center}
 	\fbox{
@@ -767,6 +744,118 @@ In the Kripke-semantics in~\eqref{eq:kripke} the two connectives $\IMP$ and $\BO
   \caption{System $\labIKp$}
 	\label{fig:labIKp}
 \end{figure}
+
+Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
+We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$ \todo{$\TOP$ yes/no}, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+\begin{equation}
+  \label{eq:nomon}
+  \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
+  \quad
+  \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A} \IMP B \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
+  \quad
+  \vlinf{\llabrn\BOX}{}{\B, xRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, xRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
+\end{equation}
+that are not sufficient for a complete system, and we will see below
+why. Before, let us first look at the rules $\rlabrn\IMP$ and
+$\rlabrn\BOX$. In the multiple-conlusion nested sequent system
+of~\cite{kuz:str:maehara}, these are the two rules that force
+single-conclusion. This is the reason why in our system we need the
+$\le$ in the relational atoms; we need to go to the future of the
+current world.  In the Kripke-semantics in~\eqref{eq:kripke} the two
+connectives $\IMP$ and $\BOX$ are the ones that need the
+future-relation $\le$. This relation is reflexive and transitive. In
+order to capture that in the proof system, we need to add the rules
+$\rn{refl}$ and $\rn{trans}$.
+
+Finally, in the semantics, the two relations $\rel$ and $\le$ are
+strongly connected through the two conditions $F_1$ and $F_2$
+\todo{proper typography}. These need to be reflected in the proof
+system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
+%
+However, these two rule create new labels, and in order to be
+complete, the system needs the \emph{monotonicity} rule:
+\begin{equation}
+  \label{eq:mono}
+  \vlinf{\rn{mon}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
+    \lseq{\B, x \le x'}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}
+\end{equation}
+Since this rule is a form of contraction, it would cause the same
+problems as contraction in a cut elimination proof. Hence, it is
+preferable to have a system in which this rule is admissible. This is
+the reason why we have monotonicity incorporated in the rules
+$\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
+instead of using the rules in~\eqref{eq:nomon}.
+
+\begin{theorem}
+  \label{thm:mon-adm}
+  The rule $\rn{mon}$ is admissible for system $\labIKp$.
+\end{theorem}
+
+For proving this theorem, we need a series of auxiliary lemmas.
+
+\todo{}
+
+\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
+  \todo{}
+\end{proof}
+
+In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
+\begin{equation}
+  \label{eq:cut}
+  \vliiinf{\labrn{cut}}{}{
+    \lseq\B\Left\Right}{
+    \lseq\B\Left{\Right,\labels{z}{C}}}{}{
+    \lseq\B{\Left,\labels{z}{C}}{\Right}}
+\end{equation}
+Then we can summarize soundness and completeness, and cut
+admissibility of $\labIKp$ in the following Theorem:
+
+\begin{theorem}\label{thm:cutfree-compl}
+	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
+	%
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{i} $A$ is a theorem of $\IK$. 
+		%
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$.
+		\item\label{iii} $A$ is provable in $\labIKp$.
+		%
+		\item\label{iv} $A$ is valid in every birelational frame. %satisfying the properties in $\CC$.
+	\end{enumerate}
+\end{theorem}
+
+The proof of this theorem is the topic of the following sections. The
+equivalence of \ref{i} and \ref{iv} has already been stated in
+Theorem~\ref{thm:plotkin}~\cite{Fischer,Plotkin}. The implication
+\ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
+the implication~\ref{ii}$\implies$\ref{iii} is shown in
+Section~\ref{sec:cut-elim}, and finally, the implication
+\ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness}\label{sec:soundness}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Completness}\label{sec:completeness}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cut Admissibility}\label{sec:cut-elim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Labelled sequent calculi with $\rel$ and $\le$}
 
 
 %%
