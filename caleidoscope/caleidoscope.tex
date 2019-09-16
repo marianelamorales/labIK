@@ -12,6 +12,7 @@
 \usepackage{bm}
 \usepackage{xcolor}
 \usepackage{pgf}
+\usepackage{array}
 \usepackage[all]{xy}
 \usepackage{tikz}
 %\usepackage{hyperref}
@@ -299,7 +300,7 @@ Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
 to give sound, complete and cut-free deductive system to a broad range
 of logics. Unlike so-called \emph{internal calculi}, like
 hyper-sequents~\cite{avron:elc96} or nested
-sequents~\cite{kashima,brunnler,pog} or 2-sequents~\cite{masini:apal92},
+sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09} or 2-sequents~\cite{masini:apal92},
 labelled calculi have the advantage of beeing more uniform and
 accommodating more logics.
 
@@ -320,7 +321,7 @@ inference rule
     \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
 where $\B$ stands for a set of relation atoms, and $\Gamma$ and
-$\Delta$ for sets of labelled formulas.
+$\Delta$ for multi-sets of labelled formulas.
 
 However,
 in this paper we are concerned with \emph{intuitionistic modal
@@ -357,7 +358,7 @@ these logics have certain shortcomings:
     \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
   \end{equation}
   have already been studied
-  in~\cite{Plotkin}.\todo{check: did they get that wrong in  \cite{Plotkin}?}
+  in~\cite{plotkin:stirling:86}.\todo{check: did they get that wrong in  \cite{plotkin:stirling:86}?}
 \item The correspondence between the syntax and the semantics is not
   as clean as one would expect. As only the $R$-relation (and not the
   $\le$-relation) of the frame is visible in an ordinary labelled
@@ -367,7 +368,7 @@ these logics have certain shortcomings:
     any world in that layer.}\todo{check terminology in Simpson} models, as
   already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
   and considered as a very unsatisfactory situation\todo{check what he
-    said exactly} (see also \cite{mar:str:indexed}).
+    said exactly} (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two issues we propose here to extend the
 notion of labelled sequent by also allowing relational atoms of the
@@ -390,7 +391,7 @@ Besides that, there is another pleasant observation to make about our
 system. Ordinary labelled sequent systems for intuitionistic modal
 logic are single-conclusion~\cite{simpson:phd}. The same is true for
 the corresponding nested sequent
-systems~\cite{str:fossacs13,mar:str:aiml}. It is possible to express
+systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
 Maehara style multiple-conclusion systems in nested
 sequents~\cite{kuz:str:maehara}, and therefore also in ordinary
 labelled sequents. However, also in these systems there are rules
@@ -403,9 +404,9 @@ we never delete information.\lutz{check, is this really the case?}
 
 \medskip
 
-This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cutelim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
+This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
 
-\todo{maybe paragraph on related work? cite Maffezioli, Naibo and Negri~\cite{Maffezioli}.}
+\todo{maybe paragraph on related work? cite Maffezioli, Naibo and Negri~\cite{maffezioli:etal:synthese13}.}
 
 
 \section*{Introduction(old version, to be deleted)}
@@ -588,40 +589,43 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 	if $\lb w \le \lb{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
-We write $w \Vdash a$ if $a \in V(w)$, and by definition, we always have $w \Vdash \top$ and never that $w \Vdash \bot$. 
+We write $\M, w \Vdash a$ if $a \in V(w)$, and by definition, we always have $\M, w \Vdash \top$ and never that $\M, w \Vdash \bot$. 
 %
 Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
-\begin{equation}
+$$
+\begin{array}{rcl}
 \label{eq:kripke}
-\parbox{30em}{%
-	$w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
+%\parbox{30em}{%
+
+	\M, \lb w \Vdash \fm{A \AND B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ and } \M, \lb w \Vdash \fm B\\
 	
-	$w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
+	\M, \lb w \Vdash \fm{A \OR B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ or } \M, \lb w \Vdash \fm B\\
+
+	\M, \lb w \Vdash \fm{A \IMP B} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ with } \futs w{w'}, \mbox{ if } \M, \lb{w'} \Vdash \fm A \mbox{ then } \M, \lb{w'} \Vdash \fm B\\
 	
-	$w \Vdash A \IMP B$ iff for all $\lb{w'}$ with $\futs w{w'}$, if $w' \Vdash A$ then $w' \Vdash B$
+	\M, \lb w \Vdash \fm{\BOX A} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ and } \lb u \mbox{ with } \futs w{w'} \mbox{ and } \accs {w'}u, \M, \lb u \Vdash \fm A \hfill \\ %$(\ast)$
 	
-	$w \Vdash \BOX A$ iff for all $\lb{w'}$ and $\lb u$ with $\futs w{w'}$ and $\accs {w'}u$, $u \Vdash A$ \hfill %$(\ast)$
-	
-	$w \Vdash \DIA A$ iff there exists a $u$ such that $\accs wu$ and $u \Vdash A$.
+	\M, \lb w \Vdash \fm{\DIA A} & \mbox{iff} & \mbox{there exists a } \lb u \mbox{ such that } \accs wu \mbox{ and } \M, \lb u \Vdash \fm A.
 	
 	%We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
-}
-\end{equation}
-\todo{fix typography}
+%}
+\end{array}
+$$
 
-We write $w \not\Vdash A$ if it is not the case that $w \Vdash A$, but contrarily to the classical case, we do not have $w \Vdash \neg A$ iff $w \Vdash A$ (since $\neg A$ is defined as $A \IMP \bot$).
+
+We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
 
 From the monotonicity of the valuation function $V$, we get a monotonicity property for the relation:
 \begin{proposition}(Monotonicity) 
-	For any formula $A$ and for $\lb w, \lb{w'} \in W$, if $\futs w{w'}$ and $w \Vdash A$, then $w' \Vdash A$.
+	For any formula $\fm A$ and for $\lb w, \lb{w'} \in W$, if $\futs w{w'}$ and $\M, \lb w \Vdash \fm A$, then $\M, \lb{w'} \Vdash \fm A$.
 \end{proposition}
 
 
 
 \begin{definition}
-	A formula $A$ is \emph{satisfied} in a model $\M = \langle W, \rel, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
+	A formula $\fm A$ is \emph{satisfied} in a model $\M = \langle W, \rel, \le, V \rangle$, if for all $\lb w \in W$ we have $\M, \lb w \Vdash \fm A$.
 	%
-	A formula $A$ is \emph{valid} in a frame $\F = \langle W, \rel, \le \rangle$, if for all valuations $V$, $A$ is satisfied in $\langle W, R, \le, V \rangle$.
+	A formula $\fm A$ is \emph{valid} in a frame $\F = \langle W, \rel, \le \rangle$, if for all valuations $V$, $\fm A$ is satisfied in $\langle W, R, \le, V \rangle$.
 \end{definition}
 
 
@@ -632,8 +636,8 @@ From the monotonicity of the valuation function $V$, we get a monotonicity prope
 
 Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
 
-\begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]\label{thm:plotkin}
-	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
+\begin{theorem}[Fischer-Servi~\cite{fischer-servi:84}, Plotkin and Stirling~\cite{plotkin:stirling:86}]\label{thm:plotkin}
+	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
 \todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions}
@@ -786,7 +790,7 @@ intended meaning is that the corresponing relation holds between the
 worlds $\lb x$ and $\lb y$. This is enough to define the notion of
 \emph{(labelled) sequent}, which is a triple $\lseq\B\Left\Right$,
 where $\B$ is a set of relation atoms, and $\Left$ and $\Right$ are
-sets of labelled formulas, all written as list, separated by commas.
+multi-sets of labelled formulas, all written as list, separated by commas.
 
 \begin{figure}[!t]
   \begin{center}
@@ -849,7 +853,7 @@ sets of labelled formulas, all written as list, separated by commas.
 
 Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
 We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
-Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
 \begin{equation}
   \label{eq:nomon}
   \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
@@ -861,7 +865,7 @@ Our starting point was the multiple-conlusion nested sequent system \emph{\`a la
 that are not sufficient for a complete system, and we will see below
 why. Before, let us first look at the rules $\rlabrn\IMP$ and
 $\rlabrn\BOX$. In the multiple-conlusion nested sequent system
-of~\cite{kuz:str:maehara}, these are the two rules that force
+of~\cite{str:2017maehara}, these are the two rules that force
 single-conclusion. This is the reason why in our system we need the
 $\le$ in the relational atoms; we need to go to the future of the
 current world.  In the Kripke-semantics in~\eqref{eq:kripke} the two
@@ -886,20 +890,9 @@ problems as contraction in a cut elimination proof. Hence, it is
 preferable to have a system in which this rule is admissible. This is
 the reason why we have monotonicity incorporated in the rules
 $\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
-instead of using the rules in~\eqref{eq:nomon}.
+instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of monotonicity in the Section~\ref{sec:mon}.
 
-\begin{theorem}
-  \label{thm:mon-adm}
-  The rule $\rn{mon}$ is admissible for system $\labIKp$.
-\end{theorem}
-
-For proving this theorem, we need a series of auxiliary lemmas.
-
-\todo{}
-
-\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
-  \todo{}
-\end{proof}
+\todo{I am not sure how to introduce the next lemma}
 
 \begin{lemma}
 	The following rule is admissible in $\labIKp$: 
@@ -907,91 +900,77 @@ For proving this theorem, we need a series of auxiliary lemmas.
 \end{lemma}
 
 \begin{proof}
-	By induction of the size of the formula $A$.
-	\begin{smallequation*}
-		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
-		\reducesto
-		\vlinf{\labrn{id}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+	By induction of the size of the formula $\fm A$.
+	\begin{itemize}
+		\item Atomic case
+		\begin{smallequation*}
+			%\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+			%\reducesto
+			\vlinf{\labrn{id}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+		\end{smallequation*}
+		
+		\item $\fm{A \AND B}$
+		%\begin{smallequation*}
+		%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{}
+		%	\reducesto
+		%\end{smallequation*}
+		\begin{smallequation*}
+			\vlderivation{
+				\vlin{\llabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
+					\vliin{\rlabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
+						\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
+							\vlhy{}
+						}
+					}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
 	\end{smallequation*}
-	\begin{smallequation*}
-		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{}
-		\reducesto
-	\end{smallequation*}
+	
+	\item $\fm{A \OR B}$
+	%\begin{smallequation*}
+	%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
+	%	\reducesto
+	%\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\llabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
-				\vliin{\rlabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
+			\vliin{\llabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
+				\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
 						\vlhy{}
 					}
-				}{
-				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+				}
+			}{
+			\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
+				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
 					\vlhy{}
 				}
 			}
 		}
 	}
-\end{smallequation*}
-
-\begin{smallequation*}
-	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
-	\reducesto
-\end{smallequation*}
-\begin{smallequation*}
-	\vlderivation{
-		\vliin{\llabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
-			\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
-				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
-					\vlhy{}
-				}
-			}
-		}{
-		\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
-			\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
-				\vlhy{}
-			}
-		}
-	}
-}
-\end{smallequation*}
-
-\begin{smallequation*}
-	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{}
-	\reducesto
-\end{smallequation*}
-\begin{smallequation*}\hspace*{-10em}
-	\vlderivation{
-		\vlin{\rlabrn\IMP}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
-			\vlin{trans}{}{\B, x \le y, y \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-				\vliin{\llabrn\IMP}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-					\vlin{refl}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
-						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
-							\vlhy{}
+	\end{smallequation*}
+	
+	\item $\fm{A \IMP B}$
+%	\begin{smallequation*}
+%		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{}
+%		\reducesto
+%	\end{smallequation*}
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\rlabrn\IMP}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
+				\vlin{\rn{trans}}{}{\B, x \le y, y \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+					\vliin{\llabrn\IMP}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+						\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+							\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+								\vlhy{}
+							}
 						}
-					}
-				}{
-				\vlin{refl}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-\end{smallequation*}
-
-\begin{smallequation*}
-	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{}
-	\reducesto
-\end{smallequation*}
-\begin{smallequation*}
-	\vlderivation{
-		\vlin{\rlabrn\BOX}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
-			\vlin{trans}{}{\B, x \le y, y \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
-				\vlin{\llabrn\BOX}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
-					\vlin{refl}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
-						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \rel w, w \le w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+					}{
+					\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
 							\vlhy{}
 						}
 					}
@@ -999,26 +978,49 @@ For proving this theorem, we need a series of auxiliary lemmas.
 			}
 		}
 	}
-\end{smallequation*}
+	\end{smallequation*}
 
-\begin{smallequation*}
-	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{}
-	\reducesto
-\end{smallequation*}
-\begin{smallequation*}
-	\vlderivation{
-		\vlin{\llabrn\DIA}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-			\vlin{\color{red}{F_2}}{}{\B, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
-						\vlhy{}
+	\item $\fm{\BOX A}$
+%	\begin{smallequation*}
+%		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{}
+%		\reducesto
+%	\end{smallequation*}
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\rlabrn\BOX}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
+				\vlin{\rn{trans}}{}{\B, x \le y, y \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+					\vlin{\llabrn\BOX}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+						\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+							\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \rel w, w \le w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+								\vlhy{}
+							}
+						}
 					}
 				}
 			}
 		}
-	}
-\end{smallequation*}
-
+	\end{smallequation*}
+	
+	\item $\fm{\DIA A}$
+%	\begin{smallequation*}
+%		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{}
+%		\reducesto
+%	\end{smallequation*}
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\llabrn\DIA}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+					\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+						\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+							\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	\end{smallequation*}
+	\end{itemize}
+	
 \end{proof}
 
 In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
@@ -1054,6 +1056,24 @@ Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The impl
 the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication
 \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Admissibility of monotonicity}\label{sec:mon}
+
+\begin{theorem}
+	\label{thm:mon-adm}
+	The rule $\rn{mon}$ is admissible for system $\labIKp$.
+\end{theorem}
+
+For proving this theorem, we need a series of auxiliary lemmas.
+
+\todo{}
+
+\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
+	\todo{}
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1840,7 +1860,16 @@ If it does we rewrite it with a fresh variable $v$ first.
 \end{proof}
 
 \begin{proof} [Proof of soundness]
-	We need to prove that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. As the proof is similar for each of the rules, we prove the soundness of some particular rules:
+	We need to prove that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. 
+	
+	In order to obtain the proof, let us introduce a definition:
+	
+	\begin{definition}
+		
+	\end{definition}
+	
+	
+	As the proof is similar for each of the rules, we prove the soundness of some particular rules:
 	
 	\begin{itemize}
 		\item Rule $\llabrn\BOX$: 
@@ -1874,11 +1903,11 @@ If it does we rewrite it with a fresh variable $v$ first.
 		then there exists a proof 
 		$\vlderivation{\vlhtr{\DD^{\bm\BOT}}{\B, \Left \SEQ \Right}}$
 		
-		\item 
-		If there exists a proof 
-		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\TOP} \SEQ \Right}}$ 
-		then there exists a proof 
-		$\vlderivation{\vlhtr{\DD^{\bm\TOP}}{\B, \Left \SEQ \Right}}$
+	%	\item 
+	%	If there exists a proof 
+	%	$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\TOP} \SEQ \Right}}$ 
+	%	then there exists a proof 
+	%	$\vlderivation{\vlhtr{\DD^{\bm\TOP}}{\B, \Left \SEQ \Right}}$
 		
 		\item 
 		If there exists a proof 
@@ -1894,6 +1923,9 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \begin{lemma}\label{lem:inv}\hbox{}\quad
 	\begin{enumerate}
+		\item
+		If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
+		
 		\item
 		If there exists a proof 
 		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
@@ -2028,7 +2060,7 @@ then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Extensions}
+\section{Extensions}\label{sec:ext}
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
