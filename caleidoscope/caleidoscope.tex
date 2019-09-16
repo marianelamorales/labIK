@@ -1065,6 +1065,126 @@ Section~\ref{sec:cut-elim}, and finally, the implication
 
 \section{Completeness}\label{sec:completeness}
 
+\begin{theorem}
+	For any formula $A$. If $A$ is a theorem of $\IK$ then $A$ is provable in $\labIKp +\labrn{cut}$.
+\end{theorem}
+
+\begin{proof}
+	In order to prove completeness, we present a syntactic completeness proof with respect the Hilbert system which means that we prove all Hilbert axioms using the rules from our system $\labIKp$: we give a proof for all the axioms of propositional intuionistic logic, for the five variants of $\mathsf{k}$ axiom from the intuitionistic syntax and finally, we simulate the necessitation rule and modus ponens.
+	
+	As we mentioned, in the course of the proof, we have to derive the five $\kax$ axioms. In the derivation of $\kax[1]$ is illustrated the need of having the rules corresponding to $\rn{refl}$ and $\rn{trans}$ in the system:
+	
+	\kone
+	
+	%%%
+	We can also show that the rule $\rn{refl}$ is needed in the derivation of $\kax[2]$:
+	
+	\ktwo
+	
+	%%%%
+	In order to continue our proof for the five variants of $\kax$, we display the proof for the axiom $\kax[3]$ which also illustrates the need of having the rule corresponding to $\rn{refl}$:
+	
+	
+	\begin{center}
+		
+		$\vlderivation {
+			\vlin{\rlabrn{\IMP}}
+			{}
+			{\Rightarrow \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
+			{\vlin {\llabrn{\DIA}}
+				{}
+				{x \le y, \labels{y}{\DIA (A \OR B)} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+				{\vliin{\llabrn{\OR}}{}{x \le y, yRz, \labels{z}{A \OR B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}{\vlhy{\circledast \hspace{40mm}}}{\vlhy{\star}}}}
+		}$
+		
+		\bigskip
+		
+	\end{center}
+	
+	After applying the rule $\llabrn{\OR}$, our proof continues with two premises. On one side, the premise that follows from $\circledast$:
+	
+	\bigskip
+	\begin{center}
+		$\vlderivation{\vlin{\llabrn{\OR}}{}{\circledast}{\vlin {\rlabrn{\OR}}
+				{}
+				{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+				{\vlin {\rlabrn{\DIA}}
+					{}
+					{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+					{\vlin {\rn{refl}}
+						{}
+						{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+						{\vlin {\rn{id}}
+							{}
+							{x \le y, z \le z, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+							{\vlhy {}}}}}}}$
+	\end{center}	
+	And on the other hand, we have that the derivation continues from $\star$ like this:
+	
+	\begin{center}
+		$\vlderivation{\vlin {\llabrn{\OR}}
+			{}
+			{\star}
+			{\vlin {\rlabrn{\OR}}
+				{}
+				{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+				{\vlin {\rlabrn{\DIA}}
+					{}
+					{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+					{\vlin {\rn{refl}}
+						{}
+						{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+						{\vlin {\rn{id}}
+							{}
+							{x \le y, z \le z, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+							{\vlhy {}}}}}}}$
+	\end{center}
+\end{proof}
+
+The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame conditions $\rn{F_1}$:
+
+\kfour
+
+To complete the proof of the five variants of $\kax$ we still have to see that we can prove $\kax[5]$:
+
+\begin{center}
+	
+	$\vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{}
+		{\Rightarrow \labels{x}{\DIA \BOT \IMP \BOT}}
+		{\vlin {\llabrn{\DIA}}
+			{}
+			{x \le y, \labels{y}{\DIA \BOT} \Rightarrow \labels{y}{\BOT}}
+			{\vlin {\llabrn{\BOT}}
+				{}
+				{x \le y, yRz, \labels{z}{\BOT} \Rightarrow \labels{y}{\BOT}}
+				{\vlhy {}}}}
+	}$
+	
+\end{center}
+
+As we mentioned, in the course of the proof of the theorem, we have to give a proof for all the axioms of propositional intuitionistic logic. As an example, we display the proof of the axiom $\rn{AND}$-$\rn{2}$: $ \fm{A \AND B \IMP B}$:
+
+\begin{center}
+	$\vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{}
+		{\Rightarrow \labels{x}{A \AND B \IMP B}}
+		{\vlin {\llabrn{\AND}}
+			{}
+			{x \le y, \labels{y}{A \AND B} \Rightarrow \labels{y}{B}}
+			{\vlin {\rn{refl}}
+				{}
+				{x \le y, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+				{\vlin {\rn{id}}
+					{}
+					{x \le y, y \le y, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+					{\vlhy {}}}}}
+	}$
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Cut Admissibility}\label{sec:cut-elim}
 
