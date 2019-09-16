@@ -589,7 +589,7 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 	if $\lb w \le \lb{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
-We write $\M, w \Vdash a$ if $a \in V(w)$, and by definition, we always have $\M, w \Vdash \top$ and never that $\M, w \Vdash \bot$. 
+We write $\M, \lb w \Vdash a$ if $a \in V(w)$, and by definition, we always have $\M, w \Vdash \top$ and never that $\M, w \Vdash \bot$. 
 %
 Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
 $$
@@ -789,7 +789,7 @@ $\accs xy$ or $\futs xy$ where $\lb x$ and $\lb y$ are labels and the
 intended meaning is that the corresponing relation holds between the
 worlds $\lb x$ and $\lb y$. This is enough to define the notion of
 \emph{(labelled) sequent}, which is a triple $\lseq\B\Left\Right$,
-where $\B$ is a set of relation atoms, and $\Left$ and $\Right$ are
+where $\B$ is a set of relational and pre-order atoms, and $\Left$ and $\Right$ are
 multi-sets of labelled formulas, all written as list, separated by commas.
 
 \begin{figure}[!t]
@@ -797,7 +797,7 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 	\fbox{
 %	\begin{minipage}{.95\textwidth}
 	\begin{tabular}{c@{\quad}c}
-		$\vlinf{\rn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
+		$\vlinf{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
 		&
 		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
 		%\quad
@@ -812,36 +812,36 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+		$\vlinf{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
- 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, x \le y, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 		$\vliinf{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \futs xy, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}$ 
 % 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
  		}
 		\\\\
-		$\vlinf{\llabrn\BOX}{}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, x \le y, yRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
+		$\vlinf{\llabrn\BOX}{}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, x \le y, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, x \le y, y \rel z, \Left \SEQ \Right, \labels{z}{A}}$
+		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}$
 		\\\\
-		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}$
+		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
+		$\vlinf{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
 		\\
 		\multicolumn{2}{c}{
 		$\mbox{\hbox to .9\linewidth{\dotfill}}$
 		}
 		\\
-		$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, x\le x, \Left \SEQ \Right}$
+		$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}$
 		&
-		$\vlinf{\rn{trans}}{}{\B, x \le y, y \le z, \Left \SEQ \Right}{\B, x \le y, y \le z, x \le z, \Left \SEQ \Right}$
+		$\vlinf{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, xRy, y \le z, \Left \SEQ \Right}{\B, xRy, y \le z, x \le u, uRz, \Left \SEQ \Right}$
+		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, xRy,x \le z, \Left \SEQ \Right}{\B, xRy, x \le z, y \le u, zRu, \Left \SEQ \Right }$		
+		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
 		}
 	\end{tabular}		
 %\end{minipage}
@@ -1054,8 +1054,7 @@ equivalence of \ref{i} and \ref{iv} has already been stated in
 Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The implication
 \ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
 the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
-Section~\ref{sec:cut-elim}, and finally, the implication
-\ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
+Section~\ref{sec:cut-elim}, and finally, the implication \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1069,7 +1068,7 @@ Section~\ref{sec:cut-elim}, and finally, the implication
 
 For proving this theorem, we need a series of auxiliary lemmas.
 
-\todo{}
+\todo{move lemma \ref{lem:inv}}
 
 \begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
 	\todo{}
@@ -1080,11 +1079,31 @@ For proving this theorem, we need a series of auxiliary lemmas.
 
 \section{Soundness}\label{sec:soundness}
 
+In order to prove the implication \ref{iii}$\implies$\ref{iv} from Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. 
+
+In order to obtain the proof, let us introduce the next definitions:
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model. We say that $\f$ is an \emph{assignment function} such that $\f : Labels \rightarrow W$.
+\end{definition} 
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \Rightarrow \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \Rightarrow \Delta$ if there exists $\f$ such that:
+	\begin{enumerate}
+		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$.
+		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
+		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
+	\end{enumerate}
+	then for all $\labels{z}{B} \in \Delta$, we have that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
+\end{definition}
+
+Following the definitions, we display the proof for some rules since it is similar for each rule. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Completeness}\label{sec:completeness}
 
+\todo{an introduction? do not repeat the theorem?}
 \begin{theorem}
 	For any formula $A$. If $A$ is a theorem of $\IK$ then $A$ is provable in $\labIKp +\labrn{cut}$.
 \end{theorem}
@@ -1159,7 +1178,6 @@ For proving this theorem, we need a series of auxiliary lemmas.
 							{x \le y, z \le z, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
 							{\vlhy {}}}}}}}$
 	\end{center}
-\end{proof}
 
 The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame conditions $\rn{F_1}$:
 
@@ -1203,6 +1221,8 @@ As we mentioned, in the course of the proof of the theorem, we have to give a pr
 					{\vlhy {}}}}}
 	}$
 \end{center}
+
+\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1923,8 +1943,8 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \begin{lemma}\label{lem:inv}\hbox{}\quad
 	\begin{enumerate}
-		\item
-		If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
+		%\item
+		%If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
 		
 		\item
 		If there exists a proof 
@@ -1956,6 +1976,8 @@ If it does we rewrite it with a fresh variable $v$ first.
 		
 	\end{enumerate}
 \end{lemma}
+
+\todo{add missing cases}
 
 \begin{proof}
 In each case, we reason by induction on the height of $\DD$.
