@@ -294,12 +294,12 @@
 
 \section{Introduction}\label{sec:intro}
 
-Since their introduction in the 1980s by Gabbay~\cite{Gabbay},
+Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
 \emph{labelled proof calculi} have been widely used by proof theorist
 to give sound, complete and cut-free deductive system to a broad range
 of logics. Unlike so-called \emph{internal calculi}, like
-hyper-sequents~\cite{avron} or nested
-sequents~\cite{kashima,brunnler,pog} or 2-sequents~\cite{masini},
+hyper-sequents~\cite{avron:elc96} or nested
+sequents~\cite{kashima,brunnler,pog} or 2-sequents~\cite{masini:apal92},
 labelled calculi have the advantage of beeing more uniform and
 accommodating more logics.
 
@@ -320,7 +320,7 @@ inference rule
     \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
 where $\B$ stands for a set of relation atoms, and $\Gamma$ and
-$\Delta$ for sets \lutz{or multisets?} of labelled formulas.
+$\Delta$ for sets of labelled formulas.
 
 However,
 in this paper we are concerned with \emph{intuitionistic modal
@@ -396,7 +396,7 @@ sequents~\cite{kuz:str:maehara}, and therefore also in ordinary
 labelled sequents. However, also in these systems there are rules
 ($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
 premise, even though this is not the case in labelled
-systems~\cite{negri:xx} or nested sequents~\cite{fitting:xx} for
+systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83} for
 intuitionistic logic. Our system eliminates this
 discrepancy. Consequently, every rule in our system is invertible, as
 we never delete information.\lutz{check, is this really the case?}
@@ -547,12 +547,12 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 \end{itemize}
 
 The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system $\break \rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$. However this would give strictly no information on the behaviour of the $\DIA$ modality.
-It seems that Fitch \cite{Fitch} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{Wijekesera:1990} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. The systems are well-designed for some applications for example to analyse some type systems \cite{Benton:1998} or to reason about states of a machine under partial information \cite{WijesekeraNerode:2005}. However, they cannot satisfy the logicians as the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
+It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. The systems are well-designed for some applications for example to analyse some type systems \cite{benton:etal:jfp98} or to reason about states of a machine under partial information \cite{wijesekera:nerode:apal05}. However, they cannot satisfy the logicians as the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
 
-The axiomatisation that is now generally accepted as \emph{intuitionistic modal logic} denoted by $\IK$ was given by Plotkin and Stirling \cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi \cite{Fischer} and by Ewald \cite{Ewald} in the case of intuitionistic tense logic. It is taken to be    $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$ $\rn{+}$ $\kax[3]$ $\rn{+}$ $\kax[4]$  $\rn{+}$ $\kax[5]$.
+The axiomatisation that is now generally accepted as \emph{intuitionistic modal logic} denoted by $\IK$ was given by Plotkin and Stirling \cite{plotkin:stirling:86} and is equivalent to the one proposed by Fischer-Servi \cite{fischer-servi:84} and by Ewald \cite{ewald:jsl86} in the case of intuitionistic tense logic. It is taken to be    $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$ $\rn{+}$ $\kax[3]$ $\rn{+}$ $\kax[4]$  $\rn{+}$ $\kax[5]$.
 
 
-The Kripke semantics for $\IK$ was first defined by Fischer-Servi~\cite{Fischer}.
+The Kripke semantics for $\IK$ was first defined by Fischer-Servi~\cite{fischer-servi:84}.
 %
 It combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
 
@@ -1049,7 +1049,7 @@ admissibil\texttt{}ity of $\labIKp$ in the following Theorem:
 
 The proof of this theorem is the topic of the following sections. The
 equivalence of \ref{i} and \ref{iv} has already been stated in
-Theorem~\ref{thm:plotkin}~\cite{Fischer,Plotkin}. The implication
+Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The implication
 \ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
 the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication
@@ -1199,16 +1199,16 @@ As we mentioned, in the course of the proof of the theorem, we have to give a pr
 
 %%
 %This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
-Once possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged.  Labelled deduction has been more generally proposed by Gabbay in the 80's as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics \cite{Gabbay}. For modal logics it can also take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson \cite{Simpson}, Vigano \cite{Vigano}, and Negri\cite{Negri}. These formalisms make explicit use not only of labels, but also of relational atoms (which, to our knowledge, are not commonly used in tableaux systems, except for the pioneering work of Nerode \cite{Nerode}).
+Once possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged.  Labelled deduction has been more generally proposed by Gabbay in the 80's as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics \cite{gabbay:96}. For modal logics it can also take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson \cite{simpson:phd}, Vigano \cite{vigano:00}, and Negri\cite{negri:jpl2005}. These formalisms make explicit use not only of labels, but also of relational atoms (which, to our knowledge, are not commonly used in tableaux systems, except for the pioneering work of Nerode \cite{nerode:91}).
 
-Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{Simpson}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{Strassburger} (for a survey see~\cite[Chap.~3]{Marin}).
+Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{simpson:phd}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{Bierman} or nested sequent systems~\cite{strassburger:fossacs13} (for a survey see~\cite[Chap.~3]{Marin}).
 
-Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent. Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
+Simpson~\cite{simpson:phd} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent. Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
 %
 
 Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
 %
-The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{Maffezioli}. 
+The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{maffezioli:etal:synthese13}. 
 %
 
 \begin{definition}
@@ -1218,7 +1218,7 @@ In the next section, we present the system (called $\labIKp$) that we obtained t
 
 \section{Building $\labIKp$}
 
-As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{Negri}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system is formed from formulas of the form $\labels{x}{A}$ where $A$ is an intuitionistic modal formula, relational atoms $xRy$ ($R$ is the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and preorder atoms of the form $x \le y$. In this section, we study each rule of the system $\labIKp$ (Figure \ref{fig:labIKp}) in details. 
+As we mentioned, a labelled sequent calculus for classical modal logic was introduced in \cite{negri:jpl2005}. In our work, we show an extension of Negri's system in order to capture intuitionistic modal logics. This new system is formed from formulas of the form $\labels{x}{A}$ where $A$ is an intuitionistic modal formula, relational atoms $xRy$ ($R$ is the modal accesibility relation) where $x$, $y$ range over a set of variables called \emph{labels} and preorder atoms of the form $x \le y$. In this section, we study each rule of the system $\labIKp$ (Figure \ref{fig:labIKp}) in details. 
 
 \subsection{Frame conditions}
 %In order to capture intuitionistic modal logics, we need to answer the requirements of the de
@@ -1402,7 +1402,7 @@ The rule for implication right is explained below:
 %
 Using the rules that are presented in the previous section, we obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic following the formalism of labelled sequents. 
 %
-Most rules are similar to the ones of Simpson~\cite{Simpson}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
+Most rules are similar to the ones of Simpson~\cite{simpson:phd}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
 In particular, the rules introducing the $\BOX$-operator correspond to the definition \ref{model}.
 %
@@ -2032,14 +2032,14 @@ then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
 For example, you can add the following rule:
 $$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
 to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
 $\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
-In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
 For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
 %\begin{center}
@@ -2050,7 +2050,7 @@ Incorporating the preorder symbol into the syntax of our sequents allows us to a
 $$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
 
 
-Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
 %
 These systems enjoy cut-elimination via usual arguments. Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
 
