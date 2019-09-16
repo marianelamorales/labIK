@@ -112,6 +112,7 @@
 
 %%% General
 \input{macros}
+\input{kax_macros}
 %\newcommand{\B}{\Digamma}
 \newcommand{\B}{\mathcal{R}}
 %\newcommand{\B}{\Xi}
@@ -516,10 +517,9 @@ Starting with a set $\mathcal{A}$ of atomic propositions, denoted $a$, modal for
 %
 $$
 A \coloncolonequals
-a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
+a \mid A \AND A \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
 $$
 %
-\lutz{why do we have $\TOP$?}
 
 Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
 %%
@@ -796,8 +796,8 @@ sets of labelled formulas, all written as list, separated by commas.
 		$\vlinf{\rn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
 		&
 		$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
-		\quad
-		$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
+		%\quad
+		%$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
 		\\\\
 		$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
 		&
@@ -812,7 +812,7 @@ sets of labelled formulas, all written as list, separated by commas.
 		}
 		\\\\
 		\multicolumn{2}{c}{
- 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, x \le y, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 		$\vliinf{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, x \le y, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}$ 
 % 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
  		}
 		\\\\
@@ -849,7 +849,7 @@ sets of labelled formulas, all written as list, separated by commas.
 
 Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
 We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
-Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$ \todo{$\TOP$ yes/no}, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{kuz:str:maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
 \begin{equation}
   \label{eq:nomon}
   \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
@@ -901,6 +901,126 @@ For proving this theorem, we need a series of auxiliary lemmas.
   \todo{}
 \end{proof}
 
+\begin{lemma}
+	The following rule is admissible in $\labIKp$: 
+	$\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$
+\end{lemma}
+
+\begin{proof}
+	By induction of the size of the formula $A$.
+	\begin{smallequation*}
+		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+		\reducesto
+		\vlinf{\labrn{id}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+	\end{smallequation*}
+	\begin{smallequation*}
+		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{}
+		\reducesto
+	\end{smallequation*}
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\llabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
+				\vliin{\rlabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
+						\vlhy{}
+					}
+				}{
+				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+					\vlhy{}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
+	\reducesto
+\end{smallequation*}
+\begin{smallequation*}
+	\vlderivation{
+		\vliin{\llabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
+			\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
+				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
+					\vlhy{}
+				}
+			}
+		}{
+		\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
+			\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+				\vlhy{}
+			}
+		}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{}
+	\reducesto
+\end{smallequation*}
+\begin{smallequation*}\hspace*{-10em}
+	\vlderivation{
+		\vlin{\rlabrn\IMP}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
+			\vlin{trans}{}{\B, x \le y, y \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+				\vliin{\llabrn\IMP}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+					\vlin{refl}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+							\vlhy{}
+						}
+					}
+				}{
+				\vlin{refl}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{}
+	\reducesto
+\end{smallequation*}
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\rlabrn\BOX}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
+			\vlin{trans}{}{\B, x \le y, y \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+				\vlin{\llabrn\BOX}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+					\vlin{refl}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \rel w, w \le w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+							\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{}
+	\reducesto
+\end{smallequation*}
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\llabrn\DIA}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\color{red}{F_2}}{}{\B, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+
+\end{proof}
+
 In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
 \begin{equation}
   \label{eq:cut}
@@ -910,7 +1030,7 @@ In the following sections, we will show that the system $\labIKp$ is sound and c
     \lseq\B{\Left,\labels{z}{C}}{\Right}}
 \end{equation}
 Then we can summarize soundness and completeness, and cut
-admissibility of $\labIKp$ in the following Theorem:
+admissibil\texttt{}ity of $\labIKp$ in the following Theorem:
 
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
@@ -931,7 +1051,7 @@ The proof of this theorem is the topic of the following sections. The
 equivalence of \ref{i} and \ref{iv} has already been stated in
 Theorem~\ref{thm:plotkin}~\cite{Fischer,Plotkin}. The implication
 \ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
-the implication~\ref{ii}$\implies$\ref{iii} is shown in
+the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication
 \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
 
@@ -943,10 +1063,8 @@ Section~\ref{sec:cut-elim}, and finally, the implication
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Completness}\label{sec:completeness}
+\section{Completeness}\label{sec:completeness}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Cut Admissibility}\label{sec:cut-elim}
 
@@ -1219,9 +1337,10 @@ As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an e
 
 The proof is a careful adaptation of standard techniques.
 %
-In particular, in order to prove (i) $\rightarrow$ (ii), we present a syntactic completeness proof with respect the Hilbert system which means that we prove all Hilbert axioms using the rules from our system $\labIKp$: we give a proof for all the axioms of propositional intuionistic logic, for the five variants of $\mathsf{k}$ axiom from the intuitionistic syntax and finally, we simulate the necesssitation rule and modus ponens. As we mentioned, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%In particular, in order to prove (i) $\rightarrow$ (ii), we present a syntactic completeness proof with respect the Hilbert system which means that we prove all Hilbert axioms using the rules from our system $\labIKp$: we give a proof for all the axioms of propositional intuionistic logic, for the five variants of $\mathsf{k}$ axiom from the intuitionistic syntax and finally, we simulate the necesssitation rule and modus ponens. As we mentioned, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
 %
-As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
+%As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $\rn{F_1}$ in the system.
+\bigskip
 
 \vspace*{-.9cm}
 $$
@@ -1268,7 +1387,7 @@ Note that our system offers only an atomic version of the identity rule, though 
 %
 We therefore have to show that such a rule is admissible in our system.
 %
-As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$. The other cases are standard.
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $\rn{F_2}$. The other cases are standard.
 
 \vspace*{-.5cm}
 %\begin{example}
@@ -1291,8 +1410,6 @@ $
 $$
 %\end{example}
 
-\todo{Fix the size of the next proof}
-\marianela{I will do it at the end when we have the format that we want to submit}
 \begin{proof}[Proof of \ref{ii} $\rightarrow$ \ref{iii}]
 	
 	By induction on number of cuts + (rank,height) of the left-most top-most cut.
@@ -1614,7 +1731,8 @@ If it does we rewrite it with a fresh variable $v$ first.
 			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A} \Rightarrow \Right$.}
 		\end{center}
 		\lutz{we need to define what that means $\M\Vdash$sequent}
-                
+        \marianela{working on that}
+        
 		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\llabrn\BOX$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, \break yRz, \labels{x}{\BOX A} \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$.
 		
 		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.\lutz{that is unclear}
