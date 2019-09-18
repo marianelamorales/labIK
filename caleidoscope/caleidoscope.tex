@@ -1183,7 +1183,7 @@ Following the definitions, we display the proof for some rules since it is simil
 where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 	
 	%%%%
-	In order to continue our proof for the five variants of $\kax$, we display the proof for the axiom $\kax[3]$ which also illustrates the need of having the rule corresponding to $\rn{refl}$:
+	In order to continue our proof for the five variants of $\kax$, we display the proof for the axiom $\kax[3]$: %which also illustrates the need of having the rule corresponding to $\rn{refl}$:
 	
 	
 	\begin{center}
@@ -1201,7 +1201,7 @@ where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 						{\vlin {\rlabrn{\DIA}}
 							{}
 							{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-							{\vlin {\color{red}{\rn{refl}}}
+							{\vlin {\rn{refl}}
 								{}
 								{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
 								{\vlin {\rn{id}}
@@ -1213,7 +1213,7 @@ where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 						{\vlin {\rlabrn{\DIA}}
 							{}
 							{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-							{\vlin {\color{red}{\rn{refl}}}
+							{\vlin {\rn{refl}}
 								{}
 								{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
 								{\vlin {\rn{id}}
@@ -1227,9 +1227,56 @@ where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 	\end{center}
 	
 
-The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame conditions $\rn{F_1}$:
+The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame condition $\rn{F_1}$:
 
-\kfour
+\begin{center}
+	$\vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{\lb y \mbox{ fresh}}
+		{\Rightarrow \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
+		{\vlin {\rlabrn{\BOX}}
+			{\lb z, \lb w \mbox{ fresh}}
+			{\futs xy, \labels{y}{\DIA A \IMP \BOX B} \Rightarrow \labels{y}{\BOX (A \IMP B)}}
+			{\vlin {\rlabrn{\IMP}}
+				{\lb u \mbox{ fresh}}
+				{\futs xy, \futs yz, \accs zw, \labels{y}{\DIA A \IMP \BOX B} \Rightarrow \labels{w}{A \IMP B}}
+				{\vlin {\color{red}{\rn{F_1}}}
+					{}
+					{\futs xy, \futs yz, \futs wu, \accs zw, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+					{\vlin {\rn{trans}}
+						{}
+						{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+						{\vliin {\llabrn{\IMP}}
+							{}
+							{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+							{\vlhy{\circledast  \hspace{75mm}}}
+							{\vlhy{\star}}}}}}}
+	}$
+	
+\end{center}
+
+
+The derivation continues as the result of applying the rule $\llabrn{\IMP}$. From this rule we obtain two trees:
+
+On one side, the derivation that follows from $\circledast$:
+
+\begin{center}
+	
+	$
+	\vlderivation{
+		\vlin{\llabrn{\IMP}}{}{\circledast}{\vlin {\rlabrn{\DIA}}
+			{}
+			{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}}
+			{\vlin {\rn{refl}}
+				{}
+				{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+				{\vlin {\rn{id}}
+					{}
+					{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \futs uu, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+					{\vlhy {}}}}}
+	}$
+\end{center}
+
 
 To complete the proof of the five variants of $\kax$ we still have to see that we can prove $\kax[5]$:
 
@@ -1241,10 +1288,10 @@ To complete the proof of the five variants of $\kax$ we still have to see that w
 		{\Rightarrow \labels{x}{\DIA \BOT \IMP \BOT}}
 		{\vlin {\llabrn{\DIA}}
 			{}
-			{x \le y, \labels{y}{\DIA \BOT} \Rightarrow \labels{y}{\BOT}}
+			{\futs xy, \labels{y}{\DIA \BOT} \Rightarrow \labels{y}{\BOT}}
 			{\vlin {\llabrn{\BOT}}
 				{}
-				{x \le y, yRz, \labels{z}{\BOT} \Rightarrow \labels{y}{\BOT}}
+				{\futs xy, \accs yz, \labels{z}{\BOT} \Rightarrow \labels{y}{\BOT}}
 				{\vlhy {}}}}
 	}$
 	
@@ -1259,16 +1306,20 @@ As we mentioned, in the course of the proof of the theorem, we have to give a pr
 		{\Rightarrow \labels{x}{A \AND B \IMP B}}
 		{\vlin {\llabrn{\AND}}
 			{}
-			{x \le y, \labels{y}{A \AND B} \Rightarrow \labels{y}{B}}
+			{\futs xy, \labels{y}{A \AND B} \Rightarrow \labels{y}{B}}
 			{\vlin {\rn{refl}}
 				{}
-				{x \le y, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+				{\futs xy, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
 				{\vlin {\rn{id}}
 					{}
-					{x \le y, y \le y, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+					{\futs xy, \futs yy, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
 					{\vlhy {}}}}}
 	}$
 \end{center}
+
+\todo{I do not know how to close the theorem}
+
+As we mentioned, in order to conclude the proof of the Theorem~\ref{thm:cutfree-compl} we simulate the necessitation rule and modus ponens.
 
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
