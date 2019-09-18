@@ -1079,13 +1079,13 @@ In order to obtain the proof, let us introduce the next definitions:
 \end{definition} 
 
 \begin{definition}
-	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \Rightarrow \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \Rightarrow \Delta$ if there exists $\f$ such that:
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \Rightarrow \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \Rightarrow \Delta$ if for all $\f$ such that:
 	\begin{enumerate}
 		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$.
 		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
 		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
 	\end{enumerate}
-	then for all $\labels{z}{B} \in \Delta$, we have that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
+	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
 \end{definition}
 
 Following the definitions, we display the proof for some rules since it is similar for each rule. 
@@ -1096,7 +1096,7 @@ Following the definitions, we display the proof for some rules since it is simil
 
 \todo{an introduction? do not repeat the theorem?}
 \begin{theorem}
-	For any formula $A$. If $A$ is a theorem of $\IK$ then $A$ is provable in $\labIKp +\labrn{cut}$.
+	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK$ then $\fm A$ is provable in $\labIKp +\labrn{cut}$.
 \end{theorem}
 
 \begin{proof}
@@ -1104,12 +1104,83 @@ Following the definitions, we display the proof for some rules since it is simil
 	
 	As we mentioned, in the course of the proof, we have to derive the five $\kax$ axioms. In the derivation of $\kax[1]$ is illustrated the need of having the rules corresponding to $\rn{refl}$ and $\rn{trans}$ in the system:
 	
-	\kone
+		\begin{center}
+			$\vlderivation{
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\Rightarrow \labels{x}{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
+				{\vlin {\rlabrn{\IMP}}
+					{\lb z \mbox{ fresh}}
+					{\futs xy, \labels{y}{\BOX(A \IMP B)} \Rightarrow \labels{y}{\BOX A \IMP \BOX B}}
+					{\vlin {\rlabrn{\BOX}}
+						{\lb w, \lb u \mbox{ fresh}}
+						{\futs xy, \futs yz, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A} \Rightarrow \labels{z}{\BOX B}}
+						{\vlin {\llabrn{\BOX}}
+							{}
+							{\futs xy, \futs yz, \futs zw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A} \Rightarrow \labels{u}{B}}
+							{\vlin {\color{red}\rn{trans}}
+								{}
+								{\futs xy, \futs yz, \futs zw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+								{\vlin {\llabrn{\BOX}}
+									{}
+									{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}}
+										{\vliin{\llabrn{\IMP}}
+											{}
+											{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}}
+											{\vlin {\rn{id}}
+												{}
+												{G, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}, \labels{u}{A}}
+												{\vlhy {}}}
+											{\vlin {\rn{id}}
+												{}
+												{G, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+												{\vlhy {}}}}}}}}}}
+			}$
+		\end{center}
+		
+		where $G$ is equal to: $\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu$.
 	
 	%%%
 	We can also show that the rule $\rn{refl}$ is needed in the derivation of $\kax[2]$:
 	
-	\ktwo
+\begin{center}
+	$\vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{\lb y \mbox{ fresh}}
+		{ \Rightarrow \labels{x}{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
+		{\vlin {\rlabrn{\IMP}}
+			{\lb z \mbox{ fresh}}
+			{ \futs xy, \labels{y}{\BOX (A \IMP B)} \Rightarrow \labels{y}{(\DIA A \IMP \DIA B)}}
+			{\vlin {\llabrn{\DIA}}
+				{\lb u \mbox{ fresh}}
+				{\futs xy, \futs yz, \labels{y}{\BOX (A \IMP B)}, \labels{z}{\DIA A} \Rightarrow \labels{z}{\DIA B}}
+				{\vlin{\rlabrn{\DIA}}
+					{}
+					{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A} \Rightarrow \labels{z}{\DIA B}}
+					{\vlin {\llabrn{\BOX}}
+						{}
+						{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+						{\vlin {\color{red}\rn{refl}}
+							{}
+							{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+							{\vliin{\llabrn{\IMP}}
+								{}
+								{\futs xy, \futs yz, \accs zu, \futs uu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+								{\vlin {\rn{id}}
+									{}
+									{T, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}
+									{\vlhy {}}}
+								{\vlin {\rn{id}}
+									{}
+									{T, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+									{\vlhy {}}}								}}}}}}
+	}$
+\end{center}
+
+where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 	
 	%%%%
 	In order to continue our proof for the five variants of $\kax$, we display the proof for the axiom $\kax[3]$ which also illustrates the need of having the rule corresponding to $\rn{refl}$:
@@ -1123,52 +1194,38 @@ Following the definitions, we display the proof for some rules since it is simil
 			{\Rightarrow \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
 			{\vlin {\llabrn{\DIA}}
 				{}
-				{x \le y, \labels{y}{\DIA (A \OR B)} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
-				{\vliin{\llabrn{\OR}}{}{x \le y, yRz, \labels{z}{A \OR B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}{\vlhy{\circledast \hspace{40mm}}}{\vlhy{\star}}}}
+				{\futs xy, \labels{y}{\DIA (A \OR B)} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+				{\vliin{\llabrn{\OR}}{}{\futs xy, \accs yz, \labels{z}{A \OR B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}{\vlin {\rlabrn{\OR}}
+						{}
+						{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+						{\vlin {\rlabrn{\DIA}}
+							{}
+							{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+							{\vlin {\color{red}{\rn{refl}}}
+								{}
+								{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+								{\vlin {\rn{id}}
+									{}
+									{\futs xy, \futs zz, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+									{\vlhy {}}}}}}{\vlin {\rlabrn{\OR}}
+						{}
+						{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+						{\vlin {\rlabrn{\DIA}}
+							{}
+							{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+							{\vlin {\color{red}{\rn{refl}}}
+								{}
+								{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+								{\vlin {\rn{id}}
+									{}
+									{\futs xy, \futs zz, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+									{\vlhy {}}}}}}}}
 		}$
 		
 		\bigskip
 		
 	\end{center}
 	
-	After applying the rule $\llabrn{\OR}$, our proof continues with two premises. On one side, the premise that follows from $\circledast$:
-	
-	\bigskip
-	\begin{center}
-		$\vlderivation{\vlin{\llabrn{\OR}}{}{\circledast}{\vlin {\rlabrn{\OR}}
-				{}
-				{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
-				{\vlin {\rlabrn{\DIA}}
-					{}
-					{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-					{\vlin {\rn{refl}}
-						{}
-						{x \le y, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
-						{\vlin {\rn{id}}
-							{}
-							{x \le y, z \le z, yRz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
-							{\vlhy {}}}}}}}$
-	\end{center}	
-	And on the other hand, we have that the derivation continues from $\star$ like this:
-	
-	\begin{center}
-		$\vlderivation{\vlin {\llabrn{\OR}}
-			{}
-			{\star}
-			{\vlin {\rlabrn{\OR}}
-				{}
-				{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
-				{\vlin {\rlabrn{\DIA}}
-					{}
-					{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-					{\vlin {\rn{refl}}
-						{}
-						{x \le y, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
-						{\vlin {\rn{id}}
-							{}
-							{x \le y, z \le z, yRz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
-							{\vlhy {}}}}}}}$
-	\end{center}
 
 The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame conditions $\rn{F_1}$:
 
