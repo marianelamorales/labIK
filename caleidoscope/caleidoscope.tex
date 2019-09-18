@@ -304,8 +304,8 @@ sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09} or 2-sequents~\cite
 labelled calculi have the advantage of beeing more uniform and
 accommodating more logics.
 
-Standard labelled sequent calculi attach to every formula $A$ a label
-$x$, witten as $\labels xA$, and additionally admit so called
+Standard labelled sequent calculi attach to every formula $\fm A$ a label
+$\lb x$, witten as $\labels xA$, and additionally admit so called
 \emph{relational atoms} of the form $\accs xy$ where $\rel$ is a
 binary relation symbol. These calculi work best for logics with
 standard Kripke semantics, as in this case the relation $\rel$ is used
@@ -320,7 +320,7 @@ inference rule
   \vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
     \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
-where $\B$ stands for a set of relation atoms, and $\Gamma$ and
+where $\B$ stands for a set of relational atoms, and $\Gamma$ and
 $\Delta$ for multi-sets of labelled formulas.
 
 However,
@@ -343,7 +343,7 @@ these logics have certain shortcomings:
     \quadcm
   \end{equation}
   as they are equivalent in classical
-  modal logic. However, in intuiotionistic modal logic they are not
+  modal logic. However, in intuitionistic modal logic they are not
   equivalent, and even though the logic $\ISfour$, i.e., the
   intuitionistic version of the modal logic $\Sfour$, contains both
   axioms, they can be added independently to the logic $\IK$ (the
@@ -521,6 +521,7 @@ A \coloncolonequals
 a \mid A \AND A \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
 $$
 %
+\todo{change color?}
 
 Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
 %%
@@ -529,20 +530,20 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 
 %The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi~\cite{Fischer}. It is obtained from intuitionistic propositional logic $\mathsf{IPL}$ by adding:
 \begin{itemize}
-	\item the \emph{necessitation rule}: if $A$ is a theorem then $\BOX A$ is also a theorem; and
-	\item the following five variants of the \emph{distributivity axiom}:
+	\item the \emph{necessitation rule}: if $\fm A$ is a theorem then $\fm{\BOX A}$ is also a theorem; and
+	\item the following five variants of the \emph{distributivity axiom} $\rn{k}$:
 	\begin{equation*}
 	\label{eq:ik}%\hskip-2em
 	\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
-	\kax[1]\colon&\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)
+	\kax[1]\colon&\fm{\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)}
 	&
-	\kax[3]\colon&\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)
+	\kax[3]\colon&\fm{\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)}
 	&
-	\kax[5]\colon&\DIA\BOT\IMP\BOT
+	\kax[5]\colon&\fm{\DIA\BOT\IMP\BOT}
 	\\
-	\kax[2]\colon&\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)
+	\kax[2]\colon&\fm{\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)}
 	&
-	\kax[4]\colon&(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)\\%x[1ex]
+	\kax[4]\colon&\fm{(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)}\\%x[1ex]
 	\end{array}
 	\end{equation*}
 \end{itemize}
@@ -566,8 +567,8 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 		
 		\begin{equation*}
 		\xymatrix{
-			u' \ar@{.>}[r]^R  & v' \\
-			u \ar@{.>}[u]^{\le} \ar@{->}[r]^R  & v \ar@{->}[u]_{\le}
+			\lb{u'} \ar@{.>}[r]^R  & \lb{v'} \\
+			\lb u \ar@{.>}[u]^{\le} \ar@{->}[r]^R  & \lb v \ar@{->}[u]_{\le}
 		}
 		\end{equation*}
 		
@@ -575,8 +576,8 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 		
 		\begin{equation*}
 		\xymatrix{
-			u' \ar@{.>}[r]^R & v' \\
-			u \ar@{->}[u]^{\le} \ar@{->}[r]^R & v \ar@{.>}[u]_{\le}
+			\lb{u'} \ar@{.>}[r]^R & \lb{v'} \\
+			\lb u \ar@{->}[u]^{\le} \ar@{->}[r]^R & \lb v \ar@{.>}[u]_{\le}
 		}
 		\end{equation*}
 	\end{enumerate}
@@ -589,29 +590,27 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 	if $\lb w \le \lb{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
-We write $\M, \lb w \Vdash a$ if $a \in V(w)$, and by definition, we always have $\M, w \Vdash \top$ and never that $\M, w \Vdash \bot$. 
+We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and by definition, we always have $\M, \lb w \Vdash \top$ and never that $\M, \lb w \Vdash \bot$. 
 %
 Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
-$$
-\begin{array}{rcl}
-\label{eq:kripke}
-%\parbox{30em}{%
 
-	\M, \lb w \Vdash \fm{A \AND B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ and } \M, \lb w \Vdash \fm B\\
+\begin{equation*}\label{eq:kripke}
+	\begin{array}{rcl}
+	%\parbox{30em}{%
 	
-	\M, \lb w \Vdash \fm{A \OR B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ or } \M, \lb w \Vdash \fm B\\
-
-	\M, \lb w \Vdash \fm{A \IMP B} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ with } \futs w{w'}, \mbox{ if } \M, \lb{w'} \Vdash \fm A \mbox{ then } \M, \lb{w'} \Vdash \fm B\\
+		\M, \lb w \Vdash \fm{A \AND B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ and } \M, \lb w \Vdash \fm B\\
+		
+		\M, \lb w \Vdash \fm{A \OR B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ or } \M, \lb w \Vdash \fm B\\
 	
-	\M, \lb w \Vdash \fm{\BOX A} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ and } \lb u \mbox{ with } \futs w{w'} \mbox{ and } \accs {w'}u, \M, \lb u \Vdash \fm A \hfill \\ %$(\ast)$
-	
-	\M, \lb w \Vdash \fm{\DIA A} & \mbox{iff} & \mbox{there exists a } \lb u \mbox{ such that } \accs wu \mbox{ and } \M, \lb u \Vdash \fm A.
-	
-	%We write $w \not\Vdash A$  if it is not the case that $w\Vdash A$.\\
-%}
-\end{array}
-$$
-
+		\M, \lb w \Vdash \fm{A \IMP B} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ with } \futs w{w'}, \mbox{ if } \M, \lb{w'} \Vdash \fm A \mbox{ then } \M, \lb{w'} \Vdash \fm B\\
+		
+		\M, \lb w \Vdash \fm{\BOX A} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ and } \lb u \mbox{ with } \futs w{w'} \mbox{ and } \accs {w'}u, \M, \lb u \Vdash \fm A \hfill \\ %$(\ast)$
+		
+		\M, \lb w \Vdash \fm{\DIA A} & \mbox{iff} & \mbox{there exists a } \lb u \mbox{ such that } \accs wu \mbox{ and } \M, \lb u \Vdash \fm A.
+		
+	\end{array}
+\end{equation*}
+\todo{label is not appearing}
 
 We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
 
@@ -640,9 +639,18 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions}
-%\marianela{maybe adding the following: ?}
-%Now, we would like to consider special restrictions on these bi-relational frames. For example, we would be interested in having a correspondence between the logic $\IK$ extended with some variants of axioms and bi-relational frames satisfyins the corresponding d
+\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
+
+%Plotkin and Stirling give proper correspondence results, but they must distinguish the two dual parts of each axiom and appeal to both relations of the frames,
+
+\begin{theorem}[\cite{plotkin:stirling:86}]
+	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\agklmn$ if and only if the frame satisfies:
+	
+	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
+	
+\end{theorem}
+
+% we would like to consider special restrictions on these bi-relational frames. For example, we would be interested in having a correspondence between the logic $\IK$ extended with some variants of axioms and bi-relational frames satisfyins the corresponding d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -890,13 +898,13 @@ problems as contraction in a cut elimination proof. Hence, it is
 preferable to have a system in which this rule is admissible. This is
 the reason why we have monotonicity incorporated in the rules
 $\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
-instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of monotonicity in the Section~\ref{sec:mon}.
+instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of monotonicity in the Section~\ref{sec:cut-elim}.
 
 \todo{I am not sure how to introduce the next lemma}
 
 \begin{lemma}
 	The following rule is admissible in $\labIKp$: 
-	$\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$
+	$\vlinf{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$
 \end{lemma}
 
 \begin{proof}
@@ -906,7 +914,7 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 		\begin{smallequation*}
 			%\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
 			%\reducesto
-			\vlinf{\labrn{id}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+			\vlinf{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
 		\end{smallequation*}
 		
 		\item $\fm{A \AND B}$
@@ -916,13 +924,13 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 		%\end{smallequation*}
 		\begin{smallequation*}
 			\vlderivation{
-				\vlin{\llabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
-					\vliin{\rlabrn\AND}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
-						\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
+				\vlin{\llabrn\AND}{}{\B, \futs xy, \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
+					\vliin{\rlabrn\AND}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
+						\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
 							\vlhy{}
 						}
 					}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+					\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
 						\vlhy{}
 					}
 				}
@@ -937,15 +945,15 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 	%\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vliin{\llabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
-				\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
+			\vliin{\llabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
+				\vlin{\rlabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
+					\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
 						\vlhy{}
 					}
 				}
 			}{
-			\vlin{\rlabrn\OR}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
-				\vlin{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+			\vlin{\rlabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
+				\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
 					\vlhy{}
 				}
 			}
@@ -960,17 +968,17 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 %	\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\rlabrn\IMP}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
-				\vlin{\rn{trans}}{}{\B, x \le y, y \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-					\vliin{\llabrn\IMP}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-						\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
-							\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+			\vlin{\rlabrn\IMP}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
+				\vlin{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+					\vliin{\llabrn\IMP}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+						\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+							\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \futs zz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
 								\vlhy{}
 							}
 						}
 					}{
-					\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
-						\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \le z; \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+					\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+						\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \futs zz, \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
 							\vlhy{}
 						}
 					}
@@ -987,11 +995,11 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 %	\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\rlabrn\BOX}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
-				\vlin{\rn{trans}}{}{\B, x \le y, y \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
-					\vlin{\llabrn\BOX}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
-						\vlin{\rn{refl}}{}{\B, x \le y, y \le z, x \le z, z \rel w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
-							\vlin{\labrn{id_g}}{}{\B, x \le y, y \le z, x \le z, z \rel w, w \le w; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+			\vlin{\rlabrn\BOX}{\lb z, \lb w \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
+				\vlin{\rn{trans}}{}{\B, \futs xy, \futs yz, \accs zw, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+					\vlin{\llabrn\BOX}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+						\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+							\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw, \futs ww, \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
 								\vlhy{}
 							}
 						}
@@ -1008,10 +1016,10 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 %	\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\llabrn\DIA}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-					\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-						\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u; \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+			\vlin{\llabrn\DIA}{}{\B, \futs xy; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\rn{F_2}}{}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+					\vlin{\rlabrn\DIA}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+						\vlin{\labrn{id_g}}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
 							\vlhy{}
 						}
 					}
@@ -1056,23 +1064,6 @@ Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The impl
 the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Admissibility of monotonicity}\label{sec:mon}
-
-\begin{theorem}
-	\label{thm:mon-adm}
-	The rule $\rn{mon}$ is admissible for system $\labIKp$.
-\end{theorem}
-
-For proving this theorem, we need a series of auxiliary lemmas.
-
-\todo{move lemma \ref{lem:inv}}
-
-\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
-	\todo{}
-\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1227,6 +1218,19 @@ As we mentioned, in the course of the proof of the theorem, we have to give a pr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Cut Admissibility}\label{sec:cut-elim}
+
+\begin{theorem}
+	\label{thm:mon-adm}
+	The rule $\rn{mon}$ is admissible for system $\labIKp$.
+\end{theorem}
+
+For proving this theorem, we need a series of auxiliary lemmas.
+
+\todo{move lemma \ref{lem:inv}}
+
+\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
+	\todo{}
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
