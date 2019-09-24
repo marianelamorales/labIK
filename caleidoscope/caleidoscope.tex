@@ -1225,6 +1225,7 @@ where $T$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
 
 The proof of $\kax[4]$ shows the need of having the rule corresponding to the frame condition $\rn{F_1}$:
 
+
 \begin{center}
 	$\vlderivation {
 		\vlin{\rlabrn{\IMP}}
@@ -1245,33 +1246,34 @@ The proof of $\kax[4]$ shows the need of having the rule corresponding to the fr
 						{\vliin {\llabrn{\IMP}}
 							{}
 							{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
-							{\vlhy{\circledast  \hspace{75mm}}}
-							{\vlhy{\star}}}}}}}
+							{\vlin {\rlabrn{\DIA}}
+									{}
+									{R, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}}
+									{\vlin {\rn{refl}}
+										{}
+										{R, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+										{\vlin {\rn{id}}
+											{}
+											{R, \futs uu,  \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+											{\vlhy {}}}}}
+							{\vlin {\rn{refl}}
+								{}
+								{R, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
+								{\vlin {\llabrn{\BOX}}
+									{}
+									{R, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
+									{\vlin {\rn{refl}}
+										{}
+										{R, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+										{\vlin {\rn{id}}
+											{}
+											{R, \futs tt, \futs uu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+											{\vlhy {}}}}}}}}}}}
 	}$
 	
 \end{center}
 
-
-The derivation continues as the result of applying the rule $\llabrn{\IMP}$. From this rule we obtain two trees:
-
-On one side, the derivation that follows from $\circledast$:
-
-\begin{center}
-	
-	$
-	\vlderivation{
-		\vlin{\llabrn{\IMP}}{}{\circledast}{\vlin {\rlabrn{\DIA}}
-			{}
-			{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}}
-			{\vlin {\rn{refl}}
-				{}
-				{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
-				{\vlin {\rn{id}}
-					{}
-					{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \futs uu, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
-					{\vlhy {}}}}}
-	}$
-\end{center}
+where $R$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu$.
 
 
 To complete the proof of the five variants of $\kax$ we still have to see that we can prove $\kax[5]$:
@@ -1325,7 +1327,7 @@ As we mentioned, in order to conclude the proof of the Theorem~\ref{thm:cutfree-
 
 \todo{I do not know how to organize this section. First cut elimination proof? (lemma before or after?) Then mon is admissible using cut proof?}
 
-Following the proof for the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
+Following the proof of the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
 
 For proving this theorem, we need a series of auxiliary lemmas (see Lemma \ref{lem:inv}).
 
@@ -1647,7 +1649,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 
 \begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
 	
-	\todo{say that we can obtain the proof for monotonicity using the proof of cut.}
+	\todo{say that we can obtain the proof of monotonicity using the proof of cut.}
 	
 \end{proof}
 
