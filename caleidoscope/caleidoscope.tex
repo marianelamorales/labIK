@@ -226,6 +226,9 @@
 
 %%%%%%%%%%%%%%%%%
 
+%\newcommand{\height}[1]{\mathrm{ht}(#1)}
+\newcommand{\height}[1]{|#1|}
+
 \newcommand{\quand}{\quad\mbox{and}\quad}
 \newcommand{\qquand}{\qquad\mbox{and}\qquad}
 \newcommand{\quadcm}{\rlap{\quad,}}
@@ -1370,6 +1373,82 @@ Following the definitions, we display the proof for some rules since it is simil
 \section{Cut Admissibility}\label{sec:cut-elim}
 
 \todo{I do not know how to organize this section. First cut elimination proof? (lemma before or after?) Then mon is admissible using cut proof?}
+
+\lutz{some start below}
+
+In this section we are going to prove the admissibility of cut for $\labIKp$.
+
+\begin{theorem}
+  \label{thm:cut-adm}
+  The rule $\labrn{cut}$ is admissible for $\labIKp$.
+\end{theorem}
+
+This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
+
+The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is \todo{finish}
+
+We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if \todo{...}
+
+The following two lemmas are standard.
+
+\begin{lemma}
+  \label{lem:weak-adm}
+  The weakening rule
+  ~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
+  is height-preserving admissible for $\labIKp$.
+\end{lemma}
+
+\begin{proof}
+  \todo{}
+\end{proof}
+
+\begin{lemma}
+  \label{lem:inv}
+  The rules ..... are height-preserving invertible in
+  $\labIKp$. Furthermore, the rule $\llabrn{\IMP}$ is
+  height-preserving invertible for the right premise.
+\end{lemma}
+
+\begin{proof}
+  \todo{}
+\end{proof}
+
+The next lemma looks like a special case of
+Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
+preserve the height, and second, we cannot prove it using cut as we
+need it to eliminate the cut.
+
+\begin{lemma}
+  The atomic version of $\llabrn{mon}$
+  $$
+  \vlinf{\labrn{mon_a}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{a}}\Right}{
+    \lseq{\B, x \le x'}{\Left, \labels{x}{a}, \labels{x'}{a}}\Right}
+  $$
+  is height-preserving admissible for $\labIKp$.
+\end{lemma}
+
+\begin{proof}
+  \todo{}
+\end{proof}
+
+The next lemma is the core of our cut elimination proof.
+
+\begin{lemma}
+  \label{lem:reduction}
+  Given a derivation of shape
+  $$
+  \vlderivation{
+    \vliiin{\labrn{cut}}{}{\lseq\B\Left\Right}{
+      \vlhtr{\DD_1}{\lseq\B\Left{\Right,\labels{z}{C}}}}{
+      \vlhy{}}{
+      \vlhtr{\DD_2}{\lseq\B{\Left,\labels{z}{C}}{\Right}}}}
+  $$
+  where $\DD_1$ and $\DD_2$ are both cut-free, there is a cut-free
+  derivation of ${\lseq\B\Left\Right}$
+\end{lemma}
+
+$\vlderivation{\vlhtr{\DD}{\lseq\B\Left\Right}}$
+
 
 Following the proof of the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
 
