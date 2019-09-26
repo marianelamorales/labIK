@@ -1104,28 +1104,8 @@ Once we have shown cut elimination (the implcation \ref{ii}$\implies$\ref{iii} o
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Soundness}\label{sec:soundness}
-
-In order to prove the implication \ref{iii}$\implies$\ref{iv} from Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. 
-
-In order to obtain the proof, let us introduce the next definitions:
-
-\begin{definition}
-	Let $\M = \langle W, \rel, \le, V \rangle$ be a model. We say that $\f$ is an \emph{assignment function} such that $\f : Labels \rightarrow W$.
-\end{definition} 
-
-\begin{definition}
-	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \Rightarrow \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \Rightarrow \Delta$ if for all $\f$ such that:
-	\begin{enumerate}
-		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$.
-		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
-		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
-	\end{enumerate}
-	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
-\end{definition}
-
-Following the definitions, we display the proof for some rules since it is similar for each rule. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1361,6 +1341,35 @@ As we mentioned, in the course of the proof of the theorem, we have to give a pr
 As we mentioned, in order to conclude the proof of the Theorem~\ref{thm:cutfree-compl} we simulate the necessitation rule and modus ponens.
 
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness}\label{sec:soundness}
+
+In order to prove the implication \ref{iii}$\implies$\ref{iv} from Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. 
+
+In order to obtain the proof, let us introduce the next definitions:
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model. We say that $\f$ is an \emph{assignment function} such that $\f : Labels \rightarrow W$.
+\end{definition} 
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \Rightarrow \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \Rightarrow \Delta$ if for all $\f$ such that:
+	\begin{enumerate}
+		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$.
+		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
+		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
+	\end{enumerate}
+	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
+\end{definition}
+
+Following the definitions, we display the proof for some rules since it is similar for each rule. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
