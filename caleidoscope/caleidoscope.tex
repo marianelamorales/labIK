@@ -862,7 +862,7 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 
 Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
 We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
-Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this translation also yields the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this naive translation wpould also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
 \begin{equation}
   \label{eq:nomon}
   \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
@@ -888,36 +888,56 @@ strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These n
 system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
 %
 However, these two rule create new labels, and in order to be
-complete, the system needs the \emph{monotonicity} rule:
+complete, the system needs the \emph{monotonicity} rule $\llabrn{mon}$, shown on the left below. 
 \begin{equation}
   \label{eq:mono}
-  \vlinf{\rn{mon}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
+  \vlinf{\llabrn{mon}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
     \lseq{\B, x \le x'}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}
+  \hskip6em
+  \vlinf{\rlabrn{mon}}{}{\lseq{\B, x\le x'}{\Left}{\Right, \labels{x'}{A}}}{
+    \lseq{\B, x \le x'}{\Left}{\Right, \labels{x}{A}, \labels{x'}{A}}}
 \end{equation}
 Since this rule is a form of contraction, it would cause the same
 problems as contraction in a cut elimination proof. Hence, it is
 preferable to have a system in which this rule is admissible. This is
 the reason why we have monotonicity incorporated in the rules
 $\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
-instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of monotonicity in the Section~\ref{sec:cut-elim}.
+instead of using the rules in~\eqref{eq:nomon}. Then, not only
+$\llabrn{mon}$ but also its right-hand side version $\rlabrn{mon}$,
+shown on the right in~\eqref{eq:mono} above is admissible.
 
-\todo{I am not sure how to introduce the next lemma}
+\begin{proposition}
+  \label{prop:mon-adm}
+  The rules $\llabrn{mon}$ and $\rlabrn{mon}$ are admissible for $\labIKp$.
+\end{proposition}
 
-\begin{lemma}
-	The following rule is admissible in $\labIKp$: 
-	$\vlinf{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$
-\end{lemma}
+One can prove this proposition in the same way as one usually proves
+admissibity of contraction in a sequent calculus, by inductiop on the
+height of the derivation, which in fact would yield a stronger result,
+namely that $\llabrn{mon}$ and $\rlabrn{mon}$ are \emph{height
+  preserving} admissible for $\labIKp$. However, we do not need this
+result in this paper, and therefore we leave it as an exercise to the
+reader. Nonetheless, we will give a short proof of
+Proposition~\ref{prop:mon-adm} at the end of this section.
+
+Before, let us give another indication of the fact that $\labIKp$ is well-designed, namely that the general identity axiom is admissible.
+
+\begin{proposition}
+  \label{prop:id}
+	The following general idenity axiom~
+	{$\vlinf{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$}
+        ~is admissible for $\labIKp$. 
+\end{proposition}
 
 \begin{proof}
-	By induction of the size of the formula $\fm A$.
+	As standard, we proceed by structural induction on $\fm A$. The two base cases $\fm A=\fm a$ and $\fm A=\fm\bot$ are trivial. The inductive cases are shown below.
 	\begin{itemize}
-		\item Atomic case
-		\begin{smallequation*}
-			%\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
-			%\reducesto
-			\vlinf{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
-		\end{smallequation*}
-		
+		%% \item Atomic case
+		%% \begin{smallequation*}
+		%% 	%\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+		%% 	%\reducesto
+		%% 	\vlinf{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+		%% \end{smallequation*}
 		\item $\fm{A \AND B}$
 		%\begin{smallequation*}
 		%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{}
@@ -938,7 +958,6 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 			}
 		}
 	\end{smallequation*}
-	
 	\item $\fm{A \OR B}$
 	%\begin{smallequation*}
 	%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
@@ -1028,8 +1047,8 @@ instead of using the rules in~\eqref{eq:nomon}. We prove the admissibility of mo
 			}
 		}
 	\end{smallequation*}
+        \quedhere
 	\end{itemize}
-	
 \end{proof}
 
 In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
@@ -1062,9 +1081,26 @@ The proof of this theorem is the topic of the following sections. The
 equivalence of \ref{i} and \ref{iv} has already been stated in
 Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The implication
 \ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
-the implica tion~\ref{ii}$\implies$\ref{iii} is shown in
+the implication~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
 
+Once we have shown cut elimination (the implcation \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}), the proof of Proposition~\ref{prop:mon-adm} becomes trivial.
+
+\begin{proof}[Proof of Proposition~\ref{prop:mon-adm}]
+  The rule $\llabrn{mon}$ can be derived using the general identity and cut:
+  \begin{smallequation*}
+    \vlderivation{
+      \vliiin{\labrn{cut}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
+        \vlin{\labrn{id_g}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}{\Right, \labels{x'}{A}}}{
+          \vlhy{}}}{
+        \vlhy{\quad}}{
+        \vlhy{\lseq{\B, x \le x'}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}}
+    }
+  \end{smallequation*}
+  And both these rules are admissible by Proposition~\ref{prop:id} and
+  Theorem~\ref{thm:cutfree-compl}. The case for $\rlabrn{mon}$ is
+  similar.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
