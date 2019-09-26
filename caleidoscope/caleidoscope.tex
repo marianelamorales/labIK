@@ -226,6 +226,7 @@
 
 %%%%%%%%%%%%%%%%%
 
+\newcommand{\quand}{\quad\mbox{and}\quad}
 \newcommand{\qquand}{\qquad\mbox{and}\qquad}
 \newcommand{\quadcm}{\rlap{\quad,}}
 
@@ -239,7 +240,7 @@
 \begin{document}
 
 %\begin{frontmatter}
-  \title{A properly labelled proof system for intuitionistic modal logics}
+  \title{A fully labelled proof system for intuitionistic modal logics}
   \author{Sonia Marin \and %}
 %  \todo{New university?}
 %  \address{IT-Universitetet i K{\o}benhavn \\ Denmark }
@@ -259,12 +260,12 @@
    In this paper we present a labelled sequent system for
    intuitionistic modal logics such that there is not only one, but
    two relation symbols for the labels: one for the accessibility
-   relation associated with the Kripke semantics for modal logics and
+   relation associated with the Kripke semantics for normal modal logics and
    one for the preorder relation associated with the Kripke semantics
    for intuitionistic logic.
    %%
    This puts our system in close correspondence with the standard
-   birelational Kripke semantics for intuitionistic modal logic. As a
+   birelational Kripke semantics for intuitionistic modal logics. As a
    consequence it can encompass a wider range of intuitionistic modal
    logics than standard labelled systems.
    %%
@@ -293,20 +294,20 @@
 
 Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
 \emph{labelled proof calculi} have been widely used by proof theorist
-to give sound, complete and cut-free deductive system to a broad range
+to give sound, complete and cut-free deductive systems to a broad range
 of logics. Unlike so-called \emph{internal calculi}, like
 hyper-sequents~\cite{avron:elc96} or nested
-sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09} or 2-sequents~\cite{masini:apal92},
-labelled calculi have the advantage of being more uniform and
-accommodating more logics.
+sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann?},
+labelled calculi have the advantage of being more uniform and being able to 
+accommode more logics.
 
-Standard labelled sequent calculi attach to every formula $\fm A$ a label
+Standard labelled sequent calculi attach to every formla $\fm A$ a label
 $\lb x$, witten as $\labels xA$, and additionally admit so called
 \emph{relational atoms} of the form $\accs xy$ where $\rel$ is a
 binary relation symbol. These calculi work best for logics with
 standard Kripke semantics, as in this case the relation $\rel$ is used
 to encode the accessibility relation in the Kripke models, and the
-frame condition corresponding to the desired logic can be directly
+frame conditions corresponding to the desired logic can be directly
 encoded as inference rules. Prominent examples are classical modal
 logics and intuitionistic propositional logic, where, e.g., the frame
 condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
@@ -350,21 +351,21 @@ these logics have certain shortcomings:
   \begin{equation}
     \label{eq:4frame}
     \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
-    \qquand
+    \quand
     \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+    \;,
   \end{equation}
-  have already been studied
-  in~\cite{plotkin:stirling:86}.\todo{check: did they get that wrong in  \cite{plotkin:stirling:86}?}
-\item The correspondence between the syntax and the semantics is not
+  respectively, have already been studied
+  in~\cite{plotkin:stirling:86}.
+  \item The correspondence between the syntax and the semantics is not
   as clean as one would expect. As only the $R$-relation (and not the
   $\le$-relation) of the frame is visible in an ordinary labelled
   sequent, we only have that a sequent $\Gamma$ is provable if and
   only if is is valid in all \emph{graph-consistent}\footnote{This
     means that every layer in the model can be lifted to any future of
-    any world in that layer.}\todo{check terminology in Simpson} models, as
+    any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.} for  models, as
   already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
-  and considered as a very unsatisfactory situation\todo{check what he
-    said exactly} (see also \cite{mar:str:tableaux17}).
+  and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two issues we propose here to extend the
 notion of labelled sequent by also allowing relational atoms of the
@@ -396,11 +397,12 @@ premise, even though this is not the case in labelled
 systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83} for
 intuitionistic logic. Our system eliminates this
 discrepancy. Consequently, every rule in our system is invertible, as
-we never delete information.\lutz{check, is this really the case?}
+we never delete information.
 
 \medskip
 
-This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics. \lutz{what about doing that directly in the system presentation, like Negri does it?}
+This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics.
+
 
 \todo{maybe paragraph on related work? cite Maffezioli, Naibo and Negri~\cite{maffezioli:etal:synthese13}.}
 
@@ -510,7 +512,7 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 \section{Intuitionistic modal logics}\label{sec:intmod}
 The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
 %
-Starting with a set $\mathcal{A}$ of atomic propositions, denoted $a$, modal formulas are constructed from the grammar:
+Starting with a set $\mathcal{A}$ of atomic propositions, denoted by lower case letters $a$, $b$, $c$,\ldots, modal formulas, denoted by capital letters $A$, $B$, $C$, \ldots, are constructed from the grammar:
 %
 $$
 A \coloncolonequals
@@ -530,7 +532,7 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 	\item the following five variants of the \emph{distributivity axiom} $\rn{k}$:
 	\begin{equation*}
 	\label{eq:ik}%\hskip-2em
-	\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
+	\begin{array}[t]{r@{\;}l@{\qquad}r@{\;}l@{\qquad}r@{\;}l}
 	\kax[1]\colon&\fm{\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)}
 	&
 	\kax[3]\colon&\fm{\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)}
@@ -544,7 +546,7 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 	\end{equation*}
 \end{itemize}
 
-The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system $\break \rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$. However this would give strictly no information on the behaviour of the $\DIA$ modality.
+The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system \hbox{$\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$}. However this would give strictly no information on the behaviour of the $\DIA$ modality.
 It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. The systems are well-designed for some applications for example to analyse some type systems \cite{benton:etal:jfp98} or to reason about states of a machine under partial information \cite{wijesekera:nerode:apal05}. However, they cannot satisfy the logicians as the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
 
 The axiomatisation that is now generally accepted as \emph{intuitionistic modal logic} denoted by $\IK$ was given by Plotkin and Stirling \cite{plotkin:stirling:86} and is equivalent to the one proposed by Fischer-Servi \cite{fischer-servi:84} and by Ewald \cite{ewald:jsl86} in the case of intuitionistic tense logic. It is taken to be    $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$ $\rn{+}$ $\kax[3]$ $\rn{+}$ $\kax[4]$  $\rn{+}$ $\kax[5]$.
@@ -557,9 +559,9 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 \begin{definition}
 	A \emph{bi-relational frame} $\F$ is a triple $\langle W, \rel, \le \rangle$ 
 	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
-	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.} a reflexive and transitive relation) satisfying:
+	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.}\ a reflexive and transitive relation) satisfying:
 	\begin{enumerate}
-		\item[($\rn{F_1}$)] For $\lb u, \lb v, \lb{v'} \in W$, if $\accs uv$ and $\futs v{v'}$, there exists $\lb{u'}$ s.t.~$\futs u{u'}$ and $\accs{u'}{v'}$.
+		\item[($\rn{F_1}$)] For all $\lb u, \lb v, \lb{v'} \in W$, if $\accs uv$ and $\futs v{v'}$, there exists $\lb{u'}$ s.t.~$\futs u{u'}$ and $\accs{u'}{v'}$.
 		
 		\begin{equation*}
 		\xymatrix{
@@ -568,7 +570,7 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 		}
 		\end{equation*}
 		
-		\item[($\rn{F_2}$)] For $\lb {u'}, \lb u, \lb v \in W$, if $\futs uv$, there exists $\lb {v'}$ s.t.~$\accs{u'}{v'}$ and $\futs v{v'}$.
+		\item[($\rn{F_2}$)] For all $\lb {u'}, \lb u, \lb v \in W$, if $\futs uv$, there exists $\lb {v'}$ s.t.~$\accs{u'}{v'}$ and $\futs v{v'}$.
 		
 		\begin{equation*}
 		\xymatrix{
@@ -586,11 +588,9 @@ It combines the Kripke semantics for intuitionistic propositional logic and the 
 	if $\lb w \le \lb{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
-We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and by definition, we always have $\M, \lb w \Vdash \top$ and never that $\M, \lb w \Vdash \bot$. 
-%
-Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and inductively extend the $\Vdash$ relation to all formulas, following the rules for both intuitionistic and modal Kripke models:
 
-\begin{equation*}\label{eq:kripke}
+\begin{equation}\label{eq:kripke}
 	\begin{array}{rcl}
 	%\parbox{30em}{%
 	
@@ -605,10 +605,10 @@ Then the relation is extended to all formulas by induction, following the rules 
 		\M, \lb w \Vdash \fm{\DIA A} & \mbox{iff} & \mbox{there exists a } \lb u \mbox{ such that } \accs wu \mbox{ and } \M, \lb u \Vdash \fm A.
 		
 	\end{array}
-\end{equation*}
-\todo{label is not appearing}
-
-We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
+\end{equation}
+Observe that we never that $\M, \lb w \Vdash \fm\bot$. 
+%
+We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \not\Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
 
 From the monotonicity of the valuation function $V$, we get a monotonicity property for the relation:
 \begin{proposition}(Monotonicity) 
@@ -620,7 +620,7 @@ From the monotonicity of the valuation function $V$, we get a monotonicity prope
 \begin{definition}
 	A formula $\fm A$ is \emph{satisfied} in a model $\M = \langle W, \rel, \le, V \rangle$, if for all $\lb w \in W$ we have $\M, \lb w \Vdash \fm A$.
 	%
-	A formula $\fm A$ is \emph{valid} in a frame $\F = \langle W, \rel, \le \rangle$, if for all valuations $V$, $\fm A$ is satisfied in $\langle W, R, \le, V \rangle$.
+	A formula $\fm A$ is \emph{valid} in a frame $\F = \langle W, \rel, \le \rangle$, if for all valuations $V$, the formula $\fm A$ is satisfied in $\langle W, R, \le, V \rangle$.
 \end{definition}
 
 
@@ -629,16 +629,17 @@ From the monotonicity of the valuation function $V$, we get a monotonicity prope
 %
 %it allows for adapting to intuitionistic logic the standard embedding of modal logic into first-order logic, and also provides an extension of the standard Kripke semantics for classical modal logic to the intuitionistic case.
 
-Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
+Similarly to the classical case, the correspondence between syntax and semantics for $\IK$ can be stated as follows.
 
-\begin{theorem}[Fischer-Servi~\cite{fischer-servi:84}, Plotkin and Stirling~\cite{plotkin:stirling:86}]\label{thm:plotkin}
-	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
+\begin{theorem}[\cite{fischer-servi:84,plotkin:stirling:86}]\label{thm:plotkin}
+	A formula is a theorem of $\IK$ if and only if it is valid in every bi-relational frame.
 \end{theorem}
 
 \todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
 
 %Plotkin and Stirling give proper correspondence results, but they must distinguish the two dual parts of each axiom and appeal to both relations of the frames,
 
+\lutz{maybe the foloowing goes to the ``extensions'' section. otherwise we have to define $\agklmn$ here}
 \begin{theorem}[\cite{plotkin:stirling:86}]
 	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\agklmn$ if and only if the frame satisfies:
 	
@@ -781,10 +782,14 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
 \section{The system}\label{sec:system}
 
-In this section we present our properly labelled sequent proof system
+In this section we present our fully labelled sequent proof system
 for intuitionistic modal logics. The starting point is the notion of a
 \emph{labelled formula} which is a pair $\labels xA$ of a label $\lb
 x$ and a formula $\fm A$. The intended meaning is that $\fm A$ holds
