@@ -1050,7 +1050,7 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 			}
 		}
 	\end{smallequation*}
-        \quedhere
+        \qedhere
 	\end{itemize}
 \end{proof}
 
@@ -1219,7 +1219,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 						{\vlin {\rlabrn{\DIA}}
 							{}
 							{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-							{\vlin {\rn{refl}}
+							{\vlin {\color{red}\rn{refl}}
 								{}
 								{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
 								{\vlin {\rn{id}}
@@ -1231,7 +1231,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 						{\vlin {\rlabrn{\DIA}}
 							{}
 							{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
-							{\vlin {\rn{refl}}
+							{\vlin {\color{red}\rn{refl}}
 								{}
 								{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
 								{\vlin {\rn{id}}
@@ -1255,7 +1255,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 				{\vlin {\color{red}{\rn{F_1}}}
 					{}
 					{\futs xy, \futs yz, \futs wu, \accs zw, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
-					{\vlin {\rn{trans}}
+					{\vlin {\color{red}\rn{trans}}
 						{}
 						{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
 						{\vliin {\llabrn{\IMP}}
@@ -1264,20 +1264,20 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 							{\vlin {\rlabrn{\DIA}}
 									{}
 									{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}}
-									{\vlin {\rn{refl}}
+									{\vlin {\color{red}\rn{refl}}
 										{}
 										{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
 										{\vlin {\rn{id}}
 											{}
 											{\B, \futs uu,  \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
 											{\vlhy {}}}}}
-							{\vlin {\rn{refl}}
+							{\vlin {\color{red}\rn{refl}}
 								{}
 								{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
 								{\vlin {\llabrn{\BOX}}
 									{}
 									{\B, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
-									{\vlin {\rn{refl}}
+									{\vlin {\color{red}\rn{refl}}
 										{}
 										{\B, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
 										{\vlin {\rn{id}}
@@ -1312,7 +1312,7 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
 		{\vlin {\llabrn{\AND}}
 			{}
 			{\futs xy, \labels{y}{A \AND B} \Rightarrow \labels{y}{B}}
-			{\vlin {\rn{refl}}
+			{\vlin {\color{red}\rn{refl}}
 				{}
 				{\futs xy, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
 				{\vlin {\rn{id}}
@@ -1321,6 +1321,8 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
 					{\vlhy {}}}}}
   }
   $$
+  
+  
   Finally, we have to show how the rules of modus ponens and
   necessitation can be simulated in our system. For modus ponens, this
   is standard using the cut rule and for necesitation, we can
@@ -1331,8 +1333,6 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   
   This completes the proof of Proof of Theorem~\ref{thm:completeness}.
 \end{proof}
-
-\todo{all refl,trans, \rn{F_2} and $F_1$ in red}
 
 \todo{use the macro for sequents (the macro uses a longer arrow)}
 
@@ -1366,7 +1366,34 @@ In order to obtain the proof, let us introduce the next definitions:
 	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \Rightarrow \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \Rightarrow \Delta$.
 \end{definition}
 
-Following the definitions, we display the proof for some rules since it is similar for each rule. 
+
+Following the definitions, we display the proof of soundness for some rules since it is similar for each rule. 
+
+\begin{itemize}
+	\item Rule $\llabrn\BOX$: 
+	
+	We want to prove that the rule for $\llabrn\BOX$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
+	
+	\begin{center}
+		\emph{For all model $\M$, if $\M \Vdash \B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$, then $\M \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A} \Rightarrow \Right$.}
+	\end{center}
+	
+	By way of contradiction, we assume that there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, x \le y, yRz,\Left,\break \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash \futs xy$, $ \M_{0} \Vdash \accs yz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all $y, z \in W$ such that $\futs xy$ and $\accs yz$, then $\M_{0}, f(\lb z) \Vdash \fm A$, i.e $\M_{0} \Vdash \labels{z}{\fm A}$. 
+
+\marianela{working on this}
+	\marianela{
+	Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.
+	
+	\item Rule $\rlabrn\BOX$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$, i.e. $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{\BOX A}$, which is the same as $\M_{0} \Vdash \vlan (\B,\Left)$ and  $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$. From $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$, we have that $\M_{0} \not \Vdash \Right$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}$. Following the semantic definition of $\BOX$, there exists worlds $y, z$ in $\M_{0}$, such that $x \le y, yRz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Therefore, $\M_{0} \not \Vdash premise$, i.e. $\M_{0} \not \Vdash \B, x \le y, yRz, \Left \Rightarrow \Right, \labels{z}{A}$. Then, the rule $\rlabrn\BOX$ is sound.
+	
+	\item Rule $\rlabrn\IMP$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{A \IMP B}$, i.e., in particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $y$ such that $x \le y$ and $\M_{0} \Vdash \labels{y}{A}$ but $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, x \le y, \Left, \labels{y}{A} \Rightarrow \labels{y}{B}$. Finally, the rule $\rlabrn\IMP$ is sound.}
+\end{itemize}
+
+
+
+The other cases are similar.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2257,42 +2284,6 @@ $
 $$
 %\end{example}
 
-
-\begin{proof} [Proof of soundness]
-	We need to prove that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion. 
-	
-	In order to obtain the proof, let us introduce a definition:
-	
-	\begin{definition}
-		
-	\end{definition}
-	
-	
-	As the proof is similar for each of the rules, we prove the soundness of some particular rules:
-	
-	\begin{itemize}
-		\item Rule $\llabrn\BOX$: 
-		
-		We want to prove that the rule for $\llabrn\BOX$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
-		
-		\begin{center}
-			\emph{For all model $\M$, if $\M \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, z \colon A \Rightarrow \Right$, then $\M \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A} \Rightarrow \Right$.}
-		\end{center}
-		\lutz{we need to define what that means $\M\Vdash$sequent}
-        \marianela{working on that}
-        
-		By way of contradiction we want to see that if $\exists$ $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$,then $\M_{0} \not \Vdash premise$. More precisely for the $\llabrn\BOX$ rule we want to show that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y, \break yRz, \labels{x}{\BOX A} \Rightarrow \Right$ then $\M_{0} \not \Vdash \B,\Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$.
-		
-		Then assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, x \le y,\break yRz, \labels{x}{\BOX A} \Rightarrow \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular, from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all world $y, z$ such that $x \le y$ and $yRz$, then $\M_{0} \Vdash \labels{z}{A}$. Finally, we obtain that $\M_{0} \not \Vdash \B, \Left, x \le y, yRz, \labels{x}{\BOX A}, \labels{z}{A} \Rightarrow \Right$. Then, the rule $\llabrn\BOX$ is sound.\lutz{that is unclear}
-		
-		\item Rule $\rlabrn\BOX$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash$ $conclusion$, i.e. $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{\BOX A}$, which is the same as $\M_{0} \Vdash \vlan (\B,\Left)$ and  $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$. From $\M_{0} \not \Vdash \vlor (\Right, \labels{x}{\BOX A})$, we have that $\M_{0} \not \Vdash \Right$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}$. Following the semantic definition of $\BOX$, there exists worlds $y, z$ in $\M_{0}$, such that $x \le y, yRz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Therefore, $\M_{0} \not \Vdash premise$, i.e. $\M_{0} \not \Vdash \B, x \le y, yRz, \Left \Rightarrow \Right, \labels{z}{A}$. Then, the rule $\rlabrn\BOX$ is sound.
-		
-		\item Rule $\rlabrn\IMP$: By way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \Rightarrow \Right, \labels{x}{A \IMP B}$, i.e., in particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $y$ such that $x \le y$ and $\M_{0} \Vdash \labels{y}{A}$ but $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, x \le y, \Left, \labels{y}{A} \Rightarrow \labels{y}{B}$. Finally, the rule $\rlabrn\IMP$ is sound.
-	\end{itemize}
-        \lutz{the arguments are not clear}
-        
-	The other cases are similar.
-\end{proof}
 
 \begin{lemma}\label{lem:weak}\hbox{}\quad
 	\begin{enumerate}
