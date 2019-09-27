@@ -515,14 +515,13 @@ and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite
 \section{Intuitionistic modal logics}\label{sec:intmod}
 The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
 %
-Starting with a set $\mathcal{A}$ of atomic propositions, denoted by lower case letters $a$, $b$, $c$,\ldots, modal formulas, denoted by capital letters $A$, $B$, $C$, \ldots, are constructed from the grammar:
+Starting with a set $\mathcal{A}$ of atomic propositions, denoted by lower case letters $\fm a$, $\fm b$, $\fm c$,\ldots, modal formulas, denoted by capital letters $\fm A$, $\fm B$, $\fm C$, \ldots, are constructed from the grammar:
 %
 $$
-A \coloncolonequals
-a \mid A \AND A \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
+\fm A \coloncolonequals
+\fm a \mid \fm{A \AND A} \mid \fm{A \OR A} \mid \fm \BOT \mid \fm{A \IMP A} \mid \fm{\BOX A} \mid \fm{\DIA A}
 $$
 %
-\todo{change color?}
 
 Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
 %%
@@ -635,7 +634,7 @@ From the monotonicity of the valuation function $V$, we get a monotonicity prope
 Similarly to the classical case, the correspondence between syntax and semantics for $\IK$ can be stated as follows.
 
 \begin{theorem}[\cite{fischer-servi:84,plotkin:stirling:86}]\label{thm:plotkin}
-	A formula is a theorem of $\IK$ if and only if it is valid in every bi-relational frame.
+	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
 \todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
@@ -824,7 +823,7 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 		$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+		$\vlinf{\rlabrn\IMP}{\lb y \mbox{ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
@@ -834,9 +833,9 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 		\\\\
 		$\vlinf{\llabrn\BOX}{}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, x \le y, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
 		&
-		$\vlinf{\rlabrn\BOX}{\text{\scriptsize $y, z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}$
+		$\vlinf{\rlabrn\BOX}{\lb y, \lb z \mbox{ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}$
 		\\\\
-		$\vlinf{\llabrn\DIA}{\text{\scriptsize $y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$
+		$\vlinf{\llabrn\DIA}{\lb y \mbox{ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$
 		&
 		$\vlinf{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
 		\\
@@ -849,11 +848,11 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 		$\vlinf{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_1}}{\text{\scriptsize $u$ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
+		$\vlinf{\rn{F_1}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
 		}
 		\\\\
 		\multicolumn{2}{c}{
-		$\vlinf{\rn{F_2}}{\text{\scriptsize $u$ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
+		$\vlinf{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
 		}
 	\end{tabular}		
 %\end{minipage}
@@ -870,9 +869,9 @@ Our starting point was the multiple-conlusion nested sequent system \emph{\`a la
   \label{eq:nomon}
   \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
   \quad
-  \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A} \IMP B \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
+  \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A \IMP B} \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
   \quad
-  \vlinf{\llabrn\BOX}{}{\B, xRz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, xRz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
+  \vlinf{\llabrn\BOX}{}{\B, \accs xz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \accs xz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
 \end{equation}
 that are not sufficient for a complete system, and we will see below
 why. Before, let us first look at the rules $\rlabrn\IMP$ and
@@ -894,11 +893,11 @@ However, these two rule create new labels, and in order to be
 complete, the system needs the \emph{monotonicity} rule $\llabrn{mon}$, shown on the left below. 
 \begin{equation}
   \label{eq:mono}
-  \vlinf{\llabrn{mon}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
-    \lseq{\B, x \le x'}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}
+  \vlinf{\llabrn{mon}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}\Right}{
+    \lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}
   \hskip6em
-  \vlinf{\rlabrn{mon}}{}{\lseq{\B, x\le x'}{\Left}{\Right, \labels{x'}{A}}}{
-    \lseq{\B, x \le x'}{\Left}{\Right, \labels{x}{A}, \labels{x'}{A}}}
+  \vlinf{\rlabrn{mon}}{}{\lseq{\B, \futs{x}{x'}}{\Left}{\Right, \labels{x'}{A}}}{
+    \lseq{\B, \futs{x}{x'}}{\Left}{\Right, \labels{x}{A}, \labels{x'}{A}}}
 \end{equation}
 Since this rule is a form of contraction, it would cause the same
 problems as contraction in a cut elimination proof. Hence, it is
@@ -915,7 +914,7 @@ shown on the right in~\eqref{eq:mono} above is admissible.
 \end{proposition}
 
 One can prove this proposition in the same way as one usually proves
-admissibity of contraction in a sequent calculus, by inductiop on the
+admissibity of contraction in a sequent calculus, by induction on the
 height of the derivation, which in fact would yield a stronger result,
 namely that $\llabrn{mon}$ and $\rlabrn{mon}$ are \emph{height
   preserving} admissible for $\labIKp$. However, we do not need this
@@ -1040,7 +1039,7 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 	\begin{smallequation*}
 		\vlderivation{
 			\vlin{\llabrn\DIA}{}{\B, \futs xy; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\rn{F_2}}{}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\color{red}\rn{F_2}}{}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 					\vlin{\rlabrn\DIA}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 						\vlin{\labrn{id_g}}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
 							\vlhy{}
@@ -1093,11 +1092,11 @@ Once we have shown cut elimination (the implcation \ref{ii}$\implies$\ref{iii} o
   The rule $\llabrn{mon}$ can be derived using the general identity and cut:
   \begin{smallequation*}
     \vlderivation{
-      \vliiin{\labrn{cut}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}\Right}{
-        \vlin{\labrn{id_g}}{}{\lseq{\B, x \le x'}{\Left, \labels{x}{A}}{\Right, \labels{x'}{A}}}{
+      \vliiin{\labrn{cut}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}\Right}{
+        \vlin{\labrn{id_g}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}{\Right, \labels{x'}{A}}}{
           \vlhy{}}}{
         \vlhy{\quad}}{
-        \vlhy{\lseq{\B, x \le x'}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}}
+        \vlhy{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}}
     }
   \end{smallequation*}
   And both these rules are admissible by Proposition~\ref{prop:id} and
@@ -1136,35 +1135,35 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
     \vlderivation{
 				\vlin{\rlabrn{\IMP}}
 				{\lb y \mbox{ fresh}}
-				{\Rightarrow \labels{x}{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
+				{\SEQ \labels{x}{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
 				{\vlin {\rlabrn{\IMP}}
 					{\lb z \mbox{ fresh}}
-					{\futs xy, \labels{y}{\BOX(A \IMP B)} \Rightarrow \labels{y}{\BOX A \IMP \BOX B}}
+					{\lseq{\futs xy}{\labels{y}{\BOX(A \IMP B)}}{\labels{y}{\BOX A \IMP \BOX B}}}
 					{\vlin {\rlabrn{\BOX}}
 						{\lb w, \lb u \mbox{ fresh}}
-						{\futs xy, \futs yz, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A} \Rightarrow \labels{z}{\BOX B}}
+						{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{z}{\BOX B}}}
 						{\vlin {\llabrn{\BOX}}
 							{}
-							{\futs xy, \futs yz, \futs zw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A} \Rightarrow \labels{u}{B}}
+							{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{u}{B}}}
 							{\vlin {\color{red}\rn{trans}}
 								{}
-								{\futs xy, \futs yz, \futs zw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+								{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
 								{\vlin {\llabrn{\BOX}}
 									{}
-									{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+									{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
 									{\vlin {\color{red}\rn{refl}}
 										{}
-										{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}}
+										{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
 										{\vliin{\llabrn{\IMP}}
 											{}
-											{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}}
+											{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
 											{\vlin {\rn{id}}
 												{}
-												{\B, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{u}{B}, \labels{u}{A}}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}, \labels{u}{A}}}
 												{\vlhy {}}}
 											{\vlin {\rn{id}}
 												{}
-												{\B, \labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{u}{B}}}
 												{\vlhy {}}}}}}}}}}
     }
     $$
@@ -1174,32 +1173,32 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
     \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{\lb y \mbox{ fresh}}
-		{ \Rightarrow \labels{x}{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
+		{ \SEQ \labels{x}{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
 		{\vlin {\rlabrn{\IMP}}
 			{\lb z \mbox{ fresh}}
-			{ \futs xy, \labels{y}{\BOX (A \IMP B)} \Rightarrow \labels{y}{(\DIA A \IMP \DIA B)}}
+			{\lseq{\futs xy}{\labels{y}{\BOX (A \IMP B)}}{\labels{y}{(\DIA A \IMP \DIA B)}}}
 			{\vlin {\llabrn{\DIA}}
 				{\lb u \mbox{ fresh}}
-				{\futs xy, \futs yz, \labels{y}{\BOX (A \IMP B)}, \labels{z}{\DIA A} \Rightarrow \labels{z}{\DIA B}}
+				{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX (A \IMP B)}, \labels{z}{\DIA A}}{\labels{z}{\DIA B}}}
 				{\vlin{\rlabrn{\DIA}}
 					{}
-					{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A} \Rightarrow \labels{z}{\DIA B}}
+					{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}}}
 					{\vlin {\llabrn{\BOX}}
 						{}
-						{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+						{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}, \labels{u}{B}}}
 						{\vlin {\color{red}\rn{refl}}
 							{}
-							{\futs xy, \futs yz, \accs zu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+							{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
 							{\vliin{\llabrn{\IMP}}
 								{}
-								{\futs xy, \futs yz, \accs zu, \futs uu, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+								{\lseq{\futs xy, \futs yz, \accs zu, \futs uu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
 								{\vlin {\rn{id}}
 									{}
-									{\B, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}
+									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}}
 									{\vlhy {}}}
 								{\vlin {\rn{id}}
 									{}
-									{\B, \labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B} \Rightarrow \labels{z}{\DIA B}, \labels{u}{B}}
+									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
 									{\vlhy {}}}								}}}}}}
     }
     $$
@@ -1209,34 +1208,34 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
     \vlderivation {
 			\vlin{\rlabrn{\IMP}}
 			{}
-			{\Rightarrow \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
+			{\SEQ \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
 			{\vlin {\llabrn{\DIA}}
 				{}
-				{\futs xy, \labels{y}{\DIA (A \OR B)} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
-				{\vliin{\llabrn{\OR}}{}{\futs xy, \accs yz, \labels{z}{A \OR B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}{\vlin {\rlabrn{\OR}}
+				{\lseq{\futs xy}{\labels{y}{\DIA (A \OR B)}}{\labels{y}{\DIA A \OR \DIA B}}}
+				{\vliin{\llabrn{\OR}}{}{\lseq{\futs xy, \accs yz}{\labels{z}{A \OR B}}{\labels{y}{\DIA A \OR \DIA B}}}{\vlin {\rlabrn{\OR}}
 						{}
-						{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+						{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A \OR \DIA B}}}
 						{\vlin {\rlabrn{\DIA}}
 							{}
-							{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
 							{\vlin {\color{red}\rn{refl}}
 								{}
-								{\futs xy, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
 								{\vlin {\rn{id}}
 									{}
-									{\futs xy, \futs zz, \accs yz, \labels{z}{A} \Rightarrow \labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}
+									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
 									{\vlhy {}}}}}}{\vlin {\rlabrn{\OR}}
 						{}
-						{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A \OR \DIA B}}
+						{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A \OR \DIA B}}}
 						{\vlin {\rlabrn{\DIA}}
 							{}
-							{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
 							{\vlin {\color{red}\rn{refl}}
 								{}
-								{\futs xy, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
 								{\vlin {\rn{id}}
 									{}
-									{\futs xy, \futs zz, \accs yz, \labels{z}{B} \Rightarrow \labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}
+									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
 									{\vlhy {}}}}}}}}
 		}
     $$
@@ -1245,44 +1244,44 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{\lb y \mbox{ fresh}}
-		{\Rightarrow \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
+		{\SEQ \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
 		{\vlin {\rlabrn{\BOX}}
 			{\lb z, \lb w \mbox{ fresh}}
-			{\futs xy, \labels{y}{\DIA A \IMP \BOX B} \Rightarrow \labels{y}{\BOX (A \IMP B)}}
+			{\lseq{\futs xy}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{y}{\BOX (A \IMP B)}}}
 			{\vlin {\rlabrn{\IMP}}
 				{\lb u \mbox{ fresh}}
-				{\futs xy, \futs yz, \accs zw, \labels{y}{\DIA A \IMP \BOX B} \Rightarrow \labels{w}{A \IMP B}}
+				{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{w}{A \IMP B}}}
 				{\vlin {\color{red}{\rn{F_1}}}
 					{}
-					{\futs xy, \futs yz, \futs wu, \accs zw, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+					{\lseq{\futs xy, \futs yz, \futs wu, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
 					{\vlin {\color{red}\rn{trans}}
 						{}
-						{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+						{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
 						{\vliin {\llabrn{\IMP}}
 							{}
-							{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}}
+							{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
 							{\vlin {\rlabrn{\DIA}}
 									{}
-									{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}}
+									{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}}}
 									{\vlin {\color{red}\rn{refl}}
 										{}
-										{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+										{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
 										{\vlin {\rn{id}}
 											{}
-											{\B, \futs uu,  \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \Rightarrow \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}
+											{\lseq{\B, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
 											{\vlhy {}}}}}
 							{\vlin {\color{red}\rn{refl}}
 								{}
-								{\B, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
+								{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
 								{\vlin {\llabrn{\BOX}}
 									{}
-									{\B, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \Rightarrow \labels{u}{B}}
+									{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
 									{\vlin {\color{red}\rn{refl}}
 										{}
-										{\B, \futs tt, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+										{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
 										{\vlin {\rn{id}}
 											{}
-											{\B, \futs tt, \futs uu, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \Rightarrow \labels{u}{B}}
+											{\lseq{\B, \futs tt, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
 											{\vlhy {}}}}}}}}}}}
 }
 $$
@@ -1292,13 +1291,13 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{}
-		{\Rightarrow \labels{x}{\DIA \BOT \IMP \BOT}}
+		{\SEQ \labels{x}{\DIA \BOT \IMP \BOT}}
 		{\vlin {\llabrn{\DIA}}
 			{}
-			{\futs xy, \labels{y}{\DIA \BOT} \Rightarrow \labels{y}{\BOT}}
+			{\lseq{\futs xy}{\labels{y}{\DIA \BOT}}{\labels{y}{\BOT}}}
 			{\vlin {\llabrn{\BOT}}
 				{}
-				{\futs xy, \accs yz, \labels{z}{\BOT} \Rightarrow \labels{y}{\BOT}}
+				{\lseq{\futs xy, \accs yz}{\labels{z}{\BOT}}{\labels{y}{\BOT}}}
 				{\vlhy {}}}}
   }
   $$
@@ -1308,16 +1307,16 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{}
-		{\Rightarrow \labels{x}{A \AND B \IMP B}}
+		{\SEQ \labels{x}{A \AND B \IMP B}}
 		{\vlin {\llabrn{\AND}}
 			{}
-			{\futs xy, \labels{y}{A \AND B} \Rightarrow \labels{y}{B}}
+			{\lseq{\futs xy}{\labels{y}{A \AND B}}{\labels{y}{B}}}
 			{\vlin {\color{red}\rn{refl}}
 				{}
-				{\futs xy, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+				{\lseq{\futs xy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
 				{\vlin {\rn{id}}
 					{}
-					{\futs xy, \futs yy, \labels{y}{A}, \labels{y}{B} \Rightarrow \labels{y}{B}}
+					{\lseq{\futs xy, \futs yy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
 					{\vlhy {}}}}}
   }
   $$
@@ -1325,16 +1324,40 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   
   Finally, we have to show how the rules of modus ponens and
   necessitation can be simulated in our system. For modus ponens, this
-  is standard using the cut rule and for necesitation, we can
+  is standard using the cut rule and for necessitation, we can
   transform a proof of $\fm A$ into a proof of $\fm{\BOX A}$ as
   follows:
+  
+\begin{lemma}
+	If there exists a proof of $\vlderivation {\vlpd{\Done}{}{\SEQ \labels{z}{A}}}$ then there exists a proof of $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$
+\end{lemma}
 
-  \todo{}
+\begin{proof}
+	
+	We assume that there exists a proof of $\vlderivation {\vlpd {\Done}{}{\SEQ \labels{z}{A}}}$ and we want to obtain a proof of $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$.
+	
+	Using the rule $\rlabrn{\BOX}$ introduced in the system $\labIKp$ and the proof of $\labels{z}{A}$ from our hypothesis, we can build the following proof:
+	$\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlin{\rn{w}}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}{\vlhy{ \SEQ \labels{z}{A}}}}}$ \hspace{3mm} or what it is the same $\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}}$.
+	
+	Let $\Dtwo$ be equal to: $\Dtwo = \vlderivation {\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}$. Therefore, we have the proof $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$.
+	
+%	If we have a proof of $\vlderivation {\vlpd {\Done}{}{\SEQ \labels{z}{A}}}$ then we can obtain a proof of $\labels{x}{\BOX A}$ using the rule $\rlabrn{\BOX}$ introduced in the system $\labIKp$ and the proof of $\labels{z}{A}$ that we assumed  $\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}}$
+%	
+%	Let $\Dtwo$ be equal to: $\Dtwo = \vlderivation {\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}$.
+%	Then using the \emph{weakening} rule, we have the following proof:
+%	
+%	\bigskip
+%	\begin{center}
+%		$\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlin{\rn{w}}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}{\vlhy{ \SEQ \labels{z}{A}}}}}$
+%	\end{center}
+%	
+	
+	
+\end{proof}
+
   
   This completes the proof of Proof of Theorem~\ref{thm:completeness}.
 \end{proof}
-
-\todo{use the macro for sequents (the macro uses a longer arrow)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2324,35 +2347,35 @@ The main goal of this section is to generate stronger logics adding new axioms t
 In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
 For example, you can add the following rule:
-$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
 to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-$\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
+$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
 In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
-For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
 %\begin{center}
-	($\diabrn{4}$) if $w \rel v$ and $v \rel u$, there exists a $u'\in W$ s.t.~$u \le u'$ and $wRu'$.
+	($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %\end{center}
 
 Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
 
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
 %
 These systems enjoy cut-elimination via usual arguments. Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
 
-Proof of $\ax{4_{\BOX}} \colon \BOX A \IMP \BOX\BOX A$
+Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
 
 $\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', \bm{w' \rel v}, \bm{v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, \bm{w' \le t}, \bm{t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', \bm{v' \rel u}, w' \le t, \bm{t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, \bm{t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+		\vliq{\rlabrn\BOX}{}{\futs xw, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{\futs xw, \futs{w}{w'}, \bm{\accs{w'}{v}}, \bm{\futs{v}{v'}}, \accs{v'}{u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{trans}}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \bm{\futs{w'}{t}}, \bm{\accs{t}{v'}}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\boxbrn{4}}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \bm{\accs{v'}{u}}, \futs{w'}{t}, \bm{\accs{t}{v'}}, \futs wt \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\labrn\BOX}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{w}{t}, \bm{\accs tu}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs wt, \accs tu, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
 								\vlhy{}
 							}
 						}
@@ -2368,10 +2391,10 @@ Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
 
 $\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{x \le w, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\diasym_\rn{4}}{}{x \le w, w \rel v, v \rel u, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{x \le w, w \rel v, v \rel u, u \le u', w \rel u'  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
 						\vlhy{}
 					}
 				}
@@ -2383,7 +2406,7 @@ $
 
 \bigskip
 
-Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A$ (Figure \ref*{fig:gklmn}).\todo{Wrong label. why??} 
+Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$ (Figure \ref*{fig:gklmn}).\todo{Wrong label. why??} 
 
 Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
 
@@ -2412,7 +2435,7 @@ Following the idea to have a sound and complete system adding the axiom $\agklmn
 \bigskip
 
 \begin{center}
-	$\vlderivation { \vlin {\gklmn}{y', u$ fresh$}{\B, xR^{k}y, xR^{m}z, \Left \Rightarrow \Right}{\vlhy {\B, y \le y', xR^{k}y, xR^{m}z, y'R^{l}u, zR^{n}u, \Left\Rightarrow \Right}}}$
+	$\vlderivation { \vlin {\gklmn}{y', u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \Rightarrow \Right}{\vlhy {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\Rightarrow \Right}}}$
 \end{center}
 
 \bigskip
@@ -2426,36 +2449,36 @@ We start proving that our new system is complete with the base case of $\mathsf{
 \begin{proof}
 	\begin{center}
 		\scalebox{0.93}{
-			$\vlderivation {\vlin {\sir}
-				{y$ fresh$}
-				{\Rightarrow \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}
-				{\vlin {\sbr}
-					{z, w $ fresh $}
-					{x \le y, \labels{y}{\DIA \BOX A} \Rightarrow \labels{y}{\BOX \DIA A}}
-					{\vlin {\sdl}
-						{u$ fresh$}
-						{x \le y, y \le z, zRw, \labels{y}{\DIA \BOX A} \Rightarrow \labels{w}{\DIA A}}
-						{\vlin {\ftwo}
-							{t$ fresh$}
-							{x \le y, y \le z, zRw, yRu, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
+			$\vlderivation {\vlin {\rlabrn{\IMP}}
+				{y \mbox{ fresh}}
+				{\SEQ \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}
+				{\vlin {\rlabrn{\BOX}}
+					{z, w \mbox{ fresh} }
+					{\lseq{\futs xy}{\labels{y}{\DIA \BOX A}}{\labels{y}{\BOX \DIA A}}}
+					{\vlin {\llabrn{\DIA}}
+						{u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA \BOX A}}{\labels{w}{\DIA A}}}
+						{\vlin {\rn{F_2}}
+							{t \mbox{ fresh}}
+							{\lseq{\futs xy, \futs yz, \accs zw, \accs yu}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
 							{\vlin {\gklmn}
-								{t', j$ fresh$}
-								{x \le y, y \le z, u \le t, zRw, yRu, zRt, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
-								{\vlin {\sdr}
+								{t', j \mbox{ fresh}}
+								{\lseq{\futs xy, \futs yz, \futs ut, \accs zw, \accs yu, \accs zt}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
+								{\vlin {\rlabrn{\DIA}}
 									{}
-									{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}}
-									{\vlin {\trans}
+									{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
+									{\vlin {\rn{trans}}
 										{}
-										{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
-										{\vlin {\sbl}
+										{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+										{\vlin {\llabrn{\BOX}}
 											{}
-											{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
-											{\vlin {\refl}
+											{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+											{\vlin {\rn{refl}}
 												{}
-												{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A}, \labels{j}{A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
-												{\vlin {\ids}
+												{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+												{\vlin {\rn{id}}
 													{}
-													{x \le y, y \le z, u \le t, t \le t', u \le t',j \le j, zRw, yRu, zRt, t'Rj, wRj, \labels{u}{\BOX A}, \labels{j}{A} \Rightarrow \labels{w}{\DIA A}, \labels{j}{A}}
+													{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'},\futs jj, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
 													{\vlhy {}}}}}}}}}}}}$}
 	\end{center}
 \end{proof}
