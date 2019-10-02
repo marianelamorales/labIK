@@ -1,0 +1,251 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Completeness}\label{sec:completeness}
+
+In this section we show our system at work, as most of the section
+consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prove completeness of $\labIKp$, i.e., the implication \ref{i}$\implies$\ref{ii} of Theorem~\ref{thm:cutfree-compl}, which is stated again below:
+
+\begin{theorem}\label{thm:completeness}
+	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK$ then $\fm A$ is provable in $\labIKp +\labrn{cut}$.
+\end{theorem}
+
+\begin{remark}
+  We have seem already in the proof of Proposition~\ref{prop:id} the
+  need of the rule $\rn{F_2}$. In the following proof of
+  Theorem~\ref{thm:completeness} we also see the need of the rules
+  $\rn{F_1}$, $\rn{refl}$, and $\rn{trans}$.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:completeness}]
+  We begin by showning how the axioms $\kax[1]$--$\kax[5]$ are proved in system $\labIKp$.
+  \begin{itemize}
+  \item $\kax[1]$:
+    $$
+    \vlderivation{
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\SEQ \labels{x}{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
+				{\vlin {\rlabrn{\IMP}}
+					{\lb z \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\BOX(A \IMP B)}}{\labels{y}{\BOX A \IMP \BOX B}}}
+					{\vlin {\rlabrn{\BOX}}
+						{\lb w, \lb u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{z}{\BOX B}}}
+						{\vlin {\llabrn{\BOX}}
+							{}
+							{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{u}{B}}}
+							{\vlin {\color{red}\rn{trans}}
+								{}
+								{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
+								{\vlin {\llabrn{\BOX}}
+									{}
+									{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
+										{\vliin{\llabrn{\IMP}}
+											{}
+											{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
+											{\vlin {\rn{id}}
+												{}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}, \labels{u}{A}}}
+												{\vlhy {}}}
+											{\vlin {\rn{id}}
+												{}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{u}{B}}}
+												{\vlhy {}}}}}}}}}}
+    }
+    $$
+    where $\B$ is equal to: $\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu$.
+  \item $\kax[2]$:
+    $$
+    \vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{\lb y \mbox{ fresh}}
+		{ \SEQ \labels{x}{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
+		{\vlin {\rlabrn{\IMP}}
+			{\lb z \mbox{ fresh}}
+			{\lseq{\futs xy}{\labels{y}{\BOX (A \IMP B)}}{\labels{y}{(\DIA A \IMP \DIA B)}}}
+			{\vlin {\llabrn{\DIA}}
+				{\lb u \mbox{ fresh}}
+				{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX (A \IMP B)}, \labels{z}{\DIA A}}{\labels{z}{\DIA B}}}
+				{\vlin{\rlabrn{\DIA}}
+					{}
+					{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}}}
+					{\vlin {\llabrn{\BOX}}
+						{}
+						{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+						{\vlin {\color{red}\rn{refl}}
+							{}
+							{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+							{\vliin{\llabrn{\IMP}}
+								{}
+								{\lseq{\futs xy, \futs yz, \accs zu, \futs uu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+								{\vlin {\rn{id}}
+									{}
+									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}}
+									{\vlhy {}}}
+								{\vlin {\rn{id}}
+									{}
+									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+									{\vlhy {}}}								}}}}}}
+    }
+    $$
+    where $\B$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
+  \item $\kax[3]$:
+    $$
+    \vlderivation {
+			\vlin{\rlabrn{\IMP}}
+			{}
+			{\SEQ \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
+			{\vlin {\llabrn{\DIA}}
+				{}
+				{\lseq{\futs xy}{\labels{y}{\DIA (A \OR B)}}{\labels{y}{\DIA A \OR \DIA B}}}
+				{\vliin{\llabrn{\OR}}{}{\lseq{\futs xy, \accs yz}{\labels{z}{A \OR B}}{\labels{y}{\DIA A \OR \DIA B}}}{\vlin {\rlabrn{\OR}}
+						{}
+						{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A \OR \DIA B}}}
+						{\vlin {\rlabrn{\DIA}}
+							{}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
+							{\vlin {\color{red}\rn{refl}}
+								{}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
+								{\vlin {\rn{id}}
+									{}
+									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
+									{\vlhy {}}}}}}{\vlin {\rlabrn{\OR}}
+						{}
+						{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A \OR \DIA B}}}
+						{\vlin {\rlabrn{\DIA}}
+							{}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
+							{\vlin {\color{red}\rn{refl}}
+								{}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
+								{\vlin {\rn{id}}
+									{}
+									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
+									{\vlhy {}}}}}}}}
+		}
+    $$
+  \item $\kax[4]$:
+    $$
+\vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{\lb y \mbox{ fresh}}
+		{\SEQ \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
+		{\vlin {\rlabrn{\BOX}}
+			{\lb z, \lb w \mbox{ fresh}}
+			{\lseq{\futs xy}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{y}{\BOX (A \IMP B)}}}
+			{\vlin {\rlabrn{\IMP}}
+				{\lb u \mbox{ fresh}}
+				{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{w}{A \IMP B}}}
+				{\vlin {\color{red}{\rn{F_1}}}
+					{}
+					{\lseq{\futs xy, \futs yz, \futs wu, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+					{\vlin {\color{red}\rn{trans}}
+						{}
+						{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+						{\vliin {\llabrn{\IMP}}
+							{}
+							{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+							{\vlin {\rlabrn{\DIA}}
+									{}
+									{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
+										{\vlin {\rn{id}}
+											{}
+											{\lseq{\B, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
+											{\vlhy {}}}}}
+							{\vlin {\color{red}\rn{refl}}
+								{}
+								{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
+								{\vlin {\llabrn{\BOX}}
+									{}
+									{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
+										{\vlin {\rn{id}}
+											{}
+											{\lseq{\B, \futs tt, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
+											{\vlhy {}}}}}}}}}}}
+}
+$$
+where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu$.
+\item $\kax[5]$:
+  $$
+  \vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{}
+		{\SEQ \labels{x}{\DIA \BOT \IMP \BOT}}
+		{\vlin {\llabrn{\DIA}}
+			{}
+			{\lseq{\futs xy}{\labels{y}{\DIA \BOT}}{\labels{y}{\BOT}}}
+			{\vlin {\llabrn{\BOT}}
+				{}
+				{\lseq{\futs xy, \accs yz}{\labels{z}{\BOT}}{\labels{y}{\BOT}}}
+				{\vlhy {}}}}
+  }
+  $$
+  \end{itemize}
+  Next, we have to prove all axioms of intuitionistic propositional logic can be shown in $\labIKp$. We do this only for $\fm{A \AND B \IMP B}$ and leave the rest to the reader:
+  $$
+  \vlderivation {
+		\vlin{\rlabrn{\IMP}}
+		{}
+		{\SEQ \labels{x}{A \AND B \IMP B}}
+		{\vlin {\llabrn{\AND}}
+			{}
+			{\lseq{\futs xy}{\labels{y}{A \AND B}}{\labels{y}{B}}}
+			{\vlin {\color{red}\rn{refl}}
+				{}
+				{\lseq{\futs xy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
+				{\vlin {\rn{id}}
+					{}
+					{\lseq{\futs xy, \futs yy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
+					{\vlhy {}}}}}
+  }
+  $$
+  
+  
+  Finally, we have to show how the rules of modus ponens and
+  necessitation can be simulated in our system. For modus ponens, this
+  is standard using the cut rule and for necessitation, we can
+  transform a proof of $\fm A$ into a proof of $\fm{\BOX A}$ as
+  follows:
+  
+\begin{lemma}
+	If there exists a proof of $\vlderivation {\vlpd{\Done}{}{\SEQ \labels{z}{A}}}$ then there exists a proof of $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$
+\end{lemma}
+
+\begin{proof}
+	
+	We assume that there exists a proof of $\vlderivation {\vlpd {\Done}{}{\SEQ \labels{z}{A}}}$ and we want to obtain a proof of $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$.
+	
+	Using the rule $\rlabrn{\BOX}$ introduced in the system $\labIKp$ and the proof of $\labels{z}{A}$ from our hypothesis, we can build the following proof:
+	$\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlin{\rn{w}}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}{\vlhy{ \SEQ \labels{z}{A}}}}}$ \hspace{3mm} or what it is the same $\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}}$.
+	
+	Let $\Dtwo$ be equal to: $\Dtwo = \vlderivation {\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}$. Therefore, we have the proof $\vlderivation { \vlpd{\Dtwo}{}{\SEQ \labels{x}{\BOX A}}}$.
+	
+%	If we have a proof of $\vlderivation {\vlpd {\Done}{}{\SEQ \labels{z}{A}}}$ then we can obtain a proof of $\labels{x}{\BOX A}$ using the rule $\rlabrn{\BOX}$ introduced in the system $\labIKp$ and the proof of $\labels{z}{A}$ that we assumed  $\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}}$
+%	
+%	Let $\Dtwo$ be equal to: $\Dtwo = \vlderivation {\vlpd {\Dwone}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}}$.
+%	Then using the \emph{weakening} rule, we have the following proof:
+%	
+%	\bigskip
+%	\begin{center}
+%		$\vlderivation{\vlin{\rlabrn{\BOX}}{}{\SEQ \labels{x}{\BOX A}}{\vlin{\rn{w}}{}{\futs xy, \accs yz \SEQ \labels{z}{A}}{\vlhy{ \SEQ \labels{z}{A}}}}}$
+%	\end{center}
+%	
+	
+	
+\end{proof}
+
+  
+  This completes the proof of Proof of Theorem~\ref{thm:completeness}.
+\end{proof}

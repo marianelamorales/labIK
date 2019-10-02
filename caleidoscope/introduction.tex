@@ -1,0 +1,219 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\todo{get bib-file right}
+
+\section{Introduction}\label{sec:intro}
+
+Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
+\emph{labelled proof calculi} have been widely used by proof theorist
+to give sound, complete and cut-free deductive systems to a broad range
+of logics. Unlike so-called \emph{internal calculi}, like
+hyper-sequents~\cite{avron:elc96} or nested
+sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann?},
+labelled calculi have the advantage of being more uniform and being able to 
+accommode more logics.
+
+Standard labelled sequent calculi attach to every formla $\fm A$ a label
+$\lb x$, witten as $\labels xA$, and additionally admit so called
+\emph{relational atoms} of the form $\accs xy$ where $\rel$ is a
+binary relation symbol. These calculi work best for logics with
+standard Kripke semantics, as in this case the relation $\rel$ is used
+to encode the accessibility relation in the Kripke models, and the
+frame conditions corresponding to the desired logic can be directly
+encoded as inference rules. Prominent examples are classical modal
+logics and intuitionistic propositional logic, where, e.g., the frame
+condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
+inference rule
+\begin{equation}
+  \label{eq:Rtrans}
+  \vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+    \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
+\end{equation}
+where $\B$ stands for a set of relational atoms, and $\Gamma$ and
+$\Delta$ for multi-sets of labelled formulas.
+
+However,
+in this paper we are concerned with \emph{intuitionistic modal
+  logics}, whose Kripke semantics is based on \emph{birelational}
+frames, i.e., they have two binary relations instead of one: one
+relation $R$ that corresponds to the accessibility relation in
+ordinary Kripke frames for modal logics, and a relation $\le$ that
+corresponds to the future relation in ordinary Kripke frames for
+intuitionistic logic. Consequently, standard labelled systems for
+these logics have certain shortcomings:
+\begin{enumerate}
+\item The transitivity rule in~\eqref{eq:Rtrans} corresponds to both
+  versions of the $\fourax$-axiom
+  \begin{equation}
+    \label{eq:4ax}
+    \fm{\BOX A\IMP \BOX\BOX A}
+    \qquand
+    \fm{\DIA\DIA A\IMP\DIA A}
+    \quadcm
+  \end{equation}
+  as they are equivalent in classical
+  modal logic. However, in intuitionistic modal logic they are not
+  equivalent, and even though the logic $\ISfour$, i.e., the
+  intuitionistic version of the modal logic $\Sfour$, contains both
+  axioms, they can be added independently to the logic $\IK$ (the
+  intuitionistic version of $\K$). However, the proof theory of these
+  new logics has not been studied before, as no existing labelled (or
+  label-free) proof system can handle them, even though the
+  corresponding frame conditions
+  \begin{equation}
+    \label{eq:4frame}
+    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
+    \quand
+    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+    \;,
+  \end{equation}
+  respectively, have already been studied
+  in~\cite{plotkin:stirling:86}.
+  \item The correspondence between the syntax and the semantics is not
+  as clean as one would expect. As only the $R$-relation (and not the
+  $\le$-relation) of the frame is visible in an ordinary labelled
+  sequent, we only have that a sequent $\Gamma$ is provable if and
+  only if is is valid in all \emph{graph-consistent}\footnote{This
+    means that every layer in the model can be lifted to any future of
+    any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.} for  models, as
+  already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
+  and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
+\end{enumerate}
+In order to address these two issues we propose here to extend the
+notion of labelled sequent by also allowing relational atoms of the
+form $\futs xy$. Consequently, we can easily translate the frame
+conditions in~\eqref{eq:4frame} into inference rules:
+\begin{equation}
+  \label{eq:4rules}
+  \vlinf{\rn{4^{\BOX}}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+     \B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+  \qquand
+  \vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+    \B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
+\end{equation}
+This allows us to define cut-free deductive systems for a wide range
+of logics that could not be treated before.  Furthermore, the relation
+between syntax and semantics is as one would expect: A sequent is
+provable in our system if and only if it is valid in all models.
+
+Besides that, there is another pleasant observation to make about our
+system. Ordinary labelled sequent systems for intuitionistic modal
+logic are single-conclusion~\cite{simpson:phd}. The same is true for
+the corresponding nested sequent
+systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
+Maehara style multiple-conclusion systems in nested
+sequents~\cite{kuz:str:maehara}, and therefore also in ordinary
+labelled sequents. However, also in these systems there are rules
+($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
+premise, even though this is not the case in labelled
+systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83} for
+intuitionistic logic. Our system eliminates this
+discrepancy. Consequently, every rule in our system is invertible, as
+we never delete information.
+
+\medskip
+
+This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics.
+
+
+\todo{maybe paragraph on related work? cite Maffezioli, Naibo and Negri~\cite{maffezioli:etal:synthese13}.}
+
+
+\section*{Introduction(old version, to be deleted)}
+\todo{We should work on the introduction}
+
+One possible-world semantics was established as a solid base to define modal logics, the idea of incorporating these notions into the proof theory of modal logics emerged. Fitch seems to have been the first one to formalise it, directly including symbols representing worlds into the language of his proofs in natural deduction \cite{Fitch}.
+
+\emph{Labelled deduction} has been proposed by Gabbay~\cite{Gabbay} in the 80s as a unifying framework throughout proof theory in order to provide proof
+systems for a wide range of logics. 
+%
+For modal logics it can take
+the form of labelled natural deduction and labelled sequent systems as
+used, for example, by Simpson~\cite{Simpson}, Vigan\`o~\cite{Vigano}, and
+Negri~\cite{Negri}. 
+%
+These formalisms make explicit use not only of
+labels, but also of relational atoms referring to the accessibility relation of a Kripke frame.
+%
+In this short note we propose a system that represents both the \emph{accessibility relation} (for modal
+logics) and the \emph{preorder relation} (for intuitionistic
+logic), using the full power of the bi-relational semantics for
+intuitionistic modal logics,
+and developing fully the idea that Maffezioli, Naibo and Negri employed in~\cite{Maffezioli}. 
+
+\todo{Simpson does not have internal cut-elimination}
+
+\sonia{
+  \begin{itemize}
+  \item internal vs externl calculi
+  \item extesion to axioms are truly intuitionistic (not just the
+    classical versions as in Simpson style)
+  \item connection with semantics compared to graph homomorphism
+    restiction in Simpson and ``indexed nested systems''
+  \end{itemize}
+}
+  
+\lutz{things that should be said explicitely somewhere (maybe intro, maybe somewhere else):
+  \begin{itemize}
+  \item what we do:
+    \begin{itemize}
+    \item first systems (nested and labelled) for intuitionistic modal
+      logic where ``single conclusion'', i.e., only one formula on the
+      right.
+    \item Then ``multiple conclusion'' (Meahara-style) nested sequent.
+    \item Still rules that forced single formula on the right (white implication and white box)
+    \item by allowing both relations of the model in the proof system
+      we go to genuinely multiple conclusion: never ever a formula on
+      the right has to be deleted during proof search.
+    \end{itemize}
+  \item why we do it: 
+    \begin{itemize}
+    \item getting things right: labelled systems for classical modal
+      logics, or plain propositional intuiionistic logic have one
+      binary relation, which is exactly the relation of the standard
+      Kripke semantics. The standard Kripke semantics for
+      intuitionistic modal logic is birelational, with a strong
+      connectiion between the two binary relations. A clean labelled
+      system for these logics should incorporate both relations.
+    \item We get new logics.  In the standard nested sequent
+      or labelled sequent system for intuitionistic modal logic we
+      always have both conjuncts we we add Scott-Lemmon/Geach axioms;
+      but here we can have them separtely.
+    \end{itemize}
+  \item how we do it:
+    \begin{itemize}
+    \item We start from the Maehara nested sequent system (which can
+      be translated straightforwardly into a labelled system with one
+      relation $R$.
+    \item the rules for $\AND$ and $\OR$ are trivial and as expected
+      they can be presented such that they are invertible on the left
+      and the right, they do not concern the relations $R$ and $\le$. 
+    \item So should be the rules for $\IMP$-left and $\BOX$-left and
+      identity, but there is a subtlety; see below...
+    \item the rules for $\DIA$ are also straightforward, as they
+      concern only $R$ but not $\le$.
+    \item The rules $\BOX$-right and $\IMP$-right are the ones that
+      force single conclusion in the Maehara system. This means that
+      here they create a future, using the relation $\le$.
+    \item In order to make everything work together, this forces us to
+      have reflexivity and transitivity of $\le$, explicely as rules
+      in the system, and have rules for the F1 and F2 conditions
+      making the relations $R$ and $\le$ go together.
+    \item As a consequence we also need a rule realizing monotonicity
+      for the formulas on the right.
+    \item However, we designed the system such that monotonicity is
+      admisible by encorporating it into the rules for identity,
+      $\IMP$-left and $\BOX$-left.
+    \end{itemize}
+  \end{itemize}
+}
+%
+%For sequent systems for intuitionistic logics there is always a choice
+%to be made: make the system \emph{single conclusion} following
+%Gentzen~\cite{Gentzen} or \emph{multiple conclusion} following
+%Maehara~\cite{Maehara}. In our work we choose the multiple conclusion
+%variant because of the closer correspondence to the semantics. In that
+%respect, our system is closer to~\cite{kuz:str} than
+%to~\cite{Simpson} and~\cite{mar:str}.

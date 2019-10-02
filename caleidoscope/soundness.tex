@@ -1,0 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness}\label{sec:soundness}
+
+In order to prove the implication \ref{iii}$\implies$\ref{iv} from
+Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule of our system $\labIKp$ is sound. We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion.
+
+In order to obtain the proof, let us introduce the next definitions:
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model. We say that $\f$ is an \emph{assignment function} such that $\f : Labels \rightarrow W$.
+\end{definition} 
+
+\begin{definition}
+	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \SEQ \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \SEQ \Delta$ if for all $\f$ such that:
+	\begin{enumerate}
+		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$. \marianela{should we say that this is equal to $\M \Vdash \labels{x}{A}$?}
+		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
+		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
+	\end{enumerate}
+	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \SEQ \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \SEQ \Delta$.
+\end{definition}
+
+
+Following the definitions, we display the proof of soundness for some rules since it is similar for each rule. 
+
+\begin{itemize}
+	\item Rule $\llabrn\BOX$: 
+	
+	We want to prove that the rule for $\llabrn\BOX$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
+	
+	\begin{center}
+		\emph{For all model $\M$, if $\M \Vdash \B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$, then $\M \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$.}
+	\end{center}
+	
+	By way of contradiction, we assume that there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \futs xy, \accs yz,\Left,\break \labels{x}{\BOX A} \SEQ \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash \futs xy$, $ \M_{0} \Vdash \accs yz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all $\lb y, \lb z \in W$ such that $\futs xy$ and $\accs yz$, $\M_{0}, f(\lb z) \Vdash \fm A$, i.e $\M_{0} \Vdash \labels{z}{\fm A}$. From this result, we can say that $\M_{0} \not \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$. Thus, we have already proved that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \futs xy, \accs yz,\Left,\break \labels{x}{\BOX A} \SEQ \Right$, then $\M_{0} \not \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$. According to the definition, we proved that the rule $\llabrn\BOX$ is sound.
+	
+	
+	
+	
+	\item Rule $\rlabrn\BOX$: 
+	
+	In order to prove that the rule $\rlabrn\BOX$ of the system $\labIKp$ is sound, we need to show that:
+	
+	\begin{center}
+		\emph{For all model $\M$, if $\M \Vdash \B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}$, then $\M \Vdash \B, \Left \SEQ \Right, \labels{x}{\BOX A}$.}
+	\end{center}
+	
+	By way of contradiction, we want to prove that if there exists a model that does not satisfy the conclusion, then the same model does not satisfy the premise. Let us assume that there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \SEQ \Right, \labels{x}{\BOX A}$. In particular, $\M_{0} \not \Vdash \labels{x}{\BOX A}$, which means that there exist worlds $\lb y, \lb z$, such that $\futs xy$ and $\accs yz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Finally, we have that $\M_{0} \Vdash \B, \futs xy, \accs yz, \Left$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}, \labels{z}{A}$,  which is the same as $\M_{0} \not \Vdash \B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}$. Then, by way of contradiction, we proved that the rule $\rlabrn\BOX$ is sound.
+	
+	\item Rule $\rlabrn\IMP$: 
+	
+	We display the proof of soundness for the rule $\rlabrn\IMP$ showing that:
+	\begin{center}
+		\emph{For all model $\M$, if $\M \Vdash \B, \futs xy, \Left, \labels{y}{A} \SEQ \Right \labels{y}{B}$, then $\M \Vdash \B, \Left \SEQ \Right, \labels{x}{A \IMP B}$.}
+	\end{center}
+	
+	We prove this statement by way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0}$ does not satisfy the conclusion, i.e. $\M_{0} \not \Vdash \B, \Left \SEQ \Right, \labels{x}{A \IMP B}$. In particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $\lb y$ such that $\futs xy$ and $\M_{0}, f(\lb y) \Vdash A$ (i.e. $\M_{0} \Vdash \labels{y}{A}$) but $\M_{0}, f(\lb y) \Vdash B$, i.e. $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, \futs xy, \Left, \labels{y}{A} \SEQ \labels{y}{B}$. This means that the model $\M_{0}$ does not satisfy the premise and that is what we wanted to prove. Finally, we showed that the rule $\rlabrn\IMP$ is sound.
+	
+	\item Rule $\llabrn\DIA$:
+	
+	Following the same reasoning that we have been tabling, we define what means soundness of the rule $\llabrn\DIA$:
+	
+	\begin{center}
+		\emph{For all model $\M$, if $\M \Vdash \B, \accs xy,  \Left, \labels{y}{A} \SEQ \Right$, then $\M \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$.}
+	\end{center}
+	
+	In order to prove this statement, we assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$ and we want to see that $\M_{0} \not \Vdash \B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$.
+	From our assumption, we have that from $\M_{0} \not \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$ we obtain $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash \labels{x}{\DIA A}$ and $\M_{0} \not \Vdash \Right$. From $\M_{0} \Vdash \labels{x}{\DIA A}$, according to the definition of the $\DIA$ operator, we have that there exists a world $\lb y$ in $\M_{0}$ such that $\accs xy$ and $\M_{0} \Vdash \labels{y}{A}$. Therefore, we have that $\M_{0} \not \Vdash \B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ and we prove that the rule $\llabrn\DIA$ is sound.
+	
+	
+	\item Rule $\rlabrn\DIA$:
+	
+	We want to prove that the rule $\rlabrn\DIA$ is sound, which means that:
+	
+	\begin{center}
+		For all model $\M$, if $\M \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$ then $\M \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}$
+	\end{center}
+	
+	We prove this statement by way of contradiction. Let us assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}$, we want to show that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$.
+	From our hypothesis we have that $\M_{0} \not \Vdash \labels{x}{\DIA A}$, i.e. for all world $\lb y \in \M_{0}$ where $\accs xy$ we have $\M_{0} \not \Vdash \labels{y}{A}$. Therefore, we have that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$. Finally, assuming that $\M_{0}$ does not satisfy the conclusion, we proved that $\M_{0}$ does not satisfy the premise. Then we conclude that the rule $\rlabrn\DIA$ of the system $\labIKp$ is sound.
+\end{itemize}
+
+
+
+The other cases are similar and we leave them to the reader.
