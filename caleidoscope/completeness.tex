@@ -249,3 +249,81 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   
   This completes the proof of Proof of Theorem~\ref{thm:completeness}.
 \end{proof}
+
+
+\sonia{I think the following needs to appear somewhere as it is rather illustrative of the key points. }
+
+This a a reflection on the proof-theoretic side of the model theoretic reasons to enforce $(F1)$ and $(F2)$ conditions on birelational models.
+
+In particular, in order to prove (i) $\rightarrow$ (ii), we present a syntactic completeness proof with respect the Hilbert system which means that we prove all Hilbert axioms using the rules from our system $\labIKp$: we give a proof for all the axioms of propositional intuionistic logic, for the five variants of $\mathsf{k}$ axiom from the intuitionistic syntax and finally, we simulate the necesssitation rule and modus ponens. As we mentioned, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%
+As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $\rn{F_1}$ in the system.
+\bigskip
+
+\vspace*{-.9cm}
+$$
+\hspace*{-.5cm}
+\scalebox{.9}{
+	$
+	\vlderivation{
+		\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
+			\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
+				\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
+					\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+						\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+							\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+								\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
+									\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+										\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+											\vlhy {}
+											}
+											}
+											}
+											}{
+											%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+											%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+											%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+											%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+											\vlhy {\qquad\vdots\qquad}
+											%										}
+											%									}
+											%								}
+											%							}
+											}
+											}
+											}
+											}
+											}
+											}
+											}$
+											}$$
+											%\end{example}
+											
+											%\vspace*{-.5cm}
+											
+Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
+%
+We therefore have to show that such a rule is admissible in our system.
+%
+As an example, we display one step of this admissibility proof that also illustrates the need for the rule $\rn{F_2}$. The other cases are standard.
+
+\vspace*{-.5cm}
+%\begin{example}
+$$
+\scalebox{.9}{
+	$
+	\vlderivation{
+		\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+						\vlhy{}
+						}
+						}
+						}
+						}
+						}
+						$
+						}
+						$$
+						%\end{example}

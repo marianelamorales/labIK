@@ -479,6 +479,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 		then there exists a proof 
 		$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
 		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		\sonia{this is wrong! $x\le y$ should appear in the conclusion of $\DD$. }
 		
 		\item
 		If there exists a proof 
@@ -504,7 +505,7 @@ If it does we rewrite it with a fresh variable $v$ first.
 	\end{enumerate}
 \end{lemma}
 
-\todo{add missing cases}
+\todo{add missing cases}\sonia{they are just weakenings.}
 
 \begin{proof}
 	In each case, we reason by induction on the height of $\DD$.

@@ -38,6 +38,7 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 	\end{array}
 	\end{equation*}
 \end{itemize}
+\sonia{axioms vs. axiom schemes? do we need to write these on atomic formulas $a,b$ instead of generic formulas $A,B$?}
 
 The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system \hbox{$\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$}. However this would give strictly no information on the behaviour of the $\DIA$ modality.
 It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. The systems are well-designed for some applications for example to analyse some type systems \cite{benton:etal:jfp98} or to reason about states of a machine under partial information \cite{wijesekera:nerode:apal05}. However, they cannot satisfy the logicians as the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
@@ -128,17 +129,6 @@ Similarly to the classical case, the correspondence between syntax and semantics
 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
-
-%Plotkin and Stirling give proper correspondence results, but they must distinguish the two dual parts of each axiom and appeal to both relations of the frames,
-
-\lutz{maybe the foloowing goes to the ``extensions'' section. otherwise we have to define $\agklmn$ here}
-\begin{theorem}[\cite{plotkin:stirling:86}]
-	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\agklmn$ if and only if the frame satisfies:
-	
-	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
-	
-\end{theorem}
 
 % we would like to consider special restrictions on these bi-relational frames. For example, we would be interested in having a correspondence between the logic $\IK$ extended with some variants of axioms and bi-relational frames satisfyins the corresponding d
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

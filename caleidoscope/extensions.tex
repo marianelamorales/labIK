@@ -4,9 +4,24 @@
 
 \section{Extensions}\label{sec:ext}
 
+%\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
+
+%Plotkin and Stirling give proper correspondence results, but they must distinguish the two dual parts of each axiom and appeal to both relations of the frames,
+
+%\lutz{maybe the following goes to the ``extensions'' section. otherwise we have to define $\agklmn$ here}
+
+\todo{
+\begin{theorem}[\cite{plotkin:stirling:86}]
+	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\agklmn$ if and only if the frame satisfies:
+	
+	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
+\end{theorem}
+}
+
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
+\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
 %
 For example, you can add the following rule:
 $$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
@@ -76,6 +91,7 @@ $\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\
 
 $\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \IMP \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
 
+\sonia{in the intuitionistic case, with the $\le$ proposition, the formula is geometric.}
 
 \begin{figure}[h]
 	\begin{center}
@@ -147,7 +163,8 @@ We start proving that our new system is complete with the base case of $\mathsf{
 
 In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
 
-\begin{lemma}\label{lemma:admis} The following rules are admissible in $\labIKp$:
+\begin{lemma}\label{lemma:admis} The following rules are derivable in $\labIKp$:
+	\todo{notation $\le \circ R$ etc. needs to be defined}
 	\begin{enumerate}
 		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}, \labels{z}{A} \Rightarrow \Right}}}$}
 		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, \labels{x}{\BOX^{k} A}}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, \labels{y}{A}}}}$}
