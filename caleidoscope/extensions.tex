@@ -1,0 +1,283 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensions}\label{sec:ext}
+
+The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
+
+In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
+
+In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+%\begin{center}
+	($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%\end{center}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
+
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
+%
+These systems enjoy cut-elimination via usual arguments. Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+
+Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, {w' \le t}, {t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', {v' \rel u}, w' \le t, {t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, {t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+$
+
+Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$
+
+\bigskip
+
+Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$ (Figure \ref*{fig:gklmn}).\todo{Wrong label. why??} 
+
+Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
+
+$\star$ \emph{Classical case} \hspace{2.2mm} $\rightsquigarrow$ \hspace{3.7mm}$\forall x,y,z ( xR^{k}y \vlan xR^{m}z \rightarrow \exists u yR^{l}u \vlan zR^{n}u)$ 
+
+$\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \IMP \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
+
+
+\begin{figure}[h]
+	\begin{center}
+		$
+		\xymatrix{
+			& u' \ar@{.>}[ddr]^{R^l} \\
+			& u \ar@{.>}[u]^{\le} \\
+			w \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && x \\
+			& v \ar@{.>}[ur]_{R^n}
+		}
+		$
+	\end{center}
+	\label{fig:gklmn}
+	\caption{$\agklmn$ axiom for intuitionistic case}
+\end{figure}
+
+Following the idea to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the next rule:
+
+\bigskip
+
+\begin{center}
+	$\vlderivation { \vlin {\gklmn}{y', u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \Rightarrow \Right}{\vlhy {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\Rightarrow \Right}}}$
+\end{center}
+
+\bigskip
+
+We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
+
+\begin{theorem}
+	The system $\labIKp +\agklmn$ is complete for $\mathsf{k = l = m = n = 1}$.
+\end{theorem}
+
+\begin{proof}
+	\begin{center}
+		\scalebox{0.93}{
+			$\vlderivation {\vlin {\rlabrn{\IMP}}
+				{y \mbox{ fresh}}
+				{\SEQ \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}
+				{\vlin {\rlabrn{\BOX}}
+					{z, w \mbox{ fresh} }
+					{\lseq{\futs xy}{\labels{y}{\DIA \BOX A}}{\labels{y}{\BOX \DIA A}}}
+					{\vlin {\llabrn{\DIA}}
+						{u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA \BOX A}}{\labels{w}{\DIA A}}}
+						{\vlin {\rn{F_2}}
+							{t \mbox{ fresh}}
+							{\lseq{\futs xy, \futs yz, \accs zw, \accs yu}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
+							{\vlin {\gklmn}
+								{t', j \mbox{ fresh}}
+								{\lseq{\futs xy, \futs yz, \futs ut, \accs zw, \accs yu, \accs zt}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
+								{\vlin {\rlabrn{\DIA}}
+									{}
+									{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
+									{\vlin {\rn{trans}}
+										{}
+										{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+										{\vlin {\llabrn{\BOX}}
+											{}
+											{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+											{\vlin {\rn{refl}}
+												{}
+												{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+												{\vlin {\rn{id}}
+													{}
+													{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'},\futs jj, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+													{\vlhy {}}}}}}}}}}}}$}
+	\end{center}
+\end{proof}
+
+In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
+
+\begin{lemma}\label{lemma:admis} The following rules are admissible in $\labIKp$:
+	\begin{enumerate}
+		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}, \labels{z}{A} \Rightarrow \Right}}}$}
+		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, \labels{x}{\BOX^{k} A}}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, \labels{y}{A}}}}$}
+		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, \labels{x}{\DIA^{k} A} \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, \labels{y}{A} \Rightarrow \Right}}}$ }
+		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}, \labels{y}{A}}}}$}
+	\end{enumerate}
+\end{lemma}
+
+\def\lef#1{#1}
+\def\rig#1{#1^{\circ}}
+\newcommand{\wbri}[2]{[\strut^{#1} #2]}
+
+	{\small
+		\begin{equation*}
+			\vlderivation{
+				\vlin{\rig\IMP,\lef\AND}{}{\rig{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\lef\DIA, \lef\AND,\lef\DIA}{}{\lef{\DIA(\BOX(a \OR b) \AND \DIA a)}, \lef{\DIA(\BOX(a \OR b) \AND \DIA b)}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+						\vlin{g 1111}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+							\vliin{\lef\BOX, \lef\OR}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+								\vlhtr{\pi_1}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}
+							}
+							{
+								\vlhtr{\pi_2}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}	
+							}
+						}
+					}
+				}
+			}
+		\end{equation*}
+	}
+	
+	{\small
+		\begin{equation*}
+			\pi_1 \quad=\quad
+			\vlderivation{
+				\vlin{}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+						\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a \AND \DIA b}}}{
+							\vlin{\rig{\DIA}}{}{
+								\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a}}}{
+								\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a, \rig a}}}{\vlhy{}}}
+						}
+						{
+							\vlin{\rig{\DIA}}{}{
+								\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA b}}}{
+								\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b, \rig b}, \wbri{z}{\lef a}}}{\vlhy{}}}
+						}
+					}
+				}
+			}
+		\end{equation*}
+	}
+	
+	{\small
+		\begin{equation*}
+			\pi_2 \quad=\quad 		
+			\vlderivation{
+				\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+					\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a \AND \DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+						\vlin{\rig{\DIA}}{}{
+							\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+							\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a, \rig a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
+					}{
+					\vlin{\rig{\DIA}}{}{
+						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b, \rig b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
+				}
+			}
+		}
+	\end{equation*}
+}
+
+
+
+{\small
+	\begin{equation*}
+	\vlderivation{
+		\vlin{\llabrn\IMP,\llabrn\AND}{}{\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+			\vlin{\lef\DIA, \lef\AND,\lef\DIA}{}{\lef{\DIA(\BOX(a \OR b) \AND \DIA a)}, \lef{\DIA(\BOX(a \OR b) \AND \DIA b)}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+				\vlin{g 1111}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+					\vliin{\lef\BOX, \lef\OR}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+						\vlhtr{\pi_1}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}
+					}
+					{
+						\vlhtr{\pi_2}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}	
+					}
+				}
+			}
+		}
+	}
+	\end{equation*}
+}
+
+{\small
+	\begin{equation*}
+	\pi_1 \quad=\quad
+	\vlderivation{
+		\vlin{}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+			\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+				\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a \AND \DIA b}}}{
+					\vlin{\rig{\DIA}}{}{
+						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a}}}{
+						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a, \rig a}}}{\vlhy{}}}
+				}
+				{
+					\vlin{\rig{\DIA}}{}{
+						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA b}}}{
+						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b, \rig b}, \wbri{z}{\lef a}}}{\vlhy{}}}
+				}
+			}
+		}
+	}
+	\end{equation*}
+}
+
+{\small
+	\begin{equation*}
+	\pi_2 \quad=\quad 		
+	\vlderivation{
+		\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
+			\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a \AND \DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+				\vlin{\rig{\DIA}}{}{
+					\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+					\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a, \rig a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
+			}{
+			\vlin{\rig{\DIA}}{}{
+				\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
+				\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b, \rig b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
+		}
+	}
+}
+\end{equation*}
+}

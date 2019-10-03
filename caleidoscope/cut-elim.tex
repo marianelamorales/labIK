@@ -1,0 +1,606 @@
+\section{Cut Admissibility}\label{sec:cut-elim}
+In this section we are going to prove the admissibility of cut for $\labIKp$.
+
+\begin{theorem}
+	\label{thm:cut-adm}
+	The rule $\labrn{cut}$ is admissible for $\labIKp$.
+\end{theorem}
+
+This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
+
+The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is the height of D when seen as a tree, i.e., the length of
+the longest path in the tree from its root to one of its leaves.
+
+We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if for every
+derivation of the conclusion of the rule there are derivations for each of its premisses with at most the same height.
+
+The following two lemmas are standard.
+
+\begin{lemma}
+	\label{lem:weak-adm}
+	The weakening rule
+	~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
+	is height-preserving admissible for $\labIKp$.
+\end{lemma}
+
+\begin{proof}
+	\todo{\begin{lemma}
+		If there exists a proof  $\vlderivation {\vlpd{\D}{}{\B, \Left \Rightarrow \Right}}$ then there exists a proof $\vlderivation {\vlpd {\Dw}{}{\B, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}}$
+		
+	\end{lemma}
+	
+	\vspace{3mm}
+	
+	\begin{proof}
+		By induction on the height of $\D$.
+		
+		For a proof of height 1:
+		
+		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \Left, x \le y, x \colon a \Rightarrow \Right, y \colon a}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \Left, x \le y, xRy, u \le v, x \colon a, z \colon A \Rightarrow \Right, w \colon B, y \colon a}{\vlhy {}}}$.
+		\vspace{2mm}
+		
+		For a proof $\D$ of height greater than 1:
+		
+		\begin{center}
+			
+			$\vlderivation{\vlin {$r$}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
+			
+		\end{center}
+		
+		Then by induction hypothesis there exists a proof 
+		
+		\begin{center}
+			
+			$\vlderivation {\vlpd {\Dwone}{}{\B', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}$
+			
+		\end{center}
+		
+		Therefore, we have the proof 
+		
+		\begin{center}
+			
+			$\Dw = \vlderivation {\vlin{}{}{\B, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}{\vlpd {\Dwone}{}{\B', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}}$
+			
+		\end{center}
+		
+	\end{proof}}
+\end{proof}
+
+\begin{lemma}
+	\label{lem:inv}
+	The rules ..... are height-preserving invertible in
+	$\labIKp$. Furthermore, the rule $\llabrn{\IMP}$ is
+	height-preserving invertible for the right premise.
+\end{lemma}
+
+\begin{proof}
+	\todo{}
+\end{proof}
+
+The next lemma looks like a special case of
+Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
+preserve the height, and second, we cannot prove it using cut as we
+need it to eliminate the cut.
+
+\begin{lemma}
+	The atomic version of $\llabrn{mon}$
+	$$
+	\vlinf{\labrn{mon_a}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}\Right}{
+		\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}\Right}
+	$$
+	is height-preserving admissible for $\labIKp$.
+\end{lemma}
+
+\begin{proof}
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{
+				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x''}{a}}{
+					\vlhy{}
+				}
+			}
+		}
+		\reducesto
+		\vlderivation{
+			\vlin{\color{red}\labrn{trans}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \futs{x}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{
+					\vlhy{}
+				}}
+			}
+		\end{smallequation*}
+		\todo{missing case}
+		%  	\begin{smallequation*}
+		%  		\vlderivation{
+		%  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{
+		%  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x'}{a}}{
+		%  					\vlhy{}
+		%  				}
+		%  			}
+		%  		}
+		%  		\reducesto
+		%  		\vlinf{\labrn{id}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{}
+		%  		\qedhere
+		%  	\end{smallequation*}
+	\end{proof}
+	
+	The next lemma is the core of our cut elimination proof.
+	
+	\begin{lemma}
+		\label{lem:reduction}
+		Given a derivation of shape
+		$$
+		\vlderivation{
+			\vliiin{\labrn{cut}}{}{\lseq\B\Left\Right}{
+				\vlhtr{\DD_1}{\lseq\B\Left{\Right,\labels{z}{C}}}}{
+				\vlhy{}}{
+				\vlhtr{\DD_2}{\lseq\B{\Left,\labels{z}{C}}{\Right}}}}
+		$$
+		where $\DD_1$ and $\DD_2$ are both cut-free, there is a cut-free
+		derivation of ${\lseq\B\Left\Right}$
+	\end{lemma}
+	
+	%$\vlderivation{\vlhtr{\DD}{\lseq\B\Left\Right}}$
+	
+	
+	Following the proof of the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
+	
+	For proving this theorem, we need a series of auxiliary lemmas (see Lemma \ref{lem:inv}).
+	
+	\begin{proof}
+		
+		By induction on number of cuts + (rank,height) of the left-most top-most cut.
+		
+		\textbf{Commutative cases:}\label{commutative-cases}
+		
+		\begin{smallequation*}
+			\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+				\vliin{\llabrn\IMP}{}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
+					\vlhtr{\DD_1}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+				}{
+				\vlhtr{\DD_2}{\B_1, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+			}
+		}{
+		\vlhtr{\DD_3}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+	}
+	\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-2em}
+	\vlderiibase{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+		}{
+		\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+	}
+}{
+\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{y}{B} \SEQ \Right}{
+	\vlhtr{\DD_2}{\B_1, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+}{
+\vlhtr{\DD_3[v/y]^{\invr{\llabrn\IMP}}}{\B_2, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+We need to make sure that $y$ does not appear in $\DD_3$, before applying Lemma~\ref{lem:inv}.
+%
+If it does we rewrite it with a fresh variable $v$ first.
+
+%\begin{smallequation*}
+%	\reducesto
+%	\vlderibase{\llabrn{cont}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+%		\vliin{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right}{
+%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+%%				\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+%%				}{
+%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+%%				}
+%				\vlhtr{\DD_4}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+%			}{
+%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
+%%				\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%%				}{
+%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%%				}
+%				\vlhtr{\DD_5}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%			}
+%		}
+%\end{smallequation*}
+%
+%\begin{smallalign*}&
+%	\text{with } \DD_4 = \quad
+%	\vlderivation{
+%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+%			\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+%		}{
+%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+%		}
+%	}
+%	\\&
+%	\text{and } \DD_5 = \quad
+%	\vlderivation{
+%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
+%			\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%		}{
+%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
+%		}
+%	}
+%\end{smallalign*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vlin{\rlabrn\IMP}{\text{\footnotesize $x'$ fresh}}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{A \IMP B}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $x''$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le x'' \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
+			\vlhtr{\DD_1[x''/x']}{\B_1, x \le x'', \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\IMP}}}{\B_2, x \le x'', \Left, \labels{z}{C}, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlin{\llabrn\BOX}{}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{\BOX A}, \labels{z}{C} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\llabrn\BOX}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\rn w}}{\B_2, \Left, \labels{x}{\BOX A}, \labels{v}{A}, \labels{z}{C} \SEQ \Right}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vlin{\rlabrn\BOX}{\text{\footnotesize $x',y'$ fresh}}{\B_1, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', x' \rel y' \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\BOX A}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $u,v$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\BOX}}}{\B_1, x \le u, u \rel v, \Left, \labels{z}{C} \SEQ \Right, \labels{v}{A}}
+	}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-2em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B_1, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y', \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{\DIA A}, \labels{z}{C} \SEQ \Right}
+}
+\reducesto
+\vlderibase{\llabrn\DIA}{\text{\footnotesize $y''$ fresh (also in $\DD_2$)}}{\B_1, \B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right}{
+		\vlhtr{\DD_1[y''/y']}{\B_1, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right, \labels{z}{C}}
+	}{
+	\vlhtr{\DD_2^{\invr{\llabrn\DIA}}}{\B_2, \Left, \labels{y''}{A}, \labels{z}{C} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-2em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+		\vlin{\rlabrn\DIA}{}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}}
+}
+\reducesto
+%	\end{smallequation*}
+%	
+%	\begin{smallequation*}
+\vlderibase{\rlabrn\DIA}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
+		\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+	}{
+	\vlhtr{\DD_2^{\rn w}}{\B_2, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+}
+}
+\end{smallequation*}
+
+\textbf{Key cases:}\label{key-cases}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
+		\vlin{\labrn{id}}{}{\B_1, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+			\vlhy{}	
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
+}
+\reducesto
+\vlderibase{\llabrn{mon}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
+	\vlhtr{\DD_2^{\rn w}}{\B_1, \B_2, x \le y, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
+		\vlhtr{\DD_1}{\B_1, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
+	}{
+	\vlin{\labrn{id}}{}{\B_2, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+		\vlhy{}	
+	}
+}
+\reducesto
+\vlderibase{\rlabrn{mon}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
+	\vlhtr{\DD_1^{\rn w}}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \B_3, x \le y, \Left \SEQ \Right}{
+		\vlin{\rlabrn\IMP}{}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}}
+		}
+	}{
+	\vliin{\llabrn\IMP}{}{\B_2, \B_3, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	}{
+	\vlhtr{\DD_3}{\B_3, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}
+	\hspace*{-2em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, \B_3, x \le y, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlin{\rlabrn\IMP}{}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
+				\vlhtr{\DD_1^{\rn w}}{\B_1, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
+			}
+			%			\vlhtr{\DD_{1\rn w}'}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}
+		}{
+		\vlhtr{\DD_{2}}{\B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	}
+}{
+\vliin{\labrn{cut}}{}{\B_1, \B_3, x \le y, \Left, \labels{y}{A} \SEQ \Right}{
+	\vlhtr{\DD_1[y/x']}{\B_1, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
+}{
+\vlhtr{\DD_3}{\B_3, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B_1, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1}{\B_1, x \le x', x' \rel y', \Left \SEQ \Right, \labels{y'}{A}}	
+		}
+	}{
+	\vlin{\llabrn\BOX}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+	}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right}{
+		%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
+		\vlhtr{\DD_1[u/x',v/y']}{\B_1, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}	
+		%			}{
+		%			\vlin{\llabrn\BOX}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{v}{A}}{
+		%				\vlin{\labrn{id}}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{v}{A}}{
+		%					\vlhy{}
+		%					}
+		%				}
+		%			}
+	}{
+	\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left, \labels{v}{A} \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B_1, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B_1, x \le x', x' \rel y', \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
+		}
+	}{
+	\vlhtr{\DD_2}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+}
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right}{
+		\vlin{\rlabrn\DIA}{}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+		}
+	}{
+	\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B_2, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B_2, x \rel y',\Left, \labels{y'}{A} \SEQ \Right}
+	}	
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \rel y, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B_1, x \rel y, \Left \SEQ \Right, \labels{y}{A}, \labels{x}{\DIA A}}
+		}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B_2, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_2^{\rn w}}{\B_2, x \rel y',\Left, \labels{y'}{A} \SEQ \Right, \labels{y}{A}}
+		}
+	}
+}{
+\vlhtr{\DD_2[y/y']}{\B_2, x \rel y,\Left, \labels{y}{A} \SEQ \Right}
+}
+\end{smallequation*}
+\end{proof}
+
+
+\begin{theorem}
+	\label{thm:mon-adm}
+	The rule $\rn{mon}$ is admissible for system $\labIKp$.
+\end{theorem}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
+	
+	\todo{say that we can obtain the proof of monotonicity using the proof of cut.}
+	
+\end{proof}
+
+
+\begin{lemma}\label{lem:inv}\hbox{}\quad
+	\begin{enumerate}
+		%\item
+		%If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
+		
+		\item
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+		\item
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
+		of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
+		
+		\item 
+		If there exists a proof 
+		$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
+		then there exists a proof 
+		$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
+		of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+		
+	\end{enumerate}
+\end{lemma}
+
+\todo{add missing cases}
+
+\begin{proof}
+	In each case, we reason by induction on the height of $\DD$.
+	
+	\begin{itemize}
+		\item $\llabrn\IMP$:
+		For a proof of height $1$, it is straightforward.
+		%
+		For example, if $\DD = \vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a}, \labels{x}{A \IMP B} \SEQ \Right, \labels{v}{a}}{}$, 
+		%
+		then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a},\labels{y}{B} \SEQ \Right, \labels{v}{a}}{}$.
+		
+		For a proof $\DD$ of height greater than $1$ we have two cases, depending on whether the last rule of $\DD$ acts on $\labels{x}{A \IMP B}$ or only on some part of the context.
+		
+		First let us fix a given index $y$ that does not appear in $\DD$.
+		
+		If we start with a proof
+		\begin{smallequation*}
+			\DD = 
+			\vlderivation{
+				\vlin{\rn{r}}{}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+					\vlhtr{\DD'}{\B', \Left', \labels{x}{A \IMP B} \SEQ \Right'}
+				}	
+			}
+		\end{smallequation*}
+		
+		Then by induction hypothesis there exists a proof 
+		\begin{smallequation*}
+			\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}}
+		\end{smallequation*}
+		of the same (or smaller) height as $\DD'$ (as $y$ also does not appear in $\DD'$).
+		
+		Therefore, we have the proof
+		\begin{smallequation*}
+			\DD^{\invr{\llabrn\IMP}} = 
+			\vlderivation{
+				\vlin{\rn{r}}{}{\B, \Left, \labels{y}{B} \SEQ \Right}{
+					\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}
+				}
+			}
+		\end{smallequation*}
+		of the same (or smaller) height as $\DD$.
+		
+		If we start with a proof 
+		\begin{smallequation*}
+			\vlderivation{
+				\vliin{\llabrn\IMP}{\text{\footnotesize $x \le z$ appears in $\B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+					\vlhtr{\DD_1}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{A}}
+				}{
+				\vlhtr{\DD_2}{\B, \Left, \labels{z}{B} \SEQ \Right}
+			}
+		}
+	\end{smallequation*}
+	then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlderivation{\vlhtr{\DD_2[y/z]}{\B, \Left, \labels{y}{B} \SEQ \Right}}$ (as $y$ also does not appear in $\DD_2$) and its height is smaller than the one of $\DD$.
+	
+	%
+	\item $\llabrn\DIA$:
+	
+	If we start with a proof
+	\begin{smallequation*}
+		\DD = 
+		\vlderivation{
+			\vlin{\rn{r}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+				\vlhtr{\DD'}{\B', \Left', \labels{x}{\DIA A} \SEQ \Right'}
+			}	
+		}
+	\end{smallequation*}
+	
+	Then by induction hypothesis there exists a proof 
+	\begin{smallequation*}
+		\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}}
+	\end{smallequation*}
+	of the same (or smaller) height as $\DD'$.
+	
+	Therefore, we have the proof
+	\begin{smallequation*}
+		\DD^{\invr{\llabrn\DIA}} = 
+		\vlderivation{
+			\vlin{\rn{r}}{}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}{
+				\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}
+			}
+		}
+	\end{smallequation*}
+	of the same (or smaller) height as $\DD$, for any label $y$ that does not appear in $\DD$.
+	
+	If we start with a proof 
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+				\vlhtr{\DD'}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right}
+			}	
+		}
+	\end{smallequation*}
+	then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$ for any label $y$ that does not appear in $\DD$.
+	
+	\item $\rlabrn\IMP$ and $\rlabrn\BOX$ : Similar.
+\end{itemize}
+\end{proof}
+
