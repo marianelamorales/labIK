@@ -237,64 +237,59 @@ In order to have a completeness proof for the general case, we need to introduce
 	\end{equation*}
 }
 
-
-
+%
+%	\begin{smallequation*}\hspace*{-1.7cm}
+%	\vlderivation{
+%		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+%			\vlin{\llabrn\DIA, \llabrn\AND,\llabrn\DIA, \rlabrn\DIA}{}{x\le x', \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+%				\vlin{g 1111}{}{x\le x', x'Ry', y'Ru', x'Rz', z'Rv', \labels{y'}{\BOX(a \OR b)}, \labels{u'}{a}, \labels{z'}{\BOX(a \OR b)}, \labels{v'}{b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+%					\vlin{\llabrn\BOX}{}{y'Ru', z'Rv', z'\le z'', y'\le y'', y'Rv'', z''Rv'', z'Ru'', y''Ru'', \labels{y'}{\BOX(a \OR b)}, \labels{u'}{a}, \labels{z'}{\BOX(a \OR b)}, \labels{v'}{b} \SEQ \labels{y'}{\DIA a \AND \DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+%						\vlhy{y'Ru', z'Rv', z'\le z'', y'\le y'', y'Rv'', z''Rv'', z'Ru'', y''Ru'', \labels{u'}{a \OR b}, \labels{v''}{a \OR b}, \labels{u'}{a}, \labels{v'}{a \OR b}, \labels{u''}{a \OR b},\labels{v'}{b} \SEQ \labels{y'}{\DIA a \AND \DIA b}, \labels{z'}{\DIA a \AND \DIA b}}
+%%						\vlhtr{\pi_1}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}
+%%					}
+%%					{
+%%						\vlhtr{\pi_2}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}	
+%					}
+%				}
+%			}
+%		}
+%	}
+%	\end{smallequation*}
+%	
 {\small
-	\begin{equation*}
-	\vlderivation{
-		\vlin{\llabrn\IMP,\llabrn\AND}{}{\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-			\vlin{\lef\DIA, \lef\AND,\lef\DIA}{}{\lef{\DIA(\BOX(a \OR b) \AND \DIA a)}, \lef{\DIA(\BOX(a \OR b) \AND \DIA b)}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-				\vlin{g 1111}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-					\vliin{\lef\BOX, \lef\OR}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-						\vlhtr{\pi_1}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}
-					}
-					{
-						\vlhtr{\pi_2}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}	
+	\begin{equation*}%\hspace*{-1.7cm}
+		\vlderivation{
+			\vlin{\rlabrn\IMP,\llabrn\AND}{x\le x'}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{x'Ry'}{\labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\rlabrn\AND+\rn{id}}{}{\labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
+%							\vlhy{}
+%						}
+%					}{
+					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{x'Rz'}{\labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
+						\vlin{\rlabrn\AND+\rn{id}}{}{\labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+							\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{y'\le y'', y''Ru'', z'Ru''}{\labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+								\vlin{\llabrn\OR+\rn{id}}{}{\labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
+%											\vlhy{}
+%											}
+%										}{
+									\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{z'\le z'', z''Rv'', y'Rv''}{\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+										\vlin{\llabrn\OR+\rn{id}}{}{\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlhy{\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+											}
+										}
+									}
+								}
+%							}{
+%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
+%								\vlhy{}		
+%								}
+							}
+						}
 					}
 				}
 			}
 		}
-	}
 	\end{equation*}
-}
-
-{\small
-	\begin{equation*}
-	\pi_1 \quad=\quad
-	\vlderivation{
-		\vlin{}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-			\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-				\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a \AND \DIA b}}}{
-					\vlin{\rig{\DIA}}{}{
-						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a}}}{
-						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a, \rig a}}}{\vlhy{}}}
-				}
-				{
-					\vlin{\rig{\DIA}}{}{
-						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA b}}}{
-						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b, \rig b}, \wbri{z}{\lef a}}}{\vlhy{}}}
-				}
-			}
-		}
-	}
-	\end{equation*}
-}
-
-{\small
-	\begin{equation*}
-	\pi_2 \quad=\quad 		
-	\vlderivation{
-		\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-			\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a \AND \DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-				\vlin{\rig{\DIA}}{}{
-					\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-					\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a, \rig a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
-			}{
-			\vlin{\rig{\DIA}}{}{
-				\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-				\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b, \rig b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
-		}
-	}
-}
-\end{equation*}
 }
