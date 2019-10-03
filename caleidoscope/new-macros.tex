@@ -198,6 +198,8 @@
 %%%% General
 \newcommand*{\A}{\mathcal{A}}
 %\newcommand{\G}{\mathcal{G}}
+\newcommand*{\SG}{\fm{\mathcal{G}}}
+\newcommand{\SGi}[1]{\fm{\mathcal{G}_{#1}}}
 %
 \newcommand{\quand}{\quad\mbox{and}\quad}
 \newcommand{\qquand}{\qquad\mbox{and}\qquad}
@@ -273,6 +275,12 @@
 \newcommand{\f}{f^{\mathcal{M}}}
 \newcommand{\M}{\mathcal{M}}
 \newcommand{\F}{\mathcal{F}}
+%
+\newcommand{\inter}[1]{\lb{\llbracket #1\rrbracket}}
+%\newcommand{\force}[3]{#1,#2\Vdash#3}
+\newcommand{\nforce}[3]{#1,#2\not\Vdash#3}
+\newcommand{\cforce}[3]{#1,\lb{#2}\Vdash\fm{#3}}
+\newcommand{\cnforce}[3]{#1,\lb{#2}\not\Vdash\fm{#3}}
 
 %%%% Derivations
 \newcommand{\Dw}{\mathcal{D}^{w}}
