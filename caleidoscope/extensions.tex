@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$  $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -177,65 +177,85 @@ In order to have a completeness proof for the general case, we need to introduce
 \def\rig#1{#1^{\circ}}
 \newcommand{\wbri}[2]{[\strut^{#1} #2]}
 
-	{\small
-		\begin{equation*}
+		\begin{smallequation*}\hspace*{-1.5cm}
 			\vlderivation{
-				\vlin{\rig\IMP,\lef\AND}{}{\rig{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-					\vlin{\lef\DIA, \lef\AND,\lef\DIA}{}{\lef{\DIA(\BOX(a \OR b) \AND \DIA a)}, \lef{\DIA(\BOX(a \OR b) \AND \DIA b)}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-						\vlin{g 1111}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-							\vliin{\lef\BOX, \lef\OR}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-								\vlhtr{\pi_1}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}
-							}
-							{
-								\vlhtr{\pi_2}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}	
-							}
+				\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ \labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\llabrn\DIA, \llabrn\AND,\llabrn\DIA}{xRy,yRu,xRz,zRv}{\labels{x}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+						\vlin{g 1111}{yRw,zRw}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+							\vliin{\llabrn\BOX, \llabrn\OR}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+%								\vlhtr{\pi_2}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{b} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}									
+									\vliin{\rlabrn\DIA,\rlabrn\AND}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+										\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b} \SEQ \labels{y}{\DIA a}}{
+											\vlin{\rn{id}}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b} \SEQ \labels{u}{a}}{
+												\vlhy{}
+											}
+										}
+									}{
+									\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b} \SEQ \labels{y}{\DIA b}}{
+										\vlin{\rn{id}}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b} \SEQ \labels{w}{b}}{
+											\vlhy{}
+										}
+									}
+								}
+							}{								
+%								\vlhtr{\pi_1}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}
+								\vliin{\rlabrn\DIA,\rlabrn\AND}{}{\labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+									\vlin{\rlabrn\DIA}{}{\labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{z}{\DIA a}}{
+										\vlin{\rn{id}}{}{\labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{w}{a}}{
+											\vlhy{}
+											}
+										}
+									}{
+									\vlin{\rlabrn\DIA}{}{\labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{z}{\DIA b}}{
+										\vlin{\rn{id}}{}{\labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{v}{b}}{
+											\vlhy{}
+											}
+										}
+									}
+								}
 						}
 					}
 				}
 			}
-		\end{equation*}
-	}
+		\end{smallequation*}
 	
-	{\small
-		\begin{equation*}
-			\pi_1 \quad=\quad
-			\vlderivation{
-				\vlin{}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-					\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-						\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a \AND \DIA b}}}{
-							\vlin{\rig{\DIA}}{}{
-								\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA a}}}{
-								\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a, \rig a}}}{\vlhy{}}}
-						}
-						{
-							\vlin{\rig{\DIA}}{}{
-								\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{\lef a}, \rig{\DIA b}}}{
-								\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b, \rig b}, \wbri{z}{\lef a}}}{\vlhy{}}}
-						}
-					}
-				}
-			}
-		\end{equation*}
-	}
+%		\begin{smallequation*}
+%			\pi_1 \quad=\quad
+%			\vlderivation{
+%				\vliin{\rlabrn\DIA,\rlabrn\AND}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+%					\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{z}{\DIA a}}{
+%						\vlin{\rn{id}}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{w}{a}}{
+%							\vlhy{}
+%							}
+%						}
+%					}{
+%					\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{z}{\DIA b}}{
+%						\vlin{\rn{id}}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b}, \labels{w}{a} \SEQ \labels{v}{b}}{
+%							\vlhy{}
+%							}
+%						}
+%					}
+%				}
+%		\end{smallequation*}
 	
-	{\small
-		\begin{equation*}
-			\pi_2 \quad=\quad 		
-			\vlderivation{
-				\vlin{\rig{\DIA}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}, \rig{\DIA(\DIA a \AND \DIA b)}}{
-					\vliin{\rig{\AND}}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a \AND \DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-						\vlin{\rig{\DIA}}{}{
-							\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA a}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-							\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a, \rig a}, \wbri{z}{\lef b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
-					}{
-					\vlin{\rig{\DIA}}{}{
-						\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b}, \rig{\DIA b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{
-						\vlin{id}{}{\wbri{u}{\lef{\BOX(a \OR b)}, \wbri{x}{\lef a}, \wbri{z}{\lef b, \rig b}}, \wbri{v}{\lef{\BOX(a \OR b)}, \wbri{y}{\lef b}, \wbri{z}{}}}{\vlhy{}}}
-				}
-			}
-		}
-	\end{equation*}
-}
+%		\begin{smallequation*}
+%			\pi_2 \quad=\quad 		
+%			\vlderivation{
+%				\vliin{\rlabrn\DIA,\rlabrn\AND}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{x}{\DIA(\DIA a \AND \DIA b)}}{
+%					\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{y}{\DIA a}}{
+%						\vlin{\rn{id}}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{u}{a}}{
+%							\vlhy{}
+%							}
+%						}
+%					}{
+%					\vlin{\rlabrn\DIA}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{y}{\DIA b}}{
+%						\vlin{id}{}{\labels{y}{\BOX(a \OR b)}, \labels{u}{a}, \labels{w}{b}, \labels{z}{\BOX(a \OR b)}, \labels{v}{b} \SEQ \labels{w}{b}}{
+%							\vlhy{}
+%							}
+%						}
+%					}
+%				}
+%	\end{smallequation*}
 
 
 \begin{equation*}
