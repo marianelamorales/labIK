@@ -4,20 +4,6 @@ $  $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Extensions}\label{sec:ext}
 
-%\todo{Add something else about Fischer-Servi theorem?}\lutz{no, but we should add the Plotkin-Stirling theorem about the relation between axioms and frame conditions} \todo{add an intro to the next theorem}
-
-%Plotkin and Stirling give proper correspondence results, but they must distinguish the two dual parts of each axiom and appeal to both relations of the frames,
-
-%\lutz{maybe the following goes to the ``extensions'' section. otherwise we have to define $\agklmn$ here}
-
-\todo{
-\begin{theorem}[\cite{plotkin:stirling:86}]
-	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\agklmn$ if and only if the frame satisfies:
-	
-	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
-\end{theorem}
-}
-
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
 In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
@@ -81,9 +67,17 @@ $\vlderivation{
 }
 $
 
-\bigskip
 
-Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$ (Figure \ref*{fig:gklmn}).\todo{Wrong label. why??} 
+Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$(Figure \ref{fig:gklmn}).\todo{Wrong label. why??}\sonia{?}
+
+\todo{
+	\begin{theorem}[\cite{plotkin:stirling:86}]
+	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$ if and only if the frame satisfies:
+	
+	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
+\end{theorem}
+}
+
 
 Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
 
@@ -118,64 +112,105 @@ Following the idea to have a sound and complete system adding the axiom $\agklmn
 
 \bigskip
 
-We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
+%We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
+%
+%\begin{theorem}
+%	The system $\labIKp +\agklmn$ is complete for $\mathsf{k = l = m = n = 1}$.
+%\end{theorem}
+%
+%\begin{proof}
+%		\begin{smallequation*}
+%			\vlderivation {\vlin {\rlabrn{\IMP}}{y \mbox{ fresh}}{\SEQ \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}{
+%					\vlin {\rlabrn{\BOX}}{z, w \mbox{ fresh} }{\lseq{\futs xy}{\labels{y}{\DIA \BOX A}}{\labels{y}{\BOX \DIA A}}}{
+%						\vlin {\llabrn{\DIA}}{u \mbox{ fresh}}{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA \BOX A}}{\labels{w}{\DIA A}}}{
+%							\vlin {\rn{F_2}}{t \mbox{ fresh}}{\lseq{\futs xy, \futs yz, \accs zw, \accs yu}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}{
+%								\vlin {\gklmn}{t', j \mbox{ fresh}}{\lseq{\futs xy, \futs yz, \futs ut, \accs zw, \accs yu, \accs zt}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}{
+%									\vlin {\rlabrn{\DIA}}{}{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}{
+%										\vlin {\rn{trans}}{}{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}{
+%											\vlin {\llabrn{\BOX}}{}{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}{
+%												\vlin {\rn{refl}}{}{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}{
+%													\vlin {\rn{id}}{}{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'},\futs jj, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
+%													{\vlhy {}}}}}}}}}}}}
+%		\end{smallequation*}
+%\end{proof}
+%
+%\begin{smallequation*}
+%	\vlderivation {
+%		\vlin {\rlabrn{\IMP}}{\futs{x}{x'}}{\SEQ \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}{
+%			\vlin {\rlabrn{\BOX}}{\futs{x'}{x''}, \accs{x''}{y''}}{\labels{x'}{\DIA \BOX A} \SEQ\labels{x'}{\BOX \DIA A}}{
+%				\vlin {\llabrn{\DIA}}{\accs{x'}{z'}}{\labels{x'}{\DIA \BOX A}\SEQ\labels{y''}{\DIA A}}{
+%					\vlin {\rn{F_2}}{\futs{z'}{z''}, \accs{x''}{z''}}{\labels{z'}{\BOX A}\SEQ\labels{y''}{\DIA A}}{
+%						\vlin {\gklmn}{\futs{z''}{z'''}, \accs{z'''}{w''}, \accs{y''}{w''}}{\labels{z'}{\BOX A}\SEQ\labels{y''}{\DIA A}}{
+%							\vlin {\rlabrn{\DIA}}{}{\labels{z'}{\BOX A}\SEQ\labels{y''}{\DIA A}}{
+%								\vlin {\rn{trans}+\rn{refl}}{\futs{z'}{z'''},\futs{w''}{w''}}{\labels{z'}{\BOX A}\SEQ\labels{y''}{\DIA A}, \labels{w''}{A}}{
+%									\vlin {\llabrn{\BOX}}{}{\labels{z'}{\BOX A}\SEQ\labels{y''}{\DIA A}, \labels{w''}{A}}{
+%										\vlin {\rn{id}}{}{\labels{z'}{\BOX A}, \labels{w''}{A}\SEQ\labels{y''}{\DIA A}, \labels{w''}{A}}{
+%											\vlhy {}}}}}}}}}}}
+%\end{smallequation*}
 
-\begin{theorem}
-	The system $\labIKp +\agklmn$ is complete for $\mathsf{k = l = m = n = 1}$.
+\begin{theorem}\label{thm:compl-gklmn}
+	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
+\end{theorem}
+
+\begin{proof} Same as Thm.~\ref{thm:completeness} with the additional derivation of $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$.
+		\begin{smallequation*}
+			\vlderivation{
+				\vlin{\rlabrn\IMP}{\futs{x}{x_0}}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
+					\vliq{\rlabrn\BOX}{\{\futs{x_i}{x_i'}, \accs{x_i'}{x_{i+1}}\}_{0\le i \le m-1}}{\labels{x_0}{\DIA^k\BOX^lA} \SEQ \labels{x_0}{\BOX^m\DIA^n A}}{
+						\vliq{\rn{F_1}}{\futs{x_{m-2}'}{x_{m-2}''}, \accs{x_{m-2}''}{x_{m-1}'},\{\futs{x_i'}{x_i''},\accs{x_i''}{x_{i+1}''}\}_{0\le i \le m-2}}{\labels{x_0}{\DIA^k\BOX^l A} \SEQ \labels{x_m}{\DIA^n A}}{
+							\vliq{\llabrn\DIA}{\accs{x_0}{y_1}, \{\accs{y_j}{y_{j+1}}\}_{1\le j \le k-1}}{\labels{x_0}{\DIA^k\BOX^l A} \SEQ \labels{x_m}{\DIA^n A}}{
+								\vliq{\rn{F_2}}{\accs{x_0''}{y_1'},\{\accs{y_{j}'}{y_{j+1}'}\}_{1\le j \le k-1}}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+									\vlin {\gklmn}{\futs{y_k'}{y_k''},\lb{y_k''}R^l\lb{w}, \lb{x_m}R^n\lb{w}}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+										\vliq {\rlabrn{\DIA}}{}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+											\vlin {\rn{trans}+\rn{refl}}{\futs{y_k}{y_k''}, \ldots, \futs{w}{w}}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+												\vliq {\llabrn{\BOX}}{}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+													\vlin {\rn{id}}{}{\labels{y_k}{\BOX^l A},\labels{w}{A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+														\vlhy{}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+		\end{smallequation*}
+\end{proof}
+
+\begin{theorem}\label{thm:cut-elim-gklmn}
+	The rule $\rn{cut}$ is admissible for $\labIKp + \gklmn$.
 \end{theorem}
 
 \begin{proof}
-	\begin{center}
-		\scalebox{0.93}{
-			$\vlderivation {\vlin {\rlabrn{\IMP}}
-				{y \mbox{ fresh}}
-				{\SEQ \labels{x}{\DIA \BOX A \IMP \BOX \DIA A}}
-				{\vlin {\rlabrn{\BOX}}
-					{z, w \mbox{ fresh} }
-					{\lseq{\futs xy}{\labels{y}{\DIA \BOX A}}{\labels{y}{\BOX \DIA A}}}
-					{\vlin {\llabrn{\DIA}}
-						{u \mbox{ fresh}}
-						{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA \BOX A}}{\labels{w}{\DIA A}}}
-						{\vlin {\rn{F_2}}
-							{t \mbox{ fresh}}
-							{\lseq{\futs xy, \futs yz, \accs zw, \accs yu}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
-							{\vlin {\gklmn}
-								{t', j \mbox{ fresh}}
-								{\lseq{\futs xy, \futs yz, \futs ut, \accs zw, \accs yu, \accs zt}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
-								{\vlin {\rlabrn{\DIA}}
-									{}
-									{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}}}
-									{\vlin {\rn{trans}}
-										{}
-										{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
-										{\vlin {\llabrn{\BOX}}
-											{}
-											{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
-											{\vlin {\rn{refl}}
-												{}
-												{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'}, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
-												{\vlin {\rn{id}}
-													{}
-													{\lseq{\futs xy, \futs yz, \futs ut, \futs{t}{t'}, \futs{u}{t'},\futs jj, \accs zw, \accs yu, \accs zt, \accs{t'}{j}, \accs wj}{\labels{u}{\BOX A}, \labels{j}{A}}{\labels{w}{\DIA A}, \labels{j}{A}}}
-													{\vlhy {}}}}}}}}}}}}$}
-	\end{center}
+Straightforward as the $\gklmn$ rule only manipulates the relational context.
 \end{proof}
 
-In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
+\begin{theorem}\label{thm:sound-gklmn}
+	For any formula $A$. If $A$ is provable in $\labIKp$, then it is valid in every birelational frame satisfying the intuitionistic $klmn$-incestuality condition.
+\end{theorem}
 
-\begin{lemma}\label{lemma:admis} The following rules are derivable in $\labIKp$:
-	\todo{notation $\le \circ R$ etc. needs to be defined}
-	\begin{enumerate}
-		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}, \labels{z}{A} \Rightarrow \Right}}}$}
-		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, \labels{x}{\BOX^{k} A}}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, \labels{y}{A}}}}$}
-		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, \labels{x}{\DIA^{k} A} \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, \labels{y}{A} \Rightarrow \Right}}}$ }
-		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}, \labels{y}{A}}}}$}
-	\end{enumerate}
-\end{lemma}
+\begin{proof}
+	\todo{}
+\end{proof}
 
-\def\lef#1{#1}
-\def\rig#1{#1^{\circ}}
-\newcommand{\wbri}[2]{[\strut^{#1} #2]}
+%In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
+%
+%\begin{lemma}\label{lemma:admis} The following rules are derivable in $\labIKp$:
+%	\todo{notation $\le \circ R$ etc. needs to be defined}
+%	\begin{enumerate}
+%		\item{$\vlderivation {\vlin {\boxlk}{}{\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}\Rightarrow \Right}{\vlhy {\B, \Left, x(\le \circ $R$)^{k}y, \labels{x}{\BOX^{k} A}, \labels{z}{A} \Rightarrow \Right}}}$}
+%		\item{$\vlderivation{\vlin {\boxk}{}{\B, \Left \Rightarrow \Right, \labels{x}{\BOX^{k} A}}{\vlhy {\B, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, \labels{y}{A}}}}$}
+%		\item{$\vlderivation { \vlin {\diamk}{}{\B, \Left, \labels{x}{\DIA^{k} A} \Rightarrow \Right}{\vlhy {\B, xR^{k}y, \Left, \labels{y}{A} \Rightarrow \Right}}}$ }
+%		\item{$\vlderivation { \vlin {\diamrk}{}{\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}}{\vlhy {\B, \Left, xR^{k}y \Rightarrow \Right, \labels{x}{\DIA^{k}A}, \labels{y}{A}}}}$}
+%	\end{enumerate}
+%\end{lemma}
+%
+%\def\lef#1{#1}
+%\def\rig#1{#1^{\circ}}
+%\newcommand{\wbri}[2]{[\strut^{#1} #2]}
 
 		\begin{smallequation*}\hspace*{-1.5cm}
 			\vlderivation{
@@ -307,3 +342,6 @@ In order to have a completeness proof for the general case, we need to introduce
 		}
 	\end{equation*}
 }
+
+\todo{For path axioms we must have that adding the rule for the two sides of the axiom is equivalent to adding the rule that doesn't make use of the pre-order. Is it possible to see that directly on the proof theoretical side?}
+\sonia{probably not because the preorder is introduced/used in other rules for $\BOX$ and $\IMP$}
