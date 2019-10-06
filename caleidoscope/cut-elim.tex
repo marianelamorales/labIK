@@ -16,16 +16,17 @@ derivation of the conclusion of the rule there are derivations for each of its p
 
 The following two lemmas are standard.
 
-\begin{lemma}
-	\label{lem:weak-adm}
-	The weakening rule
-	~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
-	is height-preserving admissible for $\labIKp$.
-\end{lemma}
+%\begin{lemma}
+%	\label{lem:weak-adm}
+%	The weakening rule
+%	~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
+%	is height-preserving admissible for $\labIKp$.
+%\end{lemma}
 
-\begin{proof}
-	\todo{\begin{lemma}
-		If there exists a proof  $\vlderivation {\vlpd{\D}{}{\B, \Left \Rightarrow \Right}}$ then there exists a proof $\vlderivation {\vlpd {\Dw}{}{\B, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}}$
+
+	\begin{lemma}
+		\label{lem:weak-adm}
+		If there exists a proof  $\vlderivation {\vlpd{\D}{}{\B, \Left \Rightarrow \Right}}$ then there exists a proof $\vlderivation {\vlpd {\Dw}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A }\SEQ \Right, \labels{w}{B}}}$
 		
 	\end{lemma}
 	
@@ -36,7 +37,7 @@ The following two lemmas are standard.
 		
 		For a proof of height 1:
 		
-		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \Left, x \le y, x \colon a \Rightarrow \Right, y \colon a}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \Left, x \le y, xRy, u \le v, x \colon a, z \colon A \Rightarrow \Right, w \colon B, y \colon a}{\vlhy {}}}$.
+		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \accs xy, \futs uv, \Left, \labels{x}{a}, \labels{z}{A} \SEQ \Right, \labels{w}{B}, \labels{y}{a}}{\vlhy {}}}$.
 		\vspace{2mm}
 		
 		For a proof $\D$ of height greater than 1:
@@ -51,7 +52,7 @@ The following two lemmas are standard.
 		
 		\begin{center}
 			
-			$\vlderivation {\vlpd {\Dwone}{}{\B', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}$
+			$\vlderivation {\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}$
 			
 		\end{center}
 		
@@ -59,12 +60,12 @@ The following two lemmas are standard.
 		
 		\begin{center}
 			
-			$\Dw = \vlderivation {\vlin{}{}{\B, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}{\vlpd {\Dwone}{}{\B', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}}$
+			$\Dw = \vlderivation {\vlin{}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}{\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}}$
 			
 		\end{center}
 		
-	\end{proof}}
-\end{proof}
+	\end{proof}
+
 
 \begin{lemma}
 	\label{lem:inv}
@@ -107,19 +108,36 @@ need it to eliminate the cut.
 				}}
 			}
 		\end{smallequation*}
-		\todo{missing case}
-		%  	\begin{smallequation*}
-		%  		\vlderivation{
-		%  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{
-		%  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x'}{a}}{
-		%  					\vlhy{}
-		%  				}
-		%  			}
-		%  		}
-		%  		\reducesto
-		%  		\vlinf{\labrn{id}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{}
-		%  		\qedhere
-		%  	\end{smallequation*}
+
+	  	\begin{smallequation*}
+	  		\vlderivation{
+	  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+	  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x}{a}}{
+	  					\vlhy{}
+	  				}
+	  			}
+	  		}
+	  		\reducesto
+	  		\vlderivation{
+	  		\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+	  				\vlhy{}
+	  			}}}
+	  		\qedhere
+	  	\end{smallequation*}
+			  	
+	  	\begin{smallequation*}
+	  		\vlderivation{
+	  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{
+	  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x'}{a}}{
+	  					\vlhy{}
+	  				}
+	  			}
+	  		}
+	  		\reducesto
+	  		\vlinf{\labrn{id}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{}
+	  		\qedhere
+	  	\end{smallequation*}
+	  	
 	\end{proof}
 	
 	The next lemma is the core of our cut elimination proof.
