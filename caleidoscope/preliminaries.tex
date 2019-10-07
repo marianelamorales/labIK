@@ -16,13 +16,13 @@ $$
 
 Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
 %%
-Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are classically but not intuitionistically equivalent. Five axioms have been considered as primitives in the literature. An intuitionistic variant of the modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
+Lacking De Morgan duality, there are many variants of the \emph{distributivity axiom} $\mathsf{k}$ that are classically but not intuitionistically equivalent. Five axioms have been considered as primitives in the literature. An intuitionistic variant of the modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
 %
 
 %The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi~\cite{Fischer}. It is obtained from intuitionistic propositional logic $\mathsf{IPL}$ by adding:
 \begin{itemize}
 	\item the \emph{necessitation rule}: if $\fm A$ is a theorem then $\fm{\BOX A}$ is also a theorem; and
-	\item the following five variants of the \emph{distributivity axiom} $\rn{k}$:
+	\item the following five variants of $\rn{k}$:
 	\begin{equation*}
 	\label{eq:ik}%\hskip-2em
 	\begin{array}[t]{r@{\;}l@{\qquad}r@{\;}l@{\qquad}r@{\;}l}
@@ -38,10 +38,9 @@ Lacking De Morgan duality, there are several variants of $\mathsf{k}$ that are c
 	\end{array}
 	\end{equation*}
 \end{itemize}
-\sonia{axioms vs. axiom schemes? do we need to write these on atomic formulas $a,b$ instead of generic formulas $A,B$?}
 
 The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system \hbox{$\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$}. However this would give strictly no information on the behaviour of the $\DIA$ modality.
-It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. The systems are well-designed for some applications for example to analyse some type systems \cite{benton:etal:jfp98} or to reason about states of a machine under partial information \cite{wijesekera:nerode:apal05}. However, they cannot satisfy the logicians as the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
+It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. In these systems, however, the addition of the \emph{Excluded Middle} principle to it does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
 
 The axiomatisation that is now generally accepted as \emph{intuitionistic modal logic} denoted by $\IK$ was given by Plotkin and Stirling \cite{plotkin:stirling:86} and is equivalent to the one proposed by Fischer-Servi \cite{fischer-servi:84} and by Ewald \cite{ewald:jsl86} in the case of intuitionistic tense logic. It is taken to be    $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$ $\rn{+}$ $\kax[3]$ $\rn{+}$ $\kax[4]$  $\rn{+}$ $\kax[5]$.
 
@@ -87,7 +86,6 @@ We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and inductively exten
 \begin{equation}\label{eq:kripke}
 	\begin{array}{rcl}
 	%\parbox{30em}{%
-	
 		\M, \lb w \Vdash \fm{A \AND B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ and } \M, \lb w \Vdash \fm B\\
 		
 		\M, \lb w \Vdash \fm{A \OR B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ or } \M, \lb w \Vdash \fm B\\
@@ -100,7 +98,7 @@ We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and inductively exten
 		
 	\end{array}
 \end{equation}
-Observe that we never that $\M, \lb w \Vdash \fm\bot$. 
+Observe that we never have that $\M, \lb w \Vdash \fm\bot$. 
 %
 We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \not\Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
 

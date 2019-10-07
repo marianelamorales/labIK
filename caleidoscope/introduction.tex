@@ -11,7 +11,7 @@ Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
 to give sound, complete and cut-free deductive systems to a broad range
 of logics. Unlike so-called \emph{internal calculi}, like
 hypersequents~\cite{avron:elc96}, nested
-sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann?},
+sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann:tableaux15},
 labelled calculi have the advantage of being more uniform and being able to 
 accommode a larger class of logics.
 
@@ -44,7 +44,7 @@ corresponds to the preorder relation in Kripke frames for
 intuitionistic logic. Consequently, standard labelled systems for
 these logics have certain shortcomings:
 \begin{enumerate}
-\item The transitivity rule in~\eqref{eq:Rtrans} corresponds to both
+\item The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
   versions of the $\fourax$-axiom
   \begin{equation}
     \label{eq:4ax}
@@ -53,13 +53,13 @@ these logics have certain shortcomings:
     \fm{\DIA\DIA A\IMP\DIA A}
     \quadcm
   \end{equation}
-  as they are equivalent in classical
+  which are equivalent in classical
   modal logic. However, in intuitionistic modal logic they are not
   equivalent, and even though the logic $\IKfour$, i.e., the
   intuitionistic version of the modal logic $\Kfour$, contains both
   axioms, they can also be added independently to the logic $\IK$ (an
-  intuitionistic version of $\K$). However, the proof theory of these
-  new logics has not been studied before, as no existing labelled (or
+  intuitionistic version of $\K$). The proof theory of these
+  new logics has not been studied before; no existing labelled (or
   label-free) proof system can handle them, even though the
   corresponding frame conditions
   \begin{equation}
@@ -69,10 +69,21 @@ these logics have certain shortcomings:
     \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
     \;,
   \end{equation}
-  \todo{add graphical representation of the conditions}
+%  \todo{add graphical representation of the conditions}
+  $$
+  \xymatrix{
+  	x' \ar@{.>}[drr]^R \\
+  	x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
+  }
+  \qquad\qquad
+  \xymatrix{
+  	&& z''  \\
+  	x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
+  }
+  $$
   respectively, have already been studied
   in~\cite{plotkin:stirling:86}.
-  \sonia{the general condition is correct but not the application to 4}
+%  \sonia{the general condition is correct but not the application to 4}
   \item The correspondence between the syntax and the semantics is not
   as clean as one would expect. As only the $R$-relation (and not the
   $\le$-relation) of the frame is visible in an ordinary labelled
@@ -83,6 +94,7 @@ these logics have certain shortcomings:
   models, 
   \sonia{this is only true for logics outside of the path axioms.}
   \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
+  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
   as already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
   and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
@@ -107,6 +119,7 @@ Besides that, there is another pleasant observation to make about our
 system. Ordinary labelled sequent systems for intuitionistic modal
 logic are single-conclusion~\cite{simpson:phd}. 
 \sonia{No! the system for epistemic logic by Maffezioli, Naibo and Negri~\cite{maffezioli:etal:synthese13} is multi-conclusion}
+\todo{need to say that it is the same principle as in their work, but we use in a more general setting and extend it to a framework for many intuitionistic modal logics while keeping the nice invertibility property.}
 %
 The same is true for the corresponding nested sequent
 systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express

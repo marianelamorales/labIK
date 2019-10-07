@@ -8,19 +8,19 @@
 In this section we present our fully labelled sequent proof system
 for intuitionistic modal logics. The starting point is the notion of a
 \emph{labelled formula} which is a pair $\labels xA$ of a label $\lb
-x$ and a formula $\fm A$. The intended meaning is that $\fm A$ holds
-at world $\lb x$. A \emph{relation atom} is either an expression
-$\accs xy$ or $\futs xy$ where $\lb x$ and $\lb y$ are labels and the
-intended meaning is that the corresponing relation holds between the
-worlds $\lb x$ and $\lb y$. 
-\sonia{Not sure we want to make it sound so semantical here, with not much context.}
+x$ and a formula $\fm A$. 
+%The intended meaning is that $\fm A$ holds at world $\lb x$. 
+A \emph{relation atom} is either an expression
+$\accs xy$ or $\futs xy$ where $\lb x$ and $\lb y$ are labels. 
+%and the intended meaning is that the corresponing relation holds between the worlds $\lb x$ and $\lb y$. 
+%\sonia{Not sure we want to make it sound so semantical here, with not much context. Also, it is wron, because of sequent LHS!}
 %
-This is enough to define the notion of
-\emph{(labelled) sequent}, which is a triple $\lseq\B\Left\Right$,
-where $\B$ is a set of relational and pre-order atoms, 
-\sonia{inconsistent naming with intro}
+%This is enough to define the notion of
+A \emph{(labelled) sequent} is a triple $\lseq\B\Left\Right$,
+where $\B$ is a set of relational atoms
+%\sonia{inconsistent naming with intro}
 and $\Left$ and $\Right$ are
-multi-sets of labelled formulas, all written as list, separated by commas.
+multi-sets of labelled formulas, all written as lists, separated by commas.
 
 \begin{figure}[!t]
   \begin{center}
@@ -84,7 +84,7 @@ multi-sets of labelled formulas, all written as list, separated by commas.
 Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
 We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
 \sonia{This is an interesting alternative view but for me the starting point really is the Maffezioli, Naibo and Negri paper. Maybe rephrase slightly to acknowledge their work too.}
-Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this naive translation wpould also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this naive translation would also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
 \begin{equation}
   \label{eq:nomon}
   \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
@@ -97,27 +97,33 @@ that are not sufficient for a complete system, and we will see below
 why. Before, let us first look at the rules $\rlabrn\IMP$ and
 $\rlabrn\BOX$. In the multiple-conlusion nested sequent system
 of~\cite{str:2017maehara}, these are the two rules that force
-single-conclusion. This is the reason why in our system we need the
-$\le$ in the relational atoms; we need to go to the future of the
-current world.  In the Kripke-semantics in~\eqref{eq:kripke} the two
-connectives $\IMP$ and $\BOX$ are the ones that need the
-future-relation $\le$. This relation is reflexive and transitive. In
+single-conclusion. 
+%This is the reason why in our system we need the
+%$\le$ in the relational atoms; we need to go to the future of the
+%current world.  
+%
+In our system, this phenomenon is replaced by a re-positioning of the considered formulas to a fresh label.
+%
+In the Kripke-semantics in~\eqref{eq:kripke} the two
+connectives $\IMP$ and $\BOX$ are the ones that make use of the
+pre-order relation $\le$. This relation is reflexive and transitive. In
 order to capture that in the proof system, we need to add the rules
 $\rn{refl}$ and $\rn{trans}$.
+%
+These can be obtained by applying the axioms-as-rules methodology as in~\cite{maffezioli:etal:synthese13}.
 
 Finally, in the semantics, the two relations $\rel$ and $\le$ are
-strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These need to be reflected in the proof
-system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
+strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These need to be reflected at the level of the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
 %
-However, these two rule create new labels, and in order to be
+However, these two rules create new labels, and in order to be
 complete, the system needs the \emph{monotonicity} rule $\llabrn{mon}$, shown on the left below. 
 \begin{equation}
   \label{eq:mono}
-  \vlinf{\llabrn{mon}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}\Right}{
-    \lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}
+  \vlinf{\llabrn{mon}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}\Right}{
+    \lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}, \labels{y}{A}}\Right}
   \hskip6em
-  \vlinf{\rlabrn{mon}}{}{\lseq{\B, \futs{x}{x'}}{\Left}{\Right, \labels{x'}{A}}}{
-    \lseq{\B, \futs{x}{x'}}{\Left}{\Right, \labels{x}{A}, \labels{x'}{A}}}
+  \vlinf{\rlabrn{mon}}{}{\lseq{\B, \futs{x}{y}}{\Left}{\Right, \labels{y}{A}}}{
+    \lseq{\B, \futs{x}{y}}{\Left}{\Right, \labels{x}{A}, \labels{y}{A}}}
 \end{equation}
 Since this rule is a form of contraction, it would cause the same
 problems as contraction in a cut elimination proof. Hence, it is
@@ -126,11 +132,11 @@ the reason why we have monotonicity incorporated in the rules
 $\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
 instead of using the rules in~\eqref{eq:nomon}. Then, not only
 $\llabrn{mon}$ but also its right-hand side version $\rlabrn{mon}$,
-shown on the right in~\eqref{eq:mono} above is admissible.
+shown on the right in~\eqref{eq:mono} above become admissible.
 
 \begin{proposition}
   \label{prop:mon-adm}
-  The rules $\llabrn{mon}$ and $\rlabrn{mon}$ are admissible for $\labIKp$.
+  The rules $\llabrn{mon}$ and $\rlabrn{mon}$ are admissible for $\labIKp$. 
 \end{proposition}
 
 One can prove this proposition in the same way as one usually proves
@@ -146,7 +152,7 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 
 \begin{proposition}
   \label{prop:id}
-	The following general idenity axiom~
+	The following general identity axiom~
 	{$\vlinf{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$}
         ~is admissible for $\labIKp$. 
 \end{proposition}
@@ -230,6 +236,26 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 	}
 	\end{smallequation*}
 
+%\sonia{is a simpler derivation available along those lines, using Proposition~\ref{prop:mon-adm}?
+%	\begin{smallequation*}
+%		\vlderivation{
+%			\vlin{\rlabrn\IMP}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
+%				\vliin{\llabrn\IMP}{}{\B, \futs xy, \futs yz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+%					\vlin{\rn{mon_R}+\rn{mon_L}}{}{\B, \futs xy, \futs yz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{y}{A}}{
+%						\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \Left, \labels{x}{A \IMP B}, \labels{z}{A}, \labels{y}{A} \SEQ \Right, \labels{z}{B}, \labels{y}{A}, \labels{z}{A}}{
+%							\vlhy{}
+%						}
+%					}
+%				}{
+%				\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \Left, \labels{y}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+%					\vlhy{}
+%				}
+%			}
+%		}
+%	}
+%\end{smallequation*}
+%}
+
 	\item $\fm{\BOX A}$
 %	\begin{smallequation*}
 %		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{}
@@ -258,7 +284,7 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 %	\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\llabrn\DIA}{}{\B, \futs xy; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\llabrn\DIA}{}{\B, \futs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
 				\vlin{\color{red}\rn{F_2}}{}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 					\vlin{\rlabrn\DIA}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 						\vlin{\labrn{id_g}}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
@@ -281,8 +307,8 @@ In the following sections, we will show that the system $\labIKp$ is sound and c
     \lseq\B\Left{\Right,\labels{z}{C}}}{}{
     \lseq\B{\Left,\labels{z}{C}}{\Right}}
 \end{equation}
-Then we can summarize soundness and completeness, and cut
-admissibil\texttt{}ity of $\labIKp$ in the following Theorem:
+Then we can summarize soundness, completeness, and cut
+admissibility of $\labIKp$ in the following Theorem:
 
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
@@ -306,20 +332,20 @@ Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The impl
 the implication~\ref{ii}$\implies$\ref{iii} is shown in
 Section~\ref{sec:cut-elim}, and finally, the implication \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
 
-Once we have shown cut elimination (the implcation \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}), the proof of Proposition~\ref{prop:mon-adm} becomes trivial.
+Once we have shown cut elimination (the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}), the proof of Proposition~\ref{prop:mon-adm} becomes trivial.
 
 \begin{proof}[Proof of Proposition~\ref{prop:mon-adm}]
   The rule $\llabrn{mon}$ can be derived using the general identity and cut:
   \begin{smallequation*}
     \vlderivation{
-      \vliiin{\labrn{cut}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}\Right}{
-        \vlin{\labrn{id_g}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}}{\Right, \labels{x'}{A}}}{
+      \vliiin{\labrn{cut}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}\Right}{
+        \vlin{\labrn{id_g}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}{\Right, \labels{y}{A}}}{
           \vlhy{}}}{
         \vlhy{\quad}}{
-        \vlhy{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{A}, \labels{x'}{A}}\Right}}
+        \vlhy{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}, \labels{y}{A}}\Right}}
     }
   \end{smallequation*}
-  And both these rules are admissible by Proposition~\ref{prop:id} and
+  and both these rules are admissible by Proposition~\ref{prop:id} and
   Theorem~\ref{thm:cutfree-compl}. The case for $\rlabrn{mon}$ is
   similar.
 \end{proof}

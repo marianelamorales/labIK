@@ -1,4 +1,4 @@
-$  $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,48 +27,50 @@ $$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs w
 
 Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
 %
-These systems enjoy cut-elimination via usual arguments. Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+These systems enjoy cut-elimination via usual arguments. 
 
-Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+%Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+%
+%Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+%
+%$\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+%		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+%			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+%							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+%								\vlhy{}
+%							}
+%						}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$
+%
+%Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+%
+%$\vlderivation{
+%	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+%		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+%			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+%					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+%						\vlhy{}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$
 
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\rn{trans}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, {w' \le t}, {t \rel v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\boxbrn{4}}{}{x \le w, w \le w', w' \rel v, v \le v', {v' \rel u}, w' \le t, {t \rel v'}, w \le t \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\labrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, {t \rel u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
-								\vlhy{}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-$
 
-Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
-
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-$
-
-
-Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$(Figure \ref{fig:gklmn}).\todo{Wrong label. why??}\sonia{?}
+Now we want to obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\agklmn$ (also known as $\mathsf{Scott-Lemmon}$ $\mathsf{axiom}$): $\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}$. %(Figure \ref{fig:gklmn}).\todo{Wrong label. why??}\sonia{?}
 
 \todo{
 	\begin{theorem}[\cite{plotkin:stirling:86}]
@@ -77,6 +79,8 @@ Now we want to obtain a sound and complete proof system for the intuitionistic m
 	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
 \end{theorem}
 }
+
+\sonia{I don't think we need the actual \emph{correspondence} result. Soundness and completeness is enough for us}.
 
 
 Writing this axiom in both classical and intuitionistic logic in first-order language, we obtain:
@@ -87,19 +91,17 @@ $\star$ \emph{Intuitionistic case} $\rightsquigarrow$  $\forall x,y,z((xR^{k}y \
 
 \sonia{in the intuitionistic case, with the $\le$ proposition, the formula is geometric.}
 
-\begin{figure}[h]
-	\begin{center}
-		$
+\begin{figure}
+		$$
 		\xymatrix{
 			& u' \ar@{.>}[ddr]^{R^l} \\
 			& u \ar@{.>}[u]^{\le} \\
 			w \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && x \\
 			& v \ar@{.>}[ur]_{R^n}
 		}
-		$
-	\end{center}
+		$$
 	\label{fig:gklmn}
-	\caption{$\agklmn$ axiom for intuitionistic case}
+	\caption{}
 \end{figure}
 
 Following the idea to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the next rule:
