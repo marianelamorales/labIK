@@ -13,7 +13,9 @@ purpose of the following definitions.
 
 \begin{definition}\label{def:force-seq}
 	Let $\M = \langle W, \rel_\M, \le_\M, V \rangle$ be a model, and let
-	$\SG$ be the sequent $\lseq\B\Left\Right$. A \emph{$\SG$-interpretation
+	$\SG$ be the sequent $\lseq\B\Left\Right$. 
+	\sonia{$\mathcal G$ usually denotes only the relational context. using it for the whole sequent is confusing. this concept is called $\mathcal G$-interpretation as it is a graph homomorphism from the graph described by $\mathcal G$ to the model.}
+	A \emph{$\SG$-interpretation
 		in $\M$} is a mapping $\inter{\cdot}$ from the labels in $\SG$ to the set $W$ of worlds in $\M$, such that whenever $\accs xy$ in $\B$, then $\inter x\rel_\M\inter y$, and whenever $\futs xy$ in $\B$, then $\inter x\le_\M\inter y$. Now we can define 
 	\begin{equation}
 	\M,\inter\cdot\Vdash\SG\qquad\mbox{iff}\qquad
@@ -61,22 +63,42 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \Left, \futs
 			xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
 			\Right}$. Contradiction.
+		\todo{The reasoning by contradiction is not necessary. Could be rewritten more lightly as follows:}
+			%
+			Assume that $\B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+			is valid in all birelational frames. 
+			Consider a model $\M$ and an interpretation $\inter\cdot$ of the conclusion sequent
+			$\B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$ into $\M$, such
+			that for all $\labels{z}{C} \in \Gamma$ we have $\M, \inter z \Vdash \fm C$
+			and $\cforce \M x{\BOX A}$. %and $\cnforce \M wB$ for all $\labels wB\in\Right$. However, 
+			Hence, as $\inter x\le_\M\inter y$ and $\inter y\rel_\M\inter z$, 
+			by the definition of forcing in~\eqref{eq:kripke} we also have $\cforce \M zA$, and 
+			consequently $\cforce \M wB$ for all $\labels wB\in\Right$. 
+			Thus, $\cforce \M{\inter\cdot}{\B, \Left, \futs
+				xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+				\Right}$. \todo{should we rewrite the whole proof?}
+			
 		\item $\rlabrn\BOX$: By way of contradiction, assume that $\B, \futs xy,
 		\accs yz, \Left \SEQ \Right, \labels{z}{A}$ is valid in all
 		birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{\BOX
 			A}$ is not, where $\lb y$ and $\lb z$ do not occur in $\B$ or
-		$\Left$ or $\Right$.This means that we have a model $\M$ and an
+		$\Left$ or $\Right$.
+		This means that we have a model $\M$ and an
 		interpretation $\inter\cdot$, such that
-		$\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{\BOX
-				A}}$. This means that there are worlds $\lb{y'}$ and $\lb{z'}$
+		$\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}$. 
+%		Namely, for all $\labels{w}{C}$ in $\Gamma$, $\M, \inter w \Vdash \fm C$, but
+%		for all $\labels{z}{B}$ in $\Delta$, $\nforce {\M }{\inter z}{ \fm B}$.
+		So in particular, there are worlds $\lb{y'}$ and $\lb{z'}$
 		in $\M$ such that $\inter x\le_\M \lb{y'}$ and
-		$\lb{y'}\rel_\M\lb{z'}$ and $\nforce\M{\lb{z'}}{\fm A}$. Now we let
+		$\lb{y'}\rel_\M\lb{z'}$ and $\nforce\M{\lb{z'}}{\fm A}$. 
+		%
+		Now we let
 		$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter
 		y'=\lb{y'}$ and $\inter z'=\lb{z'}$ and $\inter\cdot'=\inter\cdot$
 		on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy,
 			\accs yz, \Left \SEQ \Right, \labels{z}{A}}$. Contradiction.
 		
-		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. This means that there exists world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now we let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
+		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. So there exists a world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now we let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
 		
 		\item $\llabrn\DIA$: By way of contradiction, assume that $\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ is valid in all birelational frames, but $\B, \Left, \labels{x}{\DIA A} \SEQ \Right$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}$, i.e. $\cforce \M x{\DIA A}$. This means that there exists world $\lb{y'}$ in $\M$ such that $\inter x\rel_\M \lb{y'}$ and $\cforce \M {\lb{y'}}{A}$. Now we let $\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot' = \inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$. Contradiction.
 		

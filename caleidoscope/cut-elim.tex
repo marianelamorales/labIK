@@ -44,19 +44,19 @@ The following two lemmas are standard.
 		
 		\begin{center}
 			
-			$\vlderivation{\vlin {$r$}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
+			$\vlderivation{\vlin {\rn{r}}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
 			
 		\end{center}
 		
-		Then by induction hypothesis there exists a proof 
+		Then applying the induction hypothesis, we build a proof:
 		
-		\begin{center}
-			
-			$\vlderivation {\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}$
-			
-		\end{center}
-		
-		Therefore, we have the proof 
+%		\begin{center}
+%			
+%			$\vlderivation {\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}$
+%			
+%		\end{center}
+%		
+%		Therefore, we have the proof 
 		
 		\begin{center}
 			
@@ -66,17 +66,6 @@ The following two lemmas are standard.
 		
 	\end{proof}
 
-
-\begin{lemma}
-	\label{lem:inv}
-	The rules ..... are height-preserving invertible in
-	$\labIKp$. Furthermore, the rule $\llabrn{\IMP}$ is
-	height-preserving invertible for the right premise.
-\end{lemma}
-
-\begin{proof}
-	\todo{}
-\end{proof}
 
 The next lemma looks like a special case of
 Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
@@ -141,6 +130,14 @@ need it to eliminate the cut.
 	\end{proof}
 	
 	The next lemma shows that all the rules in our system are invertible, as already mentioned in the introduction. 
+	
+	\begin{lemma}
+		\label{lem:inv}
+		The rules of $\labIKp$ are height-preserving invertible. 
+		Furthermore, the rule $\llabrn{\IMP}$ is
+		height-preserving invertible for the right premise.
+	\end{lemma}
+
 	
 	\begin{lemma}\label{lem:inv}\hbox{}\quad\todo{change this $\bullet$ notation!!}
 		\begin{enumerate}
@@ -619,12 +616,12 @@ If it does we rewrite it with a fresh variable $v$ first.
 \end{proof}
 
 
-\begin{theorem}
-	\label{thm:mon-adm}
-	The rule $\rn{mon}$ is admissible for system $\labIKp$.
-\end{theorem}
-
-
+%\begin{theorem}
+%	\label{thm:mon-adm}
+%	The rule $\rn{mon}$ is admissible for system $\labIKp$.
+%\end{theorem}
+%
+%
 %\begin{proof}[Proof of Theorem~\ref{thm:mon-adm}]
 %	
 %	\todo{say that we can obtain the proof of monotonicity using the proof of cut.}
