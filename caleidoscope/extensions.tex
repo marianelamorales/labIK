@@ -94,7 +94,7 @@ for any natural numbers $k,l,m,n$.
 Indeed, they are known to obey a strong correspondence with the class of frames satisfying the condition illustrated on Figure~\ref{fig:gklmn}, which we call by analogy to the classical case, \emph{intuitionistic klmn-incestuality condition}.
 
 	\begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
-		An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$ if and only if the frame satisfies:
+		An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$ if and only if the frame satisfies:
 		
 		if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
 	\end{theorem}
@@ -115,7 +115,7 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 Following again the axiom-as-rule idea, to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
 
 \begin{center}
-	$\vlinf{\gklmn}{y', u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$
+	$\vlinf{\gklmn}{\lb{y'}, \lb u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$
 \end{center}
 
 
@@ -161,7 +161,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	For any formula $A$, the following are equivalent.
 	%
 	\begin{enumerate}
-		\item\label{1} $A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$. 
+		\item\label{1} $A$ is a theorem of $\IK + \fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$. 
 		%
 		\item\label{2} $A$ is provable in $\labIKp + \gklmn +\labrn{cut}$.
 		\item\label{3} $A$ is provable in $\labIKp + \gklmn $.
@@ -175,7 +175,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	\begin{itemize}
 	\item $1 \implies 2$:
 %	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
-	Same as Thm.~\ref{thm:completeness} with the additional derivation of $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$:
+	Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$:
 		\begin{smallequation*}
 			\vlderivation{
 				\vlin{\rlabrn\IMP}{}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
@@ -301,7 +301,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 \begin{remark}
 	As an illustration of our system, we reconsider an example that as problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
 	%
-	Indeed, the formula $\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)$ is not a theorem of this logic, but becomes provable if we directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP (yRu \AND zRu))$) to our system.
+	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but becomes provable if we directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP (yRu \AND zRu))$) to our system.
 	%
 	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
 	
