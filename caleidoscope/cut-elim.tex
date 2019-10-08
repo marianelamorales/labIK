@@ -3,7 +3,7 @@ In this section we are going to prove the admissibility of cut for $\labIKp$.
 
 \begin{theorem}
 	\label{thm:cut-adm}
-	The rule $\labrn{cut}$ is admissible for $\labIKp$.
+	The $\labrn{cut}$ rule is admissible for $\labIKp$.
 \end{theorem}
 
 This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
@@ -11,10 +11,10 @@ This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of The
 The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is the height of D when seen as a tree, i.e., the length of
 the longest path in the tree from its root to one of its leaves.
 
-We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if for every
-derivation of the conclusion of the rule there are derivations for each of its premisses with at most the same height.
+We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise(s) there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if for every
+derivation of the conclusion of the rule there are derivations for each of its premises with at most the same height.
 
-The following two lemmas are standard.
+%The following two lemmas are standard.
 
 %\begin{lemma}
 %	\label{lem:weak-adm}
@@ -23,33 +23,34 @@ The following two lemmas are standard.
 %	is height-preserving admissible for $\labIKp$.
 %\end{lemma}
 
+The first lemma is the height-preserving admissibility of weakening on both relational atoms and labelled formulas.
 
 	\begin{lemma}
 		\label{lem:weak-adm}
 		If there exists a proof  $\vlderivation {\vlpd{\D}{}{\B, \Left \Rightarrow \Right}}$ then there exists a proof $\vlderivation {\vlpd {\Dw}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A }\SEQ \Right, \labels{w}{B}}}$
-		
+		of the same (or smaller) height.
 	\end{lemma}
 	
-	\vspace{3mm}
+%	\vspace{3mm}
 	
 	\begin{proof}
 		By induction on the height of $\D$.
 		
-		For a proof of height 1:
-		
-		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \accs xy, \futs uv, \Left, \labels{x}{a}, \labels{z}{A} \SEQ \Right, \labels{w}{B}, \labels{y}{a}}{\vlhy {}}}$.
-		\vspace{2mm}
-		
-		For a proof $\D$ of height greater than 1:
-		
-		\begin{center}
-			
-			$\vlderivation{\vlin {\rn{r}}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
-			
-		\end{center}
-		
-		Then applying the induction hypothesis, we build a proof:
-		
+%		For a proof of height 1:
+%		
+%		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \accs xy, \futs uv, \Left, \labels{x}{a}, \labels{z}{A} \SEQ \Right, \labels{w}{B}, \labels{y}{a}}{\vlhy {}}}$.
+%		\vspace{2mm}
+%		
+%		For a proof $\D$ of height greater than 1:
+%		
+%		\begin{center}
+%			
+%			$\vlderivation{\vlin {\rn{r}}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
+%			
+%		\end{center}
+%		
+%		Then applying the induction hypothesis, we build a proof:
+%		
 %		\begin{center}
 %			
 %			$\vlderivation {\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}$
@@ -57,20 +58,20 @@ The following two lemmas are standard.
 %		\end{center}
 %		
 %		Therefore, we have the proof 
-		
-		\begin{center}
-			
-			$\Dw = \vlderivation {\vlin{}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}{\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}}$
-			
-		\end{center}
+%		
+%		\begin{center}
+%			
+%			$\Dw = \vlderivation {\vlin{}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}{\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}}$
+%			
+%		\end{center}
 		
 	\end{proof}
 
 
 The next lemma looks like a special case of
 Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
-preserve the height, and second, we cannot prove it using cut as we
-need it to eliminate the cut.
+preserve the height, and second, we cannot prove it using $\rn{cut}$ rule as we
+are trying to eliminate it from derivations.
 
 \begin{lemma}
 	The atomic version of $\llabrn{mon}$
@@ -82,6 +83,10 @@ need it to eliminate the cut.
 \end{lemma}
 
 \begin{proof}
+	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}{\Right}$
+	of the same (or smaller) height.
+	The inductive step is straightforward by permutation of rules.
+	The base cases are obtained as follows:
 	\begin{smallequation*}
 		\vlderivation{
 			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{
@@ -134,146 +139,150 @@ need it to eliminate the cut.
 	\begin{lemma}
 		\label{lem:inv}
 		The rules of $\labIKp$ are height-preserving invertible. 
-		Furthermore, the rule $\llabrn{\IMP}$ is
-		height-preserving invertible for the right premise.
+%		Furthermore, the rule $\llabrn{\IMP}$ is
+%		height-preserving invertible for the right premise.
 	\end{lemma}
 
-	
-	\begin{lemma}\label{lem:inv}\hbox{}\quad\todo{change this $\bullet$ notation!!}
-		\begin{enumerate}
-			%\item
-			%If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
-			
-			\item
-			If there exists a proof 
-			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
-			then there exists a proof 
-			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
-			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-			\sonia{this is wrong! $x\le y$ should appear in the conclusion of $\DD$. }
-			
-			\item
-			If there exists a proof 
-			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
-			then there exists a proof 
-			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
-			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-			
-			\item 
-			If there exists a proof 
-			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
-			then there exists a proof 
-			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
-			of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
-			
-			\item 
-			If there exists a proof 
-			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
-			then there exists a proof 
-			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
-			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-			
-		\end{enumerate}
-	\end{lemma}
-	
-	\todo{add missing cases}\sonia{they are just weakenings.}
-	
 	\begin{proof}
-		In each case, we reason by induction on the height of $\DD$.
-		
-		\begin{itemize}
-			\item $\llabrn\IMP$:
-			For a proof of height $1$, it is straightforward.
-			%
-			For example, if $\DD = \vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a}, \labels{x}{A \IMP B} \SEQ \Right, \labels{v}{a}}{}$, 
-			%
-			then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a},\labels{y}{B} \SEQ \Right, \labels{v}{a}}{}$.
-			
-			For a proof $\DD$ of height greater than $1$ we have two cases, depending on whether the last rule of $\DD$ acts on $\labels{x}{A \IMP B}$ or only on some part of the context.
-			
-			First let us fix a given index $y$ that does not appear in $\DD$.
-			
-			If we start with a proof
-			\begin{smallequation*}
-				\DD = 
-				\vlderivation{
-					\vlin{\rn{r}}{}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-						\vlhtr{\DD'}{\B', \Left', \labels{x}{A \IMP B} \SEQ \Right'}
-					}	
-				}
-			\end{smallequation*}
-			
-			Then by induction hypothesis there exists a proof 
-			\begin{smallequation*}
-				\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}}
-			\end{smallequation*}
-			of the same (or smaller) height as $\DD'$ (as $y$ also does not appear in $\DD'$).
-			
-			Therefore, we have the proof
-			\begin{smallequation*}
-				\DD^{\invr{\llabrn\IMP}} = 
-				\vlderivation{
-					\vlin{\rn{r}}{}{\B, \Left, \labels{y}{B} \SEQ \Right}{
-						\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}
-					}
-				}
-			\end{smallequation*}
-			of the same (or smaller) height as $\DD$.
-			
-			If we start with a proof 
-			\begin{smallequation*}
-				\vlderivation{
-					\vliin{\llabrn\IMP}{\text{\footnotesize $x \le z$ appears in $\B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-						\vlhtr{\DD_1}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{A}}
-					}{
-					\vlhtr{\DD_2}{\B, \Left, \labels{z}{B} \SEQ \Right}
-				}
-			}
-		\end{smallequation*}
-		then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlderivation{\vlhtr{\DD_2[y/z]}{\B, \Left, \labels{y}{B} \SEQ \Right}}$ (as $y$ also does not appear in $\DD_2$) and its height is smaller than the one of $\DD$.
-		
+		For each rule $\rn{r}$, we need to show that if there exists a proof $\DD$ of the conclusion, there exists a proof $\DD^{\rn r}_i$ of the $i$-th premisse for $i\in\{0,1,2\}$ of the same (or smaller) height.
+		For $\rlabrn\AND$, $\llabrn\AND$, $\rlabrn\OR$, $\llabrn\OR$, and the right premise of $\llabrn\IMP$, we use a standard induction on the height of $\DD$.
 		%
-		\item $\llabrn\DIA$:
+		For $\rlabrn\IMP$, $\rlabrn\BOX$, $\llabrn\DIA$ as well, but
+		we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r}_1$ when necessary.
+		%
+		The other rules can be shown invertible using Lemma~\ref{lem:weak-adm}. 
+%		\todo{add missing cases}\sonia{they are just weakenings.}
+%		
 		
-		If we start with a proof
-		\begin{smallequation*}
-			\DD = 
-			\vlderivation{
-				\vlin{\rn{r}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-					\vlhtr{\DD'}{\B', \Left', \labels{x}{\DIA A} \SEQ \Right'}
-				}	
-			}
-		\end{smallequation*}
 		
-		Then by induction hypothesis there exists a proof 
-		\begin{smallequation*}
-			\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}}
-		\end{smallequation*}
-		of the same (or smaller) height as $\DD'$.
-		
-		Therefore, we have the proof
-		\begin{smallequation*}
-			\DD^{\invr{\llabrn\DIA}} = 
-			\vlderivation{
-				\vlin{\rn{r}}{}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}{
-					\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}
-				}
-			}
-		\end{smallequation*}
-		of the same (or smaller) height as $\DD$, for any label $y$ that does not appear in $\DD$.
-		
-		If we start with a proof 
-		\begin{smallequation*}
-			\vlderivation{
-				\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-					\vlhtr{\DD'}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right}
-				}	
-			}
-		\end{smallequation*}
-		then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$ for any label $y$ that does not appear in $\DD$.
-		
-		\item $\rlabrn\IMP$ and $\rlabrn\BOX$ : Similar.
-	\end{itemize}
+%		\begin{enumerate}
+%			%\item
+%			%If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
+%			
+%			\item[$\llabrn\IMP$]
+%			If there exists a proof 
+%			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
+%			then there exists a proof 
+%			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
+%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+%			\sonia{this is wrong! $x\le y$ should appear in the conclusion of $\DD$. }
+%			
+%			\item[$\rlabrn\IMP$]
+%			If there exists a proof 
+%			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
+%			then there exists a proof 
+%			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
+%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+%			
+%			\item[$\rlabrn\BOX$]
+%			If there exists a proof 
+%			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
+%			then there exists a proof 
+%			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
+%			of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
+%			
+%			\item [$\llabrn\DIA$]
+%			If there exists a proof 
+%			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
+%			then there exists a proof 
+%			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
+%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
+%			
+%		\end{enumerate}
+%	
+%		\begin{itemize}
+%			\item $\llabrn\IMP$:
+%			For a proof of height $1$, it is straightforward.
+%			%
+%			For example, if $\DD = \vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a}, \labels{x}{A \IMP B} \SEQ \Right, \labels{v}{a}}{}$, 
+%			%
+%			then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a},\labels{y}{B} \SEQ \Right, \labels{v}{a}}{}$.
+%			
+%			For a proof $\DD$ of height greater than $1$ we have two cases, depending on whether the last rule of $\DD$ acts on $\labels{x}{A \IMP B}$ or only on some part of the context.
+%			
+%			First let us fix a given index $y$ that does not appear in $\DD$.
+%			
+%			If we start with a proof
+%			\begin{smallequation*}
+%				\DD = 
+%				\vlderivation{
+%					\vlin{\rn{r}}{}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+%						\vlhtr{\DD'}{\B', \Left', \labels{x}{A \IMP B} \SEQ \Right'}
+%					}	
+%				}
+%			\end{smallequation*}
+%			
+%			Then by induction hypothesis there exists a proof 
+%			\begin{smallequation*}
+%				\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}}
+%			\end{smallequation*}
+%			of the same (or smaller) height as $\DD'$ (as $y$ also does not appear in $\DD'$).
+%			
+%			Therefore, we have the proof
+%			\begin{smallequation*}
+%				\DD^{\invr{\llabrn\IMP}} = 
+%				\vlderivation{
+%					\vlin{\rn{r}}{}{\B, \Left, \labels{y}{B} \SEQ \Right}{
+%						\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}
+%					}
+%				}
+%			\end{smallequation*}
+%			of the same (or smaller) height as $\DD$.
+%			
+%			If we start with a proof 
+%			\begin{smallequation*}
+%				\vlderivation{
+%					\vliin{\llabrn\IMP}{\text{\footnotesize $x \le z$ appears in $\B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+%						\vlhtr{\DD_1}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{A}}
+%					}{
+%					\vlhtr{\DD_2}{\B, \Left, \labels{z}{B} \SEQ \Right}
+%				}
+%			}
+%		\end{smallequation*}
+%		then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlderivation{\vlhtr{\DD_2[y/z]}{\B, \Left, \labels{y}{B} \SEQ \Right}}$ (as $y$ also does not appear in $\DD_2$) and its height is smaller than the one of $\DD$.
+%		
+%		%
+%		\item $\llabrn\DIA$:
+%		
+%		If we start with a proof
+%		\begin{smallequation*}
+%			\DD = 
+%			\vlderivation{
+%				\vlin{\rn{r}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+%					\vlhtr{\DD'}{\B', \Left', \labels{x}{\DIA A} \SEQ \Right'}
+%				}	
+%			}
+%		\end{smallequation*}
+%		
+%		Then by induction hypothesis there exists a proof 
+%		\begin{smallequation*}
+%			\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}}
+%		\end{smallequation*}
+%		of the same (or smaller) height as $\DD'$.
+%		
+%		Therefore, we have the proof
+%		\begin{smallequation*}
+%			\DD^{\invr{\llabrn\DIA}} = 
+%			\vlderivation{
+%				\vlin{\rn{r}}{}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}{
+%					\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}
+%				}
+%			}
+%		\end{smallequation*}
+%		of the same (or smaller) height as $\DD$, for any label $y$ that does not appear in $\DD$.
+%		
+%		If we start with a proof 
+%		\begin{smallequation*}
+%			\vlderivation{
+%				\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+%					\vlhtr{\DD'}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right}
+%				}	
+%			}
+%		\end{smallequation*}
+%		then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$ for any label $y$ that does not appear in $\DD$.
+%		
+%		\item $\rlabrn\IMP$ and $\rlabrn\BOX$ : Similar.
+%	\end{itemize}
 \end{proof}
 
 
@@ -297,16 +306,15 @@ need it to eliminate the cut.
 	%$\vlderivation{\vlhtr{\DD}{\lseq\B\Left\Right}}$
 	
 	
-	Following the proof of the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
-	
-	For proving this theorem, we need a series of auxiliary lemmas (see Lemma \ref{lem:inv}).
+%	Following the proof of the Theorem \ref{thm:cutfree-compl}, in this section, we prove the implication \ref{ii}$\implies$\ref{iii}, i.e, we want to prove that our system $\labIKp$ is complete without the \rn{cut} rule.
+%	
+%	For proving this theorem, we need a series of auxiliary lemmas (see Lemma \ref{lem:inv}).
 	
 	\begin{proof}
-		
-		By induction on number of cuts + (rank,height) of the leftmost topmost cut.
+		%
+		By a lexicographic induction on the formula complexity of $A$ and the sum of the heights $\height{\DD_1}+\height{\DD_2}$.
 		
 		\textbf{Commutative cases:}\label{commutative-cases}
-		\todo{we probably don't need all the cases here?}
 		
 		\begin{smallequation*}
 			\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
@@ -615,6 +623,9 @@ If it does we rewrite it with a fresh variable $v$ first.
 \todo{check!}
 \end{proof}
 
+\begin{proof}[Proof of Theorem~\ref{thm:cut-adm}]
+			By induction on number of $\rn{cut}$ rules, always applying Lemma~\ref{lem:reduction} to the leftmost topmost cut.
+\end{proof}
 
 %\begin{theorem}
 %	\label{thm:mon-adm}

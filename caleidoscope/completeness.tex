@@ -22,7 +22,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
   We begin by showing how the axioms $\kax[1]$--$\kax[5]$ are proved in system $\labIKp$.
   \begin{itemize}
   \item $\kax[1]$:
-    $$
+    \begin{smallequation*}
     \vlderivation{
 				\vlin{\rlabrn{\IMP}}
 				{\lb y \mbox{ fresh}}
@@ -48,19 +48,19 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 										{\vliin{\llabrn{\IMP}}
 											{}
 											{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
-											{\vlin {\rn{id}}
+											{\vlin {\rn{id_g}}
 												{}
 												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}, \labels{u}{A}}}
 												{\vlhy {}}}
-											{\vlin {\rn{id}}
+											{\vlin {\rn{id_g}}
 												{}
 												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{u}{B}}}
 												{\vlhy {}}}}}}}}}}
     }
-    $$
+\end{smallequation*}
     where $\B$ is equal to: $\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu$.
   \item $\kax[2]$:
-    $$
+    \begin{smallequation*}
     \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{\lb y \mbox{ fresh}}
@@ -83,19 +83,20 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 							{\vliin{\llabrn{\IMP}}
 								{}
 								{\lseq{\futs xy, \futs yz, \accs zu, \futs uu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
-								{\vlin {\rn{id}}
+								{\vlin {\rn{id_g}}
 									{}
 									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}}
 									{\vlhy {}}}
-								{\vlin {\rn{id}}
+								{\vlin {\rn{id_g}}
 									{}
 									{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
 									{\vlhy {}}}								}}}}}}
     }
-    $$
+        \end{smallequation*}
+        
     where $\B$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
   \item $\kax[3]$:
-    $$
+    \begin{smallequation*}
     \vlderivation {
 			\vlin{\rlabrn{\IMP}}
 			{}
@@ -112,7 +113,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 							{\vlin {\color{red}\rn{refl}}
 								{}
 								{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
-								{\vlin {\rn{id}}
+								{\vlin {\rn{id_g}}
 									{}
 									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
 									{\vlhy {}}}}}}{\vlin {\rlabrn{\OR}}
@@ -124,15 +125,15 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 							{\vlin {\color{red}\rn{refl}}
 								{}
 								{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
-								{\vlin {\rn{id}}
+								{\vlin {\rn{id_g}}
 									{}
 									{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
 									{\vlhy {}}}}}}}}
 		}
-    $$
+    \end{smallequation*}
   \item $\kax[4]$:
-    $$
-\vlderivation {
+    \begin{smallequation*}
+	\vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{\lb y \mbox{ fresh}}
 		{\SEQ \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
@@ -157,7 +158,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 									{\vlin {\color{red}\rn{refl}}
 										{}
 										{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
-										{\vlin {\rn{id}}
+										{\vlin {\rn{id_g}}
 											{}
 											{\lseq{\B, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
 											{\vlhy {}}}}}
@@ -170,15 +171,15 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 									{\vlin {\color{red}\rn{refl}}
 										{}
 										{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
-										{\vlin {\rn{id}}
+										{\vlin {\rn{id_g}}
 											{}
 											{\lseq{\B, \futs tt, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
-											{\vlhy {}}}}}}}}}}}
-}
-$$
+											{\vlhy {}}}}}}}}}}}}
+    \end{smallequation*}
+
 where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu$.
 \item $\kax[5]$:
-  $$
+  \begin{smallequation*}
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{}
@@ -191,10 +192,11 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
 				{\lseq{\futs xy, \accs yz}{\labels{z}{\BOT}}{\labels{y}{\BOT}}}
 				{\vlhy {}}}}
   }
-  $$
+    \end{smallequation*}
+    
   \end{itemize}
   Next, we have to prove all axioms of intuitionistic propositional logic can be shown in $\labIKp$. We do this only for $\fm{A \AND B \IMP B}$ and leave the rest to the reader:
-  $$
+  \begin{smallequation*}
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
 		{}
@@ -205,12 +207,13 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
 			{\vlin {\color{red}\rn{refl}}
 				{}
 				{\lseq{\futs xy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
-				{\vlin {\rn{id}}
+				{\vlin {\rn{id_g}}
 					{}
 					{\lseq{\futs xy, \futs yy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
 					{\vlhy {}}}}}
   }
-  $$
+    \end{smallequation*}
+    
   
   
   Finally, we have to show how the rules of modus ponens and
