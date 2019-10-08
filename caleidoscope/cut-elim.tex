@@ -24,17 +24,17 @@ derivation of the conclusion of the rule there are derivations for each of its p
 %\end{lemma}
 
 The first lemma is the height-preserving admissibility of weakening on both relational atoms and labelled formulas.
-
-	\begin{lemma}
-		\label{lem:weak-adm}
-		If there exists a proof  $\vlderivation {\vlpd{\D}{}{\B, \Left \Rightarrow \Right}}$ then there exists a proof $\vlderivation {\vlpd {\Dw}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A }\SEQ \Right, \labels{w}{B}}}$
-		of the same (or smaller) height.
-	\end{lemma}
 	
-%	\vspace{3mm}
+\begin{lemma}
+	\label{lem:weak-adm}
+	The weakening rule
+	~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
+	is height-preserving admissible for $\labIKp$.
+\end{lemma}
 	
 	\begin{proof}
-		By induction on the height of $\D$.
+		By induction on the height of $\D$, we show that if there exists a proof  $$\vlderivation {\vlpd{\D}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}}$$ then there exists a proof $$\vlderivation {\vlpd {\Dw}{}{\lseq{\B}{\Left}{\Right}}}$$
+		of the same (or smaller) height.
 		
 %		For a proof of height 1:
 %		
@@ -116,7 +116,6 @@ are trying to eliminate it from derivations.
 	  		\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
 	  				\vlhy{}
 	  			}}}
-	  		\qedhere
 	  	\end{smallequation*}
 			  	
 	  	\begin{smallequation*}
@@ -312,9 +311,14 @@ are trying to eliminate it from derivations.
 	
 	\begin{proof}
 		%
-		By a lexicographic induction on the formula complexity of $A$ and the sum of the heights $\height{\DD_1}+\height{\DD_2}$.
+		The proof is by a lexicographic induction on the complexity of the cut-formula $C$ and the sum of the heights $\height{\DD_1}+\height{\DD_2}$.
+		%
+		We perform a case analysis on the last rule used in $\DD_1$ above the $\rn{cut}$ and whether it applies to the cut-formula or not.
+		%
+		In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
 		
 		\textbf{Commutative cases:}\label{commutative-cases}
+		In such a case, the complexity of the cut-formula stays constant, but the depth decreases.
 		
 		\begin{smallequation*}
 			\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
@@ -340,15 +344,12 @@ are trying to eliminate it from derivations.
 \vliin{\labrn{cut}}{}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}{
 	\vlhtr{\DD_2}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
 }{
-\vlhtr{\DD_3[v/y]^{\invr{\llabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
 }
 }
 \end{smallequation*}
 
-We need to make sure that $y$ does not appear in $\DD_3$, before applying Lemma~\ref{lem:inv}.
-%
-If it does we rewrite it with a fresh variable $v$ first.
-\sonia{check what is actually required since that Lemma is wrong!}
+where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}.
 
 %\begin{smallequation*}
 %	\reducesto
