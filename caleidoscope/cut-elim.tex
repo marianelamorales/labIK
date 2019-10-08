@@ -50,7 +50,7 @@ Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
 preserve the height, and second, we cannot prove it using $\rn{cut}$ rule as we
 are trying to eliminate it from derivations.
 
-\begin{lemma}
+\begin{lemma}\label{lem:adm-mon-at}
 	The atomic version of $\llabrn{mon}$
 	$$
 	\vlinf{\labrn{mon_a}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}\Right}{
@@ -168,6 +168,8 @@ are trying to eliminate it from derivations.
                 \begin{description}
                 \item[Base cases:]\label{base-cases}
                 When the complexity of the cut-formula is $0$, i.e.~$C$ is atomic, or in general when the height of $\DD_1$ or $\DD_2$ is $0$, we can produce a cut-free derivation of the conclusion.
+                %
+                In the first two cases below, we appeal to Lemma~\ref{lem:adm-mon-at}, to use atomic monotonicity rules freely.
         \begin{itemize}
         	                \item 
         	                \begin{smallequation*}
