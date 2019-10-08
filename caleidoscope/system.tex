@@ -284,8 +284,8 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 %	\end{smallequation*}
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\llabrn\DIA}{}{\B, \futs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\color{red}\rn{F_2}}{}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\llabrn\DIA}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\color{red}\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 					\vlin{\rlabrn\DIA}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
 						\vlin{\labrn{id_g}}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
 							\vlhy{}

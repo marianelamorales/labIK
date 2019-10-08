@@ -99,10 +99,10 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
     \begin{smallequation*}
     \vlderivation {
 			\vlin{\rlabrn{\IMP}}
-			{}
+			{\lb y \mbox{ fresh}}
 			{\SEQ \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
 			{\vlin {\llabrn{\DIA}}
-				{}
+				{\lb z \mbox{ fresh}}
 				{\lseq{\futs xy}{\labels{y}{\DIA (A \OR B)}}{\labels{y}{\DIA A \OR \DIA B}}}
 				{\vliin{\llabrn{\OR}}{}{\lseq{\futs xy, \accs yz}{\labels{z}{A \OR B}}{\labels{y}{\DIA A \OR \DIA B}}}{\vlin {\rlabrn{\OR}}
 						{}
@@ -144,7 +144,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 				{\lb u \mbox{ fresh}}
 				{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{w}{A \IMP B}}}
 				{\vlin {\color{red}{\rn{F_1}}}
-					{}
+					{\lb t \mbox{ fresh}}
 					{\lseq{\futs xy, \futs yz, \futs wu, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
 					{\vlin {\color{red}\rn{trans}}
 						{}
@@ -182,10 +182,10 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   \begin{smallequation*}
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
-		{}
+		{\lb y \mbox{ fresh}}
 		{\SEQ \labels{x}{\DIA \BOT \IMP \BOT}}
 		{\vlin {\llabrn{\DIA}}
-			{}
+			{\lb z \mbox{ fresh}}
 			{\lseq{\futs xy}{\labels{y}{\DIA \BOT}}{\labels{y}{\BOT}}}
 			{\vlin {\llabrn{\BOT}}
 				{}
@@ -199,7 +199,7 @@ where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs 
   \begin{smallequation*}
   \vlderivation {
 		\vlin{\rlabrn{\IMP}}
-		{}
+		{\lb y \mbox{ fresh}}
 		{\SEQ \labels{x}{A \AND B \IMP B}}
 		{\vlin {\llabrn{\AND}}
 			{}
