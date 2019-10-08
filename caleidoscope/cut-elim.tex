@@ -32,40 +32,17 @@ The first lemma is the height-preserving admissibility of weakening on both rela
 	is height-preserving admissible for $\labIKp$.
 \end{lemma}
 	
-	\begin{proof}
-		By induction on the height of $\D$, we show that if there exists a proof  $$\vlderivation {\vlpd{\D}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}}$$ then there exists a proof $$\vlderivation {\vlpd {\Dw}{}{\lseq{\B}{\Left}{\Right}}}$$
-		of the same (or smaller) height.
-		
-%		For a proof of height 1:
-%		
-%		if $\D$ = $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{\vlhy {}}}$ then we take $\Dw$ to be $\vlderivation {\vlin{\rn{id}}{}{\B, \futs xy, \accs xy, \futs uv, \Left, \labels{x}{a}, \labels{z}{A} \SEQ \Right, \labels{w}{B}, \labels{y}{a}}{\vlhy {}}}$.
-%		\vspace{2mm}
-%		
-%		For a proof $\D$ of height greater than 1:
-%		
-%		\begin{center}
-%			
-%			$\vlderivation{\vlin {\rn{r}}{}{\B, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\B', \Left' \Rightarrow \Right'}}}$
-%			
-%		\end{center}
-%		
-%		Then applying the induction hypothesis, we build a proof:
-%		
-%		\begin{center}
-%			
-%			$\vlderivation {\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}$
-%			
-%		\end{center}
-%		
-%		Therefore, we have the proof 
-%		
-%		\begin{center}
-%			
-%			$\Dw = \vlderivation {\vlin{}{}{\B, \accs xy, \futs uv, \Left, \labels{z}{A} \SEQ \Right, \labels{w}{B}}{\vlpd {\Dwone}{}{\B', \accs xy, \futs uv, \Left', \labels{z}{A} \SEQ \Right', \labels{w}{B}}}}$
-%			
-%		\end{center}
-		
-	\end{proof}
+\begin{proof}
+  By a straightforward induction on the height of the derivation, we can transform any derivation
+  \begin{equation*}
+    \vlderivation {\vlpd {\D}{}{\lseq{\B}{\Left}{\Right}}}
+    \qquad
+    \mbox{into}
+    \qquad
+    \vlderivation {\vlpd{\Dw}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}}
+  \end{equation*}
+of the same (or smaller) height.
+\end{proof}
 
 
 The next lemma looks like a special case of
@@ -83,7 +60,7 @@ are trying to eliminate it from derivations.
 \end{lemma}
 
 \begin{proof}
-	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}{\Right}$
+	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}{\Right}$
 	of the same (or smaller) height.
 	The inductive step is straightforward by permutation of rules.
 	The base cases are obtained as follows:
@@ -136,8 +113,11 @@ are trying to eliminate it from derivations.
 	The next lemma shows that all the rules in our system are invertible, as already mentioned in the introduction. 
 	
 	\begin{lemma}
-		\label{lem:inv}
-		The rules of $\labIKp$ are height-preserving invertible. 
+	  \label{lem:inv}
+          All single-premise rules of $\labIKp$ are height-preserving
+          invertible. Furthermore, the rules $\llabrn{\OR}$ and
+          $\rlabrn{\AND}$ are invertible on both premises, and the
+          rule $\llabrn{\IMP}$ is invertible on the right premise.
 %		Furthermore, the rule $\llabrn{\IMP}$ is
 %		height-preserving invertible for the right premise.
 	\end{lemma}
@@ -147,146 +127,14 @@ are trying to eliminate it from derivations.
 		For $\rlabrn\AND$, $\llabrn\AND$, $\rlabrn\OR$, $\llabrn\OR$, and the right premise of $\llabrn\IMP$, we use a standard induction on the height of $\DD$.
 		%
 		For $\rlabrn\IMP$, $\rlabrn\BOX$, $\llabrn\DIA$ as well, but
-		we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r}_1$ when necessary.
+		we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r}$ when necessary.
 		%
 		The other rules can be shown invertible using Lemma~\ref{lem:weak-adm}. 
-%		\todo{add missing cases}\sonia{they are just weakenings.}
-%		
-		
-		
-%		\begin{enumerate}
-%			%\item
-%			%If there exists a proof $\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}}$ then there exists a proof $\vlderivation{\vlhtr{\DD^{\invr{\llabrn\AND}}}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}$ of the same (or smaller) height, for any label $x$ that does not appear in $\DD$.
-%			
-%			\item[$\llabrn\IMP$]
-%			If there exists a proof 
-%			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}}$ 
-%			then there exists a proof 
-%			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\IMP}}}{\B, \Left, \labels{y}{B} \SEQ \Right}}$
-%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-%			\sonia{this is wrong! $x\le y$ should appear in the conclusion of $\DD$. }
-%			
-%			\item[$\rlabrn\IMP$]
-%			If there exists a proof 
-%			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}}$ 
-%			then there exists a proof 
-%			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}}$
-%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-%			
-%			\item[$\rlabrn\BOX$]
-%			If there exists a proof 
-%			$\vlderivation{\vlhtr{\DD}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}}$ 
-%			then there exists a proof 
-%			$\vlderivation{\vlhtr{\DD^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}}$
-%			of the same (or smaller) height, for any label $u$ and $v$ that do not appear in $\DD$.
-%			
-%			\item [$\llabrn\DIA$]
-%			If there exists a proof 
-%			$\vlderivation{\vlhtr{\DD}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}}$ 
-%			then there exists a proof 
-%			$\vlderivation{\vlhtr{\DD^{\invr{\llabrn\DIA}}}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$
-%			of the same (or smaller) height, for any label $y$ that does not appear in $\DD$.
-%			
-%		\end{enumerate}
-%	
-%		\begin{itemize}
-%			\item $\llabrn\IMP$:
-%			For a proof of height $1$, it is straightforward.
-%			%
-%			For example, if $\DD = \vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a}, \labels{x}{A \IMP B} \SEQ \Right, \labels{v}{a}}{}$, 
-%			%
-%			then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlinf{\labrn{id}}{}{\B, u \le v, \Left, \labels{u}{a},\labels{y}{B} \SEQ \Right, \labels{v}{a}}{}$.
-%			
-%			For a proof $\DD$ of height greater than $1$ we have two cases, depending on whether the last rule of $\DD$ acts on $\labels{x}{A \IMP B}$ or only on some part of the context.
-%			
-%			First let us fix a given index $y$ that does not appear in $\DD$.
-%			
-%			If we start with a proof
-%			\begin{smallequation*}
-%				\DD = 
-%				\vlderivation{
-%					\vlin{\rn{r}}{}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-%						\vlhtr{\DD'}{\B', \Left', \labels{x}{A \IMP B} \SEQ \Right'}
-%					}	
-%				}
-%			\end{smallequation*}
-%			
-%			Then by induction hypothesis there exists a proof 
-%			\begin{smallequation*}
-%				\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}}
-%			\end{smallequation*}
-%			of the same (or smaller) height as $\DD'$ (as $y$ also does not appear in $\DD'$).
-%			
-%			Therefore, we have the proof
-%			\begin{smallequation*}
-%				\DD^{\invr{\llabrn\IMP}} = 
-%				\vlderivation{
-%					\vlin{\rn{r}}{}{\B, \Left, \labels{y}{B} \SEQ \Right}{
-%						\vlhtr{{\DD'}^{\invr{\llabrn\IMP}}}{\B', \Left', \labels{y}{B} \SEQ \Right'}
-%					}
-%				}
-%			\end{smallequation*}
-%			of the same (or smaller) height as $\DD$.
-%			
-%			If we start with a proof 
-%			\begin{smallequation*}
-%				\vlderivation{
-%					\vliin{\llabrn\IMP}{\text{\footnotesize $x \le z$ appears in $\B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-%						\vlhtr{\DD_1}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{A}}
-%					}{
-%					\vlhtr{\DD_2}{\B, \Left, \labels{z}{B} \SEQ \Right}
-%				}
-%			}
-%		\end{smallequation*}
-%		then we take $\DD^{\invr{\llabrn\IMP}}$ to be $\vlderivation{\vlhtr{\DD_2[y/z]}{\B, \Left, \labels{y}{B} \SEQ \Right}}$ (as $y$ also does not appear in $\DD_2$) and its height is smaller than the one of $\DD$.
-%		
-%		%
-%		\item $\llabrn\DIA$:
-%		
-%		If we start with a proof
-%		\begin{smallequation*}
-%			\DD = 
-%			\vlderivation{
-%				\vlin{\rn{r}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-%					\vlhtr{\DD'}{\B', \Left', \labels{x}{\DIA A} \SEQ \Right'}
-%				}	
-%			}
-%		\end{smallequation*}
-%		
-%		Then by induction hypothesis there exists a proof 
-%		\begin{smallequation*}
-%			\vlderivation{\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}}
-%		\end{smallequation*}
-%		of the same (or smaller) height as $\DD'$.
-%		
-%		Therefore, we have the proof
-%		\begin{smallequation*}
-%			\DD^{\invr{\llabrn\DIA}} = 
-%			\vlderivation{
-%				\vlin{\rn{r}}{}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}{
-%					\vlhtr{{\DD'}^{\invr{\llabrn\DIA}}}{\B', x \rel y, \Left', \labels{y}{A} \SEQ \Right'}
-%				}
-%			}
-%		\end{smallequation*}
-%		of the same (or smaller) height as $\DD$, for any label $y$ that does not appear in $\DD$.
-%		
-%		If we start with a proof 
-%		\begin{smallequation*}
-%			\vlderivation{
-%				\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-%					\vlhtr{\DD'}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right}
-%				}	
-%			}
-%		\end{smallequation*}
-%		then we take $\DD^{\invr{\llabrn\DIA}}$ to be $\vlderivation{\vlhtr{\DD'[y/y']}{\B, x \rel y, \Left, \labels{y}{A} \SEQ \Right}}$ for any label $y$ that does not appear in $\DD$.
-%		
-%		\item $\rlabrn\IMP$ and $\rlabrn\BOX$ : Similar.
-%	\end{itemize}
 \end{proof}
 
 
 	
-	The next lemma is the core of our cut elimination proof.
+	The next lemma is the central ingredient of our cut elimination proof.
 	
 	\begin{lemma}
 		\label{lem:reduction}
@@ -316,10 +164,12 @@ are trying to eliminate it from derivations.
 		We perform a case analysis on the last rule used in $\DD_1$ above the $\rn{cut}$ and whether it applies to the cut-formula or not.
 		%
 		In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
-		
-		\textbf{Commutative cases:}\label{commutative-cases}
+
+                \begin{description}
+                \item[Commutative cases:]\label{commutative-cases}
 		In such a case, the complexity of the cut-formula stays constant, but the depth decreases.
-		
+		\begin{itemize}
+                \item $\llabrn\IMP$:
 		\begin{smallequation*}
 			\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
 				\vliin{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
@@ -333,7 +183,7 @@ are trying to eliminate it from derivations.
 	\reducesto
 \end{smallequation*}
 
-\begin{smallequation*}\hspace*{-3.5em}
+\begin{smallequation*}\hspace*{-8.5em}
 	\vlderiibase{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
 			\vlhtr{\DD_1}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
@@ -348,51 +198,9 @@ are trying to eliminate it from derivations.
 }
 }
 \end{smallequation*}
-
-where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}.
-
-%\begin{smallequation*}
-%	\reducesto
-%	\vlderibase{\llabrn{cont}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-%		\vliin{\llabrn\IMP}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right}{
-%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
-%%				\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
-%%				}{
-%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
-%%				}
-%				\vlhtr{\DD_4}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
-%			}{
-%%			\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
-%%				\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
-%%				}{
-%%				\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
-%%				}
-%				\vlhtr{\DD_5}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
-%			}
-%		}
-%\end{smallequation*}
-%
-%\begin{smallalign*}&
-%	\text{with } \DD_4 = \quad
-%	\vlderivation{
-%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
-%			\vlhtr{\DD_1^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
-%		}{
-%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
-%		}
-%	}
-%	\\&
-%	\text{and } \DD_5 = \quad
-%	\vlderivation{
-%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}{
-%			\vlhtr{\DD_2^{\rn w}}{\B_1, x \le y, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
-%		}{
-%			\vlhtr{\DD_3^{\rn w}}{\B_2, \Left, \labels{x}{A \IMP B}, \labels{y}{B} \SEQ \Right}
-%		}
-%	}
-%\end{smallalign*}
-
-\begin{smallequation*}
+where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}. We use the same naming scheme in the following cases.
+\item $\rlabrn\IMP$:
+\begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
 		\vlin{\rlabrn\IMP}{\text{\footnotesize $x'$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
@@ -402,7 +210,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 \end{smallequation*}
 
-\begin{smallequation*}
+\begin{smallequation*}\hskip8em
 	\reducesto
 	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $x''$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
 		\vliin{\labrn{cut}}{}{\B, x \le x'' \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
@@ -412,8 +220,8 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 	}
 }
 \end{smallequation*}
-
-\begin{smallequation*}
+\item $\llabrn\BOX$:
+\begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
 		\vlin{\llabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
@@ -423,7 +231,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 \end{smallequation*}
 
-\begin{smallequation*}
+\begin{smallequation*}\hskip8em
 	\reducesto
 	\vlderibase{\llabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
@@ -434,7 +242,8 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 \end{smallequation*}
 
-\begin{smallequation*}
+\item $\rlabrn\BOX$:
+\begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
 		\vlin{\rlabrn\BOX}{\text{\footnotesize $x',y'$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, x \le x', x' \rel y' \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
@@ -444,7 +253,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 \end{smallequation*}
 
-\begin{smallequation*}
+\begin{smallequation*}\hskip8em
 	\reducesto
 	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $u,v$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
 		\vliin{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
@@ -454,8 +263,9 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 	}
 }
 \end{smallequation*}
+\item $\llabrn\DIA$:
 
-\begin{smallequation*}\hspace*{-2em}
+\begin{smallequation*}\hspace*{-5.5em}
 	\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
 		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
@@ -472,9 +282,10 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 }
 \end{smallequation*}
-\todo{is this correct wrt to invertibility Lemma~\ref{lem:inv}??}
+%\todo{is this correct wrt to invertibility Lemma~\ref{lem:inv}??}
+\item $\rlabrn\DIA$:
 
-\begin{smallequation*}\hspace*{-2em}
+\begin{smallequation*}\hspace*{-5.5em}
 	\vlderiibase{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
 		\vlin{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
@@ -494,9 +305,11 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 }
 \end{smallequation*}
-
-\textbf{Key cases:}\label{key-cases}
-
+                \end{itemize}
+              \item[Key cases:]\label{key-cases}
+                
+                \begin{itemize}
+                \item $C=a$:
 \begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
 		\vlin{\labrn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
@@ -524,6 +337,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 	\vlhtr{\DD_1^{\rn w}}{\B, x \le y, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
 }
 \end{smallequation*}
+                \item $C=A\IMP B$:
 
 \begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right}{
@@ -541,7 +355,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 \end{smallequation*}
 
 \begin{smallequation*}
-	\hspace*{-2em}
+	\hspace*{-7em}
 	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{
 			\vlin{\rlabrn\IMP}{}{\B, x \le y, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
@@ -559,7 +373,8 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 }
 \end{smallequation*}
-\todo{check that substitution!}
+%\todo{check that substitution!}
+                \item $C=\BOX A$:
 
 \begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left \SEQ \Right}{
@@ -595,6 +410,7 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 }
 }
 \end{smallequation*}
+                \item $C=\DIA A$:
 
 \begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right}{
@@ -621,9 +437,12 @@ where $\DD_3^{w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn
 \vlhtr{\DD_2[y/y']}{\B, x \rel y,\Left, \labels{y}{A} \SEQ \Right}
 }
 \end{smallequation*}
-\todo{check!}
+                \end{itemize}
+                \end{description}
 \end{proof}
 
+
+                We can now complete the proof of Theorem~\ref{thm:cut-adm}.
 \begin{proof}[Proof of Theorem~\ref{thm:cut-adm}]
 			By induction on number of $\rn{cut}$ rules, always applying Lemma~\ref{lem:reduction} to the leftmost topmost cut.
 \end{proof}
