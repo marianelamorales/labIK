@@ -93,7 +93,7 @@ for any natural numbers $k,l,m,n$.
 
 Indeed, they are known to obey a strong correspondence with the class of frames satisfying the condition illustrated on Figure~\ref{fig:gklmn}, which we call by analogy to the classical case, \emph{intuitionistic klmn-incestuality condition}.
 
-	\begin{theorem}[\cite{plotkin:stirling:86}]
+	\begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
 		An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$ if and only if the frame satisfies:
 		
 		if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
@@ -115,7 +115,7 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 Following again the axiom-as-rule idea, to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
 
 \begin{center}
-	$\vlderivation { \vlin {\gklmn}{y', u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \Rightarrow \Right}{\vlhy {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\Rightarrow \Right}}}$
+	$\vlinf{\gklmn}{y', u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$
 \end{center}
 
 
@@ -158,14 +158,24 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\labIKp$ with any $\gklmn$ rule to provide a sound and cut-free complete system for this family of logics.
 
 \begin{theorem}\label{thm:cutfree-compl-gklmn}
-	
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{1} $A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$. 
+		%
+		\item\label{2} $A$ is provable in $\labIKp + \gklmn +\labrn{cut}$.
+		\item\label{3} $A$ is provable in $\labIKp + \gklmn $.
+		%
+		\item\label{4} $A$ is valid in every birelational frame satisfying the klmn-incestuality property.
+	\end{enumerate}
 \end{theorem}
 
-\begin{theorem}\label{thm:compl-gklmn}
-	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
-\end{theorem}
-
-\begin{proof} Same as Thm.~\ref{thm:completeness} with the additional derivation of $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$.
+\begin{proof} 
+	The proof is similar to the one of Theorem~\ref{thm:cutfree-compl}.
+	\begin{itemize}
+	\item $1 \implies 2$:
+%	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
+	Same as Thm.~\ref{thm:completeness} with the additional derivation of $\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$:
 		\begin{smallequation*}
 			\vlderivation{
 				\vlin{\rlabrn\IMP}{}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
@@ -192,22 +202,29 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 				}
 		\end{smallequation*}
 		where we omit the accumulated relational context for space reason.
-\end{proof}
-
-\begin{theorem}\label{thm:cut-elim-gklmn}
-	The rule $\rn{cut}$ is admissible for $\labIKp + \gklmn$.
-\end{theorem}
-
-\begin{proof}
-Straightforward as the $\gklmn$ rule only manipulates the relational context.
-\end{proof}
-
-\begin{theorem}\label{thm:sound-gklmn}
-	For any formula $A$. If $A$ is provable in $\labIKp$, then it is valid in every birelational frame satisfying the intuitionistic $klmn$-incestuality condition.
-\end{theorem}
-
-\begin{proof}
-	\todo{}
+		
+		\item $2 \implies 3$:
+		To prove that the rule $\rn{cut}$ is admissible for $\labIKp + \gklmn$, it is enough to insert a case for the rule $\gklmn$ in the proof of Theorem~\ref{thm:cut-elim}, which
+		is straightforward as the $\gklmn$ rule only manipulates the relational context.
+		
+		\item $3 \implies 4$:
+		As we already proved the rules of $\labIKp$ sound in Theorem~\ref{thm:soundness}, we only need to prove that $\gklmn$ is sound.
+		%
+		By way of contradiction, assume that $\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right$ is valid in any klmn-incestuous frame,
+		but that there is such a model $\M$ and an interpretation $\inter\cdot$, such
+		that $\M,\inter\cdot\not\Vdash\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right$.
+		%
+		That means, $\inter x \rel_\M^k \inter y$, $\inter x \rel_\M^m\inter z$, for all $\labels{x}{A} \in \Left$, $\cforce \M xA$ and for all $\labels wB\in\Right$,
+		$\cnforce \M wB$. 
+		%
+		Since $\M$ is klmn-incestuous, there exists $v,w\in W_\M$, such that $\inter y \le_\M \lb{v}$, $\lb{v} R_\M^l \lb{w}$, and $\inter z R_\M^n \lb{w}$.
+		%
+		Now let $\inter\cdot^*$ be the extension of $\inter\cdot$ such that $\inter{y'}^* = v$, $\inter{u}^* = w$, and $\inter\cdot^* = \inter\cdot$ otherwise.
+		%
+		Then, $ \nforce \M {\inter\cdot^*} {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$. Contradiction.
+		\end{itemize}
+		
+		The proof is completed by appealing to Theorem~\ref{thm:gklmn-correspondence} used as $4 \implies 1$ to close the equivalence.
 \end{proof}
 
 %In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
@@ -286,9 +303,9 @@ Straightforward as the $\gklmn$ rule only manipulates the relational context.
 	%
 	Indeed, the formula $\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)$ is not a theorem of this logic, but becomes provable if we directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP (yRu \AND zRu))$) to our system.
 	%
-	But by adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
+	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
 	
-	\begin{smallequation*}\hspace*{-1.7cm}
+	\begin{smallequation*}\hspace*{-1.2cm}
 		\vlderivation{
 			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
 				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
@@ -306,8 +323,8 @@ Straightforward as the $\gklmn$ rule only manipulates the relational context.
 %											}
 %										}{
 									\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-										\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-											\vlid{}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+										\vlin{\llabrn\OR+\rn{id}}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlid{}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
 												\vlhy{}
 												}
 											}
@@ -325,8 +342,7 @@ Straightforward as the $\gklmn$ rule only manipulates the relational context.
 			}
 		}
 	\end{smallequation*}
+	where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
 \end{remark}
 
 
-\todo{For path axioms we must have that adding the rule for the two sides of the axiom is equivalent to adding the rule that doesn't make use of the pre-order. Is it possible to see that directly on the proof theoretical side?}
-\sonia{probably not because the preorder is introduced/used in other rules for $\BOX$ and $\IMP$}

@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\todo{get bib-file right}
+%\todo{get bib-file right}
 
 \section{Introduction}\label{sec:intro}
 
@@ -88,13 +88,13 @@ these logics have certain shortcomings:
   as clean as one would expect. As only the $R$-relation (and not the
   $\le$-relation) of the frame is visible in an ordinary labelled
   sequent, we only have that a sequent $\Gamma$ is provable if and
-  only if is is valid in all \emph{graph-consistent}\footnote{This
+  only if is satisfied in all \emph{graph-consistent}\footnote{This
     means that every layer in the model can be lifted to any future of
     any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
   models, 
-  \sonia{this is only true for logics outside of the path axioms.}
-  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
-  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
+%  \sonia{this is only true for logics outside of the path axioms.}
+%  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
+%  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
   as already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
   and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
@@ -118,8 +118,6 @@ provable in our system if and only if it is valid in all models.
 Besides that, there is another pleasant observation to make about our
 system. Ordinary labelled sequent systems for intuitionistic modal
 logic are single-conclusion~\cite{simpson:phd}. 
-\sonia{No! the system for epistemic logic by Maffezioli, Naibo and Negri~\cite{maffezioli:etal:synthese13} is multi-conclusion}
-\todo{need to say that it is the same principle as in their work, but we use in a more general setting and extend it to a framework for many intuitionistic modal logics while keeping the nice invertibility property.}
 %
 The same is true for the corresponding nested sequent
 systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
@@ -129,16 +127,18 @@ labelled sequents. However, also in these systems there are rules
 ($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
 premise, even though this is not the case in labelled
 systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83} for
-intuitionistic logic. Our system eliminates this
-discrepancy. Consequently, every rule in our system is invertible, as
-we never delete information.
-
-\medskip
+intuitionistic logic. 
+%
+Maffezioli, Naibo and Negri have considered in~\cite{maffezioli:etal:synthese13} a labelled system for intuitionistic bimodal epistemic logic which is multi-conclusion.
+%
+Our system uses the same principle, both labelled and multi-conclusion sequents, but we use in a more general setting and extend it to a framework for many intuitionistic modal logics.
+%
+This eliminates the undesired discrepancy as, consequently, every rule in our system is invertible, i.e.~we never delete information in a bottom-up proof search.
 
 This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics.
 
 
-\todo{maybe paragraph on related work?}
+%\todo{maybe paragraph on related work?}
 
 
 %\section*{Introduction(old version, to be deleted)}

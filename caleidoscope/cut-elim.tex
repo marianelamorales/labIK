@@ -166,8 +166,56 @@ are trying to eliminate it from derivations.
 		In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
 
                 \begin{description}
+                \item[Base cases:]\label{base-cases}
+                When the complexity of the cut-formula is $0$, i.e.~$C$ is atomic, or in general when the height of $\DD_1$ or $\DD_2$ is $0$, we can produce a cut-free derivation of the conclusion.
+        \begin{itemize}
+        	                \item 
+        	                \begin{smallequation*}
+        	                	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+        	                		\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+        	                			\vlhy{}	
+        	                		}
+        	                	}{
+        	                	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
+        	                }
+        	                \reducesto
+        	                \vlderibase{\llabrn{mon}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+        	                	\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
+        	                }
+        	            \end{smallequation*}
+        	            
+        	            \item
+        	            \begin{smallequation*}
+        	            	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+        	            		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
+        	            	}{
+        	            	\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+        	            		\vlhy{}	
+        	            	}
+        	            }
+        	            \reducesto
+        	            \vlderibase{\rlabrn{mon}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+        	            	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+        	            }
+        	        \end{smallequation*}
+        	        
+        	        \item
+        	        \begin{smallequation*}
+        	        	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+        	        		\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}, \labels{z}{C}}{
+        	        			\vlhy{}	
+        	        		}
+        	        	}{
+        	        	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{z}{C} \SEQ \Right, \labels{y}{a}}		
+        	        }
+        	        \reducesto
+        	        \vlderibase{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+        	        	\vlhy{}
+        	        	}
+        	    \end{smallequation*}
+        \end{itemize}
                 \item[Commutative cases:]\label{commutative-cases}
-		In such a case, the complexity of the cut-formula stays constant, but the depth decreases.
+		In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
 		\begin{itemize}
                 \item $\llabrn\IMP$:
 		\begin{smallequation*}
@@ -307,36 +355,9 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \end{smallequation*}
                 \end{itemize}
               \item[Key cases:]\label{key-cases}
-                
+                In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decresing inductive measure.
                 \begin{itemize}
-                \item $C=a$:
-\begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
-		\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
-			\vlhy{}	
-		}
-	}{
-	\vlhtr{\DD_2}{\B, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
-}
-\reducesto
-\vlderibase{\llabrn{mon}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
-	\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
-}
-\end{smallequation*}
 
-\begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
-		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
-	}{
-	\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
-		\vlhy{}	
-	}
-}
-\reducesto
-\vlderibase{\rlabrn{mon}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
-	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
-}
-\end{smallequation*}
                 \item $C=A\IMP B$:
 
 \begin{smallequation*}
