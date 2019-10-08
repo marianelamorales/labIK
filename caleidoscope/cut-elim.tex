@@ -171,30 +171,30 @@ are trying to eliminate it from derivations.
 		\begin{itemize}
                 \item $\llabrn\IMP$:
 		\begin{smallequation*}
-			\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-				\vliin{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
-					\vlhtr{\DD_1}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+			\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+				\vliin{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
+					\vlhtr{\DD_1}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
 				}{
-				\vlhtr{\DD_2}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+				\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
 			}
 		}{
-		\vlhtr{\DD_3}{\B, x \le y, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+		\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
 	}
 	\reducesto
 \end{smallequation*}
 
 \begin{smallequation*}\hspace*{-8.5em}
-	\vlderiibase{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-		\vliin{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
-			\vlhtr{\DD_1}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+	\vlderiibase{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
 		}{
-		\vlhtr{\DD_3^{\rn w}}{\B, x \le y, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+		\vlhtr{\DD_3^{\rn w}}{\B, \futs xy, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
 	}
 }{
-\vliin{\labrn{cut}}{}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}{
-	\vlhtr{\DD_2}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}{
+	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
 }{
-\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, x \le y, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, \futs xy, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
 }
 }
 \end{smallequation*}
@@ -202,8 +202,8 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \item $\rlabrn\IMP$:
 \begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
-		\vlin{\rlabrn\IMP}{\text{\footnotesize $x'$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
-			\vlhtr{\DD_1}{\B, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
+		\vlin{\rlabrn\IMP}{\text{\footnotesize $\lb{x'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
 		}
 	}{
 	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{A \IMP B}}
@@ -212,32 +212,32 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \begin{smallequation*}\hskip8em
 	\reducesto
-	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $x''$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
-		\vliin{\labrn{cut}}{}{\B, x \le x'' \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
-			\vlhtr{\DD_1[x''/x']}{\B, x \le x'', \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}, \labels{z}{C}}
+	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $\lb{x''}$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vliin{\labrn{cut}}{}{\B, \futs{x}{x''}, \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
+			\vlhtr{\DD_1[x''/x']}{\B, \futs{x}{x''}, \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}, \labels{z}{C}}
 		}{
-		\vlhtr{\DD_2^{\invr{\rlabrn\IMP}}}{\B, x \le x'', \Left, \labels{z}{C}, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}
+		\vlhtr{\DD_2^{\invr{\rlabrn\IMP}}}{\B, \futs{x}{x''}, \Left, \labels{z}{C}, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}
 	}
 }
 \end{smallequation*}
 \item $\llabrn\BOX$:
 \begin{smallequation*}\hskip-8em
-	\vlderiibase{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
-		\vlin{\llabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
-			\vlhtr{\DD_1}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
 		}
 	}{
-	\vlhtr{\DD_2}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{z}{C} \SEQ \Right}
+	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{z}{C} \SEQ \Right}
 }
 \end{smallequation*}
 
 \begin{smallequation*}\hskip8em
 	\reducesto
-	\vlderibase{\llabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
-		\vliin{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
-			\vlhtr{\DD_1}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+	\vlderibase{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
 		}{
-		\vlhtr{\DD_2^{\rn w}}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A}, \labels{z}{C} \SEQ \Right}
+		\vlhtr{\DD_2^{\rn w}}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A}, \labels{z}{C} \SEQ \Right}
 	}
 }
 \end{smallequation*}
@@ -245,8 +245,8 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \item $\rlabrn\BOX$:
 \begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
-		\vlin{\rlabrn\BOX}{\text{\footnotesize $x',y'$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
-			\vlhtr{\DD_1}{\B, x \le x', x' \rel y' \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
+		\vlin{\rlabrn\BOX}{\text{\footnotesize $\lb{x'},\lb{y'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \accs{x'}{y'}, \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
 		}
 	}{
 	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\BOX A}}
@@ -255,11 +255,11 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \begin{smallequation*}\hskip8em
 	\reducesto
-	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $u,v$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
-		\vliin{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
-			\vlhtr{\DD_1}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}, \labels{z}{C}}
+	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $\lb u,\lb v$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}, \labels{z}{C}}
 		}{
-		\vlhtr{\DD_2^{\invr{\rlabrn\BOX}}}{\B, x \le u, u \rel v, \Left, \labels{z}{C} \SEQ \Right, \labels{v}{A}}
+		\vlhtr{\DD_2^{\invr{\rlabrn\BOX}}}{\B, \futs xu, \accs uv, \Left, \labels{z}{C} \SEQ \Right, \labels{v}{A}}
 	}
 }
 \end{smallequation*}
@@ -267,18 +267,18 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \begin{smallequation*}\hspace*{-5.5em}
 	\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
-			\vlhtr{\DD_1}{\B, x \rel y', \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
+		\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \accs{x}{y'}, \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
 		}
 	}{
 	\vlhtr{\DD_2}{\B, \Left, \labels{x}{\DIA A}, \labels{z}{C} \SEQ \Right}
 }
 \reducesto
-\vlderibase{\llabrn\DIA}{\text{\footnotesize $y''$ fresh (also in $\DD_2$)}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-	\vliin{\labrn{cut}}{}{\B, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right}{
-		\vlhtr{\DD_1[y''/y']}{\B, x \rel y'', \Left, \labels{y''}{A} \SEQ \Right, \labels{z}{C}}
+\vlderibase{\llabrn\DIA}{\text{\footnotesize $\lb{y''}$ fresh (also in $\DD_2$)}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+	\vliin{\labrn{cut}}{}{\B, \accs{x}{y''}, \Left, \labels{y''}{A} \SEQ \Right}{
+		\vlhtr{\DD_1[y''/y']}{\B, \accs{x}{y''}, \Left, \labels{y''}{A} \SEQ \Right, \labels{z}{C}}
 	}{
-	\vlhtr{\DD_2^{\invr{\llabrn\DIA}}}{\B, x \rel y'', \Left, \labels{y''}{A}, \labels{z}{C} \SEQ \Right}
+	\vlhtr{\DD_2^{\invr{\llabrn\DIA}}}{\B, \accs{x}{y''}, \Left, \labels{y''}{A}, \labels{z}{C} \SEQ \Right}
 }
 }
 \end{smallequation*}
@@ -286,9 +286,9 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \item $\rlabrn\DIA$:
 
 \begin{smallequation*}\hspace*{-5.5em}
-	\vlderiibase{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
-		\vlin{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
-			\vlhtr{\DD_1}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+		\vlin{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
 		}
 	}{
 	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}}
@@ -297,9 +297,9 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 %	\end{smallequation*}
 %	
 %	\begin{smallequation*}
-\vlderibase{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
-	\vliin{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
-		\vlhtr{\DD_1}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+\vlderibase{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+	\vliin{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
+		\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
 	}{
 	\vlhtr{\DD_2^{\rn w}}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
 }
@@ -311,44 +311,44 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
                 \begin{itemize}
                 \item $C=a$:
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
-		\vlin{\labrn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+		\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
 			\vlhy{}	
 		}
 	}{
 	\vlhtr{\DD_2}{\B, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
 }
 \reducesto
-\vlderibase{\llabrn{mon}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right}{
-	\vlhtr{\DD_2^{\rn w}}{\B, x \le y, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
+\vlderibase{\llabrn{mon}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+	\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
 }
 \end{smallequation*}
 
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
 		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
 	}{
-	\vlin{\labrn{id}}{}{\B, x \le y, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+	\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
 		\vlhy{}	
 	}
 }
 \reducesto
-\vlderibase{\rlabrn{mon}}{}{\B, x \le y, \Left \SEQ \Right, \labels{y}{a}}{
-	\vlhtr{\DD_1^{\rn w}}{\B, x \le y, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+\vlderibase{\rlabrn{mon}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
 }
 \end{smallequation*}
                 \item $C=A\IMP B$:
 
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right}{
-		\vlin{\rlabrn\IMP}{}{\B, x \le y, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
-			\vlhtr{\DD_1}{\B, x \le y, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{
+		\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+			\vlhtr{\DD_1}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}}
 		}
 	}{
-	\vliin{\llabrn\IMP}{}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
-		\vlhtr{\DD_2}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	\vliin{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
 	}{
-	\vlhtr{\DD_3}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+	\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
 }
 }
 \reducesto
@@ -356,20 +356,20 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \begin{smallequation*}
 	\hspace*{-7em}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right}{
-		\vliin{\labrn{cut}}{}{\B, x \le y, \Left \SEQ \Right, \labels{y}{A}}{
-			\vlin{\rlabrn\IMP}{}{\B, x \le y, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
-				\vlhtr{\DD_1^{\rn w}}{\B, x \le y, x \le x', \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
+				\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
 			}
 			%			\vlhtr{\DD_{1\rn w}'}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}
 		}{
-		\vlhtr{\DD_{2}}{\B, x \le y, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+		\vlhtr{\DD_{2}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
 	}
 }{
-\vliin{\labrn{cut}}{}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right}{
-	\vlhtr{\DD_1[y/x']}{\B, x \le y, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
+\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right}{
+	\vlhtr{\DD_1[y/x']}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
 }{
-\vlhtr{\DD_3}{\B, x \le y, \Left, \labels{y}{B} \SEQ \Right}
+\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
 }
 }
 \end{smallequation*}
@@ -377,22 +377,22 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
                 \item $C=\BOX A$:
 
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left \SEQ \Right}{
-		\vlin{\rlabrn\BOX}{}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{x}{\BOX A}}{
-			\vlhtr{\DD_1}{\B, x \le u, u \rel v, x \le x', x' \rel y', \Left \SEQ \Right, \labels{y'}{A}}	
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs{u}{v}, \futs{x}{x'}, \accs{x'}{y'}, \Left \SEQ \Right, \labels{y'}{A}}	
 		}
 	}{
-	\vlin{\llabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right}{
-		\vlhtr{\DD_2}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+	\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
 	}
 }
 \reducesto
 \end{smallequation*}
 
 \begin{smallequation*}\hspace*{-7em}
-	\vlderiibase{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left \SEQ \Right}{
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right}{
 		%		\vliin{\labrn{cut}}{}{\B_1, \B_2, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}{
-		\vlhtr{\DD_1[u/x',v/y']}{\B, x \le u, u \rel v, \Left \SEQ \Right, \labels{v}{A}}	
+		\vlhtr{\DD_1[u/x',v/y']}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}	
 		%			}{
 		%			\vlin{\llabrn\BOX}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{v}{A}}{
 		%				\vlin{\labrn{id}}{}{\B_2, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{v}{A}}{
@@ -401,40 +401,40 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 		%				}
 		%			}
 	}{
-	\vliin{\labrn{cut}}{}{\B, x \le u, u \rel v, \Left, \labels{v}{A} \SEQ \Right}{
-		\vlin{\rlabrn\BOX}{}{\B, x \le u, u \rel v, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
-			\vlhtr{\DD_1^{\rn w}}{\B, x \le u, u \rel v, x \le x', x' \rel y', \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
+	\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B, \futs xu, \accs uv, \futs{x}{x'}, \accs{x'}{y'}, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
 		}
 	}{
-	\vlhtr{\DD_2}{\B, x \le u, u \rel v, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
 }
 }
 \end{smallequation*}
                 \item $C=\DIA A$:
 
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right}{
-		\vlin{\rlabrn\DIA}{}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}}{
-			\vlhtr{\DD_1}{\B, x \rel y, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right}{
+		\vlin{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
 		}
 	}{
-	\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B, x \rel y, \Left, \labels{x}{\DIA A} \SEQ \Right}{
-		\vlhtr{\DD_2}{\B, x \rel y, x \rel y',\Left, \labels{y'}{A} \SEQ \Right}
+	\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ is fresh}}{\B, \accs xy, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \accs xy, \accs{x}{y'},\Left, \labels{y'}{A} \SEQ \Right}
 	}	
 }
 \end{smallequation*}
 
 \begin{smallequation*}
-	\vlderiibase{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right}{
-		\vliin{\labrn{cut}}{}{\B, x \rel y, \Left \SEQ \Right, \labels{y}{A}}{
-			\vlhtr{\DD_1}{\B, x \rel y, \Left \SEQ \Right, \labels{y}{A}, \labels{x}{\DIA A}}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{y}{A}, \labels{x}{\DIA A}}
 		}{
-		\vlin{\llabrn\DIA}{\text{\footnotesize $y'$ is fresh}}{\B, x \rel y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{A}}{
-			\vlhtr{\DD_2^{\rn w}}{\B, x \rel y, x \rel y',\Left, \labels{y'}{A} \SEQ \Right, \labels{y}{A}}
+		\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ is fresh}}{\B, \accs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \accs{x}{y'},\Left, \labels{y'}{A} \SEQ \Right, \labels{y}{A}}
 		}
 	}
 }{
-\vlhtr{\DD_2[y/y']}{\B, x \rel y,\Left, \labels{y}{A} \SEQ \Right}
+\vlhtr{\DD_2[y/y']}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
 }
 \end{smallequation*}
                 \end{itemize}

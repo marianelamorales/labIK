@@ -50,18 +50,14 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 	\begin{itemize}
 		\item $\rlabrn\bot$: This is trivial because $\bot$ is never forced.
 		\item $\rn{id}$: This follows immediately from Proposition~\ref{prop:mon-adm}.
-		\item $\llabrn\BOX$: By way of contradiction, assume that $\B, \Left,
-		\futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
-		is valid in all birelational frames, but $\B,\Left, \futs xy,
-		\accs yz, \labels{x}{\BOX A} \SEQ \Right$ is not. This means that
+		\item $\llabrn\BOX$: By way of contradiction, assume that $\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+		is valid in all birelational frames, but $\B, \futs xy,	\accs yz,\Left, \labels{x}{\BOX A} \SEQ \Right$ is not. This means that
 		we have a model $\M$ and an interpretation $\inter\cdot$, such
-		that $\M,\inter\cdot\not\Vdash\B,\Left, \futs xy, \accs yz,
-		\labels{x}{\BOX A} \SEQ \Right$, i.e., $\inter x\le_\M\inter y$
+		that $\M,\inter\cdot\not\Vdash\B, \futs xy, \accs yz, \Left,	\labels{x}{\BOX A} \SEQ \Right$, i.e., $\inter x\le_\M\inter y$
 		and $\inter y\rel_\M\inter z$ and $\cforce \M x{\BOX A}$ and
 		$\cnforce \M wB$ for all $\labels wB\in\Right$. However, by the
 		definition of forcing in~\eqref{eq:kripke} we also have $\cforce
-		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \Left, \futs
-			xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
 			\Right}$. Contradiction.
 %		\todo{The reasoning by contradiction is not necessary. Could be rewritten more lightly as follows:}
 %			%
