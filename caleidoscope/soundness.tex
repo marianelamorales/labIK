@@ -63,20 +63,20 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \Left, \futs
 			xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
 			\Right}$. Contradiction.
-		\todo{The reasoning by contradiction is not necessary. Could be rewritten more lightly as follows:}
-			%
-			Assume that $\B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
-			is valid in all birelational frames. 
-			Consider a model $\M$ and an interpretation $\inter\cdot$ of the conclusion sequent
-			$\B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$ into $\M$, such
-			that for all $\labels{z}{C} \in \Gamma$ we have $\M, \inter z \Vdash \fm C$
-			and $\cforce \M x{\BOX A}$. %and $\cnforce \M wB$ for all $\labels wB\in\Right$. However, 
-			Hence, as $\inter x\le_\M\inter y$ and $\inter y\rel_\M\inter z$, 
-			by the definition of forcing in~\eqref{eq:kripke} we also have $\cforce \M zA$, and 
-			consequently $\cforce \M wB$ for all $\labels wB\in\Right$. 
-			Thus, $\cforce \M{\inter\cdot}{\B, \Left, \futs
-				xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
-				\Right}$. \todo{should we rewrite the whole proof?}\lutz{no. we do by contradiction. I'll explainon skype.}
+%		\todo{The reasoning by contradiction is not necessary. Could be rewritten more lightly as follows:}
+%			%
+%			Assume that $\B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+%			is valid in all birelational frames. 
+%			Consider a model $\M$ and an interpretation $\inter\cdot$ of the conclusion sequent
+%			$\B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$ into $\M$, such
+%			that for all $\labels{z}{C} \in \Gamma$ we have $\M, \inter z \Vdash \fm C$
+%			and $\cforce \M x{\BOX A}$. %and $\cnforce \M wB$ for all $\labels wB\in\Right$. However, 
+%			Hence, as $\inter x\le_\M\inter y$ and $\inter y\rel_\M\inter z$, 
+%			by the definition of forcing in~\eqref{eq:kripke} we also have $\cforce \M zA$, and 
+%			consequently $\cforce \M wB$ for all $\labels wB\in\Right$. 
+%			Thus, $\cforce \M{\inter\cdot}{\B, \Left, \futs
+%				xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+%				\Right}$. \todo{should we rewrite the whole proof?}\lutz{no. we do by contradiction. I'll explainon skype.}
 			
 		\item $\rlabrn\BOX$: By way of contradiction, assume that $\B, \futs xy,
 		\accs yz, \Left \SEQ \Right, \labels{z}{A}$ is valid in all
