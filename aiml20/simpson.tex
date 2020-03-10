@@ -225,28 +225,26 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 %		
 			\\\\
 			
+			$\vlderivation {\vliin {\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \labels{z}{C}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{z}{C}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
+			&$\vlderivation { \vlin{\rlabrn[1]\OR}{}{\B, \Left \SEQ \labels{x}{A \OR B}}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}}$
+			$\vlderivation { \vlin {\rlabrn[2]\OR}{}{\B, \Left \SEQ \labels{x}{A \OR B}}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
 			
-%		\vspace{3mm}
+			\\\\
+	
+			$\vlderivation {\vliin{\llabrn\IMP}{}{\B, \Left, \labels{x}{A} \IMP B \SEQ \labels{z}{C}}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ \labels{z}{C}}}}$
+			&$\vlderivation {\vlin{\rlabrn\IMP}{}{\B,  \Left, \labels{x}{A} \SEQ \labels{x}{B}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}}}$
+			
+			\\\\
+
+			$\vlderivation { \vlin {\llabrn\BOX}{}{\B, \accs xy, \Left, \labels{x}{\BOX A} \SEQ \labels{z}{B}}{\vlhy {\B, \accs xy, \Left, \labels{x}{\BOX A}, \labels{y}{A} \SEQ \labels{z}{B}}}}$
+			&$\vlderivation { \vlin {\rlabrn\BOX}{\lb y \mbox{ is fresh}}{\B, \Left \SEQ \labels{x}{\BOX A}}{\vlhy {\B, \accs xy, \Left \SEQ \labels{y}{A}}}}$
+
+			\\\\
+			
+			$\vlderivation { \vlin{\llabrn\DIA}{\lb y \mbox{ is fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \labels{z}{B}}{\vlhy {\B, \accs xy, \Left, \labels{y}{A} \SEQ \labels{z}{B}}}}$
+			&$\vlderivation {\vlin {\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \labels{x}{\DIA A}}{\vlhy {\B, \accs xy, \Left \SEQ \labels{y}{A}}}}$
 %		
-%		
-%		$\vlderivation {\vliin {\solef}{}{\B, \Left, x \colon \vls[A.B] \SEQ z \colon C}{\vlhy {\B, \Left, \labels{x}{A} \SEQ z \colon C}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
-%		\hspace{7mm}$\vlderivation { \vlin{\sorone}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}}$
-%		\hspace{7mm}$\vlderivation { \vlin {\sotwo}{}{\B, \Left \SEQ x \colon \vls[A.B]}{\vlhy {\B, \Left \SEQ \labels{x}{B}}}}$
-%		
-%		\vspace{3mm}
-%		
-%		$\vlderivation {\vliin{\sil}{}{\B, \Left, \labels{x}{A} \vljm B \SEQ z \colon C}{\vlhy {\B, \Left \SEQ \labels{x}{A}}}{\vlhy {\B, \Left, \labels{x}{B} \SEQ z \colon C}}}$
-%		\hspace{7mm}$\vlderivation {\vlin{\sir}{}{\B,  \Left, \labels{x}{A} \SEQ \labels{x}{B}}{\vlhy {\B, \Left, \labels{x}{A} \SEQ \labels{x}{B}}}}$
-%		
-%		\vspace{3mm}
-%		
-%		$\vlderivation { \vlin {\sbl}{}{\B, x \rel y, \Left, x \colon \BOX A \SEQ z\colon B}{\vlhy {\B, x \rel y, \Left, x \colon \BOX A, y \colon A \SEQ z\colon B}}}$
-%		\hspace{7mm}$\vlderivation { \vlin {\sbr}{y$ is fresh$}{\B, \Left \SEQ x \colon \BOX A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A}}}$
-%		
-%		\vspace{3mm}
-%		
-%		$\vlderivation { \vlin{\sdl}{y$ is fresh$}{\B, \Left, x \colon \DIA A \SEQ z \colon B}{\vlhy {\B, x \rel y, \Left, y \colon A \SEQ z \colon B}}}$
-%		\hspace{7mm}$\vlderivation {\vlin {\sdr}{}{\B,x \rel y, \Left \SEQ x \colon \DIA A}{\vlhy {\B, x \rel y, \Left \SEQ y \colon A }}}$
+%	
 %		
 
 		\end{tabular}		
