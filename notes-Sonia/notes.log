@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  21 MAR 2020 16:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.12.5)  21 MAR 2020 16:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1379,6 +1379,26 @@ Overfull \hbox (64.2492pt too wide) detected at line 1539
 \derldim=\dimen184
 \dercdim=\dimen185
 \derrdim=\dimen186
+\derboxone=\box112
+\derldim=\dimen184
+\dercdim=\dimen185
+\derrdim=\dimen186
+\derboxone=\box112
+\derldim=\dimen184
+\dercdim=\dimen185
+\derrdim=\dimen186
+\derboxone=\box112
+\derldim=\dimen184
+\dercdim=\dimen185
+\derrdim=\dimen186
+\derboxone=\box112
+\derldim=\dimen184
+\dercdim=\dimen185
+\derrdim=\dimen186
+\derboxone=\box112
+\derldim=\dimen184
+\dercdim=\dimen185
+\derrdim=\dimen186
  (./notes.bbl [13]) [14] (./notes.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1436,7 +1456,7 @@ e1/public/wasy2-ps/wasy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/p
 ublic/wasy2-ps/wasy9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public
 /xypic/xyatip10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on notes.pdf (14 pages, 442466 bytes).
+Output written on notes.pdf (14 pages, 443142 bytes).
 PDF statistics:
  224 PDF objects out of 1000 (max. 8388607)
  163 compressed objects within 2 object streams
