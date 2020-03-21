@@ -5,6 +5,8 @@
 
 
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Packages
@@ -35,8 +37,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Proof package
-\usepackage[noxy]{../virginialake}
+\usepackage[noxy]{virginialake}
 \vlnosmallleftlabels
+\vlnostructuressyntax
 %
 \newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
 %
@@ -206,6 +209,10 @@
 \newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
 \newcommand*{\invr}[1]{#1^\bullet}
 %
+\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rrn}[2][]  {\rn{#2}_{R#1}}%^\lab}}
+\newcommand*{\lrn}[2][]  {\rn{#2}_{L#1}}%^\lab}}
+%
 \newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
 \newcommand*{\rlabrn}[2][]  {\rn{#2}_{R#1}}%^\lab}}
 \newcommand*{\llabrn}[2][]  {\rn{#2}_{L#1}}%^\lab}}
@@ -214,6 +221,116 @@
 \newcommand*{\boxbrn}[1]{\rn{\brsym_\rn{#1}}}%^{\lab}}}
 \newcommand*{\diasym}{\mathord{\diamondplus}}
 \newcommand*{\diabrn}[1][]{\rn{\diasym_\rn{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Nested sequents
+\makeatletter
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+	\@ifnextchar\i{\br@two}{%
+		\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+	\def\br@{#1}%
+	\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+	\def\br@{#3}%
+	\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+\newcommand*{\bBR}{%
+	\@ifnextchar\i{\bbr@two}{%
+		\@ifnextchar\bgroup{\bbr@one}{% 
+}}}
+\newcommand*{\bbr@one}[1]{%
+	\def\br@{#1}%
+	\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\bbr@two}[3]{%
+	\def\br@{#3}%
+	\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+%\newcommand*{\@makeoperator}[2]{
+%	\newcommand*{#1}{%
+%		\mathrm{#2}\mdelim{\lparen}{\rparen}
+%	}
+%}
+%%
+%\@makeoperator{\fm}{fm^{\n}}
+%\@makeoperator{\ofm}{fm^{\o}}
+%\@makeoperator{\hfm}{fm^{\h}}
+%%
+%\@makeoperator{\depth}{dp}
+%\@makeoperator{\rank}{rk}
+%\@makeoperator{\height}{ht}
+%\@makeoperator{\tree}{tree}
+%\@makeoperator{\graph}{graph}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% contexts
+\makeatletter
+\newcommand*{\cxs}{%
+	\@ifnextchar\i{\cxs@two}{%
+		\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+	\def\cxs@{#1}%
+	\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+	\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+	\def\cxs@{#3}%
+	\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+	\cxs@one@decor%
+}
+\def\cxs@one@decor{%
+	\@ifnextchar_{\cxs@one@sub}{%
+		\@ifnextchar^{\cxs@one@sup}{%
+			\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+				\@ifnextchar[{\cxs@one@arg}%]
+				\cxs}}}%
+}
+\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
+
+%% Change these as needed, but keep the \cx@continuation at the end
+\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
+
+\def\cx@delete@star#1*{%
+	\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+}
+
+\newcommand*{\@makecontextual}[2]{
+	\newcommand*{#1}{%
+		\@ifnextchar*{\cx@delete@star{#2}}{%
+			\@ifnextchar\f{\cx@delete@focus{#2}}{%
+				#2\cx@continuation}}%
+	}%
+}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Ex}{}
+
+\@makecontextual{\Cx}{\Gamma}
+\@makecontextual{\Dx}{\Delta}
+\@makecontextual{\Lx}{\Lambda}
+\@makecontextual{\Rx}{\Pi}
+
+\@makecontextual{\LLx}{\Omega}
+\@makecontextual{\RRx}{\Xi}
+\@makecontextual{\CCx}{\Sigma}
+\@makecontextual{\DDx}{\Theta}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% intuitionistic
+\newcommand*{\rt}[1]{#1^\circ}
+\newcommand*{\lf}[1]{#1^\bullet}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1462,11 +1579,11 @@ $\vlderivation{
 	}
 $
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Constructive modal logic}
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constructive modal logic(s?)}
+
 %\subsection{Syntax}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1539,7 +1656,172 @@ $
 %	\label{fig:labhCK}
 %\end{figure}
 
+\subsection{Sequent system}
 
+\[
+\vlinf{\rn{id}}{}{\Gamma, A \SEQ \Delta, A}{}
+\quad
+\vlinf{\lrn\BOT}{}{\Gamma, \BOT \SEQ \Delta}{}
+\quad
+\vlinf{\rrn\BOT}{}{\Gamma \SEQ \Delta, \BOT}{\Gamma \SEQ \Delta}
+\]
+\[
+\vliinf{\lrn\OR}{}{\Gamma, A \OR B \SEQ \Delta}{\Gamma, A \SEQ \Delta}{\Gamma, B \SEQ \Delta}
+\quad
+\vlinf{\rrn\OR}{}{\Gamma \SEQ \Delta, A \OR B}{\Gamma \SEQ \Delta, A, B}
+\quad
+\vlinf{\lrn\AND}{}{\Gamma, A \AND B \SEQ \Delta}{\Gamma, A, B \SEQ \Delta}
+\quad
+\vliinf{\rrn\AND}{}{\Gamma \SEQ \Delta, A \AND B}{\Gamma \SEQ \Delta, A}{\Gamma \SEQ \Delta, B}
+\]
+\[
+\vliinf{\lrn\IMP}{}{\Gamma, A \IMP B \SEQ \Delta}{\Gamma, A \IMP B \SEQ \Delta, A}{\Gamma, B \SEQ \Delta}
+\quad
+\vlinf{\rrn\IMP}{}{\Gamma \SEQ \Delta, A \IMP B}{\Gamma \SEQ A \IMP B}
+\]
+\[
+\vlinf{\lrn\DIA}{}{\BOX\Gamma_1, \Gamma_2, \DIA A \SEQ \DIA\Delta_1, \Delta_2}{\Gamma_1, A \SEQ \Delta_1}
+\quad
+\vlinf{\rrn\BOX}{}{\BOX\Gamma_1, \Gamma_2 \SEQ \Delta, \BOX A}{\Gamma_1 \SEQ A}
+\]
+
+\subsection{Remarks}
+
+We know that $\kax[1]$ and $\kax[2]$ are easily derived even if we restrict the succedent to always be a singleton.
+\[\vlderivation{
+	\vlin{\rrn\IMP}{}{\kax[1]\colon\BOX(A \IMP B) \IMP (\BOX A \IMP \BOX B)}{
+		\vlin{\rrn\IMP}{}{\BOX(A \IMP B) \SEQ \BOX A \IMP \BOX B}{
+			\vlin{\rrn\BOX}{}{\BOX(A \IMP B), \BOX A \SEQ \BOX B}{
+				\vliin{\lrn\IMP}{}{A \IMP B, A \SEQ B}{
+					\vlin{\rn{id}}{}{A \IMP B, A \SEQ A}{
+						\vlhy{}
+						}
+					}{
+					\vlin{\rn{id}}{}{B, A \SEQ B}{
+						\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\qquad
+\vlderivation{
+	\vlin{\rrn\IMP}{}{\kax[2]\colon\BOX(A \IMP B) \IMP(\DIA A \IMP \DIA B)}{
+		\vlin{\rrn\IMP}{}{\BOX(A \IMP B) \SEQ \DIA A \IMP \DIA B}{
+			\vlin{\lrn\DIA}{}{\BOX(A \IMP B), \DIA A \SEQ \DIA B}{
+				\vliin{\lrn\IMP}{}{A \IMP B, A \SEQ B}{
+					\vlin{\rn{id}}{}{A \IMP B, A \SEQ A}{
+						\vlhy{}
+						}
+					}{
+					\vlin{\rn{id}}{}{B, A \SEQ B}{
+						\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\]
+
+$\kax[3]$ becomes derivable as soon as we allow two or more formulas on the right.
+\[
+\vlderivation{
+	\vlin{\rrn\IMP}{}{\kax[3]\colon\DIA(A \OR B)\IMP(\DIA A \OR \DIA B)}{
+		\vlin{\rrn\OR}{}{\DIA(A \OR B) \SEQ \DIA A \OR \DIA B}{
+			\vlin{\lrn\DIA}{}{\DIA(A \OR B) \SEQ \DIA A, \DIA B}{
+				\vliin{\lrn\OR}{}{A \OR B \SEQ A, B}{
+					\vlin{\rn{id}}{}{A \SEQ A, B}{
+						\vlhy{}
+						}
+					}{
+					\vlin{\rn{id}}{}{B \SEQ A, B}{
+						\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\]
+
+$\kax[5]$ becomes derivable as soon as we allow the righthandside to be empty. 
+\[
+\vlderivation{
+	\vlin{\rrn\IMP}{}{\kax[5]\colon\DIA\BOT\IMP\BOT}{
+		\vlin{\rrn\BOT}{}{\DIA\BOT \SEQ \BOT}{
+			\vlin{\lrn\DIA}{}{\DIA\BOT \SEQ}{
+				\vlin{\lrn\BOT}{}{\BOT \SEQ}{
+					\vlhy{}
+					}
+				}
+			}
+		}
+	}
+\]
+
+$\kax[4]$ on the other hand, is still underivable.
+\[
+\vlderivation{
+	\vlin{\rrn\IMP}{}{\kax[4]\colon(\DIA A \IMP \BOX B)\IMP\BOX(A \IMP B)}{
+		\vliin{\lrn\IMP}{}{\DIA A \IMP \BOX B \SEQ \BOX(A \IMP B)}{
+			\vlin{\textcolor{red}{?}}{}{\DIA A \IMP \BOX B \SEQ \DIA A, \BOX(A \IMP B)}{
+				\vlhy{\textcolor{red}{???}}
+				}
+			}{
+			\vlin{\rrn\BOX}{}{\BOX B \SEQ \BOX(A \IMP B)}{
+				\vlin{\rrn\IMP}{}{B \SEQ A \IMP B}{
+					\vlin{\rn{id}}{}{B, A \SEQ B}{
+						\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\]
+
+\subsection{Bicolor nested sequent systems}
+
+\paragraph{For $\IK$}
+\[
+\vlinf{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{}
+\quad
+\vlinf{\lrn{\BOT}}{}{\Cx{\lf \BOT}}{}
+\]
+\[
+\vlinf{\lrn\AND}{}{\Cx{\lf{A \AND B}}}{\Cx{\lf A, \lf B}}
+\quad
+\vliinf{\rrn\AND}{}{\Cx{\rt{A \AND B}}}{\Cx{\rt A}}{\Cx{\rt B}}
+\quad
+\vliinf{\lrn\OR}{}{\Cx{\lf{A \OR B}}}{\Cx{\lf A}}{\Cx{\lf B}}
+\quad
+\vlinf{\rrn\OR}{}{\Cx{\rt{A \OR B}}}{\Cx{\rt A, \rt B}}
+\]
+\[
+%\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\lf{A \IMP B}, \bBR{\rt A, \Cx[2]}}}{\Cx[1]{\bBR{\lf B, \Cx[2]}}}
+%
+\vliinf{\lrn[1]\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\rt A}}{\Cx[1]{\lf B}}
+\quad
+\vlinf{\lrn[2]\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf{A \IMP B}, \Cx[2]}}}
+\quad
+\vlinf{\rrn\IMP}{}{\Cx{\rt{A \IMP B}}}{\Cx{\bBR{\lf A, \rt B}}}
+\]
+\[
+\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf A, \Cx[2]}}}}
+\quad
+\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}
+\quad
+\vlinf{\lrn\DIA}{}{\Cx{\lf{\DIA A}}}{\Cx{\BR{\lf A}}}
+\quad
+\vlinf{\rrn\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\BR{\rt A, \Cx[2]}}}
+\]
+\[
+\vlinf{\lf{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf A, \Cx[2]}}}
+\quad
+\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\Cx[2]}}}}
+\]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Bibliography
