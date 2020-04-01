@@ -1810,6 +1810,7 @@ $\kax[4]$ on the other hand, is still underivable.
 \]
 \[
 \vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf A, \Cx[2]}}}}
+%\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\BR{\lf A, \Cx[2]}}}
 \quad
 \vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}
 \quad
@@ -1820,9 +1821,14 @@ $\kax[4]$ on the other hand, is still underivable.
 \[
 \vlinf{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf A, \Cx[2]}}}
 \quad
-\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt An, \Cx[2]}}}{\Cx51]{\rt A, \bBR{\Cx[2]}}}
+\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\Cx[2]}}}
 \quad
 \vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\Cx[2]}}}}
+\]
+\[
+\vlinf{refl_\le}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\bBR{\Cx[2]}}}
+\quad
+\vlinf{trans_\le}{}{\Cx[1]{\bBR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
 \]
 
 \paragraph{For $\sys{IS4}$}
@@ -1830,7 +1836,8 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 \[
 \vlinf{\lrn[1]\BOX}{}{\Cx[1]{\lf{\BOX A}}}{\Cx{\lf A}}
 \quad
-\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
+%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
+\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\BR{\lf{\BOX A}, \Cx[2]}}}
 \quad
 \vlinf{\rrn[1]\DIA}{}{\Cx[1]{\rt{\DIA A}}}{\Cx{\rt A}}
 \quad
