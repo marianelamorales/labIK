@@ -513,20 +513,29 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 			{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}
 			{\vlin{\rrn\IMP}{}
 				{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}
-				{\vlin{\lrn{mon}}{}
+				{\vlin{\rn{F_\rn{1}}}{}
 					{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}
-					{\vliin{\lrn\IMP}{}
-						{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
-						{\vlin{\rrn\DIA}{}
-							{\bBR{\bBR{\rt{\DIA A}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\bBR{\BR{\rt{A}, \bBR{\lf{A}, \rt{B}}}}}}
-								{\vlhy{}}}}
-						{\vlin{\lrn\BOX}{}
-							{\bBR{\bBR{\lf{\BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\bBR{\BR{\lf{B}, \bBR{\lf{A}, \rt{B}}}}}}
-								{\vlhy{}}}}}
+					{\vlin{\lrn{mon}}{}
+						{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\bBR{\BR{\lf{A}, \rt{B}}}}}}
+						{\vlin{\lrn{mon}}{}
+							{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\lf{A}, \rt{B}}}}}}
+							{\vliin{\lrn\IMP}{}
+								{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}
+								{\vlin{\rrn\DIA}{}
+									{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}
+									{\vlin{\rn{refl}}{}
+										{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A}, \rt{B}}}}}}
+										{\vlin{\rn{id}}{}
+											{\bBR{\bBR{\bBR{\BR{ \lf{A}, \bBR{\rt{A}, \rt{B}}}}}}}
+											{\vlhy{}}}}}
+								{\vlin{\lrn\BOX}{}
+									{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
+									{\vlin{\rn{refl}}{}
+										{\bBR{\bBR{\bBR{\BR{\lf{B}, \lf{A}, \rt{B}}}}}}
+										{\vlin{\rn{id}}{}
+											{\bBR{\bBR{\bBR{\BR{\lf{B}, \bBR{\rt{B}, \lf{A}}}}}}}
+											{\vlhy{}}}}}}}
+						}
 					}}}
 	}$
 	
