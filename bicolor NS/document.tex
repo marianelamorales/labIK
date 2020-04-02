@@ -417,16 +417,12 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 									{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \BR{\lf{A},\rt{B}}}}}}
 									{\vliin{\lrn\IMP}{}
 										{\bBR{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
-										{\vlin{\rn{refl}}{}
+										{\vlin{\rn{id}}{}
 											{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A},\rt{B}}}}}}
+											{\vlhy{}}}
 											{\vlin{\rn{id}}{}
-												{\bBR{\bBR{\bBR{\BR{\lf{A}, \bBR{ \rt{A},\rt{B}}}}}}}
-												{\vlhy{}}}}
-											{\vlin{\rn{refl}}{}
 												{\bBR{\bBR{\bBR{\BR{\lf{B}, \lf{A},\rt{B}}}}}}
-												{\vlin{\rn{id}}{}
-													{\bBR{\bBR{\bBR{\BR{\lf{B}, \bBR{\rt{B}, \lf{A}}}}}}}
-													{\vlhy{}}}}}}}}}}}}}
+												{\vlhy{}}}}}}}}}}}}
 	$
 \end{center}
 
@@ -454,16 +450,12 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 							{\vliin{\lrn\IMP}
 								{}
 								{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A}, \rt{B}}}}}
-								{\vlin{\rn{refl}}{}
+								{\vlin{\rn{id}}{}
 									{\bBR{\bBR{\BR{\rt{A}, \lf{A}, \rt{B}}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\BR{\lf{A}, \bBR{\rt{A}, \rt{B}}}}}}
-										{\vlhy{}}}}
-								{\vlin{\rn{refl}}{}
+									{\vlhy{}}}
+								{\vlin{\rn{id}}{}
 									{\bBR{\bBR{\BR{\lf{B}, \lf{A}, \rt{B}}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\BR{\lf{B}, \bBR{\lf{A}, \rt{B}}}}}}
-										{\vlhy{}}}}}}}}}}
+									{\vlhy{}}}}}}}}}
 	}$
 \end{center}
 \bigskip
@@ -484,18 +476,14 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 					{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A}, \rt{\DIA B}}}
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{refl}}{}
+						{\vlin{\rn{id}}{}
 							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA B}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\BR{\lf{A}, \bBR{\rt{A}}}, \rt{\DIA B}}}
-								{\vlhy{}}}}}
+							{\vlhy{}}}}
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{refl}}{}
+						{\vlin{\rn{id}}{}
 							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\BR{\lf{B}, \bBR{\rt{B}}}, \rt{\DIA A}}}
-								{\vlhy{}}}}}}}}
+							{\vlhy{}}}}}}}
 	}$
 	
 \end{center}
@@ -524,18 +512,14 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 								{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}
 								{\vlin{\rrn\DIA}{}
 									{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}
-									{\vlin{\rn{refl}}{}
+									{\vlin{\rn{id}}{}
 										{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A}, \rt{B}}}}}}
-										{\vlin{\rn{id}}{}
-											{\bBR{\bBR{\bBR{\BR{ \lf{A}, \bBR{\rt{A}, \rt{B}}}}}}}
-											{\vlhy{}}}}}
+										{\vlhy{}}}}
 								{\vlin{\lrn\BOX}{}
 									{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
-									{\vlin{\rn{refl}}{}
+									{\vlin{\rn{id}}{}
 										{\bBR{\bBR{\bBR{\BR{\lf{B}, \lf{A}, \rt{B}}}}}}
-										{\vlin{\rn{id}}{}
-											{\bBR{\bBR{\bBR{\BR{\lf{B}, \bBR{\rt{B}, \lf{A}}}}}}}
-											{\vlhy{}}}}}}}
+										{\vlhy{}}}}}}
 						}
 					}}}
 	}$
