@@ -349,9 +349,9 @@
 \[
 %\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\lf{A \IMP B}, \bBR{\rt A, \Cx[2]}}}{\Cx[1]{\bBR{\lf B, \Cx[2]}}}
 %
-\vliinf{\lrn[1]\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\rt A}}{\Cx[1]{\lf B}}
+\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\rt A}}{\Cx[1]{\lf B}}
 \quad
-\vlinf{\lrn[2]\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf{A \IMP B}, \Cx[2]}}}
+%\vlinf{\lrn[2]\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf{A \IMP B}, \Cx[2]}}}
 \quad
 \vlinf{\rrn\IMP}{}{\Cx{\rt{A \IMP B}}}{\Cx{\bBR{\lf A, \rt B}}}
 \]
@@ -368,11 +368,11 @@
 \[
 \vlinf{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf A, \Cx[2]}}}
 \quad
-\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\Cx[2]}}}
-\quad
 \vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\Cx[2]}}}}
 \]
 \[
+\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\Cx[2]}}}
+\quad
 \vlinf{\rn{refl}_\le}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\bBR{\Cx[2]}}}
 \quad
 \vlinf{\rn{trans}_\le}{}{\Cx[1]{\bBR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
@@ -414,7 +414,7 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 								{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\BR{\lf{A},\rt{B}}}}}}
 								{\vlin{\lrn\BOX}{}
 									{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \BR{\lf{A},\rt{B}}}}}}
-									{\vliin{\lrn[1]\IMP}{}
+									{\vliin{\lrn\IMP}{}
 										{\bBR{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
 										{\vlin{\rn{refl}}{}
 											{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A},\rt{B}}}}}}
@@ -447,10 +447,10 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 					{\vlin {\lrn{mon}}
 						{}
 						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}}}}
-						{\vlin {\rrn\BOX}
+						{\vlin {\lrn\BOX}
 							{}
 							{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}}}}
-							{\vliin{\lrn[1]\IMP}
+							{\vliin{\lrn\IMP}
 								{}
 								{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A}, \rt{B}}}}}
 								{\vlin{\rn{refl}}{}
@@ -510,13 +510,13 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 		{\kax[4] \colon \rt{(\DIA A \IMP \BOX B) \IMP \BOX(A \IMP B)}}
 		{\vlin {\rrn\BOX}
 			{}
-			{\bBR{\lf{(\DIA A \IMP \BOX B)}, \rt{\BOX(A \IMP B)}}}
+			{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}
 			{\vlin{\rrn\IMP}{}
-				{\bBR{\lf{(\DIA A \IMP \BOX B)}, \bBR{\BR{\rt{A \IMP B}}}}}
-				{\vlin{\lrn[2]\IMP}{}
-					{\bBR{\lf{(\DIA A \IMP \BOX B)}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}
-					{\vliin{\lrn[1]\IMP}{}
-						{\bBR{\bBR{\lf{(\DIA A \IMP \BOX B)}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
+				{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}
+				{\vlin{\lrn{mon}}{}
+					{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}
+					{\vliin{\lrn\IMP}{}
+						{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
 						{\vlin{\rrn\DIA}{}
 							{\bBR{\bBR{\rt{\DIA A}, \BR{\bBR{\lf{A}, \rt{B}}}}}}
 							{\vlin{\rn{id}}{}
