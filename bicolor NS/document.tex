@@ -38,6 +38,9 @@
 \vlnosmallleftlabels
 \vlnostructuressyntax
 %
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+
 \newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
 %
 \newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
@@ -555,6 +558,26 @@ In this section we are going to prove the admissibility of cut for the system $\
 	\end{theorem}
 
 \begin{lemma}
+	\label{lem:weak-adm}
+	The weakening rule
+	~$\vlinf{\rn{weak}}{}{\Cx{\Gamma_{1}}}{\Cx{ \emptyset}}$~
+	is height-preserving admissible for $\rn{NIK}$.
+\end{lemma}
+
+\begin{lemma}
+	\label{lem:m-adm}
+	The rule
+	~$\vlinf{\rn{m[]}}{}{\Cx{\BR{\Gamma_{1}, \Gamma_{2}}}}{\Cx{\BR{\Gamma_{1}}, \BR{\Gamma_{2}}}}$~
+	is height-preserving admissible for $\rn{NIK}$.
+\end{lemma}
+
+	\begin{lemma}
+		\label{lem:inv}
+		All single-premise rules of $\rn{NIK}$ are height-preserving
+		invertible.
+	\end{lemma}
+	
+\begin{lemma}
 	\label{lem:reduction}
 	Given a derivation of shape
 	$$
@@ -575,7 +598,141 @@ In this section we are going to prove the admissibility of cut for the system $\
 	In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
 
 \newpage
-\textbf{Key cases}
+
+
+\textbf{Commutative cases}: In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
+
+\begin{itemize}
+\item $\rrn\IMP$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}, \rt{A \IMP B}}}
+	{\vlin{}{}
+		{\Cx{\Gamma_{1}, \rt{A \IMP B}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A \IMP B}, \lf{C}}}} 
+}$
+$\reducesto$
+$\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\Cx{\Gamma_{1}, \rt{A \IMP B}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\rrn\IMP}}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}, \lf{C}}}}}
+}$
+
+\item $\lrn\IMP$:
+\marianela{doubt}
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
+	{\vliin{\lrn\IMP}{}
+		{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{C}}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{B}, \rt{C}}}}}
+	{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \lf{C}}}}
+	}$
+	$\reducesto$
+	
+	
+$\vlderivation{
+	\vliin{\lrn\IMP}{}
+	{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \rt{A}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{C}}}}
+		{\vlhtr{\DD_3^{\lrn\IMP}}{\Cx{\Gamma_{1}, \rt{A}, \lf{C}}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \lf{B}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{B}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\lrn\IMP}}{\Cx{\Gamma_{1}, \lf{B}, \lf{C}}}}}
+	}$
+
+\item $\rrn\BOX$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}, \rt{\BOX A}}}
+	{\vlin{\rrn\BOX}{}
+		{\Cx{\Gamma_{1}, \rt{\BOX A}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{\BOX A}, \lf{C}}}}
+}$
+$\reducesto$
+$\vlderivation{
+	\vlin{\rrn\BOX}{}
+	{\Cx{\Gamma_{1}, \rt{\BOX A}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\rrn\BOX}}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}, \lf{C}}}}}
+}$
+
+\item $\lrn\BOX$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
+	{\vlin{\lrn\BOX}{}
+		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}, \lf{C}}}}
+}$
+$\reducesto$
+$\vlderivation{
+	\vlin{\lrn\BOX}{}
+	{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\lrn\BOX}}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{C}}}}}
+}$
+
+\item $\rrn\DIA$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
+	{\vlin{\rrn\DIA}{}
+		{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}, \lf{C}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vlin{\rrn\DIA}{}
+	{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\BR{\Gamma_{1}, \rt{A}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\rrn\DIA}}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \lf{C}}}}}
+	}$
+	
+\item $\lrn\DIA$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}, \lf{\DIA A}}}
+	{\vlin{\lrn\DIA}{}
+		{\Cx{\Gamma_{1}, \lf{\DIA A}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \BR{\lf{A}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{\DIA A}, \rt{C}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vlin{\lrn\DIA}{}
+	{\Cx{\Gamma_{1}, \lf{\DIA A}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \BR{\lf{A}}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \BR{\lf{A}}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\lrn\DIA}}{\Cx{\Gamma_{1}, \BR{\lf{A}}, \lf{C}}}}}
+	}$
+\end{itemize}
+
+\textbf{Key cases}: In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decresing inductive measure.
 
 \begin{itemize}
 \item $C=A \AND B$:
@@ -611,10 +768,21 @@ $\vlderivation{
 		{\Cx{\Gamma_{1}, \rt{A \OR B}}}
 		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A},\rt{B}}}}}
 	{\vliin{\lrn\OR}{}
-		{}
-		{}
-		{}}
+		{\Cx{\Gamma_{1}, \lf{A \OR B}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{A}}}}
+		{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{B}}}}}
 	}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vliin{}{}
+		{\Cx{\Gamma_{1}, \rt{A}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{B}}}}
+		{\vlhtr{\DD_3^{w}}{\Cx{\Gamma_{1}, \rt{A}, \lf{B}}}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{A}}}}
+	}$	
+
 \item $C=A \IMP B$:
 
 $\vlderivation{
@@ -640,6 +808,25 @@ $\vlderivation{
 	
 \item $C=\BOX A$:
 
+\marianela{doubt}
+%$\vlderivation{
+%	\vliin{\rn{cut}}{}
+%	{\Cx{\BR{\Gamma_{1}}}}
+%	{\vlin{\rrn\BOX}{}
+%		{\Cx{\BR{\Gamma_{1}}, \rt{\BOX A}}}
+%		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
+%	{\vlin{\lrn\BOX}{}
+%		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
+%		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}}}
+%	}$
+%	$\reducesto$
+%$\vlderivation{
+%	\vliin{\rn{cut}}{}
+%	{\Cx{\BR{\Gamma_{1}}}}
+%	{\vlin{\rn{refl}}{}
+%		{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
+%		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
+%	{\vlin{}{}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}{}}}$
 
 $\vlderivation{
 	\vliin{\rn{cut}}{}
@@ -650,17 +837,22 @@ $\vlderivation{
 	{\vlin{\lrn\BOX}{}
 		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
 		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}}}
-	}$
-	$\reducesto$
+}$
+$\reducesto$
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
-	{\vlin{\rn{refl}}{}
-		{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
-	{\vlin{}{}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}{}}}$
+	{\vlin{\rn{m[]}}{}
+		{\Cx{\BR{\Gamma_{1}, \rt{A}}}}
+		{\vlin{\rn{refl}}{}
+			{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
+			{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}}
+	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+		}}$
 
 \item $C=\DIA A$:
+
+\marianela{doubt}
 
 $\vlderivation{
 	\vliin{\rn{cut}}{}
@@ -676,10 +868,13 @@ $\vlderivation{
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
-	{\vlin{}{}{}{}}
-	{\vlin{}{}{}{}}
+	{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}}}}
+	{\vlin{\rn{m[]}}{}
+		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}}}
 	}$
 \end{itemize}
+
 \end{proof}
 
 %% Bibliography
