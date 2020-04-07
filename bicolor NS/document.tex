@@ -332,6 +332,7 @@
 \section{Bicolor nested sequent systems}
 
 \paragraph{For $\IK$}
+
 \[
 %\vlinf{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{}
 \vlinf{\rn{id}}{}{\Cx{\lf A, \rt A}}{}
@@ -378,6 +379,7 @@
 \quad
 \vlinf{\rn{trans}_\le}{}{\Cx[1]{\bBR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
 \]
+
 
 \paragraph{For $\sys{IS4}$}
 Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
@@ -542,6 +544,143 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 	}$
 	
 \end{center}
+
+\subsection{Cut admissibility}
+
+In this section we are going to prove the admissibility of cut for the system $\rn{NIK}$.
+
+\begin{theorem}
+	\label{thm:cut-adm}
+	The $\rn{cut}$ rule is admissible for $\rn{NIK}$.
+	\end{theorem}
+
+\begin{lemma}
+	\label{lem:reduction}
+	Given a derivation of shape
+	$$
+	\vlderivation{
+		\vliiin{\labrn{cut}}{}{\Cx{\Gamma_{1}}}{
+			\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{C}}}}{
+			\vlhy{}}{
+			\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{C}}}}}
+	$$
+	where $\DD_1$ and $\DD_2$ are both cut-free, there is a cut-free
+	derivation of $\Cx{\Gamma_{1}}$
+\end{lemma}
+
+\begin{proof}
+	
+	We perform a case analysis on the last rule used in $\DD_1$ above the $\rn{cut}$ and whether it applies to the cut-formula or not.
+	%
+	In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
+
+\newpage
+\textbf{Key cases}
+
+\begin{itemize}
+\item $C=A \AND B$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vliin{\rrn\AND}{}
+		{\Cx{\Gamma_{1}, \rt{A \AND B}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{B}}}}}
+	{\vlin{\lrn\AND}{}
+		{\Cx{\Gamma_{1}, \lf{A \AND B}}}
+		{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{A}, \lf{B}}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \lf{A}}}
+		{\vlhtr{\DD_2^{w}}{\Cx{\Gamma_{1}, \lf{A}, \rt{B}}}}
+		{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{A}, \lf{B}}}}}
+	}$
+
+\item $C= A \OR B$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vlin{\rrn\OR}{}
+		{\Cx{\Gamma_{1}, \rt{A \OR B}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A},\rt{B}}}}}
+	{\vliin{\lrn\OR}{}
+		{}
+		{}
+		{}}
+	}$
+\item $C=A \IMP B$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vlin{\rrn\IMP}{}
+		{\Cx{\Gamma_{1}, \rt{A \IMP B}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}}}}}
+	{\vliin{\lrn\IMP}{}
+		{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A}}}}
+		{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{B}}}}}}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{}{}
+	{\Cx{\Gamma_{1}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \lf{A}}}
+		{\vlin{\rn{refl}}{}{\Cx{\Gamma_{1}, \lf{A}, \rt{B}}}{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}}}}}
+		{\vlhtr{\DD_3^{w}}{\Cx{\Gamma_{1}, \lf{A}, \lf{B}}}}}
+	}$
+	
+\item $C=\BOX A$:
+
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{\rrn\BOX}{}
+		{\Cx{\BR{\Gamma_{1}}, \rt{\BOX A}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
+	{\vlin{\lrn\BOX}{}
+		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{\rn{refl}}{}
+		{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
+	{\vlin{}{}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}{}}}$
+
+\item $C=\DIA A$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{\rrn\DIA}{}
+		{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}}}}}
+	{\vlin{\lrn\DIA}{}
+		{\Cx{\BR{\Gamma_{1}}, \lf{\DIA A}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{}{}{}{}}
+	{\vlin{}{}{}{}}
+	}$
+\end{itemize}
+\end{proof}
 
 %% Bibliography
 %\bibliographystyle{plain}
