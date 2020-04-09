@@ -779,7 +779,7 @@ $\vlderivation{
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\Gamma_{1}}}
-	{\vliin{}{}
+	{\vliin{\rn{cut}}{}
 		{\Cx{\Gamma_{1}, \rt{A}}}
 		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{B}}}}
 		{\vlhtr{\DD_3^{w}}{\Cx{\Gamma_{1}, \rt{A}, \lf{B}}}}}
@@ -883,6 +883,73 @@ $\vlderivation{
 
 \end{proof}
 
+\subsubsection{Cut-Elimination for IS4}
+
+\textbf{Key cases}:
+
+\begin{itemize}
+\item $C=\lrn[1]\BOX$:
+
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vlin{\rrn\BOX}{}
+		{\Cx{\Gamma_{1}, \rt{\BOX A}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}}}}}
+	{\vlin{\lrn[1]\BOX}{}
+		{\Cx{\Gamma_{1}, \lf{\BOX A}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{A}}}}}
+	}$
+	$\reducesto$
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\Gamma_{1}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \rt{A}}}
+		{\vlin{\rrn\BOX}{}
+			{\Cx{\Gamma_{1}, \rt{A}, \rt{\BOX A}}}
+			{\vlhtr{\DD_1^{w}}{\Cx{\Gamma_{1}, \rt{A}, \bBR{\BR{\rt{A}}}}}}}
+		{\vlin{\lrn[1]\BOX}{}
+			{\Cx{\Gamma_{1}, \rt{A}, \lf{\BOX A}}}
+			{\vlhtr{\DD_2^{w}}{\Cx{\Gamma_{1}, \rt{A}, \lf{A}}}}}}
+	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{A}}}}
+	}$
+
+\item $C=\lrn[2]\BOX$:
+
+\begin{center}
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{\rrn\BOX}{}
+		{\Cx{\BR{\Gamma_{1}}, \rt{\BOX A}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
+	{\vlin{\lrn[2]\BOX}{}
+		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{\BOX A}}}}}}
+	}$
+	$\reducesto$
+	
+$\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\Gamma_{1}}}}
+	{\vlin{\rn{m[]}}{}
+		{\Cx{\BR{\Gamma_{1}, \rt{A}}}}
+		{\vlin{\rn{refl}}{}
+			{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
+			{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+		{\vlin{\rrn\BOX}{}
+			{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{\BOX A}}}
+			{\vlhtr{\DD_1^{w}}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \bBR{\BR{\rt{A}}}}}}}
+		{\vlin{\lrn[2]\BOX}{}
+			{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}}}
+			{\vlhtr{\DD_2^{w}}{\Cx{\BR{\Gamma_{1}, \lf{A}, \lf{\BOX A}}}}}}}
+	}$
+\end{center}
+	
+\end{itemize}
 %% Bibliography
 %\bibliographystyle{plain}
 %\bibliography{references}
