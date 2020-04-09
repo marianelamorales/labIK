@@ -354,7 +354,7 @@
 \[
 %\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\lf{A \IMP B}, \bBR{\rt A, \Cx[2]}}}{\Cx[1]{\bBR{\lf B, \Cx[2]}}}
 %
-\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\rt A}}{\Cx[1]{\lf B}}
+\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\lf{A \IMP B}, \rt A}}{\Cx[1]{\lf B}}
 \quad
 %\vlinf{\lrn[2]\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf{A \IMP B}, \Cx[2]}}}
 \quad
@@ -362,13 +362,13 @@
 \]
 \[
 %\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf A, \Cx[2]}}}}
-\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\BR{\lf A, \Cx[2]}}}
+\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf A, \Cx[2]}}}
 \quad
 \vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}
 \quad
 \vlinf{\lrn\DIA}{}{\Cx{\lf{\DIA A}}}{\Cx{\BR{\lf A}}}
 \quad
-\vlinf{\rrn\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\BR{\rt A, \Cx[2]}}}
+\vlinf{\rrn\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt A, \Cx[2]}}}
 \]
 \[
 \vlinf{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf A, \Cx[2]}}}
@@ -415,18 +415,18 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 					{\vlin {\lrn\BOX}{}
 						{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\lf{\BOX A},\BR{\rt{B}}}}}}
 						{\vlin {\lrn{mon}}{}
-							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\BR{\lf{A},\rt{B}}}}}}
+							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
 							{\vlin {\lrn{mon}}{}
-								{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\BR{\lf{A},\rt{B}}}}}}
+								{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
 								{\vlin{\lrn\BOX}{}
-									{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \BR{\lf{A},\rt{B}}}}}}
+									{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A},  \BR{\lf{A},\rt{B}}}}}}
 									{\vliin{\lrn\IMP}{}
-										{\bBR{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
+										{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
 										{\vlin{\rn{id}}{}
-											{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A},\rt{B}}}}}}
+											{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A},\rt{B}}}}}}
 											{\vlhy{}}}
 											{\vlin{\rn{id}}{}
-												{\bBR{\bBR{\bBR{\BR{\lf{B}, \lf{A},\rt{B}}}}}}
+												{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{B}, \lf{A},\rt{B}}}}}}
 												{\vlhy{}}}}}}}}}}}}
 	$
 \end{center}
@@ -448,18 +448,18 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 					{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}}, \rt{\DIA B}}}}
 					{\vlin {\lrn{mon}}
 						{}
-						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}}}}
+						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
 						{\vlin {\lrn\BOX}
 							{}
-							{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}}}}
+							{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
 							{\vliin{\lrn\IMP}
 								{}
-								{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A}, \rt{B}}}}}
+								{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A \IMP B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
 								{\vlin{\rn{id}}{}
-									{\bBR{\bBR{\BR{\rt{A}, \lf{A}, \rt{B}}}}}
+									{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
 									{\vlhy{}}}
 								{\vlin{\rn{id}}{}
-									{\bBR{\bBR{\BR{\lf{B}, \lf{A}, \rt{B}}}}}
+									{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
 									{\vlhy{}}}}}}}}}
 	}$
 \end{center}
@@ -482,12 +482,12 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}
 						{\vlin{\rn{id}}{}
-							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA B}}}
+							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA A}, \rt{\DIA B}}}
 							{\vlhy{}}}}
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}
 						{\vlin{\rn{id}}{}
-							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}}}
+							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}, \rt{\DIA B}}}
 							{\vlhy{}}}}}}}
 	}$
 	
@@ -516,14 +516,14 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 							{\vliin{\lrn\IMP}{}
 								{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}
 								{\vlin{\rrn\DIA}{}
-									{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}
+									{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}
 									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\bBR{\BR{\rt{A}, \lf{A}, \rt{B}}}}}}
+										{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A}, \BR{ \rt{A}, \lf{A}, \rt{B}}}}}}
 										{\vlhy{}}}}
 								{\vlin{\lrn\BOX}{}
 									{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
 									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\bBR{\BR{\lf{B}, \lf{A}, \rt{B}}}}}}
+										{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{B}, \lf{A}, \rt{B}}}}}}
 										{\vlhy{}}}}}}
 						}
 					}}}
@@ -571,11 +571,11 @@ In this section we are going to prove the admissibility of cut for the system $\
 	is height-preserving admissible for $\rn{NIK}$.
 \end{lemma}
 
-	\begin{lemma}
-		\label{lem:inv}
-		All single-premise rules of $\rn{NIK}$ are height-preserving
-		invertible.
-	\end{lemma}
+\begin{lemma}\marianela{Should I make the proof to show which rule is invertible?}
+	\label{lem:inv}
+	All single-premise rules of $\rn{NIK}$ are height-preserving
+	invertible.
+\end{lemma}
 	
 \begin{lemma}
 	\label{lem:reduction}
@@ -597,13 +597,12 @@ In this section we are going to prove the admissibility of cut for the system $\
 	%
 	In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
 
-\newpage
-
 
 \textbf{Commutative cases}: In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
 
 \begin{itemize}
 \item $\rrn\IMP$:
+
 
 $\vlderivation{
 	\vliin{\rn{cut}}{}
@@ -624,14 +623,14 @@ $\vlderivation{
 }$
 
 \item $\lrn\IMP$:
-\marianela{doubt}
 
+\begin{center}
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
 	{\vliin{\lrn\IMP}{}
 		{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{C}}}
-		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{C}}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{A}, \rt{C}}}}
 		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{B}, \rt{C}}}}}
 	{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \lf{C}}}}
 	}$
@@ -642,17 +641,19 @@ $\vlderivation{
 	\vliin{\lrn\IMP}{}
 	{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
 	{\vliin{\rn{cut}}{}
-		{\Cx{\Gamma_{1}, \rt{A}}}
-		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \rt{A}, \rt{C}}}}
-		{\vlhtr{\DD_3^{\lrn\IMP}}{\Cx{\Gamma_{1}, \rt{A}, \lf{C}}}}}
+		{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{A}}}
+		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{A}, \rt{C}}}}
+		{\vlhtr{\DD_3^{w}}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{A}, \lf{C}}}}}
 	{\vliin{\rn{cut}}{}
 		{\Cx{\Gamma_{1}, \lf{B}}}
 		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{B}, \rt{C}}}}
 		{\vlhtr{\DD_2^{\lrn\IMP}}{\Cx{\Gamma_{1}, \lf{B}, \lf{C}}}}}
 	}$
+\end{center}
 
 \item $\rrn\BOX$:
 
+\begin{center}
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\Gamma_{1}, \rt{\BOX A}}}
@@ -670,6 +671,7 @@ $\vlderivation{
 		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}, \rt{C}}}}
 		{\vlhtr{\DD_2^{\rrn\BOX}}{\Cx{\Gamma_{1}, \bBR{\BR{\rt{A}}}, \lf{C}}}}}
 }$
+\end{center}
 
 \item $\lrn\BOX$:
 
@@ -678,7 +680,7 @@ $\vlderivation{
 	{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
 	{\vlin{\lrn\BOX}{}
 		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}, \rt{C}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{C}}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}, \rt{C}}}}}
 	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}, \lf{C}}}}
 }$
 $\reducesto$
@@ -686,10 +688,11 @@ $\vlderivation{
 	\vlin{\lrn\BOX}{}
 	{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
 	{\vliin{\rn{cut}}{}
-		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{C}}}}
-		{\vlhtr{\DD_2^{\lrn\BOX}}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{C}}}}}
+		{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}, \rt{C}}}}
+		{\vlhtr{\DD_2^{w}}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}, \lf{C}}}}}
 }$
+
 
 \item $\rrn\DIA$:
 
@@ -698,7 +701,7 @@ $\vlderivation{
 	{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
 	{\vlin{\rrn\DIA}{}
 		{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}, \rt{C}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{C}}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}, \rt{C}}}}}
 	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}, \lf{C}}}}
 	}$
 	$\reducesto$
@@ -706,11 +709,11 @@ $\vlderivation{
 	\vlin{\rrn\DIA}{}
 	{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
 	{\vliin{\rn{cut}}{}
-		{\Cx{\BR{\Gamma_{1}, \rt{A}}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{C}}}}
-		{\vlhtr{\DD_2^{\rrn\DIA}}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \lf{C}}}}}
+		{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}, \rt{C}}}}
+		{\vlhtr{\DD_2^{w}}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}, \lf{C}}}}}
 	}$
-	
+
 \item $\lrn\DIA$:
 
 $\vlderivation{
@@ -785,6 +788,7 @@ $\vlderivation{
 
 \item $C=A \IMP B$:
 
+\begin{center}
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\Gamma_{1}}}
@@ -793,41 +797,30 @@ $\vlderivation{
 		{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}}}}}
 	{\vliin{\lrn\IMP}{}
 		{\Cx{\Gamma_{1}, \lf{A \IMP B}}}
-		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A}}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \lf{A \IMP B}, \rt{A}}}}
 		{\vlhtr{\DD_3}{\Cx{\Gamma_{1}, \lf{B}}}}}}$
 	$\reducesto$
+	
+	
 $\vlderivation{
-	\vliin{}{}
+	\vliin{\rn{cut}}{}
 	{\Cx{\Gamma_{1}}}
-	{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\Gamma_{1}, \rt{A}}}
+		{\vlin{\rrn\IMP}{}
+			{\Cx{\Gamma_{1}, \rt{A}, \rt{A \IMP B}}}
+			{\vlhtr{\DD_1^{w}}{\Cx{\Gamma_{1}, \rt{A}, \bBR{\lf{A}, \rt{B}}}}}}
+		{\vlhtr{\DD_2}{\Cx{\Gamma_{1}, \rt{A}, \lf{A \IMP B}}}}}
 	{\vliin{\rn{cut}}{}
 		{\Cx{\Gamma_{1}, \lf{A}}}
 		{\vlin{\rn{refl}}{}{\Cx{\Gamma_{1}, \lf{A}, \rt{B}}}{\vlhtr{\DD_1}{\Cx{\Gamma_{1}, \bBR{\lf{A}, \rt{B}}}}}}
 		{\vlhtr{\DD_3^{w}}{\Cx{\Gamma_{1}, \lf{A}, \lf{B}}}}}
 	}$
-	
+
+\end{center}
 \item $C=\BOX A$:
 
-\marianela{doubt}
-%$\vlderivation{
-%	\vliin{\rn{cut}}{}
-%	{\Cx{\BR{\Gamma_{1}}}}
-%	{\vlin{\rrn\BOX}{}
-%		{\Cx{\BR{\Gamma_{1}}, \rt{\BOX A}}}
-%		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
-%	{\vlin{\lrn\BOX}{}
-%		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
-%		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}}}
-%	}$
-%	$\reducesto$
-%$\vlderivation{
-%	\vliin{\rn{cut}}{}
-%	{\Cx{\BR{\Gamma_{1}}}}
-%	{\vlin{\rn{refl}}{}
-%		{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
-%		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
-%	{\vlin{}{}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}{}}}$
-
+\begin{center}
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
@@ -836,9 +829,11 @@ $\vlderivation{
 		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}
 	{\vlin{\lrn\BOX}{}
 		{\Cx{\BR{\Gamma_{1}}, \lf{\BOX A}}}
-		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}}}}}
 }$
 $\reducesto$
+
+
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
@@ -847,19 +842,24 @@ $\vlderivation{
 		{\vlin{\rn{refl}}{}
 			{\Cx{\BR{\Gamma_{1}}, \BR{\rt{A}}}}
 			{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}}, \bBR{\BR{\rt{A}}}}}}}}
-	{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
+		{\vlin{\rrn\BOX}{}
+			{\Cx{\BR{\Gamma_{1}, \lf{A}}, \rt{\BOX A}}}
+			{\vlhtr{\DD_1^{w}}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \bBR{\BR{\rt{A}}}}}}}
+		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}, \lf{A}}, \lf{\BOX A}}}}
 		}}$
+\end{center}
 
 \item $C=\DIA A$:
 
-\marianela{doubt}
-
+\begin{center} 
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
 	{\vlin{\rrn\DIA}{}
 		{\Cx{\BR{\Gamma_{1}}, \rt{\DIA A}}}
-		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}}}}}
 	{\vlin{\lrn\DIA}{}
 		{\Cx{\BR{\Gamma_{1}}, \lf{\DIA A}}}
 		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}}}
@@ -868,11 +868,17 @@ $\vlderivation{
 $\vlderivation{
 	\vliin{\rn{cut}}{}
 	{\Cx{\BR{\Gamma_{1}}}}
-	{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\BR{\Gamma_{1}, \rt{A}}}}
+		{\vlhtr{\DD_1}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \rt{\DIA A}}}}
+		{\vlin{\lrn\DIA}{}
+			{\Cx{\BR{\Gamma_{1}, \rt{A}}, \lf{\DIA A}}}
+			{\vlhtr{\DD_2^{w}}{\Cx{\BR{\Gamma_{1}, \rt{A}}, \BR{\lf{A}}}}}}}
 	{\vlin{\rn{m[]}}{}
 		{\Cx{\BR{\Gamma_{1}, \lf{A}}}}
 		{\vlhtr{\DD_2}{\Cx{\BR{\Gamma_{1}}, \BR{\lf{A}}}}}}
 	}$
+\end{center}
 \end{itemize}
 
 \end{proof}
