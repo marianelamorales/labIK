@@ -542,12 +542,64 @@ $$
 	}
 $$
 
-\todo{Derive the axioms of $\sys{IS4}$:
-\begin{align*}
-	\ax{t}_{\BOX} \colonequals & \quad \BOX a \IMP a & \ax{t}_{\DIA} \colonequals & \quad a \IMP \DIA a\\
-	\ax{4}_{\BOX} \colonequals & \quad \BOX a \IMP \BOX\BOX a & \ax{4}_{\DIA} \colonequals & \quad  \DIA\DIA a \IMP \DIA a
-\end{align*}
-}
+\subsubsection{Derivation of the axioms of $\sys{IS4}$}
+
+\[
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\ax{t}_{\BOX} \colon \BOX a \IMP a}
+	{\vlin{\lrn[1]\BOX}{}
+		{\bBR{\lf{\BOX a}, \rt{a}}}
+		{\vlin{\rn{id}}{}
+			{\bBR{\lf{\BOX a}, \lf{a} \rt{a}}}
+			{\vlhy{}}}}
+	}
+\quad\quad\quad\quad
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\ax{t}_{\DIA} \colon a \IMP \DIA a}
+	{\vlin{\rrn[1]\DIA}{}
+		{\bBR{\lf{a}, \rt{\DIA a}}}
+		{\vlin{\rn{id}}{}
+			{\bBR{\lf{a}, \rt{\DIA a}, \rt{a}}}
+			{\vlhy{}}}}
+	}
+\]	
+
+\[
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\ax{4}_{\BOX} \colon \BOX a \IMP \BOX\BOX a}
+	{\vlin{\rrn\BOX}{}
+		{\bBR{\lf{\BOX a}, \rt{\BOX \BOX a}}}
+		{\vlin{\lrn{mon}}{}
+			{\bBR{\lf{\BOX a}, \bBR{\BR{\rt{\BOX a}}}}}
+			{\vlin{\lrn[2]\BOX}{}
+				{\bBR{\bBR{\lf{\BOX a}, \BR{\rt{\BOX a}}}}}
+				{\vlin{\rn{id}}{}
+					{\bBR{\bBR{\lf{\BOX a}, \BR{\lf{\BOX a}, \rt{\BOX a}}}}}
+					{\vlhy{}}}}}}
+	}
+\quad\quad\quad\quad
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\ax{4}_{\DIA} \colon \DIA\DIA a \IMP \DIA a}
+	{\vlin{\lrn\DIA}{}
+		{\bBR{\lf{\DIA \DIA a}, \rt{\DIA a}}}
+		{\vlin{\rrn[2]\DIA}{}
+			{\bBR{\BR{\lf{\DIA a}}, \rt{\DIA a}}}
+			{\vlin{\rn{id}}{}
+				{\bBR{\BR{\lf{\DIA a}, \rt{\DIA a}}, \rt{\DIA a}}}
+				{}}}}
+	}
+\]
+
+%\todo{Derive the axioms of $\sys{IS4}$:
+%\begin{align*}
+%	\ax{t}_{\BOX} \colonequals & \quad \BOX a \IMP a & \ax{t}_{\DIA} \colonequals & \quad a \IMP \DIA a\\
+%	\ax{4}_{\BOX} \colonequals & \quad \BOX a \IMP \BOX\BOX a & \ax{4}_{\DIA} \colonequals & \quad  \DIA\DIA a \IMP \DIA a
+%\end{align*}
+%}
 
 \subsection{Cut admissibility}
 
