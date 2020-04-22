@@ -190,6 +190,18 @@
 \newcommand*{\lab}{\mathsf{lab}}
 \newcommand*{\labK}{\lab\K}
 
+%%%% System NKK
+\newcommand{\IMPW}{\IMP^{\circ}}
+\newcommand{\IMPB}{\IMP^{\bullet}}
+\newcommand{\ANDW}{\AND^{\circ}}
+\newcommand{\ANDB}{\AND^{\bullet}}
+\newcommand{\ORW}{\OR^{\circ}}
+\newcommand{\ORB}{\OR^{\bullet}}
+\newcommand{\BOXW}{\BOX^{\circ}}
+\newcommand{\BOXB}{\BOX^{\bullet}}
+\newcommand{\DIAW}{\DIA^{\circ}}
+\newcommand{\DIAB}{\DIA^{\bullet}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Labelled sequents
@@ -802,6 +814,31 @@ $$
 }
 $$
 
+\item $\rn{F_1}$:
+\todo{Fix.}
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\BR{\bBR{\Cx[1]}}}}
+	{\vlin{\rn{F_1}}{}
+		{\Cx{\BR{\bBR{\Cx[1]}}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\bBR{\BR{\Cx[1]}}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\BR{\bBR{\Cx[1]}}, \lf{C}}}}
+	}
+\reducesto
+\vlderivation{
+	\vlin{\rn{F_1}}{}
+	{\Cx{\BR{\bBR{\Cx[1]}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\bBR{\BR{\Cx[1]}}}}
+		{\vlhtr{\DD_1}{\Cx{\bBR{\BR{\Cx[1]}}, \rt{C}}}}
+		{\vlin{\rn{t[]}}{}
+			{\Cx{\bBR{\BR{\Cx[1]}}, \lf{C}}}
+			{\vlin{}{}
+				{\Cx{\BR{\bBR{\BR{\Cx[1]}}}, \rt{C}}}
+				{\vlhtr{}{}}}}}
+	}
+$$
 \end{itemize}
 
 \textbf{Key cases}: In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decreasing inductive measure.
@@ -998,7 +1035,6 @@ $$
 $$
 
 \item $C=\BOX A$ capturing $\lrn[2]\BOX$:
-\marianela{Not sure. Is not there a rule like if I have something like $\BR{\BR{}}$, then I can have only one bracket? Or the medial but swapping the premise and conclusion? HAVING SIMILAR PROBLEM FOR THE KEY CASE OF $\lrn[2]\BOX$}
 
 $$
 \vlderivation{
@@ -1013,7 +1049,7 @@ $$
 	}
 \reducesto
 \vlderivation{
-	\vliin{\rn{\BOX-cut}}{}
+	\vliin{\rn{\BOX4-cut}}{}
 	{\Cx{\BR{\Cx[1]}}}
 	{\vlin{\rrn\BOX}{}
 		{\Cx{\BR{\Cx[1]}, \rt{\BOX A}}}
@@ -1087,7 +1123,7 @@ $$
 	}
 \reducesto
 \vlderivation{
-	\vliin{\rn{\DIA-cut}}{}
+	\vliin{\rn{\DIA4-cut}}{}
 	{\Cx{\BR{\Cx[1]}}}
 		{\vlhtr{\DD_1}{\Cx{\BR{\Cx[1], \rt{\DIA A}}, \rt{\DIA A}}}}
 	{\vlin{\lrn\DIA}{}
@@ -1199,6 +1235,104 @@ $$
 		{\vlhtr{\DD_1}{\Cx{\BR{\Cx[1], \rt{\DIA A}}, \rt{\DIA A}, \rt{C}}}}
 		{\vlhtr{\DD_2^{\rn w}}{\Cx{\BR{\Cx[1], \rt{\DIA A}}, \rt{\DIA A}, \lf{C}}}}}
 	}
+$$
+\end{itemize}
+
+\section{Proof transformation from $\rn{NIK}$ to $\rn{NKK}$}
+
+\begin{itemize}
+
+\item Rule $\ORW$:
+
+$$\vlderivation{
+\vlderivation{
+\vlin{\ORW}{}
+{\Cx{\rt{A \OR B}}}
+{\vlhtr{\DD_1}{\Cx{\rt{A}}}}}	
+}
+\mbox{or}
+\vlderivation{
+\vlin{\ORW}{}
+{\Cx{\rt{A \OR B}}}
+{\vlhtr{\DD_1}{\Cx{\rt{B}}}}
+}	
+\reducesto
+\vlderivation{
+\vlin{\rrn\OR}{}
+{\Cx{\rt{A \OR B}}}
+{\vlhtr{\DD_1^{\rn w}}{\Cx{\rt{A}, \rt{B}}}}}
+$$
+
+\item Rule $\IMPB$:
+
+$$
+\vlderivation{
+\vliin{\IMPB}{}
+{\Cx{\lf{A \IMP B}}}
+{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
+{\vlhtr{\DD_2}{\Cx{\lf{B}}}}
+}
+\reducesto
+\vlderivation{
+\vliin{\lrn\IMP}{}
+{\Cx{\lf{A \IMP B}}}
+{\vlhtr{\DD_1^{\rn w}}{\Cx{\lf{A \IMP B}, \rt{A}}}}
+{\vlhtr{\DD_2}{\Cx{\lf{B}}}}	
+}
+$$
+
+\item Rule $\IMPW$:
+
+\todo{}
+$$
+\vlderivation{\vlin{\IMPW}{}
+{\Cx{\rt{A \IMP B}}}
+{\vlhtr{\DD_1}{\Cx{\lf{A}, \rt{B}}}}}
+\reducesto
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{\Cx{\rt{A \IMP B}}}
+	{\vlin{\rn{mon_{R}}}{}
+		{\Cx{\bBR{\lf{A}, \rt{B}}}}
+		{\vlin{}{}
+			{\Cx{\bBR{\lf{A}}, \rt{B}}}
+			{}}}
+	}
+$$
+
+\item Rule $\BOXB$:
+
+$$
+\vlderivation{
+\vlin{\BOXB}{}
+{\Cx{\lf{\BOX A}, \BR{\Cx[1]}}}
+{\vlhtr{\DD_1}{\Cx{\BR{\lf{A}, \Cx[1]}}}}	
+}
+\reducesto
+\vlderivation{
+\vlin{}{}
+{\Cx{\lf{\BOX A}, \BR{\Cx[1]}}}
+{\vlhtr{\DD_1^{\rn w}}{\Cx{\lf{\BOX A}, \BR{\lf{A}, \Cx[1]}}}}
+}
+$$
+
+\item Rule $\BOXW$:
+
+\todo{}
+$$
+\vlderivation{
+\vlin{\BOXW}{}
+{\Cx{\rt{\BOX A}}}
+{\vlhtr{\DD_1}{\Cx{\BR{\rt{A}}}}}
+}
+\reducesto
+\vlderivation{
+\vlin{\rrn\BOX}{}
+{\Cx{\rt{\BOX A}}}
+{\vlin{}{}
+{\Cx{\bBR{\BR{\rt{A}}}}}
+{\vlhtr{}{}}}	
+}
 $$
 \end{itemize}
 %% Bibliography
