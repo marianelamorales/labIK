@@ -435,23 +435,29 @@ $$
 				{\vlin {\lrn{mon}}{}
 					{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\BR{\rt{B}}}}}}
 					{\vlin {\lrn\BOX}{}
-						{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\lf{\BOX A},\BR{\rt{B}}}}}}
+						{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A},\BR{\rt{B}}}}}}
 						{\vlin {\lrn{mon}}{}
-							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
+							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
 							{\vlin {\lrn{mon}}{}
-								{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
+								{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
 								{\vlin{\lrn\BOX}{}
-									{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A},  \BR{\lf{A},\rt{B}}}}}}
+									{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
 									{\vliin{\lrn\IMP}{}
-										{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
-										{\vlin{\rn{id}}{}
-											{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A},\rt{B}}}}}}
-											{\vlhy{}}}
+										{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
+										{\vlin{\rn{refl}}{}
+											{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \rt{A}, \lf{A},\rt{B}}}}}}
 											{\vlin{\rn{id}}{}
-												{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{B}, \lf{A},\rt{B}}}}}}
-												{\vlhy{}}}}}}}}}}}}
+												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \bBR{\rt{A}}, \lf{A},\rt{B}}}}}}
+												{\vlhy{}}}}
+											{\vlin{\rn{refl}}{}
+												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\rt{B}, \lf{B}}}}}}
+												{\vlin{\rn{id}}{}
+													{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\bBR{\rt{B}}, \lf{B}}}}}}
+													{\vlhy{}}}}}}}}}}}}}
 $$
 
+where $\Bx$ is equal to $\lf{\BOX(A \IMP B)}, \lf{\BOX A}$.
+			
 %%%%%%%%%%%%%%%%%%%%k2%%%%%%%%%%%%%%%%%%
 	$$
 	\vlderivation {
@@ -472,16 +478,20 @@ $$
 						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
 						{\vlin {\lrn\BOX}
 							{}
-							{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
+							{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
 							{\vliin{\lrn\IMP}
 								{}
-								{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A \IMP B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-								{\vlin{\rn{id}}{}
-									{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-									{\vlhy{}}}
-								{\vlin{\rn{id}}{}
-									{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-									{\vlhy{}}}}}}}}}
+								{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A \IMP B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+								{\vlin{\rn{refl}}{}
+									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+									{\vlin{\rn{id}}{}
+										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \bBR{\rt{A}}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+										{\vlhy{}}}}
+								{\vlin{\rn{refl}}{}
+									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+									{\vlin{\rn{id}}{}
+										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \bBR{\rt{B}}}, \rt{\DIA B}}}}
+										{\vlhy{}}}}}}}}}}
 	}
 $$
 
@@ -500,50 +510,61 @@ $$
 					{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A}, \rt{\DIA B}}}
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{id}}{}
+						{\vlin{\rn{refl}}{}
 							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA A}, \rt{\DIA B}}}
-							{\vlhy{}}}}
+							{\vlin{\rn{id}}{}
+								{\bBR{\BR{\lf{A}, \bBR{\rt{A}}}, \rt{\DIA A}, \rt{\DIA B}}}
+								{\vlhy{}}}}}
 					{\vlin{\rrn\DIA}{}
 						{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{id}}{}
+						{\vlin{\rn{refl}}{}
 							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}, \rt{\DIA B}}}
-							{\vlhy{}}}}}}}
+							{\vlin{\rn{id}}{}
+								{\bBR{\BR{\lf{B}, \bBR{\rt{B}}}, \rt{\DIA A}, \rt{\DIA B}}}
+								{\vlhy{}}}}}}}}
 	}
 $$
 
 %%%%%%%%%%%%%%%%%%%%k4%%%%%%%%%%%%%%%%%%
 $$
 \vlderivation {
-		\vlin{\rrn\IMP}
-		{}
-		{\kax[4] \colon \rt{(\DIA A \IMP \BOX B) \IMP \BOX(A \IMP B)}}
-		{\vlin {\rrn\BOX}
-			{}
-			{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}
-			{\vlin{\rrn\IMP}{}
-				{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}
-				{\vlin{\rn{F_\rn{1}}}{}
-					{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}
-					{\vlin{\lrn{mon}}{}
-						{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\bBR{\BR{\lf{A}, \rt{B}}}}}}
-						{\vlin{\lrn{mon}}{}
-							{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\lf{A}, \rt{B}}}}}}
-							{\vliin{\lrn\IMP}{}
-								{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}
-								{\vlin{\rrn\DIA}{}
-									{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A}, \BR{ \rt{A}, \lf{A}, \rt{B}}}}}}
-										{\vlhy{}}}}
-								{\vlin{\lrn\BOX}{}
-									{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{B}, \lf{A}, \rt{B}}}}}}
-										{\vlhy{}}}}}}
-						}
-					}}}
-	}
+\vlin{\rrn\IMP}
+{}
+{\kax[4] \colon \rt{(\DIA A \IMP \BOX B) \IMP \BOX(A \IMP B)}}
+{\vlin {\rrn\BOX}
+{}
+{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}
+{\vlin{\rrn\IMP}{}
+	{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}
+	{\vlin{\rn{F_\rn{1}}}{}
+		{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}
+		{\vlin{\lrn{mon}}{}
+			{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}, \bBR{\BR{\lf{A}, \rt{B}}}}}}
+			{\vlin{\lrn{mon}}{}
+				{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}, \bBR{\BR{\lf{A}, \rt{B}}}}}}
+				{\vliin{\lrn\IMP}{}
+					{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}, \bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}
+					{\vlin{\rrn\DIA}{}
+						{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A} \BR{\lf{A}, \rt{B}}}}}}
+						{\vlin{\rn{refl}}{}
+							{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A} \BR{\rt{A}, \lf{A}, \rt{B}}}}}}
+							{\vlin{\rn{id}}{}
+								{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A} \BR{\bBR{\rt{A}}, \lf{A}, \rt{B}}}}}}
+								{\vlhy{}}}}}
+					{\vlin{\lrn\BOX}{}
+						{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
+						{\vlin{\rn{refl}}{}
+							{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \rt{B}}}}}}
+							{\vlin{\rn{id}}{}
+								{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \bBR{\rt{B}}}}}}}
+								{\vlhy{}}}}}}}
+			}
+		}}}
+}
 $$
+
+where $\Rabx$ is equal to $\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}$.
+
 %%%%%%%%%%%%%%%%%%%%k5%%%%%%%%%%%%%%%%%%
 $$
 \vlderivation {
@@ -817,7 +838,7 @@ $$
 $$
 
 \item $\rn{F_1}$:
-\todo{Fix.}
+
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}
@@ -839,7 +860,27 @@ $$
 	}
 $$
 
-\item \todo{monotonicity}
+\item $\lrn{mon}$:
+
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}
+	{\Cx{\lf{A}, \bBR{\Cx[1]}}}
+	{\vlin{\lrn{mon}}{}
+		{\Cx{\lf{A}, \bBR{\Cx[1]}, \rt{C}}}
+		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}, \rt{C}}}}}
+	{\vlhtr{\DD_2}{\Cx{\lf{A}, \bBR{\Cx[1]}, \lf{C}}}}
+	}
+\reducesto
+\vlderivation{
+	\vlin{\lrn{mon}}{}
+	{\Cx{\lf{A}, \bBR{\Cx[1]}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}}}
+		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}, \rt{C}}}}
+		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}, \lf{C}}}}}
+	}
+$$
 \end{itemize}
 
 \textbf{Key cases}: In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decreasing inductive measure.
