@@ -655,6 +655,18 @@ In this section we are going to prove the admissibility of cut for the system $\
 %\sonia{You need to introduce the notation $\DD_3^{w}$ that you are using in the cut-elimination proof. Or you can just use the rule $\rn{weak}$ explicitely in the proof and use its admissiblity a posteriori.}
 
 \begin{lemma}
+	\label{lem:mon-adm}
+	The monoticity rule
+	~$\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\Cx[2]}}}$~
+	is height-preserving admissible for $\rn{NIK}$.
+\end{lemma}
+
+\begin{proof}
+	By induction on the height of $\DD$, we prove that for any proof of $\Cx[1]{\rt A, \bBR{\Cx[2]}}$, then there exists a proof of $\Cx[1]{\bBR{\rt A, \Cx[2]}}$ of the same (or smaller) height.
+	\todo{}
+\end{proof}
+
+\begin{lemma}
 	\label{lem:m-adm}
 	The rule
 	~$\vlinf{\rn{m[]}}{}{\Cx[1]{\BR{\Cx[2], \Cx[3]}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}$~
