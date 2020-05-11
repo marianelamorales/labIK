@@ -1,0 +1,343 @@
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Packages
+\usepackage{geometry}
+\geometry{vmargin=3.2cm,hmargin=3.5cm}%
+\usepackage{rotating}
+
+\usepackage{amsmath} % for improving the structure and printed output of documents containing mathematical formulas
+
+\usepackage{amssymb} % for mathematical symbols and fonts
+\usepackage{bm} % command \bm makes its ar­gu­ment bold, better than \boldsymbol{}
+\usepackage{colonequals} % symbols := and ::=
+\usepackage{cmll}  % Linear Logic symbols
+\usepackage{wasysym} % for smiley 
+
+\usepackage[matrix,arrow]{xy}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\renewcommand\qedsymbol{$\smiley$}
+
+\usepackage{graphicx} % for graphics, and commands like \scalebox{h-scale}{text} in particular
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Proof package
+\usepackage[noxy]{virginialake}
+\vlnosmallleftlabels
+\vlnostructuressyntax
+%
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+
+\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
+%
+\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
+\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
+%
+%
+\makeatletter
+\newbox\@conclbox
+\newdimen\@conclheight
+%
+\newcommand\vlderibase[4]{{%
+\setbox\@conclbox=\hbox{$#3$}\relax%
+\@conclheight=\ht\@conclbox%
+\setbox\@conclbox=\hbox{$%
+\vlderivationnc{%
+\vlin{#1}{#2}{\box\@conclbox}{#4}%
+}$}%
+\lower\@conclheight\box\@conclbox%
+}}
+%
+\newcommand\vlderidbase[4]{{%
+\setbox\@conclbox=\hbox{$#3$}\relax%
+\@conclheight=\ht\@conclbox%
+\setbox\@conclbox=\hbox{$%
+\vlderivationnc{%
+\vlid{#1}{#2}{\box\@conclbox}{#4}%
+}$}%
+\lower\@conclheight\box\@conclbox%
+}}
+%
+\newcommand\vlderiibase[5]{{%
+\setbox\@conclbox=\hbox{$#3$}\relax%
+\@conclheight=\ht\@conclbox%
+\setbox\@conclbox=\hbox{$%
+\vlderivationnc{%
+\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
+}$}%
+\lower\@conclheight\box\@conclbox%
+}}
+\makeatother
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Equation environments
+\newdimen\mydisplayskip
+\mydisplayskip=.4\abovedisplayskip
+\newenvironment{smallequation}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation\endcsname}{\csname endequation\endcsname\egroup}
+\newenvironment{smallequation*}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation*\endcsname}{\csname endequation*\endcsname\egroup}
+\newenvironment{smallalign}
+{\par\nobreak\noindent\bgroup\small\csname align\endcsname}{\csname endalign\endcsname\egroup}
+\newenvironment{smallalign*}
+{\par\nobreak\noindent\bgroup\small\csname align*\endcsname}{\csname endalign*\endcsname\egroup}
+%\newenvironment{smallmultline}
+%{\par\nobreak\vskipmydisplayskip\noindent\bgroup\small\csname multline*\endcsname}{\csname endmultline*\endcsname\egroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Extracting symbols from MnSymbol 
+\DeclareFontFamily{U} {MnSymbolC}{}
+
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+<-6>  MnSymbolC5
+<6-7>  MnSymbolC6
+<7-8>  MnSymbolC7
+<8-9>  MnSymbolC8
+<9-10> MnSymbolC9
+<10-12> MnSymbolC10
+<12->   MnSymbolC12}{}
+\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+<-6>  MnSymbolC-Bold5
+<6-7>  MnSymbolC-Bold6
+<7-8>  MnSymbolC-Bold7
+<8-9>  MnSymbolC-Bold8
+<9-10> MnSymbolC-Bold9
+<10-12> MnSymbolC-Bold10
+<12->   MnSymbolC-Bold12}{}
+
+\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+
+%\DeclareMathSymbol{\triangleright}{\mathbin}{MnSyC}{80}
+\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+\DeclareMathSymbol{\meddiamond}{\mathbin}{MnSyC}{110}
+\DeclareMathSymbol{\medsquare}{\mathbin}{MnSyC}{106}
+\DeclareMathSymbol{\vee}{\mathbin}{MnSyC}{45}
+\DeclareMathSymbol{\wedge}{\mathbin}{MnSyC}{44}
+\DeclareMathSymbol{\bot}{\mathbin}{MnSyC}{150}
+\DeclareMathSymbol{\top}{\mathbin}{MnSyC}{151}
+%\DeclareMathSymbol{\forall}{\mathbin}{MnSyC}{166}
+%\DeclareMathSymbol{\exists}{\mathbin}{MnSyC}{167}
+%\DeclareMathSymbol{\smalldiamond}{\mathbin}{MnSyC}{108}
+%\DeclareMathSymbol{\filleddiamond}{\mathbin}{MnSyC}{109}	 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% General maths
+\newcommand*\mdelim[3]{%
+\mathopen{}\left#1%
+#3%
+\right#2\mathclose{}%
+}
+
+\newcommand*{\tuple}{\mdelim{\langle}{\rangle}}
+
+\newcommand*{\DD}{\mathcal{D}}
+
+\newcommand*{\reducesto}{\quad{\leadsto}\quad}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Connectives
+\newcommand*{\NEG}[1]{\bar{#1}}
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\wedge$}}}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\vee$}}}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.6}{\raise.4ex\hbox{\large$\bm\supset$}}}}%\supset}}%
+
+\newcommand*{\BOX}{\mathord{\medsquare}}
+\newcommand*{\DIA}{\mathord{\scalebox{.9}{\raise.1ex\hbox{$\meddiamond$}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Logic
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\accs}[2]{{#1}R{#2}}
+\newcommand*{\futs}[2]{{#1}\le{#2}}
+\newcommand*{\A}{\mathcal{A}}
+\newcommand*{\F}{\mathcal{F}}
+\newcommand*{\M}{\mathfrak{M}}
+
+\newcommand{\force}[2]{#1\Vdash#2}
+\newcommand{\nforce}[2]{#1\nVdash#2}
+%
+\newcommand{\height}[1]{|#1|}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Systems
+\newcommand*{\sys}[1]{\ensuremath{\mathsf{#1}}}%\xspace}
+\newcommand*{\K}{\sys{K}}
+\newcommand*{\IK}{\sys{IK}}
+\newcommand*{\CK}{\sys{CK}}
+
+\newcommand*{\lab}{\mathsf{lab}}
+\newcommand*{\labK}{\lab\K}
+
+%%%% System NKK
+\newcommand{\IMPW}{\IMP^{\circ}}
+\newcommand{\IMPB}{\IMP^{\bullet}}
+\newcommand{\ANDW}{\AND^{\circ}}
+\newcommand{\ANDB}{\AND^{\bullet}}
+\newcommand{\ORW}{\OR^{\circ}}
+\newcommand{\ORB}{\OR^{\bullet}}
+\newcommand{\BOXW}{\BOX^{\circ}}
+\newcommand{\BOXB}{\BOX^{\bullet}}
+\newcommand{\DIAW}{\DIA^{\circ}}
+\newcommand{\DIAB}{\DIA^{\bullet}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Labelled sequents
+\newcommand{\SEQ}{\Rightarrow}
+
+\newcommand*{\Labx}{\mathcal{L}}
+\newcommand*{\Rabx}{\mathcal{R}}
+\newcommand*{\Gx}{\mathcal{G}}
+\newcommand*{\Bx}{\mathcal{B}}
+\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
+\newcommand*{\rel}{R}
+
+\newcommand*{\BBot}{\Perp} % \usepackage{cmll} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Rules
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\invr}[1]{#1^\mathsf{inv}}
+%
+\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+%\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+%\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+
+\newcommand*{\brsym}{\mathord{\scalebox{.9}{$\boxtimes$}}}
+\newcommand*{\boxbrn}[1]{\rn{\brsym_\rn{#1}}}%^{\lab}}}
+\newcommand*{\diasym}{\mathord{\diamondplus}}
+\newcommand*{\diabrn}[1][]{\rn{\diasym_\rn{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Nested sequents
+\makeatletter
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+\@ifnextchar\i{\br@two}{%
+\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+\def\br@{#1}%
+\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+\def\br@{#3}%
+\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+\newcommand*{\bBR}{%
+\@ifnextchar\i{\bbr@two}{%
+\@ifnextchar\bgroup{\bbr@one}{% 
+}}}
+\newcommand*{\bbr@one}[1]{%
+\def\br@{#1}%
+\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\bbr@two}[3]{%
+\def\br@{#3}%
+\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+%\newcommand*{\@makeoperator}[2]{
+%	\newcommand*{#1}{%
+%		\mathrm{#2}\mdelim{\lparen}{\rparen}
+%	}
+%}
+%%
+%\@makeoperator{\fm}{fm^{\n}}
+%\@makeoperator{\ofm}{fm^{\o}}
+%\@makeoperator{\hfm}{fm^{\h}}
+%%
+%\@makeoperator{\depth}{dp}
+%\@makeoperator{\rank}{rk}
+%\@makeoperator{\height}{ht}
+%\@makeoperator{\tree}{tree}
+%\@makeoperator{\graph}{graph}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% contexts
+\makeatletter
+\newcommand*{\cxs}{%
+\@ifnextchar\i{\cxs@two}{%
+\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+\def\cxs@{#1}%
+\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+\def\cxs@{#3}%
+\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+\cxs@one@decor%
+}
+\def\cxs@one@decor{%
+\@ifnextchar_{\cxs@one@sub}{%
+\@ifnextchar^{\cxs@one@sup}{%
+\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+	\@ifnextchar[{\cxs@one@arg}%]
+	\cxs}}}%
+}
+\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
+
+%% Change these as needed, but keep the \cx@continuation at the end
+\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
+
+\def\cx@delete@star#1*{%
+\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+}
+
+\newcommand*{\@makecontextual}[2]{
+\newcommand*{#1}{%
+\@ifnextchar*{\cx@delete@star{#2}}{%
+\@ifnextchar\f{\cx@delete@focus{#2}}{%
+	#2\cx@continuation}}%
+}%
+}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Ex}{}
+
+\@makecontextual{\Cx}{\Gamma}
+\@makecontextual{\Dx}{\Delta}
+\@makecontextual{\Lx}{\Lambda}
+\@makecontextual{\Rx}{\Pi}
+
+\@makecontextual{\LLx}{\Omega}
+\@makecontextual{\RRx}{\Xi}
+\@makecontextual{\CCx}{\Sigma}
+\@makecontextual{\DDx}{\Theta}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% intuitionistic
+\newcommand*{\rt}[1]{#1^\circ}
+\newcommand*{\lf}[1]{#1^\bullet}
