@@ -115,6 +115,14 @@ In this short article, we present a nested sequent system for intuiniotistic mod
 \end{array}
 \end{equation*}
 %%
+We recall the birelational models [21, 7] for intuitionistic modal logics, which are a combination of the Kripke semantics for propositional intuitionistic logic and the one for classical modal logic. A \emph{birelational frame} $\F = \langle W, R, \le \rangle$ is a non-empty set $W$ of worlds together with two binary relations $\le, \rel \subseteq W \times W$, where $\le$ is a preorder(i.e., reflexive and transitive), such that the following two conditions hold:
+
+\begin{enumerate}
+	\item[($\rn{F_1}$)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
+	
+	\item[($\rn{F_2}$)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
+\end{enumerate}
+
 \section{Bicolor nested sequent system}
 
 In order to capture intuitionistic modal logics, we build a nested sequent system with the two relations explicitly: one of for the accessibility relation $\rel$ associated with the Kripke semantics for normal modal logics (represented with one bracket in the sequent) and one for the preorder relation $\le$ associated with the Kripje semantics for intuitionistic logic (represented with two brackets in the system).
@@ -128,6 +136,7 @@ $\force{x}{\BOX A}$ iff for all $y$ and $z$ s.t. $\futs xy$ and $\accs yz$, $\fo
 	\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}$
 \end{center}
 
+\marianela{add F1 rule?}
 
 \bibliographystyle{plain}
 %\bibliographystyle{alpha}
