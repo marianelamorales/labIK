@@ -1047,7 +1047,31 @@ $$
 	}
 $$
 
-\item \todo{$F_1$ when the cut-formula is in $\Gamma_1$}
+\item \todo{$F_1$ when the right cut-formula is used  in $F_1$}
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}}}{
+			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}, \bBR{\BR{\Cx[2], \rt A }}}}
+			}
+		}{
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A}}}}
+		}
+	}
+$$
+
+\item \todo{$F_1$ when the left cut-formula is used in $F_1$}
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf A }}}}{
+			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A }}, \bBR{\BR{\Cx[2], \lf A }}}}
+		}
+	}{
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt A}}}}
+	}
+}
+$$
 
 \item 
 $$
