@@ -692,13 +692,15 @@ In this section we are going to prove the admissibility of cut for the system $\
 	Given a derivation of shape
 	$$
 	\vlderivation{
-		\vliiin{\labrn{cut}}{}{\Cx{\emptyset}}{
-			\vlhtr{\DD_1}{\Cx{\rt{C}}}}{
+		\vliiin{\labrn{Y-cut}}{}{\Cx{\emptyset}}{
+			\vlhtr{\DD_1}{\Cx{\rt{C}}^n}}{
 			\vlhy{}}{
-			\vlhtr{\DD_2}{\Cx{\lf{C}}}}}
+			\vlhtr{\DD_2}{\Cx{\lf{C}}^p}}}
 	$$
-	where $\DD_1$ and $\DD_2$ are both cut-free, there is a cut-free
+	where $\DD_1$ and $\DD_2$ are both Y-cut-free, there is a cut-free
 	derivation of $\Cx{\emptyset}$.
+	
+		\sonia{where $\Cx{\rt{C}}^n =\Cx{\rt{C}}{\ldots}{{\rt{C}}}$ with $n$ occurences of $\rt C$ anywhere in $\Cx$.}
 \end{lemma}
 
 \begin{proof}
@@ -899,29 +901,76 @@ $$
 
 \begin{itemize}
 \item $C=A \AND B$:
+%$$
+%\vlderivation{
+%	\vliin{\rn{cut}}{}
+%	{\Cx{\emptyset}}
+%	{\vliin{\rrn\AND}{}
+%		{\Cx{\rt{A \AND B}}}
+%		{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
+%		{\vlhtr{\DD_2}{\Cx{\rt{B}}}}}
+%	{\vlin{\lrn\AND}{}
+%		{\Cx{\lf{A \AND B}}}
+%		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
+%	}
+%\reducesto
+%\vlderivation{
+%	\vliin{\rn{cut}}{}
+%	{\Cx{\emptyset}}
+%	{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
+%	{\vliin{\rn{cut}}{}
+%		{\Cx{\lf{A}}}
+%		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
+%		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
+%	}
+%$$
 $$
 \vlderivation{
-	\vliin{\rn{cut}}{}
+	\vliin{\rn{Ycut}}{}
 	{\Cx{\emptyset}}
 	{\vliin{\rrn\AND}{}
-		{\Cx{\rt{A \AND B}}}
-		{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
-		{\vlhtr{\DD_2}{\Cx{\rt{B}}}}}
-	{\vlin{\lrn\AND}{}
-		{\Cx{\lf{A \AND B}}}
-		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
+		{\Cx\i{x}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}
+		{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}{\rt{A \AND B}}^{n}}}
+		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}{\rt{A \AND B}}^{n}}}
 	}
-\reducesto
-\vlderivation{
-	\vliin{\rn{cut}}{}
-	{\Cx{\emptyset}}
-	{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
-	{\vliin{\rn{cut}}{}
-		{\Cx{\lf{A}}}
-		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
-		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
+	{\vlin{\lrn\AND}{}
+		{\Cx\i{y}{\lf{A \AND B}}{\lf{A \AND B}}^{p}}
+		{\vlhtr{\DD_3}{\Cx\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{p}}}}
 	}
 $$
+$$
+\reducesto
+\vlderivation{
+	\vliin{\rn{Ycut}}{}
+	{\Cx{\emptyset}}
+	{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}{\rt{A \AND B}}^{n}}}
+	{\vliin{\rn{Ycut}}{}
+		{\Cx{\lf{A}}}
+%		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
+		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}{\rt{A \AND B}}^{n}}}
+		{\vlhtr{\DD_3}{\Cx\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{p}}}}
+}
+$$
+
+$$
+\vliinf{Ycut}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}{R, \Gamma, \labels{y_1}{A}, \ldots, \labels{y_p}{A} \SEQ \Delta}
+$$
+%there must be a derivation from $R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}$ to $R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{y_1}{A}, \ldots, \labels{y_n}{A}$
+
+$$
+\vlderivation{	
+	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+		\vliin{\rrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A \AND B} }}}}
+		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A} }}}}}
+		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}}
+	}{
+		\vlin{\lrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A \AND B}}}}}
+		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}}}}
+	}
+}
+$$
+
+
 
 \item $C= A \OR B$:
 
@@ -1060,12 +1109,13 @@ $$
 	}
 \quad\leadsto\quad
 \vlderivation{	
-	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Gamma_2}}}}{
 		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}, \bBR{\BR{\Cx[2], \rt A }}}}
 	}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A}}}}
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A}}, \bBR{\BR{\Gamma_2}}}}
 	}
-}
+}}
 $$
 
 \item \todo{$F_1$ when the left cut-formula is used in $F_1$}
