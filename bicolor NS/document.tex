@@ -12,13 +12,15 @@
 \usepackage{rotating}
 
 \usepackage{amsmath} % for improving the structure and printed output of documents containing mathematical formulas
-
 \usepackage{amssymb} % for mathematical symbols and fonts
 \usepackage{bm} % command \bm makes its ar­gu­ment bold, better than \boldsymbol{}
 \usepackage{colonequals} % symbols := and ::=
-\usepackage{cmll}  % Linear Logic symbols
-\usepackage{wasysym} % for smiley 
+%\usepackage{cmll}  % Linear Logic symbols
 
+\usepackage{wasysym} % for smiley 
+\renewcommand\qedsymbol{$\smiley$}
+
+\usepackage{graphicx} % for graphics, and commands like \scalebox{h-scale}{text} in particular
 \usepackage[matrix,arrow]{xy}
 
 \usepackage{amsthm}
@@ -27,9 +29,10 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{question}[theorem]{Question}
 \newtheorem{conjecture}[theorem]{Conjecture}
-\renewcommand\qedsymbol{$\smiley$}
 
-\usepackage{graphicx} % for graphics, and commands like \scalebox{h-scale}{text} in particular
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

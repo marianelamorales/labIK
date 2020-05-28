@@ -1,4 +1,4 @@
-\usepackage{colonequals}
+
 
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\red}[1]{{\color{red}{#1}}}
@@ -39,6 +39,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Nested sequents
+\newcommand*\mdelim[3]{%
+	\mathopen{}\left#1%
+	#3%
+	\right#2\mathclose{}%
+}
+
 \makeatletter
 %\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
 \newcommand*{\BR}{%
