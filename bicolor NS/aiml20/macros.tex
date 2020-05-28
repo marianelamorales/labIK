@@ -1,0 +1,147 @@
+\usepackage{colonequals}
+
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+
+%%% General
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+%\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Left}{\mathcal{L}}
+\newcommand{\Right}{\mathcal{R}}
+\newcommand*{\rel}{R}
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\invr}[1]{#1^\mathsf{inv}}
+\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%%% Systems
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\lab}{\mathsf{lab}}
+\newcommand*{\IK}{\mathsf{IK}}
+
+%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Nested sequents
+\makeatletter
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+\@ifnextchar\i{\br@two}{%
+\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+\def\br@{#1}%
+\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+\def\br@{#3}%
+\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+\newcommand*{\bBR}{%
+\@ifnextchar\i{\bbr@two}{%
+\@ifnextchar\bgroup{\bbr@one}{% 
+}}}
+\newcommand*{\bbr@one}[1]{%
+\def\br@{#1}%
+\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\bbr@two}[3]{%
+\def\br@{#3}%
+\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+%\newcommand*{\@makeoperator}[2]{
+%	\newcommand*{#1}{%
+%		\mathrm{#2}\mdelim{\lparen}{\rparen}
+%	}
+%}
+%%
+%\@makeoperator{\fm}{fm^{\n}}
+%\@makeoperator{\ofm}{fm^{\o}}
+%\@makeoperator{\hfm}{fm^{\h}}
+%%
+%\@makeoperator{\depth}{dp}
+%\@makeoperator{\rank}{rk}
+%\@makeoperator{\height}{ht}
+%\@makeoperator{\tree}{tree}
+%\@makeoperator{\graph}{graph}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% contexts
+\makeatletter
+\newcommand*{\cxs}{%
+\@ifnextchar\i{\cxs@two}{%
+\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+\def\cxs@{#1}%
+\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+\def\cxs@{#3}%
+\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+\cxs@one@decor%
+}
+\def\cxs@one@decor{%
+\@ifnextchar_{\cxs@one@sub}{%
+\@ifnextchar^{\cxs@one@sup}{%
+\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+	\@ifnextchar[{\cxs@one@arg}%]
+	\cxs}}}%
+}
+\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
+
+%% Change these as needed, but keep the \cx@continuation at the end
+\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
+
+\def\cx@delete@star#1*{%
+\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+}
+
+\newcommand*{\@makecontextual}[2]{
+\newcommand*{#1}{%
+\@ifnextchar*{\cx@delete@star{#2}}{%
+\@ifnextchar\f{\cx@delete@focus{#2}}{%
+	#2\cx@continuation}}%
+}%
+}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Ex}{}
+
+\@makecontextual{\Cx}{\Gamma}
+\@makecontextual{\Dx}{\Delta}
+\@makecontextual{\Lx}{\Lambda}
+\@makecontextual{\Rx}{\Pi}
+
+\@makecontextual{\LLx}{\Omega}
+\@makecontextual{\RRx}{\Xi}
+\@makecontextual{\CCx}{\Sigma}
+\@makecontextual{\DDx}{\Theta}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% intuitionistic
+\newcommand*{\rt}[1]{#1^\circ}
+\newcommand*{\lf}[1]{#1^\bullet}

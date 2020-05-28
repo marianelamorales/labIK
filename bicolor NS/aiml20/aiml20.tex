@@ -1,0 +1,181 @@
+\documentclass[twoside]{aiml20}
+
+% Please include these macros
+\usepackage{aiml20macro}
+\usepackage{virginialake}
+\input{macros}
+
+
+% Here you can include the standard packages you use.
+% Try to avoid using non-standard packages.
+% If you use a non-standard package you will have
+% to submit it when you submit the final version of
+% your paper.
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setting the correct page numbers                      
+% Ignore the next two commented lines                   
+% but please don't delete                               
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{../procnum.tex}
+%\numbering{../aiml20db}{paper}
+
+% definitions specific to your article
+\newcommand{\ob}{[}
+\newcommand{\cb}{]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%The following line defines the page header consisting of the surnames of the authors.
+% Please include only the last names! 
+% Separate by commas except the last two surnames which are separated by an "and".
+\def\lastname{Marin and Morales}
+
+\begin{document}
+
+\begin{frontmatter}
+  \title{This is the title of the paper}
+  \author{Sonia Marin}
+  %\footnote{You can put your email address or grant acknowledgement as a footnote, if you wish.}
+  \address{University College London}
+  \author{Marianela Morales}
+  \address{LIX, \'Ecole Polytechnique  \&  Inria Saclay}
+  
+  \begin{abstract}
+  We present a nested sequent system for intuitionistic modal logic in which we capture explicitly two relations: one for the accessibility relation associated with the Kripke semantics for normal modal logics (represented with one bracket in a formula or context) and one for the preorder relation associated with the Kripke semantics for intuitionistic logic (represented with two brackets in a formula or context).
+  %
+  \end{abstract}
+
+  \begin{keyword}
+  Nested sequents, Intuitionistic modal logic, Proof theory.
+  \end{keyword}
+ \end{frontmatter}
+
+%
+%\section{Instructions for authors}
+%Important information pertaining to the preparation of your paper:
+%\begin{itemize}
+%  \item Please prepare your paper by editing this file (\verb|aiml20.tex|) as well as the bibliography file, \verb|aiml20.bib|.
+%  \item Please do not use includegraphics on any PDF files not having all fonts embedded. If in doubt, please convert to JPG before including.
+%  \item It is strictly prohibited to tamper with the text dimensions, including adding to the text height or width. The dimensions of the style files are already taken to the limit of what the printer of the final proceedings is able to handle. Also, please refrain from using any kind of negative white space. 
+%  \item Please make sure too split lines that are too wide in the final output (avoid overfull \verb|\hbox|es).
+%\end{itemize}
+
+
+\section{Introduction}
+\todo{Say: working on multi-conclusion nested sequents for intuitionistic modal logic. A bit of story? Why is useful?}
+
+Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and sequent systems \cite{simpson1994proof},
+or the one of \emph{unlabelled deduction} in the form of sequent~\cite{bierman2000} or nested sequent systems \cite{strassburger2013cut}.
+Nested sequents were introduced by Kashima \cite{kashima1994cut} and then independently rediscovered by Br\"{u}nnler \cite{brunnler2009deep} and Poggiolesi \cite{poggiolesi2009method}.
+
+\section{Intuitionistic modal logics}
+The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
+%
+Starting with a set $\mathcal{A}$ of atomic propositions, denoted $a$, modal formulas are constructed from the grammar:
+%
+$$
+A \coloncolonequals
+a \mid A \AND A \mid \TOP \mid A \OR A \mid \BOT \mid A \IMP A \mid \BOX A \mid \DIA A
+$$
+%
+The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{plotkin1986} and is equivalent to the one proposed by Fischer-Servi~\cite{fischer1984}.
+%, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
+%
+It is obtained from intuitionistic propositional logic by adding:
+\begin{itemize}
+	\item the \emph{necessitation rule}: $\BOX A$ is a theorem if $A$ is a theorem; and
+	\item the following five variants of the \emph{distributivity axiom}:
+	\begin{equation*}
+	\label{eq:ik}%\hskip-2em
+	\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
+	\kax[1]\colon&\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)
+	&
+	\kax[3]\colon&\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)
+	&
+	\kax[5]\colon&\DIA\BOT\IMP\BOT
+	\\
+	\kax[2]\colon&\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)
+	&
+	\kax[4]\colon&(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)\\%x[1ex]
+	\end{array}
+	\end{equation*}
+\end{itemize}
+
+The relational semantics for $\IK$ was first defined by Fischer-Servi~\cite{fischer1984}.
+%
+It combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
+
+\begin{definition}
+	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ 
+	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
+	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ satisfying:
+	\begin{enumerate}
+		\item[($F_1$)] For $u, v, v' \in W$, if $u \rel v$ and $v \le v'$, there exists $u'$ s.t.~$u \le u'$ and $u' \rel v'$.
+		
+		\item[($F_2$)] For $u', u, v \in W$, if $u \le v$, there exists $v'$ s.t.~$u' \rel v'$ and $v\le v'$.
+	\end{enumerate}
+	%	
+\end{definition}
+
+\begin{definition}
+	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $w$ to the subset of propositional atoms true at $w$, additionally subject to:
+	if $w \le w'$ then $V(w)\subseteq V(w')$.
+\end{definition}
+
+We write $w \Vdash a$ if $a \in V(w)$, and by definition, we always have $w \Vdash \top$ and never that $w \Vdash \bot$. 
+%
+Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+
+$w \Vdash A \AND B$ iff $w \Vdash A$ and $w \Vdash B$
+
+$w \Vdash A \OR B$ iff $w \Vdash A$ or $w \Vdash B$
+
+$w \Vdash A \IMP B$ iff for all $w'$ with $w \le w'$, if $w' \Vdash A$ then $w' \Vdash B$
+
+$w \Vdash \BOX A$ iff for all $w'$ and $u$ with $w \le w'$ and $w'Ru$, $u \Vdash A$ %\hfill $(\ast)$
+
+$w \Vdash \DIA A$ iff there exists a $u$ such that $wRu$ and $u \Vdash A$.
+
+\begin{definition}
+	A formula $A$ is \emph{satisfied} in a model $\M = \langle W, R, \le, V \rangle$, if for all $w \in W$ we have $w \Vdash A$.
+	%
+	A formula $A$ is \emph{valid} in a frame $\F = \langle W, R, \le \rangle$, if for all valuations $V$, $A$ is satisfied in $\langle W, R, \le, V \rangle$.
+\end{definition}
+
+Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
+
+\begin{theorem}[Fischer-Servi~\cite{Fischer}, Plotkin and Stirling~\cite{Plotkin}]\label{thm:plotkin}
+	A formula $A$ is a theorem of $\IK$ if and only if $A$ is valid in every bi-relational frame.
+\end{theorem}
+
+\section{Bicolor NS: nested sequents capturing $\rel$ and $\le$}
+\marianela{small introduction of nested sequents}
+
+\marianela{put the whole system}
+
+\marianela{explain some specific rules: $\rrn\BOX$, $\rrn\IMP$. maybe $\rn F_1$?}
+
+\section{Conclusion}
+\marianela{say something like the idea comes from proving termination for is4...}
+
+
+%% Appendix.
+%% Remove the \Appendix command if an 
+%% appendix is not required.
+\Appendix
+Here starts the appendix. If you don't wish an appendix, please remove the \verb|\Appendix| command from the \LaTeX\ file.
+
+
+%% Bibliography
+%% Make sure to use the bibliographystyle aiml20.
+\bibliographystyle{aiml20}
+\bibliography{aiml20}
+
+\end{document}
