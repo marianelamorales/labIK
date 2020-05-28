@@ -692,16 +692,25 @@ In this section we are going to prove the admissibility of cut for the system $\
 	Given a derivation of shape
 	$$
 	\vlderivation{
-		\vliiin{\labrn{Y-cut}}{}{\Cx{\emptyset}}{
+		\vliiin{\labrn{mcut}}{}{\Cx{\emptyset}^n}{
 			\vlhtr{\DD_1}{\Cx{\rt{C}}^n}}{
 			\vlhy{}}{
-			\vlhtr{\DD_2}{\Cx{\lf{C}}^p}}}
+			\vlhtr{\DD_2}{\Cx{\lf{C}}^n}}}
 	$$
-	where $\DD_1$ and $\DD_2$ are both Y-cut-free, there is a cut-free
+	where $\DD_1$ and $\DD_2$ are both \rn{mcut}-free, there is a cut-free
 	derivation of $\Cx{\emptyset}$.
 	
-		\sonia{where $\Cx{\rt{C}}^n =\Cx{\rt{C}}{\ldots}{{\rt{C}}}$ with $n$ occurences of $\rt C$ anywhere in $\Cx$.}
+		\sonia{where $\Cx{\rt{C}}^n =\Cx{\rt{C}}{\ldots}{{\rt{C}}}$ with $n$ occurences of $\rt C$ anywhere in $\Cx$}
+		
 \end{lemma}
+
+\sonia{this corresponds in the labelled sequent to 
+	$$
+	\vliinf{Ycut}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}{R, \Gamma, \labels{x_1}{A}, \ldots, \labels{x_n}{A} \SEQ \Delta}
+	$$
+	%
+	%There must be a derivation from ${R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}$ to ${R, \Gamma \SEQ \Delta, \labels{y_1}{A}, \ldots, \labels{y_n}{A}}$
+}
 
 \begin{proof}
 	%
@@ -926,50 +935,62 @@ $$
 %$$
 $$
 \vlderivation{
-	\vliin{\rn{Ycut}}{}
-	{\Cx{\emptyset}}
+	\vliin{\rn{mcut}}{}
+	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
 	{\vliin{\rrn\AND}{}
-		{\Cx\i{x}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}
-		{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}{\rt{A \AND B}}^{n}}}
-		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}{\rt{A \AND B}}^{n}}}
+		{\Cx\i{x}{\rt{A \AND B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}
+		{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
+		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
 	}
 	{\vlin{\lrn\AND}{}
-		{\Cx\i{y}{\lf{A \AND B}}{\lf{A \AND B}}^{p}}
-		{\vlhtr{\DD_3}{\Cx\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{p}}}}
+		{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A \AND B}}{\lf{A \AND B}}^{n}}
+		{\vlhtr{\DD_3}{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{n}}}}
 	}
 $$
-$$
+$$\hspace*{-2cm}
 \reducesto
 \vlderivation{
-	\vliin{\rn{Ycut}}{}
-	{\Cx{\emptyset}}
-	{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}{\rt{A \AND B}}^{n}}}
-	{\vliin{\rn{Ycut}}{}
-		{\Cx{\lf{A}}}
+	\vliin{\rn{mcut}}{}
+	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
+	{\vlhtr{\DD_1'}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A}}{\rt{A}}^{n}}}
+	{\vliin{\rn{mcut}}{}
+		{\Cx\i{x}{\lf A}\i{y}{\lf A}{\lf{A}}^n}
 %		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
-		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}{\rt{A \AND B}}^{n}}}
-		{\vlhtr{\DD_3}{\Cx\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{p}}}}
+		{\vlhtr{\DD_2'}{\Cx\i{x}{\lf{A},\rt{B}}\i{y}{\lf{A},\rt{B}}{\lf{A},\rt{B}}^{n}}}
+		{\vlhtr{\DD_3'}{\Cx\i{x}{\lf{A},\lf{ B}}\i{y}{\lf{A}, \lf{B}}{\lf{A}, \lf{B}}^{n}}}}
 }
 $$
 
-$$
-\vliinf{Ycut}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}{R, \Gamma, \labels{y_1}{A}, \ldots, \labels{y_p}{A} \SEQ \Delta}
-$$
+$\DD_1'$ is obtained by applying invertibility.
+$\DD_2'$ is obtained by applying invertibitily and then weakening.
+$\DD_3'$ is obtained by applying invertibility.
 
-There must be a derivation from $\vlinf{}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}$ to $\vlinf{}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{y_1}{A}, \ldots, \labels{y_n}{A}}$
 
-$$
-\vlderivation{	
-	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vliin{\rrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A \AND B} }}}}
-		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A} }}}}}
-		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}}
-	}{
-		\vlin{\lrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A \AND B}}}}}
-		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}}}}
-	}
-}
-$$
+%$$
+%\vlderivation{	
+%	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}{
+%		\vliin{\rrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A \AND B} }}}}
+%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A} }}}}}
+%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}}
+%	}{
+%		\vlin{\lrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A \AND B}}}, \bBR{\BR{\Cx[2], \lf {A \AND B}}}}}
+%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}, \bBR{\BR{\Cx[2], \lf {A \AND B}}}}}}
+%	}
+%}
+%$$
+%$$
+%\vlderivation{
+%	\vliin{\rn{Y-cut}}{}{
+%\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}	
+%}{
+%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}
+%	}{
+%	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf B }}, \bBR{\BR{\Cx[2], \lf B }}}}
+%	{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A}, \lf B }}, \bBR{\BR{\Cx[2], \rt {A}, \lf B }}}}}
+%	{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}, \bBR{\BR{\Cx[2], \lf {A}, \lf B }}}}}
+%}
+%}
+%$$
 
 
 
@@ -1101,22 +1122,40 @@ $$
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}}}{
-			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}, \bBR{\BR{\Cx[2], \rt A }}}}
+		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}}}{
+			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A }}}}}
 			}
 		}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A}}}}
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
 		}
 	}
+$$
+$$
 \quad\leadsto\quad
 \vlderivation{	
-\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Gamma_2}}}}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt A }}, \bBR{\BR{\Cx[2], \rt A }}}}
+\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}{
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A}}}}}
 	}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf A}}, \bBR{\BR{\Gamma_2}}}}
+	\vlin{\rn w}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}, \bBR{\BR{\Cx[2]{\lf A}}}}}{
+		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
+		}
 	}
 }}
+$$
+
+$$
+\equiv\quad
+\vlderivation{
+\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4] }}}}}, \bBR{\BR{\Cx[2]}}}}{
+	\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\rt A} }}}}}, \bBR{\BR{\Cx[2]{\rt A} }}}
+	}{
+	\vlhy{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\rt A} }}, \bBR{\BR{\Cx[4]{\rt A} }}}}}, \bBR{\BR{\Cx[2]{\rt A} }}}	}
+}
+}{
+	\vlhy{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\lf A} }}}}}, \bBR{\BR{\Cx[2]{\lf A}}}}}
+}
+}
 $$
 
 \item \todo{$F_1$ when the left cut-formula is used in $F_1$}
@@ -1140,7 +1179,7 @@ $$
 }
 $$
 
-\item 
+\item \sonia{monotonicity}
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}
