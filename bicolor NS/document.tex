@@ -4,31 +4,34 @@
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\red}[1]{{\color{red}{#1}}}
 \newcommand{\blue}[1]{{\color{blue}{#1}}}
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Packages
 \usepackage{geometry}
 \geometry{vmargin=3.2cm,hmargin=3.5cm}%
-\usepackage{rotating}
+%\usepackage{rotating}
 
-\usepackage{amsmath} % for improving the structure and printed output of documents containing mathematical formulas
-\usepackage{amssymb} % for mathematical symbols and fonts
-\usepackage{bm} % command \bm makes its ar­gu­ment bold, better than \boldsymbol{}
-\usepackage{colonequals} % symbols := and ::=
+%\usepackage{amsmath} % for improving the structure and printed output of documents containing mathematical formulas
+%\usepackage{amssymb} % for mathematical symbols and fonts
+%\usepackage{bm} % command \bm makes its ar­gu­ment bold, better than \boldsymbol{}
+%\usepackage{colonequals} % symbols := and ::=
 %\usepackage{cmll}  % Linear Logic symbols
 
 %\usepackage{wasysym} % for smiley 
 %\renewcommand\qedsymbol{$\smiley$}
 
-\usepackage{graphicx} % for graphics, and commands like \scalebox{h-scale}{text} in particular
-\usepackage[matrix,arrow]{xy}
+%\usepackage{graphicx} % for graphics, and commands like \scalebox{h-scale}{text} in particular
+%\usepackage[matrix,arrow]{xy}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}%[section]
-\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{question}[theorem]{Question}
-\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{question}[theorem]{Question}
+%\newtheorem{conjecture}[theorem]{Conjecture}
 
 
 
@@ -38,70 +41,51 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Proof package
 \usepackage[noxy]{virginialake}
-\vlnosmallleftlabels
+%\vlnosmallleftlabels
 \vlnostructuressyntax
 %
-\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
-\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
-
 \newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
 %
-\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
-\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
-%
-%
-\makeatletter
-\newbox\@conclbox
-\newdimen\@conclheight
-%
-\newcommand\vlderibase[4]{{%
-		\setbox\@conclbox=\hbox{$#3$}\relax%
-		\@conclheight=\ht\@conclbox%
-		\setbox\@conclbox=\hbox{$%
-			\vlderivationnc{%
-				\vlin{#1}{#2}{\box\@conclbox}{#4}%
-			}$}%
-		\lower\@conclheight\box\@conclbox%
-	}}
-	%
-	\newcommand\vlderidbase[4]{{%
-			\setbox\@conclbox=\hbox{$#3$}\relax%
-			\@conclheight=\ht\@conclbox%
-			\setbox\@conclbox=\hbox{$%
-				\vlderivationnc{%
-					\vlid{#1}{#2}{\box\@conclbox}{#4}%
-				}$}%
-			\lower\@conclheight\box\@conclbox%
-		}}
-		%
-		\newcommand\vlderiibase[5]{{%
-				\setbox\@conclbox=\hbox{$#3$}\relax%
-				\@conclheight=\ht\@conclbox%
-				\setbox\@conclbox=\hbox{$%
-					\vlderivationnc{%
-						\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
-					}$}%
-				\lower\@conclheight\box\@conclbox%
-			}}
-			\makeatother
-			%
-			
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			%%% Equation environments
-			\newdimen\mydisplayskip
-			\mydisplayskip=.4\abovedisplayskip
-			\newenvironment{smallequation}
-			{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation\endcsname}{\csname endequation\endcsname\egroup}
-			\newenvironment{smallequation*}
-			{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation*\endcsname}{\csname endequation*\endcsname\egroup}
-			\newenvironment{smallalign}
-			{\par\nobreak\noindent\bgroup\small\csname align\endcsname}{\csname endalign\endcsname\egroup}
-			\newenvironment{smallalign*}
-			{\par\nobreak\noindent\bgroup\small\csname align*\endcsname}{\csname endalign*\endcsname\egroup}
-			%\newenvironment{smallmultline}
-			%{\par\nobreak\vskipmydisplayskip\noindent\bgroup\small\csname multline*\endcsname}{\csname endmultline*\endcsname\egroup}
-			
+%\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
+%\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
+%%
+%%
+%\makeatletter
+%\newbox\@conclbox
+%\newdimen\@conclheight
+%%
+%\newcommand\vlderibase[4]{{%
+%		\setbox\@conclbox=\hbox{$#3$}\relax%
+%		\@conclheight=\ht\@conclbox%
+%		\setbox\@conclbox=\hbox{$%
+%			\vlderivationnc{%
+%				\vlin{#1}{#2}{\box\@conclbox}{#4}%
+%			}$}%
+%		\lower\@conclheight\box\@conclbox%
+%	}}
+%	%
+%	\newcommand\vlderidbase[4]{{%
+%			\setbox\@conclbox=\hbox{$#3$}\relax%
+%			\@conclheight=\ht\@conclbox%
+%			\setbox\@conclbox=\hbox{$%
+%				\vlderivationnc{%
+%					\vlid{#1}{#2}{\box\@conclbox}{#4}%
+%				}$}%
+%			\lower\@conclheight\box\@conclbox%
+%		}}
+%		%
+%		\newcommand\vlderiibase[5]{{%
+%				\setbox\@conclbox=\hbox{$#3$}\relax%
+%				\@conclheight=\ht\@conclbox%
+%				\setbox\@conclbox=\hbox{$%
+%					\vlderivationnc{%
+%						\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
+%					}$}%
+%				\lower\@conclheight\box\@conclbox%
+%			}}
+%			\makeatother
+%			%
+%			
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Extracting symbols from MnSymbol 
@@ -127,8 +111,8 @@
 \DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
 
 %\DeclareMathSymbol{\triangleright}{\mathbin}{MnSyC}{80}
-\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
-\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+%\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+%\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
 \DeclareMathSymbol{\meddiamond}{\mathbin}{MnSyC}{110}
 \DeclareMathSymbol{\medsquare}{\mathbin}{MnSyC}{106}
 \DeclareMathSymbol{\vee}{\mathbin}{MnSyC}{45}
@@ -157,16 +141,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Connectives
-\newcommand*{\NEG}[1]{\bar{#1}}
-\newcommand*{\NOT}{\neg}
-\newcommand*{\AND}{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\wedge$}}}}
-\newcommand*{\TOP}{\mathord{\top}}
-\newcommand*{\OR}{\mathbin{\scalebox{.85}{\raise.1ex\hbox{\large$\vee$}}}}
+%\newcommand*{\NEG}[1]{\bar{#1}}
+%\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}%%{\scalebox{.85}{\raise.1ex\hbox{\large$\wedge$}}}}
+%\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}%%{\scalebox{.85}{\raise.1ex\hbox{\large$\vee$}}}}
 \newcommand*{\BOT}{\mathord{\bot}}
-\newcommand*{\IMP}{\mathbin{\scalebox{.6}{\raise.4ex\hbox{\large$\bm\supset$}}}}%\supset}}%
-
+\newcommand*{\IMP}{\mathbin{\supset}}%\scalebox{.6}{\raise.4ex\hbox{\large$\bm\supset$}}}}%
 \newcommand*{\BOX}{\mathord{\medsquare}}
-\newcommand*{\DIA}{\mathord{\scalebox{.9}{\raise.1ex\hbox{$\meddiamond$}}}}
+\newcommand*{\DIA}{\mathord{\meddiamond}}%%{\scalebox{.9}{\raise.1ex\hbox{$\meddiamond$}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -174,24 +157,24 @@
 \newcommand*{\ax}[1]{\mathsf{#1}}
 \newcommand*{\kax}[1][]		{\ax{k_{#1}}}
 
-\newcommand*{\A}{\mathcal{A}}
-\newcommand*{\F}{\mathcal{F}}
-\newcommand*{\M}{\mathfrak{M}}
-
-\newcommand{\force}[2]{#1\Vdash#2}
-\newcommand{\nforce}[2]{#1\nVdash#2}
+%\newcommand*{\A}{\mathcal{A}}
+%\newcommand*{\F}{\mathcal{F}}
+%\newcommand*{\M}{\mathfrak{M}}
 %
+%\newcommand{\force}[2]{#1\Vdash#2}
+%\newcommand{\nforce}[2]{#1\nVdash#2}
+%%
 \newcommand{\height}[1]{|#1|}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Systems
 \newcommand*{\sys}[1]{\ensuremath{\mathsf{#1}}}%\xspace}
-\newcommand*{\K}{\sys{K}}
+%\newcommand*{\K}{\sys{K}}
 \newcommand*{\IK}{\sys{IK}}
-\newcommand*{\CK}{\sys{CK}}
+%\newcommand*{\CK}{\sys{CK}}
 
-\newcommand*{\lab}{\mathsf{lab}}
-\newcommand*{\labK}{\lab\K}
+%\newcommand*{\lab}{\mathsf{lab}}
+%\newcommand*{\labK}{\lab\K}
 
 %%%% System NKK
 \newcommand{\IMPW}{\IMP^{\circ}}
@@ -209,15 +192,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Labelled sequents
 \newcommand{\SEQ}{\Rightarrow}
-
-\newcommand*{\Labx}{\mathcal{L}}
-\newcommand*{\Rabx}{\mathcal{R}}
-\newcommand*{\Gx}{\mathcal{G}}
-\newcommand*{\Bx}{\mathcal{B}}
+%
+%\newcommand*{\Labx}{\mathcal{L}}
+%\newcommand*{\Rabx}{\mathcal{R}}
+%\newcommand*{\Gx}{\mathcal{G}}
+%\newcommand*{\Bx}{\mathcal{B}}
 \newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
-\newcommand*{\rel}{R}
-
-\newcommand*{\BBot}{\Perp} % \usepackage{cmll} 
+%\newcommand*{\rel}{R}
+%
+%\newcommand*{\BBot}{\Perp} % \usepackage{cmll} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -225,7 +208,7 @@
 \newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
 \newcommand*{\invr}[1]{#1^\mathsf{inv}}
 %
-\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+%\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
 \newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
 \newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
 %
@@ -233,10 +216,10 @@
 %\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
 %\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
 
-\newcommand*{\brsym}{\mathord{\scalebox{.9}{$\boxtimes$}}}
-\newcommand*{\boxbrn}[1]{\rn{\brsym_\rn{#1}}}%^{\lab}}}
-\newcommand*{\diasym}{\mathord{\diamondplus}}
-\newcommand*{\diabrn}[1][]{\rn{\diasym_\rn{#1}}}
+%\newcommand*{\brsym}{\mathord{\scalebox{.9}{$\boxtimes$}}}
+%\newcommand*{\boxbrn}[1]{\rn{\brsym_\rn{#1}}}%^{\lab}}}
+%\newcommand*{\diasym}{\mathord{\diamondplus}}
+%\newcommand*{\diabrn}[1][]{\rn{\diasym_\rn{#1}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Nested sequents
@@ -330,17 +313,17 @@
 }
 \newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
 
-\@makecontextual{\Ex}{}
+%\@makecontextual{\Ex}{}
 
 \@makecontextual{\Cx}{\Gamma}
 \@makecontextual{\Dx}{\Delta}
-\@makecontextual{\Lx}{\Lambda}
-\@makecontextual{\Rx}{\Pi}
+%\@makecontextual{\Lx}{\Lambda}
+%\@makecontextual{\Rx}{\Pi}
 
-\@makecontextual{\LLx}{\Omega}
-\@makecontextual{\RRx}{\Xi}
-\@makecontextual{\CCx}{\Sigma}
-\@makecontextual{\DDx}{\Theta}
+%\@makecontextual{\LLx}{\Omega}
+%\@makecontextual{\RRx}{\Xi}
+%\@makecontextual{\CCx}{\Sigma}
+%\@makecontextual{\DDx}{\Theta}
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % intuitionistic
@@ -353,8 +336,8 @@
 \paragraph{For $\IK$}
 
 \[
-\vlinf{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{}
-%\vlinf{\rn{id}}{}{\Cx{\lf A, \rt A}}{}
+%\vlinf{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{}
+\vlinf{\rn{id}}{}{\Cx{\lf A, \rt A}}{}
 \quad
 \vlinf{\lrn{\BOT}}{}{\Cx{\lf \BOT}}{}
 \]
@@ -370,7 +353,7 @@
 \[
 %\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\lf{A \IMP B}, \bBR{\rt A, \Cx[2]}}}{\Cx[1]{\bBR{\lf B, \Cx[2]}}}
 %
-\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\lf{A \IMP B}, \rt A}}{\Cx[1]{\lf B}}
+\vliinf{\lrn\IMP}{}{\Cx{\lf{A \IMP B}}}{\Cx{\lf{A \IMP B}, \rt A}}{\Cx{\lf B}}
 \quad
 %\vlinf{\lrn[2]\IMP}{}{\Cx[1]{\lf{A \IMP B}, \bBR{\Cx[2]}}}{\Cx[1]{\bBR{\lf{A \IMP B}, \Cx[2]}}}
 \quad
@@ -391,25 +374,38 @@
 \vlinf{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
 \quad
 %\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\Cx[2]}}}}
-\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}, \bBR{\BR{\Cx[3]}}}}
+%\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}, \bBR{\BR{\Cx[3]}}}}
+%\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Cx[3]}}}}}
+\vlinf{\rn{F_1}}{\mbox{\footnotesize$\Dx$ is shallow}}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Dx}}}}}
 \]
 \[\mbox{\hbox to .9\linewidth{\dotfill}}\]
 \[
 \vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\Cx[2]}}}
 \quad
-\vlinf{\rn{refl}_\le}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\bBR{\Cx[2]}}}
+\vlinf{\rn{refl_{\bBR{\cdot}}}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\bBR{\Cx[2]}}}
 \quad
-\vlinf{\rn{trans}_\le}{}{\Cx[1]{\bBR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
+\vlinf{\rn{trans_{\bBR{\cdot}}}}{}{\Cx[1]{\bBR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
+\quad
+\vlinf{\rn{m_{\bBR{\cdot}}}}{}{\Cx[1]{\bBR{\Cx[2], \Cx[3]}}}{\Cx[1]{\bBR{\Cx[2]}, \bBR{\Cx[3]}}}
+\]
+\[
+\vlinf{\rn{w}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\emptyset}}
+\quad
+\vlinf{\rrn{c}}{}{\Cx[1]{\rt A}}{\Cx[1]{\rt A, \rt A}}
+\quad
+\vlinf{\lrn{c}}{}{\Cx[1]{\lf A}}{\Cx[1]{\lf A, \lf A}}
+\quad
+\vlinf{\rn{m_{\BR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2], \Cx[3]}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}
 \]
 
-\sonia{I am wondering whether we might need to generalise $F_1$... I am surprised this did not come up at any point.}
-
-\sonia{well... as always, the devil is in the details. Check out this case in the proof of Lemma~\ref{lem:weak-adm}:
+\sonia{I am wondering whether we might need to generalise $F_1$... I am surprised this did not come up at any point.
+%	
+Well... as always, the devil is in the details. Check out this case in the proof of Lemma~\ref{lem:weak-adm}:
 \[
 \vlderivation{
 	\vlin{\rn{w}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{
 		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[3]}}}}{
-			\vlhtr{}{\Cx[1]{\BR{\bBR{\Cx[3]}}, \bBR{{\BR{\Cx[3]}}}}}
+			\vlhtr{}{\Cx[1]{\bBR{{\BR{\Cx[3]}}}}}
 			}
 		}
 	}
@@ -418,143 +414,216 @@ to resolve this case, we need:
 \[
 \vlderivation{
 	\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{
-		\vlin{\rn{w}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}, \bBR{{\BR{\Cx[3]}}}}}{
-			\vlhtr{}{\Cx[1]{\BR{\bBR{\Cx[3]}}, \bBR{{\BR{\Cx[3]}}}}}
+		\vlin{\rn{w}}{}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Cx[3]}}}}}{
+			\vlhtr{}{\Cx[1]{\bBR{{\BR{\Cx[3]}}}}}
 			}
 		}
 	}
 \]
 }
 
-\sonia{I am wondering however, if it would remain complete if we had:
-\[
-\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Cx[3]}}}}}
-\]
-}
-
 \paragraph{For $\sys{IS4}$}
 Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 \[
-\vlinf{\lrn[1]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
+\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
 \quad
 %\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
-\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
+\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
 \quad
-\vlinf{\rrn[1]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
+\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
 \quad
-\vlinf{\rrn[2]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
+\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
 \]
 \[\mbox{\hbox to .9\linewidth{\dotfill}}\]
 \[
-\vlinf{\rn{t[]}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\BR{\Cx[2]}}}
+\vlinf{\rn{refl_{\BR{\cdot}}}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\BR{\Cx[2]}}}
 \qquad
-\vlinf{\rn{4[]}}{}{\Cx[1]{\BR{\Cx[2], \BR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}
+\vlinf{\rn{trans_{\BR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2], \BR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}
 \]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Completeness}
+\subsection{Completeness with $\rn{cut}$}
 
 %%%%%%%%%%%%%%%%%%%%k1%%%%%%%%%%%%%%%%%%
+%$$
+%\vlderivation{
+%		\vlin{\rrn\IMP}{}
+%		{\kax[1] \colon \rt{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
+%		{\vlin {\rrn\IMP}{}
+%			{\bBR{\lf{\BOX(A \IMP B)}, \rt{\BOX A \IMP \BOX B}}}
+%			{\vlin {\rrn\BOX}{}
+%				{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \rt{\BOX B}}}}
+%				{\vlin {\lrn{mon}}{}
+%					{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\BR{\rt{B}}}}}}
+%					{\vlin {\lrn\BOX}{}
+%						{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A},\BR{\rt{B}}}}}}
+%						{\vlin {\lrn{mon}}{}
+%							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
+%							{\vlin {\lrn{mon}}{}
+%								{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
+%								{\vlin{\lrn\BOX}{}
+%									{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
+%									{\vliin{\lrn\IMP}{}
+%										{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
+%										{\vlin{\rn{refl}}{}
+%											{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \rt{A}, \lf{A},\rt{B}}}}}}
+%											{\vlin{\rn{id}}{}
+%												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \bBR{\rt{A}}, \lf{A},\rt{B}}}}}}
+%												{\vlhy{}}}}
+%											{\vlin{\rn{refl}}{}
+%												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\rt{B}, \lf{B}}}}}}
+%												{\vlin{\rn{id}}{}
+%													{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\bBR{\rt{B}}, \lf{B}}}}}}
+%													{\vlhy{}}}}}}}}}}}}}
+%$$
+%
+%where $\Bx$ is equal to $\lf{\BOX(A \IMP B)}, \lf{\BOX A}$.
+
 $$
 \vlderivation{
-		\vlin{\rrn\IMP}{}
-		{\kax[1] \colon \rt{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
-		{\vlin {\rrn\IMP}{}
-			{\bBR{\lf{\BOX(A \IMP B)}, \rt{\BOX A \IMP \BOX B}}}
-			{\vlin {\rrn\BOX}{}
-				{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \rt{\BOX B}}}}
-				{\vlin {\lrn{mon}}{}
-					{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\BR{\rt{B}}}}}}
-					{\vlin {\lrn\BOX}{}
-						{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A},\BR{\rt{B}}}}}}
-						{\vlin {\lrn{mon}}{}
-							{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
-							{\vlin {\lrn{mon}}{}
-								{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
-								{\vlin{\lrn\BOX}{}
-									{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A},\rt{B}}}}}}
-									{\vliin{\lrn\IMP}{}
-										{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX(A \IMP B)},\lf{\BOX A}, \bBR{\lf{\BOX(A \IMP B)}, \lf{\BOX A}, \BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}
-										{\vlin{\rn{refl}}{}
-											{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \rt{A}, \lf{A},\rt{B}}}}}}
-											{\vlin{\rn{id}}{}
-												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A \IMP B}, \bBR{\rt{A}}, \lf{A},\rt{B}}}}}}
-												{\vlhy{}}}}
-											{\vlin{\rn{refl}}{}
-												{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\rt{B}, \lf{B}}}}}}
-												{\vlin{\rn{id}}{}
-													{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\Bx, \bBR{\Bx, \BR{\lf{A},\bBR{\rt{B}}, \lf{B}}}}}}
-													{\vlhy{}}}}}}}}}}}}}
+		\vlin{\rrn\IMP}{}{\kax[1] \colon \rt{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}{
+			\vlin {\rrn\IMP}{}{\bBR{\lf{\BOX(A \IMP B)}, \rt{\BOX A \IMP \BOX B}}}{
+				\vlin {\rrn\BOX}{}{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \rt{\BOX B}}}}{
+					\vlin {\lrn{mon}}{}{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\lf{\BOX A}, \bBR{\BR{\rt{B}}}}}}{
+						\vlin {\lrn\BOX}{}{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\lf{\BOX A},\BR{\rt{B}}}}}}{
+							\vlin {2\cdot\lrn{mon}}{}{\bBR{\lf{\BOX(A \IMP B)}, \bBR{\bBR{\BR{\lf{A},\rt{B}}}}}}{
+								\vlin{\lrn\BOX}{}{\bBR{\bBR{\bBR{\lf{\BOX(A \IMP B)}, \BR{\lf{A},\rt{B}}}}}}{
+									\vliin{\lrn\IMP}{}{\bBR{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A},\rt{B}}}}}}{
+										\vlin{\rn{id}}{}{\bBR{\bBR{\bBR{\BR{{\rt{A}}, \lf{A},\rt{B}}}}}}{
+											\vlhy{}
+											}
+										}{
+										\vlin{\rn{id}}{}{\bBR{\bBR{\bBR{\BR{{\rt{B}}, \lf{A},\lf{B}}}}}}{
+											\vlhy{}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 $$
-
-where $\Bx$ is equal to $\lf{\BOX(A \IMP B)}, \lf{\BOX A}$.
 			
+%%%%%%%%%%%%%%%%%%%%%k2%%%%%%%%%%%%%%%%%%
+%	$$
+%	\vlderivation {
+%		\vlin{\rrn\IMP}
+%		{}
+%		{ \kax[2]\colon \rt{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
+%		{\vlin {\rrn\IMP}
+%			{}
+%			{\bBR{\lf{\BOX (A \IMP B)}, \rt{\DIA A \IMP \DIA B}}}
+%			{\vlin {\lrn\DIA}
+%				{}
+%				{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\DIA A}, \rt{\DIA B}}}}
+%				{\vlin{\rrn\DIA}
+%					{}
+%					{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}}, \rt{\DIA B}}}}
+%					{\vlin {\lrn{mon}}
+%						{}
+%						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%						{\vlin {\lrn\BOX}
+%							{}
+%							{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%							{\vliin{\lrn\IMP}
+%								{}
+%								{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A \IMP B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%								{\vlin{\rn{refl}}{}
+%									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%									{\vlin{\rn{id}}{}
+%										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \bBR{\rt{A}}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%										{\vlhy{}}}}
+%								{\vlin{\rn{refl}}{}
+%									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
+%									{\vlin{\rn{id}}{}
+%										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \bBR{\rt{B}}}, \rt{\DIA B}}}}
+%										{\vlhy{}}}}}}}}}}
+%	}
+%$$
+
 %%%%%%%%%%%%%%%%%%%%k2%%%%%%%%%%%%%%%%%%
-	$$
-	\vlderivation {
-		\vlin{\rrn\IMP}
-		{}
-		{ \kax[2]\colon \rt{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
-		{\vlin {\rrn\IMP}
-			{}
-			{\bBR{\lf{\BOX (A \IMP B)}, \rt{\DIA A \IMP \DIA B}}}
-			{\vlin {\lrn\DIA}
-				{}
-				{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\DIA A}, \rt{\DIA B}}}}
-				{\vlin{\rrn\DIA}
-					{}
-					{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}}, \rt{\DIA B}}}}
-					{\vlin {\lrn{mon}}
-						{}
-						{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
-						{\vlin {\lrn\BOX}
-							{}
-							{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}, \rt{\DIA B}}}}
-							{\vliin{\lrn\IMP}
-								{}
-								{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A \IMP B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-								{\vlin{\rn{refl}}{}
-									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \rt{A}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A\IMP B}, \bBR{\rt{A}}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-										{\vlhy{}}}}
-								{\vlin{\rn{refl}}{}
-									{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \rt{B}}, \rt{\DIA B}}}}
-									{\vlin{\rn{id}}{}
-										{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{B}, \lf{A}, \bBR{\rt{B}}}, \rt{\DIA B}}}}
-										{\vlhy{}}}}}}}}}}
+$$
+\vlderivation{
+	\vlin{\rrn\IMP}{}{ \kax[2]\colon \rt{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}{
+		\vlin {\rrn\IMP}{}{\bBR{\lf{\BOX (A \IMP B)}, \rt{\DIA A \IMP \DIA B}}}{
+			\vlin {\lrn\DIA}{}{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\lf{\DIA A}, \rt{\DIA B}}}}{
+				\vlin{\rrn\DIA}{}{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}}, \rt{\DIA B}}}}{
+					\vlin {\lrn{mon}}{}{\bBR{\lf{\BOX (A \IMP B)}, \bBR{\BR{\lf{A}, \rt{B}}}}}{
+						\vlin {\lrn\BOX}{}{\bBR{\bBR{\lf{\BOX (A \IMP B)}, \BR{\lf{A}, \rt{B}}}}}{
+							\vliin{\lrn\IMP}{}{\bBR{\bBR{\BR{\lf{A \IMP B}, \lf{A}, \rt{B}}}}}{
+								\vlin{\rn{id}}{}{\bBR{\bBR{\BR{{\rt{A}}, \lf{A}, \rt{B}}}}}{
+									\vlhy{}
+								}
+							}{
+							\vlin{\rn{id}}{}{\bBR{\bBR{\BR{\lf{B}, \lf{A}, {\rt{B}}}}}}{
+								\vlhy{}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
+}
 $$
 
 %%%%%%%%%%%%%%%%%%%%k3%%%%%%%%%%%%%%%%%%
+%$$
+%\vlderivation {
+%		\vlin{\rrn\IMP}
+%		{}
+%		{\kax[3] \colon \rt{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
+%		{\vlin {\lrn\DIA}
+%			{}
+%			{\bBR{\lf{\DIA (A \OR B)}, \rt{\DIA A \OR \DIA B}}}
+%			{\vlin{\rrn\OR}{}
+%				{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A \OR \DIA B}}}
+%				{\vliin{\lrn\OR}{}
+%					{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A}, \rt{\DIA B}}}
+%					{\vlin{\rrn\DIA}{}
+%						{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}
+%						{\vlin{\rn{refl}}{}
+%							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA A}, \rt{\DIA B}}}
+%							{\vlin{\rn{id}}{}
+%								{\bBR{\BR{\lf{A}, \bBR{\rt{A}}}, \rt{\DIA A}, \rt{\DIA B}}}
+%								{\vlhy{}}}}}
+%					{\vlin{\rrn\DIA}{}
+%						{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}
+%						{\vlin{\rn{refl}}{}
+%							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}, \rt{\DIA B}}}
+%							{\vlin{\rn{id}}{}
+%								{\bBR{\BR{\lf{B}, \bBR{\rt{B}}}, \rt{\DIA A}, \rt{\DIA B}}}
+%								{\vlhy{}}}}}}}}
+%	}
+%$$
+
 $$
 \vlderivation {
-		\vlin{\rrn\IMP}
-		{}
-		{\kax[3] \colon \rt{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
-		{\vlin {\lrn\DIA}
-			{}
-			{\bBR{\lf{\DIA (A \OR B)}, \rt{\DIA A \OR \DIA B}}}
-			{\vlin{\rrn\OR}{}
-				{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A \OR \DIA B}}}
-				{\vliin{\lrn\OR}{}
-					{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A}, \rt{\DIA B}}}
-					{\vlin{\rrn\DIA}{}
-						{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{refl}}{}
-							{\bBR{\BR{\lf{A}, \rt{A}}, \rt{\DIA A}, \rt{\DIA B}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\BR{\lf{A}, \bBR{\rt{A}}}, \rt{\DIA A}, \rt{\DIA B}}}
-								{\vlhy{}}}}}
-					{\vlin{\rrn\DIA}{}
-						{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}
-						{\vlin{\rn{refl}}{}
-							{\bBR{\BR{\lf{B}, \rt{B}}, \rt{\DIA A}, \rt{\DIA B}}}
-							{\vlin{\rn{id}}{}
-								{\bBR{\BR{\lf{B}, \bBR{\rt{B}}}, \rt{\DIA A}, \rt{\DIA B}}}
-								{\vlhy{}}}}}}}}
+	\vlin{\rrn\IMP}{}{\kax[3] \colon \rt{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}{
+		\vlin {\lrn\DIA}{}{\bBR{\lf{\DIA (A \OR B)}, \rt{\DIA A \OR \DIA B}}}{
+			\vlin{\rrn\OR}{}{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A \OR \DIA B}}}{
+				\vliin{\lrn\OR}{}{\bBR{\BR{\lf{A \OR B}}, \rt{\DIA A}, \rt{\DIA B}}}{
+					\vlin{\rrn\DIA}{}{\bBR{\BR{\lf{A}}, \rt{\DIA A}, \rt{\DIA B}}}{
+							\vlin{\rn{id}}{}{\bBR{\BR{\lf{A}, {\rt{A}}}, \rt{\DIA B}}}{
+								\vlhy{}
+						}
+					}
+				}{
+				\vlin{\rrn\DIA}{}{\bBR{\BR{\lf{B}}, \rt{\DIA A}, \rt{\DIA B}}}{
+						\vlin{\rn{id}}{}{\bBR{\BR{\lf{B}, {\rt{B}}}, \rt{\DIA A}}}{
+							\vlhy{}
+						}
+					}
+				}
+			}
+		}
 	}
+}
 $$
 
 %%%%%%%%%%%%%%%%%%%%k4%%%%%%%%%%%%%%%%%%
@@ -581,7 +650,7 @@ $$
 %						{\vlin{\rn{refl}}{}
 %							{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A} \BR{\rt{A}, \lf{A}, \rt{B}}}}}}
 %							{\vlin{\rn{id}}{}
-%								{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{\DIA A} \BR{\bBR{\rt{A}}, \lf{A}, \rt{B}}}}}}
+%								{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\DIA A \IMP \BOX B}, \rt{ma A} \BR{\bBR{\rt{A}}, \lf{A}, \rt{B}}}}}}
 %								{\vlhy{}}}}}
 %					{\vlin{\lrn\BOX}{}
 %						{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}
@@ -597,28 +666,59 @@ $$
 %
 %where $\Rabx$ is equal to $\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}$.
 
+%$$
+%\vlderivation {
+%	\vlin{\rrn\IMP}{}{\kax[4] \colon \rt{(\DIA A \IMP \BOX B) \IMP \BOX(A \IMP B)}}{
+%		\vlin {\rrn\BOX}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}{
+%			\vlin{\rrn\IMP}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}{
+%				\vlin{\rn{F_1}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}{
+%					\vlin{\lrn{mon}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\bBR{\BR{\lf{A}, \rt{B}}}}}}{
+%						\vlin{\lrn{mon}}{}{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\lf{A}, \rt{B}}}}}}{
+%							\vliin{\lrn\IMP}{}{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
+%								\vlin{\rrn\DIA}{}{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}{
+%									\vlin{\rn{refl}}{}{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\rt{A}, \lf{A}, \rt{B}}}}}}{
+%										\vlin{\rn{id}}{}{\bBR{\bBR{\rt{\DIA A}, \BR{\bBR{\rt{A}}, \lf{A}, \rt{B}}}}}{
+%											\vlhy{}
+%										}
+%									}
+%								}
+%							}{
+%							\vlin{\lrn\BOX}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
+%								\vlin{\rn{refl}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \rt{B}}}}}}{
+%									\vlin{\rn{id}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \bBR{\rt{B}}}}}}}{
+%										\vlhy{}
+%										}
+%									}
+%								}
+%							}
+%						}
+%					}
+%				}
+%			}
+%		}
+%	}
+%}
+%$$
+%
+%where $\Rabx$ is equal to $\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}$.
+
 $$
 \vlderivation {
 	\vlin{\rrn\IMP}{}{\kax[4] \colon \rt{(\DIA A \IMP \BOX B) \IMP \BOX(A \IMP B)}}{
 		\vlin {\rrn\BOX}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \rt{\BOX(A \IMP B)}}}{
 			\vlin{\rrn\IMP}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\rt{A \IMP B}}}}}{
 				\vlin{\rn{F_1}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\bBR{\lf{A}, \rt{B}}}}}}{
-					\vlin{\lrn{mon}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\bBR{\BR{\lf{A}, \rt{B}}}}}}{
-						\vlin{\lrn{mon}}{}{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\BR{\lf{A}, \rt{B}}}}}}{
-							\vliin{\lrn\IMP}{}{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
-								\vlin{\rrn\DIA}{}{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}{
-									\vlin{\rn{refl}}{}{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\rt{A}, \lf{A}, \rt{B}}}}}}{
-										\vlin{\rn{id}}{}{\bBR{\bBR{\rt{\DIA A}, \BR{\bBR{\rt{A}}, \lf{A}, \rt{B}}}}}{
-											\vlhy{}
-										}
+					\vlin{2\cdot\lrn{mon}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\bBR{\BR{\lf{A}, \rt{B}}}}}}{
+						\vliin{\lrn\IMP}{}{\bBR{\bBR{\bBR{\lf{\DIA A \IMP \BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
+							\vlin{\rrn\DIA}{}{\bBR{\bBR{\bBR{\rt{\DIA A}, \BR{\lf{A}, \rt{B}}}}}}{
+								\vlin{\rn{id}}{}{\bBR{\bBR{\rt{\DIA A}, \BR{{\rt{A}}, \lf{A}, \rt{B}}}}}{
+									\vlhy{}
 									}
 								}
 							}{
-							\vlin{\lrn\BOX}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
-								\vlin{\rn{refl}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \rt{B}}}}}}{
-									\vlin{\rn{id}}{}{\bBR{\lf{\DIA A \IMP \BOX B}, \bBR{\Rabx, \bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, \bBR{\rt{B}}}}}}}{
-										\vlhy{}
-										}
+							\vlin{\lrn\BOX}{}{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{\lf{A}, \rt{B}}}}}}{
+								\vlin{\rn{id}}{}{\bBR{\bBR{\bBR{\lf{\BOX B}, \BR{ \lf{B}, \lf{A}, {\rt{B}}}}}}}{
+									\vlhy{}
 									}
 								}
 							}
@@ -628,22 +728,21 @@ $$
 			}
 		}
 	}
-}
 $$
 
-where $\Rabx$ is equal to $\lf{\DIA A \IMP \BOX B}, \BR{\bBR{\lf{A}, \rt{B}}}$.
 
 %%%%%%%%%%%%%%%%%%%%k5%%%%%%%%%%%%%%%%%%
 $$
 \vlderivation {
-		\vlin{\rrn\IMP}{}
-		{\kax[5] \colon \rt{\DIA \BOT \IMP \BOT}}
-		{\vlin {\lrn\DIA}{}
-			{\bBR{\lf{\DIA \BOT}, \rt{\BOT}}}
-			{\vlin {\lrn{\BOT}}{}
-				{\bBR{\BR{\lf{\BOT}}, \rt{\BOT}}}
-				{\vlhy {}}}}
+	\vlin{\rrn\IMP}{}{\kax[5] \colon \rt{\DIA \BOT \IMP \BOT}}{
+		\vlin {\lrn\DIA}{}{\bBR{\lf{\DIA \BOT}, \rt{\BOT}}}{
+			\vlin {\lrn{\BOT}}{}{
+				\bBR{\BR{\lf{\BOT}}, \rt{\BOT}}}{
+				\vlhy {}
+			}
+		}
 	}
+}
 $$
 
 \subsubsection{Derivation of the axioms of $\sys{IS4}$}
@@ -709,19 +808,6 @@ $$
 
 In this section we are going to prove the admissibility of cut for the system $\rn{NIK}$.
 
-\begin{theorem}
-	\label{thm:cut-adm}
-	The $\rn{cut}$ rule is admissible for $\rn{NIK}$.
-	\end{theorem}
-
-\begin{lemma}
-	\label{lem:weak-adm}
-	The weakening rule
-	~$\vlinf{\rn{weak}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\emptyset}}$~
-	is height-preserving admissible for $\rn{NIK}$.
-\end{lemma}
-%\sonia{You need to introduce the notation $\DD_3^{w}$ that you are using in the cut-elimination proof. Or you can just use the rule $\rn{weak}$ explicitely in the proof and use its admissiblity a posteriori.}
-
 \begin{lemma}
 	\label{lem:mon-adm}
 	The monoticity rule
@@ -751,14 +837,8 @@ $$
 which would be resolved using $\rn{F_2}$ in the fully labelled system.
 }
 
-\begin{lemma}
-	\label{lem:m-adm}
-	The rule
-	~$\vlinf{\rn{m[]}}{}{\Cx[1]{\BR{\Cx[2], \Cx[3]}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}$~
-	is height-preserving admissible for $\rn{NIK}$.
-\end{lemma}
 
-\begin{lemma}\marianela{Should I make the proof to show which rule is invertible?}
+\begin{lemma}%\marianela{Should I make the proof to show which rule is invertible?}
 	\label{lem:inv}
 	All single-premise rules of $\rn{NIK}$ are height-preserving
 	invertible.
@@ -777,18 +857,27 @@ which would be resolved using $\rn{F_2}$ in the fully labelled system.
 	Given a derivation of shape
 	$$
 	\vlderivation{
-		\vliiin{\labrn{mcut}}{}{\Cx{\emptyset}^n}{
-			\vlhtr{\DD_1}{\Cx{\rt{C}}^n}}{
+		\vliiin{\rn{cut}}{}{\Cx{\emptyset}^n}{
+			\vlhtr{\DD_1}{\Cx{\rt{C}}}}{
 			\vlhy{}}{
-			\vlhtr{\DD_2}{\Cx{\lf{C}}^n}}}
+			\vlhtr{\DD_2}{\Cx{\lf{C}}}}}
 	$$
-	where $\DD_1$ and $\DD_2$ are both \rn{mcut}-free, there is a cut-free
+	where $\DD_1$ and $\DD_2$ are both \rn{cut}-free, there is a \rn{cut}-free
 	derivation of $\Cx{\emptyset}$.
-	
-		\sonia{where $\Cx{\rt{C}}^n =\Cx{\rt{C}}{\ldots}{{\rt{C}}}$ with $n$ occurences of $\rt C$ anywhere in $\Cx$}
-		
 \end{lemma}
 
+\sonia{Given a derivation of shape
+$$
+\vlderivation{
+	\vliiin{\labrn{mcut}}{}{\Cx{\emptyset}^n}{
+		\vlhtr{\DD_1}{\Cx{\rt{C}}^n}}{
+		\vlhy{}}{
+		\vlhtr{\DD_2}{\Cx{\lf{C}}^n}}}
+$$
+where $\DD_1$ and $\DD_2$ are both \rn{mcut}-free, there is a cut-free
+derivation of $\Cx{\emptyset}$.
+
+where $\Cx{\rt{C}}^n =\Cx{\rt{C}}{\ldots}{{\rt{C}}}$ with $n$ occurences of $\rt C$ anywhere in $\Cx$}
 \sonia{this corresponds in the labelled sequent to 
 	$$
 	\vliinf{Ycut}{}{R, \Gamma \SEQ \Delta}{R, \Gamma \SEQ \Delta, \labels{x_1}{A}, \ldots, \labels{x_n}{A}}{R, \Gamma, \labels{x_1}{A}, \ldots, \labels{x_n}{A} \SEQ \Delta}
@@ -807,43 +896,76 @@ which would be resolved using $\rn{F_2}$ in the fully labelled system.
 	%
 	In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
 
-\todo{what if the last applied rule is an axiom?}
+\sonia{what if the last applied rule is an axiom?}
+%$$
+%\vlderivation{	
+%	\vliin{\rn{cut}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{
+%		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{
+%			\vlhy{}
+%			}
+%		}{
+%		\vlhtr{\DD_2}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
+%		}
+%	}
+%\reducesto
+%\vlderivation{
+%	\vlin{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{
+%		\vlhtr{\DD_2}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
+%		}
+%	}
+%$$
 $$
 \vlderivation{	
-	\vliin{\rn{cut}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{
-		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{
+	\vliin{\rn{cut}}{}{\Cx[1]{\lf A}}{
+		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \rt A}}{
 			\vlhy{}
-			}
-		}{
-		\vlhtr{\DD_2}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
 		}
+	}{
+		\vlhtr{\DD_2}{\Cx[1]{\lf A, \lf A}}
 	}
+}
 \reducesto
 \vlderivation{
-	\vlin{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{
-		\vlhtr{\DD_2}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
-		}
+	\vlin{\lrn{c}}{}{\Cx[1]{\lf A}}{
+		\vlhtr{\DD_2}{\Cx[1]{\lf A, \lf A}}
 	}
+}
 $$
 
+%$$
+%\vlderivation{
+%	\vliin{\rn{cut}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{
+%		\vlhtr{\DD_1}{\Cx[1]{\rt A, \bBR{\rt A, \Cx[2]}}}
+%		}{
+%		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{
+%			\vlhy{}
+%			}
+%		}
+%	}
+%\reducesto
+%\vlderivation{	
+%	\vlin{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{
+%		\vlhtr{\DD_1}{\Cx[1]{\rt A, \bBR{\rt A, \Cx[2]}}}
+%		}
+%	}
+%$$
 $$
 \vlderivation{
-	\vliin{\rn{cut}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{
-		\vlhtr{\DD_1}{\Cx[1]{\rt A, \bBR{\rt A, \Cx[2]}}}
-		}{
-		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \bBR{\rt A, \Cx[2]}}}{
+	\vliin{\rn{cut}}{}{\Cx[1]{\rt A}}{
+		\vlhtr{\DD_1}{\Cx[1]{\rt A, \rt A}}
+	}{
+		\vlin{\rn{id}}{}{\Cx[1]{\lf A, \rt A}}{
 			\vlhy{}
-			}
 		}
 	}
+}
 \reducesto
 \vlderivation{	
-	\vlin{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{
-		\vlhtr{\DD_1}{\Cx[1]{\rt A, \bBR{\rt A, \Cx[2]}}}
-		}
+	\vlin{\rrn{c}}{}{\Cx[1]{\rt A}}{
+		\vlhtr{\DD_1}{\Cx[1]{\rt A, \rt A}}
 	}
+}
 $$
-
 
 
 \textbf{Commutative cases}: In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
@@ -985,7 +1107,7 @@ $$
 }
 $$
 
-\item $\rn{F_1}$ when the cut-formula is inside $\Cx$:
+\item $\rn{F_1}$ when the cut-formula is in $\Cx[1]$:
 
 %$$
 %\vlderivation{
@@ -1029,88 +1151,155 @@ $$
 %}
 %$$
 
-$$
-\vlderivation{
-	\vliin{\rn{cut}}{}
-	{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}{\emptyset}}
-	{\vlin{\rn{F_1}}{}
-		{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}{\rt{C}}}
-		{\vlhtr{\DD_1}{\Cx[1]{\BR{\Cx[2]}, \bBR{\BR{\Cx[3]}}}{\rt{C}}}}}
-	{\vlhtr{\DD_2}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}{\lf{C}}}}
-}
-\reducesto
-\vlderivation{
-	\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}{\emptyset}}{
-		\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2]}, \bBR{\BR{\Cx[3]}}}{\emptyset}}{
-			\vlhtr{\DD_1^w}{\Cx{\BR{\bBR{\Cx[1]}}, \bBR{\BR{\Cx[1]}}}{\rt{C}}}
-		}{
-			\vlhtr{\DD_2^w}{\Cx{\BR{\bBR{\Cx[1]}}, \bBR{\BR{\Cx[1]}}}{\lf{C}}}
-		}
-	}
-}
-$$
-
-\item {$F_1$ when the right cut-formula is used  in $F_1$}
-$$\hspace*{-2cm}
-\vlderivation{
-	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}}}{
-			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A }}}}}
-		}
-	}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
-	}
-}
-\quad\leadsto\quad
-\vlderivation{	
-	\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vliin{\rn{mcut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}{
-			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A}}}}}
-		}{
-			\vlin{\rn w}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}, \bBR{\BR{\Cx[2]{\lf A}}}}}{
-				\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
-			}
-		}
-}}
-$$
-
 %$$
-%\equiv\quad
 %\vlderivation{
-%	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4] }}}}}, \bBR{\BR{\Cx[2]}}}}{
-%		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\rt A} }}}}}, \bBR{\BR{\Cx[2]{\rt A} }}}
+%	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx[3]}}}{\emptyset}}{
+%		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx[3]}}}{\rt{C}}}{
+%			\vlhtr{\DD_1}{\Cx[1]{\BR{\Cx[2]}, \bBR{\BR{\Dx[3]}}}{\rt{C}}}
+%			}
 %		}{
-%			\vlhy{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\rt A} }}, \bBR{\BR{\Cx[4]{\rt A} }}}}}, \bBR{\BR{\Cx[2]{\rt A} }}}	}
+%		\vlhtr{\DD_2}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx[3]}}}{\lf{C}}}
 %		}
-%	}{
-%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[3]{\BR{\bBR{\Cx[4]{\lf A} }}}}}, \bBR{\BR{\Cx[2]{\lf A}}}}}
+%	}
+%\reducesto
+%\vlderivation{
+%\vlin{\lrn{c}+\rrn{c}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx[3]}}}{\emptyset}}{
+%	\vlin{\rn{m_{\bBR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx[3], \Dx[3]}}}{\emptyset}}{
+%		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2],\bBR{\Dx[3]}, \bBR{\Dx[3]}}}{\emptyset}}{
+%			\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2],\bBR{\Dx[3]}}, \bBR{\BR{\Dx[3]}}}{\emptyset}}{
+%				\vlhtr{\DD_1^w}{\Cx[1]{\BR{\Cx[2],\bBR{\Dx[3]}}, \bBR{\BR{\Dx[3]}}}{\rt{C}}}
+%				}{
+%				\vlhtr{\DD_2^w}{\Cx[1]{\BR{\Cx[2],\bBR{\Dx[3]}}, \bBR{\BR{\Dx[3]}}}{\lf{C}}}
+%				}
+%			}
+%		}
 %	}
 %}
 %$$
 
-\item {$F_1$ when the left cut-formula is used in $F_1$}
 $$
 \vlderivation{
-	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}}}{
-			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}, \bBR{\BR{\Cx[2]{\lf A} }}}}
+	\vliin{\rn{cut}}{}{\Cx[1]{\emptyset}{\BR{\Cx[2], \bBR{\Dx}}}}{
+		\vlin{\rn{F_1}}{}{\Cx[1]{\rt{C}}{\BR{\Cx[2], \bBR{\Dx}}}}{
+			\vlhtr{\DD_1}{\Cx[1]{\rt{C}}{\BR{\Cx[2]}, \bBR{\BR{\Dx}}}}
 		}
 	}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A}}}}}
+		\vlhtr{\DD_2}{\Cx[1]{\lf{C}}{\BR{\Cx[2], \bBR{\Dx}}}}
 	}
 }
-\quad\leadsto\quad
-\vlderivation{	
-	\vliin{\rn{mcut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}, \bBR{\BR{\Cx[2]{\lf A} }}}}
+\reducesto
+\vlderivation{
+	\vlin{\lrn{c}+\rrn{c}}{}{\Cx[1]{\emptyset}{\BR{\Cx[2], \bBR{\Dx}}}}{
+		\vlin{\rn{m_{\bBR{\cdot}}}}{}{\Cx[1]{\emptyset}{\BR{\Cx[2], \bBR{\Dx, \Dx}}}}{
+			\vlin{\rn{F_1}}{}{\Cx[1]{\emptyset}{\BR{\Cx[2],\bBR{\Dx}, \bBR{\Dx}}}}{
+				\vliin{\rn{cut}}{}{\Cx[1]{\emptyset}{\BR{\Cx[2],\bBR{\Dx}}, \bBR{\BR{\Dx}}}}{
+					\vlhtr{\DD_1^w}{\Cx[1]{\rt{C}}{\BR{\Cx[2],\bBR{\Dx}}, \bBR{\BR{\Dx}}}}
+				}{
+					\vlhtr{\DD_2^w}{\Cx[1]{\lf{C}}{\BR{\Cx[2],\bBR{\Dx}}, \bBR{\BR{\Dx}}}}
+				}
+			}
+		}
+	}
+}
+$$
+
+\item $\rn{F_1}$ when the cut-formula is in $\Cx[2]$:
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2]{\emptyset}, \bBR{\Dx}}}}{
+		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2]{\rt{C}}, \bBR{\Dx}}}}{
+			\vlhtr{\DD_1}{\Cx[1]{\BR{\Cx[2]{\rt{C}}}, \bBR{\BR{\Dx}}}}
+		}
 	}{
-		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A}}}}}
+		\vlhtr{\DD_2}{\Cx[1]{\BR{\Cx[2]{\lf{C}}, \bBR{\Dx}}}}
+	}
+}
+\reducesto
+\vlderivation{
+	\vlin{\lrn{c}+\rrn{c}}{}{\Cx[1]{\BR{\Cx[2]{\emptyset}, \bBR{\Dx}}}}{
+		\vlin{\rn{m_{\bBR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2]{\emptyset}, \bBR{\Dx, \Dx}}}}{
+			\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2]{\emptyset},\bBR{\Dx}, \bBR{\Dx}}}}{
+				\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2]{\emptyset},\bBR{\Dx}}, \bBR{\BR{\Dx}}}}{
+					\vlhtr{\DD_1^w}{\Cx[1]{\BR{\Cx[2]{\rt{C}},\bBR{\Dx}}, \bBR{\BR{\Dx}}}}
+				}{
+					\vlhtr{\DD_2^w}{\Cx[1]{\BR{\Cx[2]{\lf{C}},\bBR{\Dx}}, \bBR{\BR{\Dx}}}}
+				}
+			}
+		}
 	}
 }
 $$
 
 
-\item $\lrn{mon}$ when applied in $\Cx$:
+\item $F_1$ when the cut-formula is in $\Dx$: \todo{???!!!}
+$$
+\vlderivation{
+	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx}}}}{
+		\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx, {\rt{C}}}}}}{
+			\vlhtr{\DD_1}{\Cx[1]{\BR{\Cx[2]}, \bBR{\BR{\Dx, {\rt{C}}}}}}
+		}
+	}{
+		\vlhtr{\DD_2}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx, {\lf{C}}}}}}
+	}
+}
+\reducesto
+\vlderivation{
+	\vliin{\red{\rn{Fcut}}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx}}}}{
+			\vlhtr{\DD_1}{\Cx[1]{\BR{\Cx[2]}, \bBR{\BR{\Dx, {\rt{C}}}}}}
+		}{
+		\vlhtr{\DD_2}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx, {\lf{C}}}}}}
+	}
+}
+$$
+
+%\item {$F_1$ when the right cut-formula is used  in $F_1$}
+%$$\hspace*{-2cm}
+%\vlderivation{
+%	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+%		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}}}{
+%			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A }}}}}
+%		}
+%	}{
+%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
+%	}
+%}
+%\quad\leadsto\quad
+%\vlderivation{	
+%	\vlin{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+%		\vliin{\rn{mcut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}{
+%			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A} }}, \bBR{\BR{\Cx[2]{\rt A}}}}}
+%		}{
+%			\vlin{\rn w}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}, \bBR{\BR{\Cx[2]{\lf A}}}}}{
+%				\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A}}}}}
+%			}
+%		}
+%}}
+%$$
+%
+%
+%\item {$F_1$ when the left cut-formula is used in $F_1$}
+%$$
+%\vlderivation{
+%	\vliin{\rn{cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+%		\vlin{F_1}{}{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}}}{
+%			\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}, \bBR{\BR{\Cx[2]{\lf A} }}}}
+%		}
+%	}{
+%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A}}}}}
+%	}
+%}
+%\quad\leadsto\quad
+%\vlderivation{	
+%	\vliin{\rn{mcut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{
+%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\lf A} }}, \bBR{\BR{\Cx[2]{\lf A} }}}}
+%	}{
+%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2]{\rt A}}}}}
+%	}
+%}
+%$$
+
+
+\item $\lrn{mon}$ when applied in $\Cx[1]$:
 
 %$$
 %\vlderivation{
@@ -1135,20 +1324,20 @@ $$
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}
-	{\Cx{\lf{A}, \bBR{\Cx[1]}}{\emptyset}}
+	{\Cx[1]{\emptyset}{\lf{A}, \bBR{\Cx[2]}}}
 	{\vlin{\lrn{mon}}{}
-		{\Cx{\lf{A}, \bBR{\Cx[1]}}{\rt{C}}}
-		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}}{\rt{C}}}}}
-	{\vlhtr{\DD_2}{\Cx{\lf{A}, \bBR{\Cx[1]}}{\lf{C}}}}
+		{\Cx[1]{\rt{C}}{\lf{A}, \bBR{\Cx[2]}}}
+		{\vlhtr{\DD_1}{\Cx[1]{\rt{C}}{\lf{A}, \bBR{\lf{A}, \Cx[2]}}}}}
+	{\vlhtr{\DD_2}{\Cx[1]{\lf{C}}{\lf{A}, \bBR{\Cx[2]}}}}
 }
 \reducesto
 \vlderivation{
 	\vlin{\lrn{mon}}{}
-	{\Cx{\lf{A}, \bBR{\Cx[1]}}{\emptyset}}
+	{\Cx[1]{\emptyset}{\lf{A}, \bBR{\Cx[2]}}}
 	{\vliin{\rn{cut}}{}
-		{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}}{\emptyset}}
-		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}}{\rt{C}}}}
-		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]}}{\lf{C}}}}}
+		{\Cx[1]{\emptyset}{\lf{A}, \bBR{\lf{A}, \Cx[2]}}}
+		{\vlhtr{\DD_1}{\Cx[1]{\rt{C}}{\lf{A}, \bBR{\lf{A}, \Cx[2]}}}}
+		{\vlhtr{\DD_2^{\rn w}}{\Cx[1]{\lf{C}}{\lf{A}, \bBR{\lf{A}, \Cx[2]}}}}}
 }
 $$
 
@@ -1157,39 +1346,39 @@ $$
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}
-	{\Cx{\lf{A}, \bBR{\Cx[1]{\emptyset}}}}
+	{\Cx[1]{\lf{A}, \bBR{\Cx[2]{\emptyset}}}}
 	{\vlin{\lrn{mon}}{}
-		{\Cx{\lf{A}, \bBR{\Cx[1]{\rt{C}}}}}
-		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]{ \rt{C}}}}}}}
-	{\vlhtr{\DD_2}{\Cx{\lf{A}, \bBR{\Cx[1]{\lf{C}}}}}}
+		{\Cx[1]{\lf{A}, \bBR{\Cx[2]{\rt{C}}}}}
+		{\vlhtr{\DD_1}{\Cx[1]{\lf{A}, \bBR{\lf{A}, \Cx[2]{ \rt{C}}}}}}}
+	{\vlhtr{\DD_2}{\Cx[1]{\lf{A}, \bBR{\Cx[2]{\lf{C}}}}}}
 	}
 \reducesto
 \vlderivation{
 	\vlin{\lrn{mon}}{}
-	{\Cx{\lf{A}, \bBR{\Cx[1]{\emptyset}}}}
+	{\Cx[1]{\lf{A}, \bBR{\Cx[2]{\emptyset}}}}
 	{\vliin{\rn{cut}}{}
-		{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]{\emptyset}}}}
-		{\vlhtr{\DD_1}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]{\rt{C}}}}}}
-		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \bBR{\lf{A}, \Cx[1]{\lf{C}}}}}}}
+		{\Cx[1]{\lf{A}, \bBR{\lf{A}, \Cx[2]{\emptyset}}}}
+		{\vlhtr{\DD_1}{\Cx[1]{\lf{A}, \bBR{\lf{A}, \Cx[2]{\rt{C}}}}}}
+		{\vlhtr{\DD_2^{\rn w}}{\Cx[1]{\lf{A}, \bBR{\lf{A}, \Cx[2]{\lf{C}}}}}}}
 	}
 $$
 
-\item $\lrn{mon}$ when applied to the cut-formula:
+\item $\lrn{mon}$ when applied to the cut-formula: \todo{???!!!}
 $$
 \vlderivation{
 	\vliin{\rn{cut}}{}
-	{\Cx{\bBR{\Cx[1]}}}
-	{\vlhtr{\DD_1}{\Cx{\bBR{\Cx[1]}, \rt{A}}}}
+	{\Cx[1]{\bBR{\Cx[2]}}}
+	{\vlhtr{\DD_1}{\Cx[1]{\bBR{\Cx[2]}, \rt{A}}}}
 	{\vlin{\lrn{mon}}{}
-		{\Cx{\bBR{\Cx[1]}, \lf{A}}}
-		{\vlhtr{\DD_2}{\Cx{\bBR{\Cx[1], \lf{A}}, \lf{A}}}}}
+		{\Cx[1]{\bBR{\Cx[2]}, \lf{A}}}
+		{\vlhtr{\DD_2}{\Cx[1]{\bBR{\Cx[2], \lf{A}}, \lf{A}}}}}
 }
 \reducesto
 \vlderivation{
-\vliin{\rn{mcut}}{}
-{\Cx{\bBR{\Cx[1]}}}
-{\vlhtr{\DD_1^{\rn w}}{\Cx{\bBR{\Cx[1], \rt{A}}, \rt{A}}}}
-{\vlhtr{\DD_2}{\Cx{\bBR{\Cx[1], \lf{A}}, \lf{A}}}}}
+\vliin{\red{\rn{mcut}}}{}
+{\Cx[1]{\bBR{\Cx[2]}}}
+{\vlhtr{\DD_1}{\Cx[1]{\bBR{\Cx[2]}, \rt{A}}}}
+{\vlhtr{\DD_2}{\Cx[1]{\bBR{\Cx[2], \lf{A}}, \lf{A}}}}}
 %\vlderivation{
 %	\vliin{\rn{cut}}{}
 %	{\Cx{\bBR{\Cx[1]}}}
@@ -1203,95 +1392,66 @@ $$
 %}
 $$
 
-\sonia{does this really work!?}
-
 \end{itemize}
 
 \textbf{Key cases}: In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decreasing inductive measure.
 
 \begin{itemize}
 \item $C=A \AND B$:
-%$$
-%\vlderivation{
-%	\vliin{\rn{cut}}{}
-%	{\Cx{\emptyset}}
-%	{\vliin{\rrn\AND}{}
-%		{\Cx{\rt{A \AND B}}}
-%		{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
-%		{\vlhtr{\DD_2}{\Cx{\rt{B}}}}}
-%	{\vlin{\lrn\AND}{}
-%		{\Cx{\lf{A \AND B}}}
-%		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
-%	}
-%\reducesto
-%\vlderivation{
-%	\vliin{\rn{cut}}{}
-%	{\Cx{\emptyset}}
-%	{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
-%	{\vliin{\rn{cut}}{}
-%		{\Cx{\lf{A}}}
-%		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
-%		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
-%	}
-%$$
 $$
 \vlderivation{
-	\vliin{\rn{mcut}}{}
-	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
+	\vliin{\rn{cut}}{}
+	{\Cx{\emptyset}}
 	{\vliin{\rrn\AND}{}
-		{\Cx\i{x}{\rt{A \AND B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}
-		{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
-		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
-	}
+		{\Cx{\rt{A \AND B}}}
+		{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
+		{\vlhtr{\DD_2}{\Cx{\rt{B}}}}}
 	{\vlin{\lrn\AND}{}
-		{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A \AND B}}{\lf{A \AND B}}^{n}}
-		{\vlhtr{\DD_3}{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{n}}}}
+		{\Cx{\lf{A \AND B}}}
+		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
 	}
-$$
-$$\hspace*{-2cm}
 \reducesto
 \vlderivation{
-	\vliin{\rn{mcut}}{}
-	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
-	{\vlhtr{\DD_1'}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A}}{\rt{A}}^{n}}}
-	{\vliin{\rn{mcut}}{}
-		{\Cx\i{x}{\lf A}\i{y}{\lf A}{\lf{A}}^n}
-%		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
-		{\vlhtr{\DD_2'}{\Cx\i{x}{\lf{A},\rt{B}}\i{y}{\lf{A},\rt{B}}{\lf{A},\rt{B}}^{n}}}
-		{\vlhtr{\DD_3'}{\Cx\i{x}{\lf{A},\lf{ B}}\i{y}{\lf{A}, \lf{B}}{\lf{A}, \lf{B}}^{n}}}}
-}
+	\vliin{\rn{cut}}{}
+	{\Cx{\emptyset}}
+	{\vlhtr{\DD_1}{\Cx{\rt{A}}}}
+	{\vliin{\rn{cut}}{}
+		{\Cx{\lf{A}}}
+		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
+		{\vlhtr{\DD_3}{\Cx{\lf{A}, \lf{B}}}}}
+	}
 $$
-
-$\DD_1'$ is obtained by applying invertibility.
-$\DD_2'$ is obtained by applying invertibitily and then weakening.
-$\DD_3'$ is obtained by applying invertibility.
-
-
-%$$
-%\vlderivation{	
-%	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}{
-%		\vliin{\rrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A \AND B} }}}}
-%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {A} }}}}}
-%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A \AND B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}}
-%	}{
-%		\vlin{\lrn\AND}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A \AND B}}}, \bBR{\BR{\Cx[2], \lf {A \AND B}}}}}
-%		{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}, \bBR{\BR{\Cx[2], \lf {A \AND B}}}}}}
-%	}
-%}
-%$$
 %$$
 %\vlderivation{
-%	\vliin{\rn{Y-cut}}{}{
-%\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}	
-%}{
-%		\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {B} }}, \bBR{\BR{\Cx[2], \rt {B} }}}}
-%	}{
-%	\vliin{\rn{Y-cut}}{}{\Cx[1]{\BR{\bBR{\Cx[2], \lf B }}, \bBR{\BR{\Cx[2], \lf B }}}}
-%	{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \rt {A}, \lf B }}, \bBR{\BR{\Cx[2], \rt {A}, \lf B }}}}}
-%	{\vlhy{\Cx[1]{\BR{\bBR{\Cx[2], \lf {A}, \lf B}}, \bBR{\BR{\Cx[2], \lf {A}, \lf B }}}}}
-%}
+%	\vliin{\rn{mcut}}{}
+%	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
+%	{\vliin{\rrn\AND}{}
+%		{\Cx\i{x}{\rt{A \AND B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}
+%		{\vlhtr{\DD_1}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
+%		{\vlhtr{\DD_2}{\Cx\i{x}{\rt{B}}\i{y}{\rt{A \AND B}}{\rt{A \AND B}}^{n}}}
+%	}
+%	{\vlin{\lrn\AND}{}
+%		{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A \AND B}}{\lf{A \AND B}}^{n}}
+%		{\vlhtr{\DD_3}{\Cx\i{x}{\lf{A \AND B}}\i{y}{\lf{A}, \lf{B}}{\lf{A \AND B}}^{n}}}}
+%	}
+%$$
+%$$\hspace*{-2cm}
+%\reducesto
+%\vlderivation{
+%	\vliin{\rn{mcut}}{}
+%	{\Cx\i{x}{\emptyset}\i{y}{\emptyset}{\emptyset}^n}
+%	{\vlhtr{\DD_1'}{\Cx\i{x}{\rt{A}}\i{y}{\rt{A}}{\rt{A}}^{n}}}
+%	{\vliin{\rn{mcut}}{}
+%		{\Cx\i{x}{\lf A}\i{y}{\lf A}{\lf{A}}^n}
+%%		{\vlhtr{\DD_2^{\rn w}}{\Cx{\lf{A}, \rt{B}}}}
+%		{\vlhtr{\DD_2'}{\Cx\i{x}{\lf{A},\rt{B}}\i{y}{\lf{A},\rt{B}}{\lf{A},\rt{B}}^{n}}}
+%		{\vlhtr{\DD_3'}{\Cx\i{x}{\lf{A},\lf{ B}}\i{y}{\lf{A}, \lf{B}}{\lf{A}, \lf{B}}^{n}}}}
 %}
 %$$
+%
+%$\DD_1'$ is obtained by applying invertibility.
+%$\DD_2'$ is obtained by applying invertibitily and then weakening.
+%$\DD_3'$ is obtained by applying invertibility.
 
 
 
