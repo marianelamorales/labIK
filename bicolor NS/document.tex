@@ -796,7 +796,7 @@ $$
 				{}}}}
 	}
 \]
-
+\marianela{asaosfm}
 %\todo{Derive the axioms of $\sys{IS4}$:
 %\begin{align*}
 %	\ax{t}_{\BOX} \colonequals & \quad \BOX a \IMP a & \ax{t}_{\DIA} \colonequals & \quad a \IMP \DIA a\\
@@ -1923,6 +1923,29 @@ $$
 }
 $$
 \end{itemize}
+
+$$
+\vlderivation{
+	\vlin{\rrn\IMP}{}
+	{((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)\IMP \BOX \BOT}
+	{\vlin{\rrn\BOX}{}
+		{\bBR{\lf{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT}, \rt{\BOX \BOT}}}
+		{\vlin{\lrn\AND}{}
+			{\bBR{\lf{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT}, \bBR{\BR{\rt{\BOT}}}}}
+			{\vliin{\lrn\IMP}{}
+				{\bBR{\lf{(\BOX a \IMP \BOT)}, \lf{(b \IMP \BOX b)\IMP \BOT}, \bBR{\BR{\rt{\BOT}}}}}
+				{\vliin{\lrn\IMP}{}
+					{\bBR{\lf{(\BOX a \IMP \BOT)}, \lf{(b \IMP \BOX b)\IMP \BOT}, \rt{b \IMP \BOX b}, \bBR{\BR{\rt{\BOT}}}}}
+					{\vlin{}{}
+						{\bBR{\lf{(\BOX a \IMP \BOT)}, \rt{\BOX a}\lf{(b \IMP \BOX b)\IMP \BOT}, \rt{b \IMP \BOX b}, \bBR{\BR{\rt{\BOT}}}}}
+						{\vlhy{MISSING SOMETHING}}}
+					{\vlin{\lrn\BOT}{}
+						{\bBR{\lf{\BOT}, \lf{(b \IMP \BOX b)\IMP \BOT}, \rt{b \IMP \BOX b}, \bBR{\BR{\rt{\BOT}}}}}
+						{\vlhy{}}}}
+				{\vlin{\lrn\BOT}{}
+					{\bBR{\lf{(\BOX a \IMP \BOT)}, \lf{\BOT}, \bBR{\BR{\rt{\BOT}}}}}
+					{\vlhy{}}}}}}
+	}$$
 %% Bibliography
 %\bibliographystyle{plain}
 %\bibliography{references}
