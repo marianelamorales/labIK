@@ -1932,25 +1932,26 @@ $$
 		{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \rt{\BOX \BOT}}}
 		{\vlin{mon_{L} + \lrn\BOX}{}
 			{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\BR{\rt{\BOT}}}}}
-			{\vliin{\lrn\IMP}{}
+			{\vlin{\lrn\AND}{}
 				{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)},\BR{\lf{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT}, \rt{\BOT}}}}}
-				{\vliin{\rrn\AND}{}
-					{\bBR{G, \bBR{G,\BR{T, \rt{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)}, \rt{\BOT}}}}}
-					{\vlin{\rrn\IMP}{}
-						{\bBR{G, \bBR{G,\BR{T,\rt{\BOX a \IMP \BOT}, \rt{\BOT}}}}}
+				{\vliin{\lrn\IMP}{}
+					{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)},\BR{\lf{\BOX a \IMP \BOT},\lf{(b \IMP \BOX b)\IMP \BOT}, \rt{\BOT}}}}}
+					{\vliin{\lrn\IMP}{}
+						{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
 						{\vlin{}{}
-							{\bBR{G, \bBR{G,\BR{T,\bBR{\lf{\BOX a}, \rt{\BOT}}, \rt{\BOT}}}}}{}}}
-					{\vlin{\rrn\IMP}{}
-						{\bBR{G, \bBR{G,\BR{T, \rt{(b \IMP \BOX b)}, \rt{\BOT}}}}}
-						{\vlhy{}}}}
-				{\vlin{\lrn\BOT}{}
-					{\bBR{G, \bBR{G,\BR{\lf{\BOT}, \rt{\BOT}}}}}
-					{\vlhy{}}}}}}
+							{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},\rt{\BOX a}, T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
+							{\vlhy{missing sth}}}
+						{\vlin{\lrn\BOT}{}
+							{\bBR{G, \bBR{G,\BR{\lf{\BOT},T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
+							{\vlhy{}}}}
+					{\vlin{\lrn\BOT}{}
+						{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},\lf{\BOT}, \rt{\BOT}}}}}
+						{\vlhy{}}}}}}}
 	}$$
 	
 where $G$ is equal to $\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}$
 
-and $T$ is equal to $\lf{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT}$
+and $T$ is equal to $\lf{(b \IMP \BOX b)\IMP \BOT}$
 %% Bibliography
 %\bibliographystyle{plain}
 %\bibliography{references}
