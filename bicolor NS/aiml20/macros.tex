@@ -1,5 +1,4 @@
-
-
+\definecolor{notgreen}{rgb}{.1,.6,.1}
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\red}[1]{{\color{red}{#1}}}
 \newcommand{\blue}[1]{{\color{blue}{#1}}}
@@ -20,13 +19,16 @@
 \newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
 \newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
 \newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+\newcommand*{\fm}[1]{{\color{notgreen}{#1}}}
+\newcommand*{\lb}[1]{{\color{blue}{#1}}}
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Logic
 \newcommand*{\ax}[1]{\mathsf{#1}}
 \newcommand*{\kax}[1][]		{\ax{k_{#1}}}
-\newcommand*{\accs}[2]{{#1}R{#2}}
-\newcommand*{\futs}[2]{{#1}\le{#2}}
 \newcommand*{\A}{\mathcal{A}}
 
 \newcommand{\force}[2]{#1\Vdash#2}
@@ -194,7 +196,6 @@
 
 
 %%% Labelled sequents
-\newcommand*{\labels}[2]{{\color{blue}{#1}\:\colon}{#2}}
 \newcommand{\SEQ}{\Rightarrow}
 \newcommand*{\DD}{\mathcal{D}}
 %\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
