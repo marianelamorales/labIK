@@ -1,0 +1,108 @@
+%\chapter{Sistema $\labIKh$ + $\agklmn$}
+\section{Extensiones del sistema $\labIKh$}
+
+%Esta sección hace referencia a trabajo futuro por terminar. 
+La idea parte de generar lógicas más fuertes extendiendo nuestro sistema con otros axiomas. Decimos \emph{una lógica más fuerte} para hacer referencia a que estamos restringiendo la clase de frames que queremos considerar, imponiendo algunas restricciones en la relación de accesibilidad. En particular, nuestro objetivo es realizar esto utilizando el \emph{axioma de Scott-Lemmon} o \emph{axioma $\agklmn$}:
+\begin{center}
+	 $\lozenge^{k} \square^{l} A \vljm \square^{m}\lozenge^{n} A$
+\end{center}
+
+Escribiendo nuestro axioma tanto en la lógica clásica como en la intuicionista en lenguaje de primer orden obtenemos lo siguiente:
+ 
+$\star$ \emph{Caso clásico} \hspace{14mm} $\rightsquigarrow$ \hspace{3.7mm}$\forall x,y,z ( xR^{k}y \vlan xR^{m}z \rightarrow \exists u yR^{l}u \vlan zR^{n}u)$ 
+
+$\star$ \emph{Caso intuicionista} \hspace{3mm} $\rightsquigarrow$ \hspace{3mm} $\forall x,y,z((xR^{k}y \vlan xR^{m}z) \vljm \exists y' (y \le y' \vlan \exists u (y'R^{l}u \vlan zR^{n} u)))$\\
+
+Para entenderlo en mayor detalle podemos observar la Figura \ref{fig:gklmn} que representa al axioma de Scott-Lemmon para el caso intuicionista la cual nos dice que:
+
+\begin{quote}
+	Sean $w$, $u$ y $v$ mundos (o etiquetas). Si $wR^k u$ y $wR^m v$ entonces existe un mundo (o etiqueta) $u'$ tal que $u \le u'$ y existe un mundo (o etiqueta) $x$ tal que $u'R^l x$ y $vR^n x$.
+\end{quote}
+
+\begin{figure}[h]
+	\begin{center}
+		$
+		\xymatrix{
+			& u' \ar@{.>}[ddr]^{R^l} \\
+			& u \ar@{.>}[u]^{\le} \\
+			w \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && x \\
+			& v \ar@{.>}[ur]_{R^n}
+		}
+		$
+	\end{center}
+	\label{fig:gklmn}
+	\caption{Axioma $\agklmn$ para el caso intuicionista}
+\end{figure}
+
+
+
+
+Ahora añadimos el axioma $\agklmn$ ($\agklmn$ para el caso intuicionista) y creamos una nueva regla de sequente para nuestro sistema $\labIKh$ con el objetivo de capturar el axioma en cuestión:
+
+\begin{center}
+	$\vlderivation { \vlin {\gklmn}{y', u$ fresh$}{\G, xR^{k}y, xR^{m}z, \Left \Rightarrow \Right}{\vlhy {\G, y \le y', xR^{k}y, xR^{m}z, y'R^{l}u, zR^{n}u, \Left\Rightarrow \Right}}}$
+\end{center}
+%\section{Completitud}
+
+\begin{teo}
+El sistema $\labIKh$ $\mathsf{+}$ $\mathsf{ axioma}$ $\agklmn$	es completo para k = l = m = n = $\mathsf{1}$.
+\end{teo}
+
+\begin{proof}
+	Como resultado de la sección \emph{Completitud Sintáctica} sabemos que $\labIKh$+$\mathsf{cut}$ es completo. Por lo tanto, sólo necesitamos mostrar que el axioma $\agklmn$ se puede probar a partir de las reglas que componen a nuestro sistema.
+	Primero demostraremos completitud para \emph{k = l = m = n = $\mathsf{1}$} como se ve a continuación:
+	\begin{center}
+		\scalebox{0.93}{
+		$\vlderivation {\vlin {\sir}
+			{y$ fresh$}
+			{\Rightarrow x \colon \lozenge \square A \vljm \square \lozenge A}
+			{\vlin {\sbr}
+				{z, w $ fresh $}
+				{x \le y, y \colon \lozenge \square A \Rightarrow y \colon \square \lozenge A}
+				{\vlin {\sdl}
+					{u$ fresh$}
+					{x \le y, y \le z, zRw, y \colon \lozenge \square A \Rightarrow w \colon \lozenge A}
+					{\vlin {\ftwo}
+						{t$ fresh$}
+						{x \le y, y \le z, zRw, yRu, u \colon \square A \Rightarrow w \colon \lozenge A}
+						{\vlin {\gklmn}
+							{t', j$ fresh$}
+							{x \le y, y \le z, u \le t, zRw, yRu, zRt, u \colon \square A \Rightarrow w \colon \lozenge A}
+							{\vlin {\sdr}
+								{}
+								{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A}
+								{\vlin {\trans}
+									{}
+									{x \le y, y \le z, u \le t, t \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+									{\vlin {\sbl}
+										{}
+										{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A \Rightarrow w \colon \lozenge A, j \colon A}
+										{\vlin {\refl}
+											{}
+											{x \le y, y \le z, u \le t, t \le t', u \le t', zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+											{\vlin {\ids}
+												{}
+												{x \le y, y \le z, u \le t, t \le t', u \le t',j \le j, zRw, yRu, zRt, t'Rj, wRj, u \colon \square A, j \colon A \Rightarrow w \colon \lozenge A, j \colon A}
+												{\vlhy {}}}}}}}}}}}}$}
+	\end{center}
+\end{proof}
+
+Para la demostración de completitud del caso general, necesitamos introducir las reglas que se presentan en el Lema~\ref{lemma:admis}. 
+
+\begin{lemma}\label{lemma:admis} Las siguientes reglas son admisibles en $\labIKh$:
+	\begin{enumerate}
+		\item{$\vlderivation {\vlin {\boxlk}{}{\G, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A\Rightarrow \Right}{\vlhy {\G, \Left, x(\le \circ $R$)^{k}y, x \colon \square^{k} A, z \colon A \Rightarrow \Right}}}$}
+		\item{$\vlderivation{\vlin {\boxk}{}{\G, \Left \Rightarrow \Right, x \colon \square^{k} A}{\vlhy {\G, x(\le \circ $R$)^{k}y,\Left \Rightarrow \Right, y \colon A}}}$}
+		\item{$\vlderivation { \vlin {\diamk}{}{\G, \Left, x \colon \lozenge^{k} A \Rightarrow \Right}{\vlhy {\G, xR^{k}y, \Left, y \colon A \Rightarrow \Right}}}$ }
+		\item{$\vlderivation { \vlin {\diamrk}{}{\G, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A}{\vlhy {\G, \Left, xR^{k}y \Rightarrow \Right, x \colon \lozenge^{k}A, y \colon A}}}$}
+	\end{enumerate}
+	%\textbf{Probably F2g???}
+\end{lemma}
+
+Nuestra conjetura es que es posible demostrar completitud del sistema para el caso general, haciendo una demostración por inducción en el parámetro $k$. Esta demostración se deja como trabajo futuro.
+
+% \begin{proof}
+% 	Por inducción en k.
+% 	\emph{\textbf{To be continued}}
+% \end{proof}
+

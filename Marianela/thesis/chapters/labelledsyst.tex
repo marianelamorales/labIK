@@ -1,0 +1,35 @@
+\chapter{Sistemas de pruebas etiquetados}
+
+Una vez que la semántica de los \emph{posibles mundos} se estableció como una base sólida para definir lógicas modales, surgió la idea de incorporar estas nociones en la teoría de la prueba de las lógicas modales. Fitch parece haber sido el primero en formalizarlo, directamente, incluyendo símbolos que representan mundos en el lenguaje de sus pruebas en deducción natural.
+
+Los sistemas de prueba etiquetados han sido propuestos por Gabbay \cite{gabbay1996} en los años 80 como un marco unificador a través de la teoría de prueba con el fin de proporcionar sistemas de prueba para una amplia gama de lógicas. Para las lógicas modales, un ejemplo de ello  son, los sistemas de deducción natural etiquetados y sistemas de secuentes etiquetados, tales como los introducidos por Simpson \cite{simpson1994}, Vigano \cite{vigano2013} y Negri \cite{negri2005}. Estos formalismos hacen uso explícito no sólo de las etiquetas, sino también de los átomos relacionales que se refieren a la relación de accesibilidad de un modelo de Kripke. En esta sección presentaremos el cálculo de secuentes de Negri para la lógica modal clásica.
+
+Los \emph{secuentes etiquetados} están formados por fórmulas etiquetadas de la forma $x \colon A$ y por átomos relacionales de la forma $x$R$y$, donde $x, y$ pertenecen a un conjunto de variables (llamados etiquetas) y $A$ es una fórmula modal. Un \emph{secuente etiquetado unilateral} es de la forma $\G \Rightarrow \Right$ donde $\G$ denota un conjunto de átomos relacionales y $\Right$ un conjunto de fórmulas etiquetadas.
+
+Un sistema de pruebas simple para la lógica modal clásica K puede ser obtenido a partir del siguiente formalismo como se ve en la siguiente figura:
+
+\vspace{3mm}
+
+\begin{figure}[h]
+	\begin{center}
+			$\vlinf{\id}{}{\G \Rightarrow \Right, x \colon a, x \colon \vls-a}{}$ \hspace{25mm}	
+			$\vlinf{\tolab}{}{\toprule}{}$
+		
+			
+			$\vliinf{\vlab}{}{\G \Rightarrow \Right, x :\vls(A.B)}{\vlabr}{\vlabu}$\hspace{9mm}
+			$\vlinf{\olab}{}{\G \Rightarrow \Right, x \colon \vls[A.B]}{\olabr}$
+			
+		\hspace{8mm}$\vlinf{\blab}{y$ fresh$}{\blabr}{\blabu}$ \hspace{9mm} $\vlinf{\dlab}{}{\dlabr}{\dlabu}$
+			
+
+	\end{center}
+	\caption{Sistema labK}
+\end{figure}
+
+\vspace{5mm}
+
+\begin{teo}(\cite{negri2005}) 
+	Una fórmula $A$ es demostrable en el cálculo labK si y sólo si $A$ es válida en cada frame.
+\end{teo}
+
+\newpage

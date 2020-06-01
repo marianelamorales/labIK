@@ -1,0 +1,137 @@
+\section{Corrección de $\labIKh$}
+
+Como se mencionó anteriormente, debemos mostrar que el sistema introducido tiene dos propiedades. Por un lado, es necesario demostrar que es un sistema completo (como se verá en el Capítulo~\ref{cap:completeness}, y por otro lado, debemos asegurar que es correcto. Esto último quiere decir que cada una de las reglas de secuentes que posee nuestro sistema $\labIKh$ es correcta. Formalmente:
+
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M$ satisface la premisa entonces $\M$ satisface la conclusión.}
+\end{center}
+
+Para poder demostrar la sentencia anterior, primero necesitamos introducir algunas definiciones y notación:
+
+\dfn{Sea $\M = \langle W, R, \le, V \rangle$ un modelo, una \emph{función de asignación} es una $\f : Labels \rightarrow W$, que a cada etiqueta ( en inglés label) le asigna un mundo en el modelo $\M$.
+%\raul{nunca definiste Labels. Introducir ese nombre cuando se introducen sistemas etiquetados por primera vez.}
+\dfn Sea $\M = \langle W, R, \le, V \rangle$ un modelo y sea $\G, \Left \Rightarrow \Right$ un secuente. Decimos que $\M \Vdash \G, \Left \Rightarrow \Right$ si existe una función de asignación $\f$ tal que:
+\medskip
+ Si se cumplen:
+\begin{enumerate}
+	\item Para todo $x \colon A \in \Left$ tenemos que $\M, f(x) \Vdash A$ (Notación: $\M \Vdash \Left$)
+	\item Para todo $xRy \in \G$ tenemos que $f(x)Rf(y)$ (Notación: $\M \Vdash \G$)
+	\item Para todo $x \le y \in \G$ tenemos que $f(x) \le f(y)$ (Notación: $\M \Vdash \G$)
+\end{enumerate}
+Entonces para todo $z \colon B \in \Right$ tenemos que $\M, f(z) \Vdash B$ (Notación: $\M \Vdash \Right$).
+Diremos que $\M \not \Vdash \G, \Left \Rightarrow \Right$ si no es cierto que $\M \Vdash \G, \Left \Rightarrow \Right$.}
+
+\medskip
+Siguiendo estas definiciones, en esta sección demostramos que todas las reglas presentadas en la Figura \ref{fig:labIKheart} son correctas. Como la prueba es similar para cada una de las reglas, demostramos la correctitud de algunas reglas particulares:
+
+
+\begin{itemize}
+\item {Regla $\svlef$}:
+
+Sea $\svlef$ la regla izquierda para la conjunción definida en la Figura~\ref{fig:labIKheart}:
+
+\begin{center}
+		$\vlinf{\svlef}{}{\G,\Left, x \colon \vls(A.B) \Rightarrow \Right}{\conjlef}$
+\end{center}
+
+Queremos ver que es correcta. Aplicando la definición, queremos ver que:
+
+\begin{center}
+\emph{Para todo modelo $\M$, si $\M \Vdash \conjlef$, entonces $\M \Vdash \G, \Left, x \colon A \vlan B \Rightarrow \Right$.}
+	
+\end{center}
+
+Para demostrar este enunciado lo hacemos a partir del uso de la contrarrecíproca, es decir queremos ver que si un existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left, x \colon \vls(A.B) \Rightarrow \Right$, entonces $\M_{0} \not \Vdash \conjlef$. Asumimos la primera parte de la implicación y tenemos que $\M_{0} \not \Vdash \G, \Left, x \colon \vls(A.B) \Rightarrow \Right$, es decir, por un lado tenemos que $\M_{0} \Vdash \G$, $\M_{0} \Vdash \Left$ y $\M_{0} \Vdash x \colon \vls(A.B)$, y por otro lado, $\M_{0} \not \Vdash \Right$. Como dijimos, en particular tenemos que $\M_{0} \Vdash x \colon \vls (A.B)$.  Por definición, obtenemos que $\M_{0} \Vdash x \colon A$ y $\M_{0} \Vdash x \colon B$. Finalmente, concluimos que, por un lado: $\M_{0} \Vdash \G$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \colon A$ y $\M_{0} \Vdash x \colon B$ y por otro lado, $\M_{0} \not \Vdash \Right$, que es lo mismo que $\M_{0} \not \Vdash \conjlef $. Por lo tanto, la regla $\svlef$ del sistema $\labIKh$ es correcta.
+
+
+\item {Regla $\sorig$}:
+
+Sea la regla $\sorig$ propuesta para el sistema $\labIKh$ la siguiente:
+
+\begin{center}
+	$\vlinf{\sorig}{}{\G, \Left \Rightarrow \Right, x \colon \vls[A.B]}{\G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B}$
+\end{center}
+
+Queremos ver la correctitud de esta regla. Más precisamente, queremos ver que:
+
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M \Vdash \G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B$, entonces $\M \Vdash \G, \Left \Rightarrow \Right, x \colon A \vlor B$.}
+\end{center}
+
+Para esta prueba utilizamos la contrarrecíproca, es decir, deseamos ver que, si existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left \Rightarrow \Right, x \colon \vls[A.B]$, entonces $\M_{0} \not \Vdash \G, \Left \Rightarrow \Right, x   \colon   A, x   \colon   B$. Asumimos entonces que $\M_{0} \not \Vdash \G, \Left \Rightarrow \Right, x \colon \vls[A.B]$, es decir, tenemos que por un lado $\M_{0} \Vdash \G$ y $\M_{0} \Vdash \Left$, y por otro, $\M_{0} \not \Vdash \Right$ y $\M_{0} \not \Vdash x \colon \vls[A.B]$. Por definición de $\Vdash$ para $\M_{0} \not \Vdash x \colon \vls[A.B]$ tenemos que $\M_{0} \not \Vdash A$ y $\M_{0} \not \Vdash B$. Por lo tanto, vimos por un lado que $\M_{0} \Vdash \G$ y $\M_{0} \Vdash \Left$, y por otro lado, vimos que $\M_{0} \not \Vdash \Right$, $\M_{0} \not \Vdash x \colon A$ y $\M_{0} \not \Vdash x \colon B$. Estas observaciones pueden reescribirse de la siguiente forma: $\M_{0} \not \Vdash \G, \Left \Rightarrow \Right, x \colon A, x \colon B$. Luego, queda demostrado que la regla $\sorig$ es correcta.
+
+
+\item{Regla $\sbr$}:
+
+La regla presentada en la Figura \ref{fig:labIKheart} para $\sbr$ es la siguiente:
+
+\begin{center}
+$\vlinf{\sbr}{}{\G, \Left \Rightarrow \Right, x \colon \square A}{\G, \Left, x \le y, yRz \Rightarrow \Right, x \colon \square A, z \colon A}$
+\end{center}
+
+Queremos saber si esta regla es correcta. Utilizando la definición de corrección que vimos anteriormente queremos ver que:
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M \Vdash \G, \Left, x \le y, yRz \Rightarrow \Right, x \colon \square A, z \colon A$, entonces $\M \Vdash \G, \Left \Rightarrow \Right, x \colon \square A.$}
+\end{center}
+ 
+Asumimos que existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left \Rightarrow \Right, x \colon \square A$ y queremos ver que $\M_{0} \not \Vdash \G, \Left, x \le y, y$R$z \Rightarrow \Right, x \colon \square A, z \colon A$. De nuestra hipótesis obtenemos que $\M_{0} \Vdash \G$ y $\M_{0} \Vdash \Left$, y también que $\M_{0} \not \Vdash \Right$ y $\M_{0} \not \Vdash x: \square A$. Por definición de $\M_{0},x \not \Vdash \square A $ tenemos que existen mundos $y, z$ pertenecientes a $\M_{0}$, tal que $x \le y$, $yRz$ donde $\M_{0}\not \Vdash z \colon A$. Por lo tanto, $\M_{0} \not \Vdash \G, \Left, x \le y, yRz \Rightarrow \Right, x \colon \square A, z \colon A$. Finalmente, utilizando la contrarrecíproca queda demostrado que la regla $\sbr$ es correcta. 
+
+
+\item {Regla $\sdr$}:
+
+La regla presentada en la Figura \ref{fig:labIKheart} para $\sdr$ es la siguiente:
+
+\begin{center}
+	$\vlinf{\sdr}{}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A}{\G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A}$
+\end{center}
+
+Al igual que como se demostró para $\sbr$, queremos saber si la regla $\sdr$ es correcta. Para ello, volvemos a utilizar la definición de corrección para esta regla en cuestión. Es decir, correctitud para la regla derecha del diamante $\sdr$ es:
+
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M \Vdash \G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A$, entonces $\M \Vdash \G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A$.}
+\end{center}
+
+Utilizando la contrarrecíproca a la definición planteada, asumimos que existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A$ y queremos ver que $\M_{0} \not \Vdash \G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A$. Desglosando nuestra hipótesis tenemos que $\M_{0} \Vdash \G$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash xRy$, $\M_{0} \not \Vdash \Right$ y $ \M_{0} \not \Vdash x: \Diamond A$. Por definición de $\M_{0} \not \Vdash x: \Diamond A$ tenemos que para todo mundo $y$ en $\M_{0}$ donde $xRy$, $\M_{0} \not \Vdash y \colon A$. Por lo tanto, podemos concluir que $\M_{0} \not \Vdash \G, \Left, xRy \Rightarrow \Right, x \colon \Diamond A, y \colon A$.
+
+\item {Regla $\sdl$}:
+
+La regla presentada en la Figura \ref{fig:labIKheart} para la regla del diamante izquierda (denotada con $\sdl$) es la siguiente:
+
+ \begin{center}  
+$\vlinf{\sdl}{}{\G, \Left, x: \Diamond A \Rightarrow \Right}{\G, \Left, x$R$y,  y \colon A \Rightarrow \Right}$
+\end{center}
+
+
+Siguiendo el mismo criterio que venimos utilizando para las reglas anteriores para la prueba de corrección, definimos corrección para $\sdl$:
+
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M \Vdash \G, \Left, xRy,  y \colon A \Rightarrow \Right$, entonces $\M \Vdash \G, \Left, x: \Diamond A \Rightarrow \Right$.}
+\end{center}
+
+Para probar este enunciado, utilizamos la contrarrecíproca: asumimos que existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left, x: \Diamond A \Rightarrow \Right$, y queremos ver que $\M_{0} \not \Vdash \G, \Left, xRy,  y \colon A$. De $\M_{0} \not \Vdash \G, \Left, x: \Diamond A \Rightarrow \Right$ tenemos que $\M_{0} \Vdash \G$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \colon \Diamond A$ y $\M_{0} \not \Vdash \Right$. Por $\M_{0}, x \Vdash \Diamond A$ sabemos que existe un mundo $y$ en $\M_{0}$ tal que $xRy$ y $\M_{0}, y \Vdash A$. Por lo tanto, $\M_{0} \not \Vdash \G, \Left, xRy,  y \colon A \Rightarrow \Right$.
+
+\item {Regla $\sbl$}:
+
+La regla para $\sbl$ presentada en nuestro sistema $\labIKh$ es la siguiente:
+
+\begin{center}
+	$\vlinf{\sbl}{}{\G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right}{\G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right}$
+\end{center}
+
+Queremos ver que esta regla es correcta. Para ello, así como hicimos con las reglas anteriores, lo que queremos demostrar es:
+
+\begin{center}
+	\emph{Para todo modelo $\M$, si $\M \Vdash \G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$, entonces $\M \Vdash \G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$.}
+\end{center}
+
+La prueba de este enunciado la hacemos a partir del uso de la contrarrecíproca, es decir, lo que queremos ver es que si existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash conclusion$, entonces $\M_{0} \not \Vdash premisa$. Más particularmente para nuestra regla: si existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$, entonces $\M_{0} \not \Vdash \G,\Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+
+Asumimos entonces que existe un modelo $\M_{0}$ tal que $\M_{0} \not \Vdash \G, \Left, x \le y, yRz, x \colon \square A \Rightarrow \Right$, es decir $\M_{0} \Vdash \G$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash x \le y$, $ \M_{0} \Vdash yRz$, $\M_{0} \Vdash x\colon \square A$ y  $\M_{0} \not \Vdash \Right$. Por lo tanto, en particular de $\M_{0} \Vdash \square A$ tenemos que para todo mundo $y, z$ tal que $x \le y$ y $yRz$, $\M_{0}, f(z) \Vdash A$, o lo que es lo mismo $\M_{0} \Vdash z \colon A$. Finalmente obtenemos que $\M_{0} \not \Vdash \G, \Left, x \le y, yRz, x \colon \square A, z \colon A \Rightarrow \Right$.
+
+\end{itemize}
+
+La corrección del resto de las reglas puede demostrarse de manera similar. De esta forma podemos concluir:
+
+\begin{teo} El sistema $\labIKh$ es correcto.\end{teo}
+
+Las siguientes secciones serán dedicadas a demostrar la otra propiedad que buscamos, es decir, que el sistema $\labIKh$ es completo.

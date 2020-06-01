@@ -1,0 +1,516 @@
+\chapter{Completitud}
+\label{cap:completeness}
+%En esta sección demostramos completitud con respecto al sistema de Hilbert utilizando nuestro sistema de prueba etiquetado \textbf{labIK$\heartsuit$}.
+Como se mencionó en el capítulo previo, necesitamos demostrar una propiedad importante de nuestro sistema que llamamos completitud. Intuitivamente, esta propiedad indica que nuestro sistema posee todo aquello que es necesario para demostrar las verdades de la lógica que caracteriza.
+
+En esta tesis, para la demostración de completitud de $\labIKh$ seguiremos dos estrategias. La primera consiste en demostrar que con las reglas de $\labIKh$ podemos obtener todos los axiomas y reglas del sistema $\IK$. Dado que $\IK$ ya es completo, obtenemos la completitud de nuestro sistema. Por otro lado, demostraremos que nuestro sistema permite simular todas las reglas del sistema propuesto por Simpson \cite{simpson1994} que también es completo. Esta última estrategia además nos permite eliminar la regla de $\mathsf{cut}$. Veremos esto en mayor detalle en el Capítulo \ref{cap:future}.
+
+En este capítulo seguiremos la primer estrategia, es decir, realizamos una demostración sintáctica en la cual las reglas de nuestro sistema son suficientes para la prueba de cada uno de los axiomas que necesitamos probar.
+
+\begin{teo} Cada teorema de la lógica $\IK$ es demostrable en $\labIKh$.
+\end{teo}
+\emph{Demostración}. Como se dijo anteriormente, nuestra demostración demuestra completitud con respecto del sistema a la Hilbert. Para esta prueba necesitamos:
+\begin{enumerate}
+	\item Probar las variantes $\kaxiom_{1}$, ..., $\kaxiom_{5}$ del axioma de distributividad $\kaxiom$ presentados en el Capítulo \ref{cap:logintuicionista}.
+	\item Demostrar todos los axiomas de la lógica modal proposicional.
+	\item Simular modus ponens.
+	\item Simular necesitación.
+\end{enumerate}
+
+Para llevar a cabo todo lo anterior, realizaremos nuestras demostraciones a partir del uso de las reglas de nuestro sistema $\labIKh$. De esta manera, como el sistema \emph{a la Hilbert} es completo, obtenemos completitud de nuestro sistema.
+
+En primer lugar, veremos que los axiomas $\kaxiom_{1}$, ..., $\kaxiom_{5}$ se pueden demostrar en el sistema $\labIKh$ como se muestra a continuación:
+
+\section{Axiomas modales}
+
+\begin{lemma}
+	Los axiomas $\kaxiom_{1}$, ..., $\kaxiom_{5}$ son demostrables en $\labIKh$
+\end{lemma}
+
+\paragraph{Axioma $\kaxiom_{1}$}
+\kone
+
+
+\paragraph{Axioma $\kaxiom_{2}$}
+	\ktwo
+
+
+\paragraph{Axioma $\kaxiom_{3}$}
+
+\begin{center}
+
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon \Diamond (\vls[A.B]) \vljm (\vls[\Diamond A. \Diamond B ])}
+		{\vlin {\sdl}
+			{}
+			{x \le y, y \colon \Diamond (\vls[A.B]) \Rightarrow y \colon \vls[\Diamond A. \Diamond B] }
+			{\vliin{\solef}{}{x \le y, yRz, z \colon \vls[A.B] \Rightarrow y \colon \vls[\Diamond A. \Diamond B]}{\vlhy{\circledast \hspace{40mm}}}{\vlhy{\star}}}}
+	}$
+	
+	\bigskip
+	
+\end{center}
+
+	Luego de aplicar la regla de disjunción para el lado izquierdo, nuestra derivación continúa con dos premisas. Por un lado tenemos la premisa que se sigue de $\circledast$:
+	
+	\bigskip
+	\begin{center}
+	$\vlderivation{\vlin{\solef}{}{\circledast}{\vlin {\sorig}
+			{}
+			{x \le y, yRz, z \colon A \Rightarrow y \colon \vls[\Diamond A. \Diamond B]}
+			{\vlin {\sdr}
+				{}
+				{x \le y, yRz, z \colon A \Rightarrow y \colon \Diamond A, y \colon \Diamond B}
+				{\vlin {\refl}
+					{}
+					{x \le y, yRz, z \colon A \Rightarrow y \colon \Diamond A, z \colon A, y \colon \Diamond B}
+					{\vlin {\ids}
+						{}
+						{x \le y, z \le z, yRz, z \colon A \Rightarrow y \colon \Diamond A, z \colon A, y \colon \Diamond B}
+						{\vlhy {}}}}}}}$
+	\end{center}	
+		Y por otra parte, tenemos la derivación que continua a partir de $\star$:
+		
+		\begin{center}
+	$\vlderivation{\vlin {\solef}
+	{}
+	{\star}
+	{\vlin {\sorig}
+		{}
+		{x \le y, yRz, z \colon B \Rightarrow y \colon \vls[\Diamond A. \Diamond B]}
+		{\vlin {\sdr}
+			{}
+			{x \le y, yRz, z \colon B \Rightarrow y \colon \Diamond A, y \colon \Diamond B}
+			{\vlin {\refl}
+				{}
+				{x \le y, yRz, z \colon B \Rightarrow y \colon \Diamond A, y \colon \Diamond B, z \colon B}
+				{\vlin {\ids}
+					{}
+					{x \le y, z \le z, yRz, z \colon B \Rightarrow y \colon \Diamond A, y \colon \Diamond B, z \colon B}
+					{\vlhy {}}}}}}}$
+\end{center}
+
+\paragraph{Axioma $\kaxiom_{4}$}
+	\kfour
+
+
+\paragraph{Axioma $\kaxiom_{5}$}
+
+\begin{center}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon \Diamond \bot \vljm \bot}
+		{\vlin {\sdl}
+			{}
+			{x \le y, y \colon \Diamond \bot \Rightarrow y \colon \bot}
+			{\vlin {\sbot}
+				{}
+				{x \le y, yRz, z \colon \bot \Rightarrow y \colon \bot}
+				{\vlhy {}}}}
+	}$
+	
+\end{center}
+
+\vspace{4mm}
+
+\section{Axiomas proposicionales intuicionistas}
+Para continuar con esta demostración, también debemos ver que todos los axiomas de la lógica proposicional intuicionista son demostrables en $\labIKh$. A continuación se puede observar una demostración para cada uno de los axiomas que fueron introducidos en el Capítulo 3. Continuamos con un método sintáctico de prueba en el que utilizamos las reglas de nuestro sistema.
+
+\begin{lemma}
+	Los axiomas la lógica proposicional intuicionista son demostrables en $\labIKh$.
+\end{lemma}
+
+
+\begin{center}
+	\textbf{THEN-1}
+	
+	$\vlderivation{
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon A \vljm (B \vljm A)}
+		{\vlin {\sir}
+			{}
+			{x \le y, y \colon A \Rightarrow y\colon B \vljm A}
+			{\vlin {\ids}
+				{}
+				{x \le y, y \le z, y \colon A, z \colon B \Rightarrow z \colon A}
+				{\vlhy {}}}}
+	}$
+	
+\end{center}
+
+
+\bigskip
+
+\begin{center}
+	\textbf{AND-1}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon \vls(A.B) \vljm A}
+		{\vlin {\svlef}
+			{}
+			{x \le y, y \colon \vls(A.B) \Rightarrow y \colon A}
+			{\vlin {\refl}
+				{}
+				{x \le y, y \colon A, y \colon B \Rightarrow y \colon A}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le y, y \colon A, y \colon B \Rightarrow y \colon A}
+					{\vlhy {}}}}}
+	}$
+\end{center}
+
+\bigskip
+
+\begin{center}
+	\textbf{AND-2}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon \vls(A.B) \vljm B}
+		{\vlin {\svlef}
+			{}
+			{x \le y, y \colon \vls(A.B) \Rightarrow y \colon B}
+			{\vlin {\refl}
+				{}
+				{x \le y, y \colon A, y \colon B \Rightarrow y \colon B}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le y, y \colon A, y \colon B \Rightarrow y \colon B}
+					{\vlhy {}}}}}
+	}$
+\end{center}
+
+\bigskip
+
+\begin{center}
+	\textbf{AND-3}
+	
+	$\vlderivation{
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon A \vljm (B \vljm (\vls(A.B)))}
+		{\vlin {\sir}
+			{}
+			{x \le y, y \colon A \Rightarrow y \colon B \vljm (\vls(A.B))}
+			{\vliin {\svrig}
+				{}
+				{x \le y, y \le z, y \colon A, z \colon B \Rightarrow z \colon \vls(A.B)}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le z, y \colon A, z \colon B \Rightarrow z \colon A}
+					{\vlhy {}}}
+				{\vlin {\refl}
+					{}
+					{x \le y, y \le z, y \colon A, z \colon B \Rightarrow z \colon B}
+					{\vlin {\ids}
+						{}
+						{x \le y, y \le z, z \le z, y \colon A, z \colon B \Rightarrow z \colon B}
+						{\vlhy {}}}}}}
+	}$
+	
+\end{center}
+
+\bigskip
+
+\begin{center}
+	\textbf{OR-1}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon A \vljm \vls[A.B]}
+		{\vlin {\sorig}
+			{}
+			{x \le y, y \colon A \Rightarrow y \colon \vls[A.B]}
+			{\vlin {\refl}
+				{}
+				{x \le y, y \colon A \Rightarrow y \colon A, y \colon B}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le y, y \colon A \Rightarrow y \colon A, y \colon B}
+					{\vlhy {}}}}}
+	}$
+	
+\end{center}
+
+\bigskip
+
+\begin{center}
+	\textbf{OR-2}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon B \vljm \vls[A.B]}
+		{\vlin {\sorig}
+			{}
+			{x \le y, y \colon B \Rightarrow y \colon \vls[A.B]}
+			{\vlin {\refl}
+				{}
+				{x \le y, y \colon B \Rightarrow y \colon A, y \colon B}
+				{\vlin {\ids}
+					{}
+					{x \le y, y \le y, y \colon B \Rightarrow y \colon A, y \colon B}
+					{\vlhy {}}}}}
+	}$
+	
+\end{center}
+
+
+\bigskip
+
+\begin{center}
+	\textbf{OR-3}
+\end{center}
+\orthree
+
+\bigskip
+
+\begin{center}
+	\textbf{FALSE}
+	
+	$\vlderivation {
+		\vlin{\sir}
+		{}
+		{\Rightarrow x \colon \bot \vljm A}
+		{\vlin {\sbot}
+			{}
+			{x \le y, y \colon \bot \Rightarrow y \colon A}
+			{\vlhy {}}}
+	}$
+	
+\end{center}
+
+\vspace{3mm}
+
+\begin{center}
+	\textbf{THEN-2}
+\end{center}
+\thentwo
+
+
+\vspace{3mm}
+
+\section{Simulando Modus Ponens}
+Una vez concluida esta demostración para cada uno de los axiomas de la lógica proposicional intuicionista, seguimos adelante con el resto de nuestra demostración para poder probar la completitud de nuestro sistema $\labIKh$. Para ello, continuamos mostrando que podemos simular de modus ponens utilizando \emph{la regla de cut} donde $\mathsf{cut}$ es:
+
+\begin{center}
+	
+	$\vliinf{\mathsf{cut}}{}{\Gone, \Gtwo, \Left \Rightarrow \Right}{\Gone, \Left \Rightarrow \Right, z \colon C}{\Gtwo, \Left, z \colon C \Rightarrow \Right}$
+	
+\end{center}
+
+Es así que utilizando $\mathsf{cut}$ vemos que la regla de modus ponens $\vliinf{}{}{B}{A}{A \vljm B}$ es simulada de la siguiente manera:
+
+\vspace{3mm}
+
+
+\begin{center}
+		
+		$\vlderivation {
+			\vliin{\cut}
+			{}
+			{\Rightarrow x \colon B}
+			{\vlin {w}
+				{}
+				{\Rightarrow x \colon A, x \colon B}
+				{\vlhy {\Rightarrow x \colon A}}}
+			{\vliin {\mathsf{cut}}
+				{}
+				{x \colon A \Rightarrow x \colon B}
+				{\vlhy{\circledast}}
+				{\vlhy{\star}}}
+		}$
+\end{center}
+
+\bigskip
+	
+	Hemos representado con $\circledast$ y $\star$ la continuación de esta derivación en donde de $\circledast$ se sigue:
+	
+	\bigskip
+	
+	\begin{center}
+	$\vlderivation{\vlin{\mathsf{cut}}{}{\circledast}{\vlin {\mathsf{w}}
+			{}
+			{x \colon A \Rightarrow x \colon B, x \colon A \vljm B}
+			{\vlhy {\Rightarrow x \colon A \vljm B}}}}$
+	
+\end{center}
+
+Mientras que de $\star$ se obtiene:
+
+\begin{center}
+	$\vlderivation{\vlin{\mathsf{cut}}{}{\star}{\vlin {\refl}
+			{}
+			{x \colon A, x \colon A \vljm B \Rightarrow x \colon B}
+			{\vliin {\sil}
+				{}
+				{x \le x, x \colon A, x \colon A \vljm B \Rightarrow x \colon B}
+				{\vlin {\ids}
+					{}
+					{x \le x, x \colon A, x \colon A \vljm B \Rightarrow x \colon B, x \colon A}
+					{\vlhy {}}}
+				{\vlin {\ids}
+					{}
+					{x \le x, x \colon A, x \colon A \vljm B, x \colon B \Rightarrow x \colon B}
+					{\vlhy {}}}}}}$
+\end{center}
+
+Finalmente, queda demostrado que pudimos simular la regla de modus ponens a partir del uso de las reglas de secuentes que conforman el sistema $\labIKh$ y de la regla de $\mathsf{cut}$.
+
+\section{Simulando Necesitación}
+
+Una vez demostrado que podemos simular modus ponens utilizando la regla cut y las reglas de nuestro sistema, nos resta ver que podemos simular la regla de necesitación donde \emph{necesitación} es: Si existe una prueba de $A$, entonces existe una prueba de $\square A$.
+
+En otras palabras, queremos probar que:
+
+\begin{lemma}
+	Si existe una prueba de $\vlderivation {\vlpd{\Done}{}{\Rightarrow z \colon A}}$ entonces existe una prueba de $\vlderivation { \vlpd{\Dtwo}{}{\Rightarrow x \colon \square A}}$.
+\end{lemma}
+
+\begin{proof}
+	
+	Podemos mostrar que:
+
+		
+		Si $\vlderivation {\vlpd {\mathcal{D}_{1}}{}{\Rightarrow z \colon A}}$ \hspace{4mm} entonces tenemos que \hspace{4mm} $\vlderivation{\vlin{\sbr}{}{\Rightarrow x \colon \square A}{\vlpd {\Dwone}{}{x \le y, yRz \Rightarrow z \colon A}}}$
+		
+
+	\bigskip
+
+		     donde llamaremos $\Dtwo$ a lo siguiente: $\Dtwo = \vlderivation {\vlpd {\Dwone}{}{x \le y, yRz \Rightarrow z \colon A}}$ 
+	\bigskip
+		
+Luego, utilizando la regla de debilitamiento (o en inglés \emph{weakening}) tenemos que: 
+
+\bigskip
+\begin{center}
+	$\vlderivation{\vlin{\sbr}{}{\Rightarrow x \colon \square A}{\vlin{\mathsf{w}}{}{x \le y, yRz \Rightarrow z \colon A}{\vlhy{ \Rightarrow z \colon A}}}}$
+\end{center}
+
+
+	
+\end{proof}
+
+A continuación veremos la demostración de otros lemas que nos permitieron realizar las distintas demostraciones de las reglas para probar completitud.
+
+En el Lema \ref{lemaw} demostramos la admisibilidad de la regla de debilitamiento o \emph{weakening} que fue ya utilizada para simular la regla de necesitación.
+
+\begin{lemma}
+	\label{lemaw}
+	Si existe una prueba $\vlderivation {\vlpd{\D}{}{\G, \Left \Rightarrow \Right}}$ entonces existe una prueba \break $\vlderivation {\vlpd {\Dw}{}{\G, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}}$
+	
+\end{lemma}
+
+\vspace{3mm}
+
+\begin{proof}
+	Por induccion en la altura de $\D$.
+	
+	Para una prueba de altura 1:
+	
+	Si $\D$ = $\vlderivation {\vlin{\ids}{}{\G, \Left, x \le y, x \colon a \Rightarrow \Right, y \colon a}{\vlhy {}}}$ entonces tenemos que:
+	
+		\hspace{40mm}$\Dw$ = $\vlderivation {\vlin{\ids}{}{\G, \Left, x \le y, x$R$y, u \le v, x \colon a, z \colon A \Rightarrow \Right, w \colon B, y \colon a}{\vlhy {}}}$.
+		
+	\vspace{3mm}
+	
+	Para una prueba en la altura de $\D$ mayor a 1:
+	
+	\begin{center}
+		
+		$\vlderivation{\vlin {$r$}{}{\G, \Left \Rightarrow \Right}{\vlpd {\Done}{}{\G', \Left' \Rightarrow \Right'}}}$
+		
+	\end{center}
+	
+	Luego, por hipótesis inductiva existe una prueba
+	\begin{center}
+		
+		$\vlderivation {\vlpd {\Dwone}{}{\G', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}$
+		
+	\end{center}
+	
+	Por lo tanto, tenemos la prueba
+	
+	\begin{center}
+		
+		$\Dw = \vlderivation {\vlin{}{}{\G, xRy, u \le v, \Left, z \colon A \Rightarrow \Right, w \colon B}{\vlpd {\Dwone}{}{\G', xRy, u \le v, \Left', z \colon A \Rightarrow \Right', w \colon B}}}$
+		
+	\end{center}
+	
+\end{proof}
+
+A lo largo de nuestras pruebas sintácticas, hemos utilizado la regla de identidad para las fórmulas. Ya que $\labIKh$ presenta únicamente la regla de identidad para átomos, en el siguiente lema vemos la admisibilidad de la regla para el caso general en nuestro sistema. 
+
+\begin{lemma}
+	La siguiente regla es admisible en $\labIKh$:
+	
+	\begin{center}
+		
+		$\vlderivation {\vlin{\idg}{}{\G, x \le y,  \Left, x \colon A \Rightarrow \Right, y \colon A }{\vlhy {}}}$
+		
+	\end{center}
+	
+\end{lemma}
+
+\vspace{3mm}
+
+\begin{proof}  Por inducción en el tamaño de $A$.
+	
+	\begin{itemize}
+		\item{$A=a$}: 
+		
+		Tenemos que la regla $\vlderivation {\vlin{\idg}{}{\G, x \le y,  \Left, x \colon a \Rightarrow \Right, y \colon a }{\vlhy {}}}$ es la misma regla que forma parte del sistema $\labIKh$:  $\vlderivation {\vlin{\ids}{}{\G, x \le y,  \Left, x \colon a \Rightarrow \Right, y \colon a }{\vlhy {}}}$ 
+		
+		\item{$A= \vls(A.B)$:}
+		
+		\begin{center}
+			$\vlderivation{\vliin{\svrig}{}{\G, x \le y, x\colon \vls(A.B), \Left \Rightarrow \Right, y \colon \vls(A.B)}{\vlin{\svlef}{}{\G, x \le y, x\colon \vls(A.B), \Left \Rightarrow \Right, y \colon A}{\vlin {}{}{\G, x \le y, x\colon A,x \colon B, \Left \Rightarrow \Right, y \colon A}{\vlhy {$Por hipótesis inductiva, tamaño($A$)$\le n$$}}}}{\vlin{\svlef}{}{\G, x \le y, x\colon \vls(A.B), \Left \Rightarrow \Right, y \colon B}{\vlin {}{}{\G, x \le y, x\colon A,x \colon B, \Left \Rightarrow \Right, y \colon B}{\vlhy {$Por hipótesis inductiva, tamaño($B$)$\le n}}}}}$
+		\end{center}
+		\item{$A = \vls[A.B]$:}
+		\begin{center}
+			$\vlderivation { \vlin{\sorig}{}{\G, x\le y, x \colon \vls[A.B], \Left \Rightarrow \Right, y \colon \vls[A.B]}{\vliin {\solef}{}{\G, x\le y, x \colon \vls[A.B], \Left \Rightarrow \Right, y \colon A, y \colon B}{\vlin {}{}{\G, x\le y, x \colon A, \Left \Rightarrow \Right, y \colon A, y \colon B}{\vlhy {$Por hipótesis inductiva, tamaño($A$)$ \le n}}}{\vlin {}{}{\G, x\le y, x \colon B, \Left \Rightarrow \Right, y \colon A, y \colon B}{\vlhy {$Por hipótesis inductiva, tamaño($B$)$\le n}}}}}$
+		\end{center}
+		\item{$A = \square A$}
+		\begin{center}
+			$\vlderivation {\vlin {\sbr}
+				{}
+				{\G, x \le y, \Left, x \colon \square A \Rightarrow \Right, y \colon \square A}{\vlin {\sbl}
+					{}
+					{\G,\Left, x \le y, x \le z, zRw, x \colon \square A \Rightarrow \Right, w \colon A }
+					{\vlin {\refl}
+						{}
+						{\G,\Left, x \le y, x \le z, zRw, x \colon \square A, w \colon A \Rightarrow \Right, w \colon A }
+						{\vlin {}
+							{}
+							{\G,\Left, x \le y, x \le z, w \le w, zRw, x \colon \square A, w \colon A \Rightarrow \Right, w \colon A }
+							{\vlhy {$Por hipótesis inductiva, tamaño($A$)$\le n}}}}}}$
+		\end{center}
+		\item{$A= \Diamond A$}
+		\begin{center}
+			$\vlderivation{\vlin {\sdl}
+				{}
+				{\G, \Left, x \le y, x \colon \Diamond A \Rightarrow \Right, y \colon \Diamond A}
+				{\vlin {\ftwo}
+					{}
+					{\G, \Left, x \le y, xRz, z \colon A \Rightarrow \Right, y \colon \Diamond A}
+					{\vlin {\sdr}
+						{}
+						{\G, \Left, x \le y, z \le u, xRz, yRu, z \colon A \Rightarrow \Right, y \colon \Diamond A}
+						{\vlin {}
+							{}
+							{\G, \Left, x \le y, z \le u, xRz, yRu, z \colon A \Rightarrow \Right, y \colon \Diamond A, u \colon A}
+							{\vlhy {$Por hipótesis inductiva, tamaño($B$)$\le n}}}}}}$
+		\end{center}
+	\end{itemize}
+\end{proof}
+
+%\input{chapters/simpson}

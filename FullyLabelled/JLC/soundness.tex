@@ -1,0 +1,189 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness}\label{sec:soundness}
+
+In order to prove the implication \ref{iii}$\implies$\ref{iv} from
+Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule
+of our system $\labIKp$ is sound. To make precise what that actually
+means, we have to extend the relation $\Vdash$, defined in
+Section~\ref{sec:intmod} from formulas to sequents. This is the
+purpose of the following definitions.
+
+\begin{definition}\label{def:force-seq}
+	Let $\M = \langle W, \rel_\M, \le_\M, V \rangle$ be a model, and let
+	$\SG$ be the sequent $\lseq\B\Left\Right$. 
+%	\sonia{$\mathcal G$ usually denotes only the relational context. using it for the whole sequent is confusing. this concept is called $\mathcal G$-interpretation as it is a graph homomorphism from the graph described by $\mathcal G$ to the model.}
+	A \emph{$\SG$-interpretation
+		in $\M$} is a mapping $\inter{\cdot}$ from the labels in $\SG$ to the set $W$ of worlds in $\M$, such that whenever $\accs xy$ in $\B$, then $\inter x\rel_\M\inter y$, and whenever $\futs xy$ in $\B$, then $\inter x\le_\M\inter y$. Now we can define 
+	\begin{equation}
+	\M,\inter\cdot\Vdash\SG\qquad\mbox{iff}\qquad
+	\parbox{20em}{if for all $\labels{x}{A} \in \Gamma$, we have $\M, \inter x \Vdash \fm A$, then there exists $\labels{z}{B} \in \Delta$ such that $\M, \inter z \Vdash \fm B$.}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def:valid-seq}
+	A sequent $\SG$ is \emph{satisfied} in $\M = \langle W, \rel, \le, V
+	\rangle$ iff for all $\SG$-interpretations $\inter\cdot$ we have
+	$\M,\inter\cdot\Vdash\SG$.
+	%%
+	A sequent $\SG$ is \emph{valid} in a frame $\F = \langle W, \rel,
+	\le \rangle$, if for all valuations $V$, the sequent $\SG$ is
+	satisfied in $\langle W, R, \le, V \rangle$.
+\end{definition}
+
+We are now ready to state the main theorem of this section, of which
+the implication \ref{iii}$\implies$\ref{iv} in
+Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
+
+\begin{theorem}\label{thm:soundness}
+	If a sequent $\SG$ is provable in $\labIKp$, then it is valid in every birelational frame.
+\end{theorem}
+
+\begin{proof}
+	We proceed by induction on the height of the derivation of $\SG$, and we show for all rules in $\labIKp$
+	$$
+	\vliiinf{\labrn{r}}{}{\SG}{\SGi1}{\cdots}{\SGi n}
+	$$ for $n\in\{0,1,2\}$, that whenever $\SGi1,\ldots,\SGi n$ are
+	valid in all birelational frame, then so is $\SG$. It follows a case analysis on $\rn r$:
+	\begin{itemize}
+		\item $\rlabrn\bot$: This is trivial because $\bot$ is never forced.
+		\item $\rn{id}$: This follows immediately from Proposition~\ref{prop:mon-adm}.
+		\item $\llabrn\BOX$: By way of contradiction, assume that $\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+		is valid in all birelational frames, but $\B, \futs xy,	\accs yz,\Left, \labels{x}{\BOX A} \SEQ \Right$ is not. This means that
+		we have a model $\M$ and an interpretation $\inter\cdot$, such
+		that $\M,\inter\cdot\not\Vdash\B, \futs xy, \accs yz, \Left,	\labels{x}{\BOX A} \SEQ \Right$, i.e., $\inter x\le_\M\inter y$
+		and $\inter y\rel_\M\inter z$ and $\cforce \M x{\BOX A}$ and
+		$\cnforce \M wB$ for all $\labels wB\in\Right$. However, by the
+		definition of forcing in~\eqref{eq:kripke} we also have $\cforce
+		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+			\Right}$. Contradiction.
+%		\todo{The reasoning by contradiction is not necessary. Could be rewritten more lightly as follows:}
+%			%
+%			Assume that $\B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+%			is valid in all birelational frames. 
+%			Consider a model $\M$ and an interpretation $\inter\cdot$ of the conclusion sequent
+%			$\B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$ into $\M$, such
+%			that for all $\labels{z}{C} \in \Gamma$ we have $\M, \inter z \Vdash \fm C$
+%			and $\cforce \M x{\BOX A}$. %and $\cnforce \M wB$ for all $\labels wB\in\Right$. However, 
+%			Hence, as $\inter x\le_\M\inter y$ and $\inter y\rel_\M\inter z$, 
+%			by the definition of forcing in~\eqref{eq:kripke} we also have $\cforce \M zA$, and 
+%			consequently $\cforce \M wB$ for all $\labels wB\in\Right$. 
+%			Thus, $\cforce \M{\inter\cdot}{\B, \Left, \futs
+%				xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+%				\Right}$. \todo{should we rewrite the whole proof?}\lutz{no. we do by contradiction. I'll explainon skype.}
+			
+		\item $\rlabrn\BOX$: By way of contradiction, assume that $\B, \futs xy,
+		\accs yz, \Left \SEQ \Right, \labels{z}{A}$ is valid in all
+		birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{\BOX
+			A}$ is not, where $\lb y$ and $\lb z$ do not occur in $\B$ or
+		$\Left$ or $\Right$.
+		This means that we have a model $\M$ and an
+		interpretation $\inter\cdot$, such that
+		$\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}$. 
+%		Namely, for all $\labels{w}{C}$ in $\Gamma$, $\M, \inter w \Vdash \fm C$, but
+%		for all $\labels{z}{B}$ in $\Delta$, $\nforce {\M }{\inter z}{ \fm B}$.
+		So in particular, there are worlds $\lb{y'}$ and $\lb{z'}$
+		in $\M$ such that $\inter x\le_\M \lb{y'}$ and
+		$\lb{y'}\rel_\M\lb{z'}$ and $\nforce\M{\lb{z'}}{\fm A}$. 
+		%
+		Now we let
+		$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter
+		y'=\lb{y'}$ and $\inter z'=\lb{z'}$ and $\inter\cdot'=\inter\cdot$
+		on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy,
+			\accs yz, \Left \SEQ \Right, \labels{z}{A}}$. Contradiction.
+		
+		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. So there exists a world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now we let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
+		
+		\item $\llabrn\DIA$: By way of contradiction, assume that $\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ is valid in all birelational frames, but $\B, \Left, \labels{x}{\DIA A} \SEQ \Right$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}$, i.e. $\cforce \M x{\DIA A}$. This means that there exists world $\lb{y'}$ in $\M$ such that $\inter x\rel_\M \lb{y'}$ and $\cforce \M {\lb{y'}}{A}$. Now we let $\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot' = \inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$. Contradiction.
+		
+		%\item $\rlabrn\DIA$: By way of contradiction, assume that $\B, \accs xy, \Left \SEQ \Right,  \labels{x}{\DIA A}, \labels{y}{A}$ is valid in all birelational frames, but $\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}$ is not. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}$, i.e., $\inter x\rel_\M\inter y$ and $\nforce\M {\lb x}{\fm{\DIA A}}$. This means that for all worlds $\lb{y}$ where $\inter x\rel_\M\inter y$,  \marianela{to be completed}
+	\end{itemize}
+	The other cases are similar (and simpler), and we leave them to the
+	reader. In particular, note that the cases for the rules $\rn{refl}$,
+	$\rn{trans}$, $\rn{F_1}$ and $\rn{F_2}$ are trivial, as all
+	birelations frames have to obey the corresponding conditions.
+\end{proof}
+
+%% We want to prove that for all model $\M$ that satisfies the premise, then $\M$ satifies the conclusion.
+
+%% In order to obtain the proof, let us introduce the next definitions:
+
+%% \begin{definition}
+%% 	Let $\M = \langle W, \rel, \le, V \rangle$ be a model. We say that $\f$ is an \emph{assignment function} such that $\f : Labels \rightarrow W$.
+%% \end{definition} 
+
+%% \begin{definition}
+%% 	Let $\M = \langle W, \rel, \le, V \rangle$ be a model and $\B, \Gamma \SEQ \Delta$ a sequent. We say that $\M \Vdash \B, \Gamma \SEQ \Delta$ if for all $\f$ such that:
+%% 	\begin{enumerate}
+%% 		\item For all $\labels{x}{A} \in \Gamma$, we have $\M, f(\lb x) \Vdash \fm A$. \marianela{should we say that this is equal to $\M \Vdash \labels{x}{A}$?}
+%% 		\item For all $\lb x, \lb y \in \B$, we have $f(\lb x) \rel f(\lb y)$.
+%% 		\item For all $\futs xy \in \B$, we have $f(\lb x) \le f(\lb y)$.
+%% 	\end{enumerate}
+%% 	then there exists $\labels{z}{B} \in \Delta$ such that $\M, f(\lb z) \Vdash \fm B$. We say that $\M \not \Vdash \B, \Gamma \SEQ \Delta$ if it is not the case that $\M \Vdash \B, \Gamma \SEQ \Delta$.
+%% \end{definition}
+
+
+%% Following the definitions, we display the proof of soundness for some rules since it is similar for each rule. 
+
+%% \begin{itemize}
+%% 	\item Rule $\llabrn\BOX$: 
+
+%% 	We want to prove that the rule for $\llabrn\BOX$ introduced in the Figure \ref{fig:labIKp} is sound. What we want to prove is:
+
+%% 	\begin{center}
+%% 		\emph{For all model $\M$, if $\M \Vdash \B,\Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$, then $\M \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A} \SEQ \Right$.}
+%% 	\end{center}
+
+%% 	By way of contradiction, we assume that there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \futs xy, \accs yz,\Left,\break \labels{x}{\BOX A} \SEQ \Right$, i.e $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash \futs xy$, $ \M_{0} \Vdash \accs yz$, $\M_{0} \Vdash \labels{x}{\BOX A}$ and  $\M_{0} \not \Vdash \Right$. Therefore, in particular from $\M_{0} \Vdash \labels{x}{\BOX A}$ we have that for all $\lb y, \lb z \in W$ such that $\futs xy$ and $\accs yz$, $\M_{0}, f(\lb z) \Vdash \fm A$, i.e $\M_{0} \Vdash \labels{z}{\fm A}$. From this result, we can say that $\M_{0} \not \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$. Thus, we have already proved that if there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \futs xy, \accs yz,\Left,\break \labels{x}{\BOX A} \SEQ \Right$, then $\M_{0} \not \Vdash \B, \Left, \futs xy, \accs yz, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$. According to the definition, we proved that the rule $\llabrn\BOX$ is sound.
+
+
+
+
+%% 	\item Rule $\rlabrn\BOX$: 
+
+%% 	In order to prove that the rule $\rlabrn\BOX$ of the system $\labIKp$ is sound, we need to show that:
+
+%% 	\begin{center}
+%% 		\emph{For all model $\M$, if $\M \Vdash \B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}$, then $\M \Vdash \B, \Left \SEQ \Right, \labels{x}{\BOX A}$.}
+%% 	\end{center}
+
+%% 	By way of contradiction, we want to prove that if there exists a model that does not satisfy the conclusion, then the same model does not satisfy the premise. Let us assume that there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left \SEQ \Right, \labels{x}{\BOX A}$. In particular, $\M_{0} \not \Vdash \labels{x}{\BOX A}$, which means that there exist worlds $\lb y, \lb z$, such that $\futs xy$ and $\accs yz$ where $\M_{0} \not \Vdash \labels{z}{A}$. Finally, we have that $\M_{0} \Vdash \B, \futs xy, \accs yz, \Left$ and $\M_{0} \not \Vdash \labels{x}{\BOX A}, \labels{z}{A}$,  which is the same as $\M_{0} \not \Vdash \B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}$. Then, by way of contradiction, we proved that the rule $\rlabrn\BOX$ is sound.
+
+%% 	\item Rule $\rlabrn\IMP$: 
+
+%% 	We display the proof of soundness for the rule $\rlabrn\IMP$ showing that:
+%% 	\begin{center}
+%% 		\emph{For all model $\M$, if $\M \Vdash \B, \futs xy, \Left, \labels{y}{A} \SEQ \Right \labels{y}{B}$, then $\M \Vdash \B, \Left \SEQ \Right, \labels{x}{A \IMP B}$.}
+%% 	\end{center}
+
+%% 	We prove this statement by way of contradiction. Assume there exists a model $\M_{0}$ such that $\M_{0}$ does not satisfy the conclusion, i.e. $\M_{0} \not \Vdash \B, \Left \SEQ \Right, \labels{x}{A \IMP B}$. In particular, $\M_{0} \not \Vdash \labels{x}{A \IMP B}$. Therefore, there exists $\lb y$ such that $\futs xy$ and $\M_{0}, f(\lb y) \Vdash A$ (i.e. $\M_{0} \Vdash \labels{y}{A}$) but $\M_{0}, f(\lb y) \Vdash B$, i.e. $\M_{0} \not \Vdash \labels{y}{B}$. Then, we have $\M_{0} \not \Vdash \B, \futs xy, \Left, \labels{y}{A} \SEQ \labels{y}{B}$. This means that the model $\M_{0}$ does not satisfy the premise and that is what we wanted to prove. Finally, we showed that the rule $\rlabrn\IMP$ is sound.
+
+%% 	\item Rule $\llabrn\DIA$:
+
+%% 	Following the same reasoning that we have been tabling, we define what means soundness of the rule $\llabrn\DIA$:
+
+%% 	\begin{center}
+%% 		\emph{For all model $\M$, if $\M \Vdash \B, \accs xy,  \Left, \labels{y}{A} \SEQ \Right$, then $\M \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$.}
+%% 	\end{center}
+
+%% 	In order to prove this statement, we assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$ and we want to see that $\M_{0} \not \Vdash \B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$.
+%% 	From our assumption, we have that from $\M_{0} \not \Vdash \B, \Left, \labels{x}{\DIA A} \SEQ \Right$ we obtain $\M_{0} \Vdash \B$, $\M_{0} \Vdash \Left$, $\M_{0} \Vdash \labels{x}{\DIA A}$ and $\M_{0} \not \Vdash \Right$. From $\M_{0} \Vdash \labels{x}{\DIA A}$, according to the definition of the $\DIA$ operator, we have that there exists a world $\lb y$ in $\M_{0}$ such that $\accs xy$ and $\M_{0} \Vdash \labels{y}{A}$. Therefore, we have that $\M_{0} \not \Vdash \B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ and we prove that the rule $\llabrn\DIA$ is sound.
+
+
+%% 	\item Rule $\rlabrn\DIA$:
+
+%% 	We want to prove that the rule $\rlabrn\DIA$ is sound, which means that:
+
+%% 	\begin{center}
+%% 		For all model $\M$, if $\M \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$ then $\M \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}$
+%% 	\end{center}
+
+%% 	We prove this statement by way of contradiction. Let us assume there exists a model $\M_{0}$ such that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}$, we want to show that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$.
+%% 	From our hypothesis we have that $\M_{0} \not \Vdash \labels{x}{\DIA A}$, i.e. for all world $\lb y \in \M_{0}$ where $\accs xy$ we have $\M_{0} \not \Vdash \labels{y}{A}$. Therefore, we have that $\M_{0} \not \Vdash \B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}$. Finally, assuming that $\M_{0}$ does not satisfy the conclusion, we proved that $\M_{0}$ does not satisfy the premise. Then we conclude that the rule $\rlabrn\DIA$ of the system $\labIKp$ is sound.
+%% \end{itemize}
+
+
+
+%% The other cases are similar and we leave them to the reader.
