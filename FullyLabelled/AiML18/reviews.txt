@@ -1,0 +1,35 @@
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 111
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: 2 (accept)
+Reviewer's confidence: 3 ((medium))
+
+----------- Overall evaluation -----------
+The authors introduce a labelled sequent proof system for Fischer-Servi’s version of intuitionistic modal logic. The new aspect of this system is that it has relational atoms for both the modal accessibility relation and the preorder relation in the Fischer-Servi model. The importance of this contribution is a bit hard to judge based on this abstract, but as the topics of intuitionistic modal logic and of labelled sequent calculi are of clear interest to attendees of AiML, this seems like a natural choice for a short paper presentation.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 111
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: 1 (weak accept)
+Reviewer's confidence: 3 ((medium))
+
+----------- Overall evaluation -----------
+The paper studies intuitionistic propositional modal logic.     The semantics consists of  Kripke models with two relations, one used to interpret the modal operator in the usual way and one preorder to interpret the intuitionistic propositional connectives.  The main result of the paper is  a labelled sequent system for intuitionistic propositional modal logic.  The paper  is well-written and the system and results  are clearly stated.   My only reservation concerns the interest of this contribution.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 111
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: -1 (weak reject)
+Reviewer's confidence: 3 ((medium))
+
+----------- Overall evaluation -----------
+The paper makes sense in the context of devising labelled deductive systems for all interesting logics at hand. Intuitionistic modal logics are certainly a very important class that gets ever more attention these days. In that sense, the paper might be of some interest. However, in my biased opinion I do not find  these kind of calculi in general either very useful or nice. It is not explained in the paper what is actually gained by having this particular calculus. So, I would rather give room at AiML for some other short presentations than this one.
