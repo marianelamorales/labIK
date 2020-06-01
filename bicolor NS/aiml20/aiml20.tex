@@ -306,108 +306,83 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 %
 %Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
 
-The proof is a careful adaptation of standard techniques.
+%The proof is a careful adaptation of standard techniques.
+%%
+%In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%%
+%As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
 %
-In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
+%\vspace*{-.9cm}
+%$$
+%\hspace*{-.5cm}
+%\scalebox{.9}{
+%	$
+%	\vlderivation{
+%		\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
+%			\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
+%				\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
+%					\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+%						\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+%							\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
+%								\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
+%									\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+%										\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
+%											\vlhy {}
+%										}
+%									}
+%								}
+%							}{
+%								%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%								%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
+%								%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+%								%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
+%								\vlhy {\qquad\vdots\qquad}
+%								%										}
+%								%									}
+%								%								}
+%								%							}
+%							}
+%						}
+%					}
+%				}
+%			}
+%		}
+%	}$
+%}$$
+%%\end{example}
 %
-As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
-
-\vspace*{-.9cm}
-$$
-\hspace*{-.5cm}
-\scalebox{.9}{
-	$
-	\vlderivation{
-		\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
-			\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
-				\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
-					\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-						\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-							\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-								\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
-									\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
-										\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
-											\vlhy {}
-										}
-									}
-								}
-							}{
-								%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
-								%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
-								%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
-								%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
-								\vlhy {\qquad\vdots\qquad}
-								%										}
-								%									}
-								%								}
-								%							}
-							}
-						}
-					}
-				}
-			}
-		}
-	}$
-}$$
-%\end{example}
-
+%%\vspace*{-.5cm}
+%
+%Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
+%%
+%We therefore have to show that such a rule is admissible in our system.
+%%
+%As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
+%
 %\vspace*{-.5cm}
-
-Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
-%
-We therefore have to show that such a rule is admissible in our system.
-%
-As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
-
-\vspace*{-.5cm}
-%\begin{example}
-$$
-\scalebox{.9}{
-	$
-	\vlderivation{
-		\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-			\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-	$
-}
-$$
-%\end{example}
+%%\begin{example}
+%$$
+%\scalebox{.9}{
+%	$
+%	\vlderivation{
+%		\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+%			\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+%				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+%					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+%						\vlhy{}
+%					}
+%				}
+%			}
+%		}
+%	}
+%	$
+%}
+%$$
+%%\end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Extensions}
-
-In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
-%
-For example, you can add the following rule:
-$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
-to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-$\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
-
-In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
-%
-For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
-%\begin{center}
-($\diabrn{4}$) if $w \rel v$ and $v \rel u$, there exists a $u'\in W$ s.t.~$u \le u'$ and $wRu'$.
-%\end{center}
-
-Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
-
-
-Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
-%
-These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
-
 
 
 \section{Bicolor NS: nested sequents capturing $\rel$ and $\le$}
@@ -484,7 +459,7 @@ $\force{x}{\BOX A}$ iff for all $y$ and $z$ s.t. $\futs xy$ and $\accs yz$, $\fo
 \quad
 %\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\Cx[2]}}}}
 %\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\bBR{\Cx[2]}}}}{\Cx[1]{\BR{\bBR{\Cx[2]}}, \bBR{\BR{\Cx[2]}}}}
-\vlinf{\rn{F_1}}{\mbox{\footnotesize$\Dx$ is shallow}}{\Cx[1]{\BR{\Cx[2], \bBR{\Dx}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Dx}}}}}
+\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Cx[3]}}}}}
 \]
 %\[\mbox{\hbox to .9\linewidth{\dotfill}}\]
 %\[
@@ -503,9 +478,58 @@ $\force{x}{\BOX A}$ iff for all $y$ and $z$ s.t. $\futs xy$ and $\accs yz$, $\fo
 
 \marianela{explain some specific rules: $\rrn\BOX$, $\rrn\IMP$. maybe $\rn F_1$?}
 
-\section{Conclusion}
+\sonia{Say that teh meta theoretic result ie cut-elimination is much harder}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensions}
+
 \marianela{say something like the idea comes from proving termination for is4...}
 
+\paragraph{Labelled}
+
+In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, w \rel u, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon (\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)$, that is, wrt.~to all frames in which $\rel$ is transitive.
+
+In~\cite{Plotkin}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \DIA\DIA A \IMP \DIA A$ are exactly the ones satisfying the condition:
+%\begin{center}
+($\diabrn{4}$) if $w \rel v$ and $v \rel u$, there exists a $u'\in W$ s.t.~$u \le u'$ and $wRu'$.
+%\end{center}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, w \rel v, v \rel u, \Left \SEQ \Right}{\B, w \rel v, v \rel u, u \le u', w \rel u' , \Left \SEQ \Right}$}$$
+
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{Plotkin}.
+%
+These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+
+
+\paragraph{Nested}
+Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
+\[
+\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
+\quad
+%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
+\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
+\quad
+\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
+\quad
+\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
+\]
+%\[\mbox{\hbox to .9\linewidth{\dotfill}}\]
+%\[
+%\vlinf{\rn{refl_{\BR{\cdot}}}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\BR{\Cx[2]}}}
+%\qquad
+%\vlinf{\rn{trans_{\BR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2], \BR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}
+%\]
 
 %% Appendix.
 %% Remove the \Appendix command if an 
