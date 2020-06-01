@@ -1,0 +1,36 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 17
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+This abstract discussed ongoing work on extending labelled deduction
+a larger class of logics.  In particular, they study logics using a
+bi-relational semantics and explicit accessibility and preorder
+relations. The inference rules reflect the definitions nicely.  I
+would have liked to see more motivation for these particular kinds of
+proof systems in general.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 17
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: 1 (weak accept)
+
+----------- Overall evaluation -----------
+Sounds like an interesting topic but I do not have the background to evaluate its novelty.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 17
+TITLE: Decomposing labelled proof theory for intuitionistic modal logic
+AUTHORS: Sonia Marin, Marianela Morales and Lutz Straßburger
+
+Overall evaluation: 2 (accept)
+
+----------- Overall evaluation -----------
+This is very interesting work on "modal correspondence theory" for intuitionistic modal logic.It builds on the authors' previous work on proof-theoretical study of modal logics, in particular connecting it to other recent developments in deep inference.  While the rules discussed in the short abstract seem very sensible, I do not know how much has been done so far towards the goal of a full correspondence theory for the logics in the cube of modal logics. Definitely looking forward to the talk.
