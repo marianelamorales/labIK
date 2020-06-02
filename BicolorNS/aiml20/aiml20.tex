@@ -95,7 +95,7 @@ A fully labelled framework, described succintly in Section~\ref{sec:labelled}, h
 %
 In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a fully nested framework, presented in Section~\ref{sec:nested}.
 %
-We would be particularly interested in a suitable system for logic $\mathsf{IS4}$ whose decidability is not known.
+We would be particularly interested in a suitable system for logic $\mathsf{IS4}$, whose decidability is not known, and discuss this direction in Section~\ref{sec:extensions}.
 
 %We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic preorder relation. 
 %
@@ -517,11 +517,11 @@ Another beneficial result of this addition is that rules $\rn{refl_\le}$ and $\r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Extensions: example of transitivity}
+\section{Extensions: example of transitivity}\label{sec:extensions}
 
 As mentionned in the introduction, one of our motivation is to investigate decision procedure for axiomatic extensions of $\IK$, for instance for $\mathsf{IS4}$, intuitionistic logic of reflexive transitive frames.
 %
-So, we will illustrate the benefit of our approach on transitivity here.
+We will therefore illustrate the benefit of our approach taking transitivity as a test-case.
 
 %\paragraph{Labelled}
 %
@@ -584,10 +584,10 @@ $$\small
 %($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %%\end{center}
 
-Incorporating the preorder symbol into the syntax, however,  allowed us to %also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+Incorporating the preorder symbol into the syntax, however,  allowed us~\cite{marin:morales:strassburger:hal} to %also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
 %$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
 %Consequently, we can easily 
-translate the conditions in~\eqref{eq:4frame} into independent inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:\vspace*{-.2cm}
+translate the conditions in~\eqref{eq:4frame} into separate inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:\vspace*{-.2cm}
 \begin{equation*}\small
 \label{eq:4rules}
 \vlinf{\rn{4_{\BOX}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
