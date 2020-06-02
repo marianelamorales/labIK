@@ -15,7 +15,7 @@
 \usepackage{colonequals}
 
 %\usepackage[matrix,arrow]{xy}
-\usepackage[noxy]{virginialake}
+\usepackage[noxy]{../../virginialake}
 %\vlnosmallleftlabels
 \vlnostructuressyntax
 
@@ -44,7 +44,7 @@
 \begin{document}
 
 \begin{frontmatter}
-  \title{Fully structured proof theory \\for intuitionistic modal logics \\(working title)}
+  \title{Fully structured proof theory for intuitionistic modal logics}
   \author{Sonia Marin}
   %\footnote{You can put your email address or grant acknowledgement as a footnote, if you wish.}
   \address{University College London, UK}
@@ -75,27 +75,48 @@
 
 \section{Introduction}
 
-\todo{sell the systems! more emphasis in the nested sequent system?}
+Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of e.g.~labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}.
 
-Structural proof theoretic accounts of intuitionistic modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction and labelled sequent systems~\cite{simpson1994}, or the one of \emph{unlabelled deduction} in the form of sequent~\cite{bierman2000} or nested sequent systems~\cite{strassburger2013} (for a survey see~\cite[Chap.~3]{marin2018}). In this article, we present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing the accesibility relation for modal logics and the intuitionistic relation $\le$. In the labelled calculus we made explicity both relations with $\rel$ and $\le$ into the system. In the nested sequent system, we represent this relations with one bracket in a sequent (for the accesibility relation) and a with two brackets in a sequent (preorder relation).  
+These generalisations of the sequent framework, inspired by relational semantics, are needed to treat modalities uniformly. 
+%
+By extending the ordinary sequent structure with \emph{one} extra element, either relational atoms between labels or nested bracketing, they encode respectively graphs or trees in the sequents, giving them enough power to represent modalities. 
+
+Similarly, proof systems have been designed for intuitionistic modal logic both as labelled sequent systems~\cite{simpson1994} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara}.
+%
+Surprisingly, in both settings, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
+
+This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
+%
+More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
+
+This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing both the modal accesibility relation and the intuitionistic pre-order relation. 
+%
+A fully labelled framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
+%
+In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a fully nested framework, presented in Section~\ref{sec:nested}.
+
+%We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic pre-order relation. 
+%
+%In the labelled calculus we made explicity both relations with $\rel$ and $\le$ into the system. 
+%
+%In the nested sequent system, we represent this relations with one bracket in a sequent (for the accesibility relation) and a with two brackets in a sequent (preorder relation).  
+%
 
 
-
-
-\section{Intuitionistic modal logics}
-The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
+\section{Intuitionistic modal logic}
+The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$. %standing most generally for \emph{necessity} and \emph{possibility}.
 %
 Starting with a set $\mathcal{A}$ of atomic propositions, denoted $\fm a$, modal formulas are constructed from the grammar:
 %
 $$
 \fm A \coloncolonequals
-\fm a \mid \fm{A \AND A} \mid \fm{A \OR A} \mid \fm{\TOP} \mid \fm{\BOT} \mid \fm{A \IMP A} \mid \fm{\BOX A} \mid \fm{\DIA A}
+\fm a \mid \fm{\BOT} \mid \fm{(A \AND A)} \mid \fm{(A \OR A)} \mid \fm{(A \IMP A)} \mid \fm{\BOX A} \mid \fm{\DIA A}
 $$
 %
-The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{plotkin1986} and is equivalent to the one proposed by Fischer-Servi~\cite{fischer1984}.
+The axiomatisation of intuitionistic modal logic $\IK$ \cite{plotkin1986,fischer1984}
 %, and by Ewald~\cite{Ewald} in the case of intuitionistic tense logic. 
 %
-It is obtained from intuitionistic propositional logic by adding:
+is obtained from intuitionistic propositional logic by adding:
 \begin{itemize}
 	\item the \emph{necessitation rule}: $\fm{\BOX A}$ is a theorem if $\fm{A}$ is a theorem; and
 	\item the following five variants of the \emph{distributivity axiom}:
@@ -115,58 +136,60 @@ It is obtained from intuitionistic propositional logic by adding:
 	\end{equation*}
 \end{itemize}
 
-The relational semantics for $\IK$ was first defined by Fischer-Servi~\cite{fischer1984}.
-%
-It combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.
+The relational semantics for $\IK$~\cite{fischer1984} combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic. % using two distinct relations on the set of worlds.
 
 
 \begin{definition}
-	A \emph{bi-relational frame} $\F$ is a triple $\langle W, R, \le \rangle$ 
+	A \emph{bi-relational frame} $\F$ consists %is a triple $\langle W, R, \le \rangle$ 
 	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ satisfying:
 	\begin{enumerate}
-		\item[($F_1$)] For $\lb u, \lb v, \lb{v'} \in W$, if $\accs uv$ and $\futs{v}{v'}$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{u'}{v'}$.
+		\item[($F_1$)] For $\lb x, \lb y, \lb z \in W$, if $\accs xy$ and $\futs yz$, there exists $\lb u$ s.t.~$\futs xu$ and $\accs uz$.
 		
-		\item[($F_2$)] For $\lb{u'}, \lb u, \lb v \in W$, if $\futs uv$, there exists $\lb{v'}$ s.t.~$\accs{u'}{v'}$ and $\futs{v}{v'}$.
+		\item[($F_2$)] For $\lb x, \lb y, \lb z \in W$, if $\futs xy$ and $\accs xz$, there exists $\lb u$ s.t.~$\accs yu$ and $\futs zu$.
 	\end{enumerate}
 	%	
 \end{definition}
 
-
-%\marianela{We recall the birelational models \cite{plotkin1986, ewald1986} for intuitionistic modal logics, which are a combination of the Kripke semantics for propositional intuitionistic logic and the one for classical modal logic. A \emph{birelational frame} $\F = \langle W, R, \le \rangle$ is a non-empty set $W$ of worlds together with two binary relations $\le, \rel \subseteq W \times W$, where $\le$ is a preorder(i.e., reflexive and transitive), such that the following two conditions hold:}
-
 \begin{definition}
-	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $\lb w$ to the subset of propositional atoms true at $\lb w$, additionally subject to:
-	if $\futs{w}{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
+	A \emph{bi-relational model} $\M$ is %a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ 
+	a bi-relational frame and a monotone valuation function $V\colon W \to 2^\mathcal{A}$.%, that is, a function mapping each world $\lb w$ to the subset of propositional atoms true at $\lb w$, additionally subject to: if $\futs{w}{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
-We write $\lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and by definition, we always have $\lb w \Vdash \fm{\TOP}$ and never that $\lb w \Vdash \fm{\BOT}$. 
+We write $\lb x \Vdash \fm a$ if $\fm a \in V(\lb x)$ and, by definition, it is never the case that $\lb x \Vdash \fm{\BOT}$. %and always have $\lb w \Vdash \fm{\TOP}$
 %
-Then the relation is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
-
-$\lb w \Vdash \fm{A \AND B}$ iff $\lb w \Vdash \fm A$ and $\lb w \Vdash \fm B$
-
-$\lb w \Vdash \fm{A \OR B}$ iff $\lb w \Vdash \fm A$ or $\lb w \Vdash \fm B$
-
-$\lb w \Vdash \fm{A \IMP B}$ iff for all $\lb{w'}$ with $\futs{w}{w'}$, if $\lb{w'} \Vdash \fm A$ then $\lb{w'} \Vdash \fm B$
-
-$\lb w \Vdash \fm{\BOX A}$ iff for all $\lb{w'}$ and $\lb u$ with $\futs{w}{w'}$ and $\accs{w'}{u}$, $\lb u \Vdash \fm A$ %\hfill $(\ast)$
-
-$\lb w \Vdash \fm{\DIA A}$ iff there exists a $\lb u$ such that $\accs wu$ and $\lb u \Vdash \fm A$.
+The relation $\Vdash$ is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+\begin{align}
+	&\lb x \Vdash \fm{A \AND B} && \text{iff}\qquad 
+	\lb x \Vdash \fm A \text{ and } \lb x \Vdash \fm B
+	\nonumber\\
+	&\lb x \Vdash \fm{A \OR B} && \text{iff}\qquad 
+	\lb x \Vdash \fm A \text{ or } \lb x \Vdash \fm B
+	\nonumber\\
+	&\lb x \Vdash \fm{A \IMP B} && \text{iff}\qquad 
+	\text{for all } \lb y \text{ with } \futs xy\text{, if }\lb y \Vdash \fm A\text{ then }\lb y \Vdash \fm B
+	\nonumber\\
+	&\lb x \Vdash \fm{\BOX A} && \text{iff}\qquad
+	\text{for all }\lb y\text{ and }\lb z\text{ with }\futs xy\text{ and }\accs yz, \lb z \Vdash \fm A %\hfill $(\ast)$
+	\tag{$\star$}\label{eq:box}\\
+	&\lb x \Vdash \fm{\DIA A} && \text{iff}\qquad
+	\text{there exists a }\lb y\text{ such that }\accs xy\text{ and }\lb y \Vdash \fm A
+	\nonumber
+\end{align}
 
 \begin{definition}
-	A formula $\fm A$ is \emph{satisfied} in a model $\M = \langle W, R, \le, V \rangle$, if for all $\lb w \in W$ we have $\lb w \Vdash \fm A$.
+%	A formula $\fm A$ is \emph{satisfied} in a model $\langle W, R, \le, V \rangle$, if for all $\lb w \in W$ we have $\lb w \Vdash \fm A$.
 	%
-	A formula $\fm A$ is \emph{valid} in a frame $\F = \langle W, R, \le \rangle$, if for all valuations $V$, $\fm A$ is satisfied in $\langle W, R, \le, V \rangle$.
+	A formula $\fm A$ is \emph{valid} in a frame $\langle W, R, \le \rangle$, if for all monotone valuations $V$ and for all $\lb w \in W$, we have $\lb w \Vdash \fm A$
 \end{definition}
 
 Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
 
-\begin{theorem}[Fischer-Servi~\cite{fischer1984}, Plotkin and Stirling~\cite{plotkin1986}]\label{thm:plotkin}
+\begin{theorem}[\cite{fischer1984,plotkin1986}]\label{thm:plotkin}
 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
-\section{Labelled sequent calculi with $\rel$ and $\le$}
+\section{Fully labelled sequent calculus}\label{sec:labelled}
 
 \begin{figure}%[h]
 	\centering
@@ -174,7 +197,7 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 	\fbox{
 		\begin{minipage}{.95\textwidth}
 			\begin{tabular}{@{\!}c@{\quad}c}
-				$\vlinf{\rn{id}}{}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{A} }{}$
+				$\vlinf{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A} }{}$
 				&
 				$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
 %				\quad
@@ -231,22 +254,20 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 %%
 %This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
 
-\emph{Labelled deduction} has been proposed by Gabbay~\cite{gabbay1996} in the 80s as a unifying framework throughout proof theory in order to provide proof
-systems for a wide range of logics. 
+%\emph{Labelled deduction} has been proposed by Gabbay~\cite{gabbay1996} in the 80s as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics. 
 %
-For modal logics it can take
-the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson~\cite{simpson1994}, Vigan\`o~\cite{vigano2000}, and Negri~\cite{negri2005}. 
+%For modal logics it can take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson~\cite{simpson1994}, Vigan\`o~\cite{vigano2000}, and Negri~\cite{negri2005}. 
 %
-Simpson's proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
+Simpson's~\cite{simpson1994} proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
 %
 Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
 %
-The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ as proposed by Maffezioli, Naibo and Negri in~\cite{maffezioli2013}. 
+The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ (similarly to~\cite{maffezioli2013} for epistemic logic). 
 %
 
 
 \begin{definition}
-	A two-sided intuitionistic \emph{labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $\accs xy$ and preorder atoms $\futs xy$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $\lb x$ and $\lb y$ taken from the set of labels and $A$ an intuitionistic modal formula).
+	A two-sided intuitionistic \emph{fully labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $\accs xy$ and preorder atoms $\futs xy$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $\lb x$ and $\lb y$ taken from a countable set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
 
 
@@ -260,7 +281,7 @@ We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for in
 %
 Most rules are similar to the ones of Simpson~\cite{simpson1994}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
-In particular, the rules introducing the $\BOX$-operator correspond to the definition $(\ast)$.
+In particular, the rules introducing the $\BOX$-operator correspond to the definition~\eqref{eq:box}.
 %
 Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
 %
@@ -287,7 +308,6 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 		%
 		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with %\quad
 		%		
-		%		\todo{}
 		\smash{%\fbox{
 			\scalebox{.9}{$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$}
 		}%}
@@ -298,19 +318,7 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 	\end{enumerate}
 \end{theorem}
 
-%We show that each rule from our system is sound.
-%
-%We also present a syntactic completeness proof with respect the Hilbert system: we prove all Hilbert axioms using the rules from our system (i.e. proof of all propositional intuitionistic axioms, the five variants of k axiom from the intuitionistic syntax, simulate the necessitation rule and simulate modus ponens).
-%
-%We present a completeness proof for our system $\labIKp$ using the Simpson system. 
-%
-%The idea comes from knowing that the Simpson system is a Cut-free system, so this proof lets us know that our system is complete without the cut rule. 
-%
-%We show the proof by case analysis. 
-%
-%Most of the rules from Simpson system are the same as the rules in the system $\labIKp$, then we prove for the rules that are different.
-
-%The proof is a careful adaptation of standard techniques.
+The proof is a careful adaptation of standard techniques (see~\cite{marin:morales:strassburger:hal}).
 %%
 %In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
 %%
@@ -389,9 +397,9 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Bicolor NS: nested sequents capturing $\rel$ and $\le$}
-\marianela{small introduction of nested sequents}
-Nested sequents were introduced by Kashima \cite{kashima1994cut} and then independently rediscovered by Br\"{u}nnler \cite{brunnler2009deep} and Poggiolesi \cite{poggiolesi2009method}.
+\section{Fully nested sequent calculus}\label{sec:nested}
+
+%Nested sequents were introduced by Kashima \cite{kashima1994cut} and then independently rediscovered by Br\"{u}nnler \cite{brunnler2009deep} and Poggiolesi \cite{poggiolesi2009method}.
 %
 Nested sequents are a generalisation of sequents from a multiset
 of formulas to a tree of multisets of formulas.
@@ -493,7 +501,7 @@ $\force{\lb x}{\fm{\BOX A}}$ iff for all $\lb y$ and $\lb z$ s.t. $\futs xy$ and
 
 \paragraph{Labelled}
 
-In~\cite{Simpson}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+In~\cite{simpson1994}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
 %
 For example, you can add the following rule:
 $$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
