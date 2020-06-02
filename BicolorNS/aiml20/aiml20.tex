@@ -283,9 +283,9 @@ We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for in
 %
 Most rules are similar to the ones of Simpson~\cite{simpson1994}, but some are more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
-For instance, the rules introducing the $\BOX$-connective correspond to the definition~\eqref{eq:box}.
+For instance, the rules introducing the $\BOX$-connective correspond to~\eqref{eq:box}.
 %
-Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
+Furthermore, our system must incorporate the conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and rules $\rn{refl_\le}$ and $\rn{trans_\le}$ are necessary to ensure that the preorder atoms behave as a preorder on labels.
 %
 %As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
 
@@ -573,7 +573,7 @@ Following Simpson~\cite{simpson1994} we could extend our basic sequent system fo
 %
 %For example, you can add the following rule:
 $$\small
-\vlinf{\rn{4}}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
+\vlinf{\rn{trans}_\rel}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
 %to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
 %$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
