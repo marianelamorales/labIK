@@ -89,7 +89,7 @@ This no longer matches the relational semantics of these logics, which requires 
 %
 More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
 
-This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing both the modal accesibility relation and the intuitionistic pre-order relation. 
+This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing both the modal accesibility relation and the intuitionistic preorder relation. 
 %
 A fully labelled framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
 %
@@ -97,7 +97,7 @@ In an attempt to make this system amenable for proof-search and decision procedu
 %
 We would be particularly interested in a suitable system for logic $\mathsf{IS4}$ whose decidability is not known.
 
-%We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic pre-order relation. 
+%We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic preorder relation. 
 %
 %In the labelled calculus we made explicity both relations with $\rel$ and $\le$ into the system. 
 %
@@ -173,7 +173,7 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 	\nonumber\\
 	&\lb x \Vdash \fm{\BOX A} && \text{iff}\qquad
 	\text{for all }\lb y\text{ and }\lb z\text{ with }\futs xy\text{ and }\accs yz, \lb z \Vdash \fm A %\hfill $(\ast)$
-	\tag{$\star$}\label{eq:box}\\
+	\label{eq:box}\\
 	&\lb x \Vdash \fm{\DIA A} && \text{iff}\qquad
 	\text{there exists a }\lb y\text{ such that }\accs xy\text{ and }\lb y \Vdash \fm A
 	\nonumber
@@ -316,7 +316,7 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 		%
 		\item\label{iii} $A$ is provable in $\labIKp$
 		%
-		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
+%		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
 	\end{enumerate}
 \end{theorem}
 
@@ -478,9 +478,12 @@ Here again, we enhance the structure with a second type of bracketting to encode
 %where $\fm{A_{1}}, . . . , \fm{A_{n}}$ are the formulas that would occur on the left of the turnstile if there was a turnstile, $\fm{B_{1}}, . . . , \fm{B_{k}}$ are the formulas that would occur on the right of the turnstile if there was a turnstile, and $\Cx[1], . . . , \Cx[m]$ are nested sequents. We use the $\bullet$ and $\circ$ as polarities indication for formulas.
 
 
+
 \begin{definition}
 	A two-sided intuitionistic \emph{fully nested sequent} is constructed from the grammar:
-	$$\Cx \coloncolonequals \varnothing \mid \lf A, \Cx \mid \rt A, \Cx \mid \BR{\Cx} \mid \bBR{\Cx}$$
+	$\Cx \coloncolonequals \varnothing \mid \lf A, \Cx \mid \rt A, \Cx \mid \BR{\Cx} \mid \bBR{\Cx}$,
+	%
+%	\noindent
 	where the $\lf{(\cdot)}$ and $\rt{(\cdot)}$ annotations are used to indicate that the formulas would occur on the left-hand-side or right-hand-side of a sequent respectively in the absence of the sequent arrow. 
 \end{definition}
 
@@ -491,20 +494,6 @@ The idea is similar to the fully labelled calculus but the shift of paradigm for
 In particular, the underlying tree-structure prevents us to express the rule $\rn{F_2}$, but its absence is compensated by the \emph{monotonicity rules} $\lrn{mon}$ and $\rrn{mon}$ which were admissible in $\labIKp$.
 %
 Another beneficial result of this addition is that rules $\rn{refl_\le}$ and $\rn{trans_\le}$ do not need equivalent here.
-
-A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
-%
-Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IS4}$ by simply adding the following rules:
-\[\small
-\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
-\quad
-%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
-\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
-\quad
-\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
-\quad
-\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
-\]
 
 %In order to capture intuitionistic modal logics, we build a nested sequent system with the two relations explicitly: one of for the accessibility relation $\rel$ associated with the Kripke semantics for normal modal logics (represented with one bracket in the sequent) and one for the preorder relation $\le$ associated with the Kripje semantics for intuitionistic logic (represented with two brackets in the system).
 
@@ -519,15 +508,24 @@ Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,k
 %
 %\marianela{add F1 rule?}
 
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\section{Extensions}
+\section{Extensions: example of transitivity}
+
+As mentionned in the introduction, one of our motivation is to investigate decision procedure for axiomatic extensions of $\IK$, for instance for $\mathsf{IS4}$, intuitionistic logic of reflexive transitive frames.
 %
+So, we will illustrate the benefit of our approach on transitivity here.
+
 %\paragraph{Labelled}
 %
-%the frame
-%condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
+%The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
 %inference rule
 %\begin{equation}
 %\label{eq:Rtrans}
@@ -536,100 +534,90 @@ Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,k
 %\end{equation}
 %where $\B$ stands for a set of relational atoms, and $\Gamma$ and
 %$\Delta$ for multi-sets of labelled formulas.
-%
-%The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
-%versions of the $\ax 4$-axiom
-%\begin{equation}
+
+The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be axiomatised by the conjunction of the two versions of the $\ax 4$-axiom:\vspace*{-.2cm}
+%\begin{equation*}
 %\label{eq:4ax}
-%\fm{\BOX A\IMP \BOX\BOX A}
-%\qquad
-%\fm{\DIA\DIA A\IMP\DIA A}
-%\quad
-%\end{equation}
-%which are equivalent in classical
-%modal logic. However, in intuitionistic modal logic they are not
-%equivalent, and even though the logic $\IK\ax 4$, i.e., the
-%intuitionistic version of the modal logic $\K\ax 4$, contains both
-%axioms, they can also be added independently to the logic $\IK$ (an
-%intuitionistic version of $\K$). The proof theory of these
-%new logics has not been studied before; no existing labelled (or
-%label-free) proof system can handle them, even though the
-%corresponding frame conditions
-%\begin{equation}
-%\label{eq:4frame}
-%\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
-%\quad
-%\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
-%\;,
-%\end{equation}
-%%  \todo{add graphical representation of the conditions}
+$$
+\ax{4_{\BOX}}\colon\fm{\BOX A\IMP \BOX\BOX A}
+\qquad\qquad\qquad
+\ax{4_{\DIA}}\colon\fm{\DIA\DIA A\IMP\DIA A}
+$$%\end{equation*}
+%
+which are equivalent in classical modal logic. 
+%
+However, in intuitionistic modal logic they are not and they can be added independently to the logic $\IK$. %(an intuitionistic version of $\K$). 
+%
+From~\cite{plotkin1986} we know they are in correspondance with the following frame conditions:\vspace*{-.2cm}
+\begin{equation}
+\label{eq:4frame}
+\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs x{u}\AND\accs {u}z)
+\quad
+\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs z{u}\AND\accs {x}{u})
+\end{equation}
+%  \todo{add graphical representation of the conditions}
 %$$
 %\xymatrix{
-%	x' \ar@{.>}[drr]^R \\
+%	u \ar@{.>}[drr]^R \\
 %	x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
 %}
 %\qquad\qquad
 %\xymatrix{
-%	&& z''  \\
+%	&& u  \\
 %	x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
 %}
 %$$
-%respectively, have already been studied
-%in~\cite{plotkin:stirling:86}.
+%respectively%, have already been studied in~\cite{plotkin:stirling:86}.
+
+Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule:\vspace*{-.2cm}
 %
-%In~\cite{simpson1994}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
-%%
 %For example, you can add the following rule:
-%$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
+$$\small
+\vlinf{\rn{4}}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
 %to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
 %$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
-%
+
 %In~\cite{plotkin1986}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %%
 %For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
 %%\begin{center}
 %($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %%\end{center}
-%
-%Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+
+Incorporating the preorder symbol into the syntax, however,  allowed us to %also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
 %$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
+%Consequently, we can easily 
+translate the conditions in~\eqref{eq:4frame} into independent inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:\vspace*{-.2cm}
+\begin{equation*}\small
+\label{eq:4rules}
+\vlinf{\rn{4_{\BOX}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {u}z, \futs x{u},\Left \SEQ \Right}
+\quad
+\vlinf{\rn{4_{\DIA}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {x}{u}, \futs z{u},\Left \SEQ \Right}  
+\end{equation*}
+%This allows us to define cut-free deductive systems for a wide range of logics that could not be treated before.
+
+%Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
+%%
+%These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+
+
+A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
 %
-%Consequently, we can easily translate the frame
-%conditions in~\eqref{eq:4frame} into inference rules:
-%\begin{equation}
-%\label{eq:4rules}
-%\vlinf{\rn{4^{\BOX}}}{\text{\footnotesize$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-%	\B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
-%\qquad
-%\vlinf{\rn{4^{\DIA}}}{\text{\footnotesize$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-%	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
-%\end{equation}
-%This allows us to define cut-free deductive systems for a wide range
-%of logics that could not be treated before.
-%
-%%Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
-%%%
-%%These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
-%
-%
-%\paragraph{Nested}
-%Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
-%\[
+Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IK4}$ by simply adding the following rules:\vspace*{-.2cm}
+\[\small
 %\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
 %\quad
-%%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
-%\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
+%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
+\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
 %\quad
 %\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
-%\quad
-%\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
-%\]
-%\[\mbox{\hbox to .9\linewidth{\dotfill}}\]
-%\[
-%\vlinf{\rn{refl_{\BR{\cdot}}}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\BR{\Cx[2]}}}
-%\qquad
-%\vlinf{\rn{trans_{\BR{\cdot}}}}{}{\Cx[1]{\BR{\Cx[2], \BR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \BR{\Cx[3]}}}
-%\]
+\quad
+\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
+\]
+
+The generalisation of these results to our fully structured framework is subject of ongoing study.
 
 %% Appendix.
 %% Remove the \Appendix command if an 
