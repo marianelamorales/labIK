@@ -14,7 +14,7 @@
 
 \usepackage{colonequals}
 
-%\usepackage[matrix,arrow]{xy}
+\usepackage[matrix,arrow]{xy}
 \usepackage[noxy]{../../virginialake}
 %\vlnosmallleftlabels
 \vlnostructuressyntax
@@ -94,6 +94,8 @@ This lead us to develop a \emph{fully structured} approach to intuitionistic mod
 A fully labelled framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
 %
 In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a fully nested framework, presented in Section~\ref{sec:nested}.
+%
+We would be particularly interested in a suitable system for logic $\mathsf{IS4}$ whose decidability is not known.
 
 %We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic pre-order relation. 
 %
@@ -106,7 +108,7 @@ In an attempt to make this system amenable for proof-search and decision procedu
 \section{Intuitionistic modal logic}
 The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$. %standing most generally for \emph{necessity} and \emph{possibility}.
 %
-Starting with a set $\mathcal{A}$ of atomic propositions, denoted $\fm a$, modal formulas are constructed from the grammar:
+Starting with a set $\mathcal{A}$ of atomic propositions, denoted $\fm a$, modal formulas are constructed from the grammar:\vspace*{-.1cm}
 %
 $$
 \fm A \coloncolonequals
@@ -119,7 +121,7 @@ The axiomatisation of intuitionistic modal logic $\IK$ \cite{plotkin1986,fischer
 is obtained from intuitionistic propositional logic by adding:
 \begin{itemize}
 	\item the \emph{necessitation rule}: $\fm{\BOX A}$ is a theorem if $\fm{A}$ is a theorem; and
-	\item the following five variants of the \emph{distributivity axiom}:
+	\item the following five variants of the \emph{distributivity axiom}:\vspace*{-.1cm}
 	\begin{equation*}
 	\label{eq:ik}%\hskip-2em
 	\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
@@ -136,11 +138,11 @@ is obtained from intuitionistic propositional logic by adding:
 	\end{equation*}
 \end{itemize}
 
-The relational semantics for $\IK$~\cite{fischer1984} combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic. % using two distinct relations on the set of worlds.
+%The relational semantics for intuitionistic modal logic combines the Kripke semantics for intuitionistic propositional logic and the one for classical modal logic. % using two distinct relations on the set of worlds.
 
 
 \begin{definition}
-	A \emph{bi-relational frame} $\F$ consists %is a triple $\langle W, R, \le \rangle$ 
+	A \emph{bi-relational frame} consists %is a triple $\langle W, R, \le \rangle$ 
 	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ satisfying:
 	\begin{enumerate}
@@ -152,13 +154,13 @@ The relational semantics for $\IK$~\cite{fischer1984} combines the Kripke semant
 \end{definition}
 
 \begin{definition}
-	A \emph{bi-relational model} $\M$ is %a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ 
-	a bi-relational frame and a monotone valuation function $V\colon W \to 2^\mathcal{A}$.%, that is, a function mapping each world $\lb w$ to the subset of propositional atoms true at $\lb w$, additionally subject to: if $\futs{w}{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
+	A \emph{bi-relational model} is %a quadruple $\langle W, R,\le,V \rangle$ with $\langle W, R, \le \rangle$ 
+	a bi-relational frame with a monotone valuation function $V\colon W \to 2^\mathcal{A}$.%, that is, a function mapping each world $\lb w$ to the subset of propositional atoms true at $\lb w$, additionally subject to: if $\futs{w}{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
 \end{definition}
 
 We write $\lb x \Vdash \fm a$ if $\fm a \in V(\lb x)$ and, by definition, it is never the case that $\lb x \Vdash \fm{\BOT}$. %and always have $\lb w \Vdash \fm{\TOP}$
 %
-The relation $\Vdash$ is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:
+The relation $\Vdash$ is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:\vspace*{-.1cm}
 \begin{align}
 	&\lb x \Vdash \fm{A \AND B} && \text{iff}\qquad 
 	\lb x \Vdash \fm A \text{ and } \lb x \Vdash \fm B
@@ -183,7 +185,7 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 	A formula $\fm A$ is \emph{valid} in a frame $\langle W, R, \le \rangle$, if for all monotone valuations $V$ and for all $\lb w \in W$, we have $\lb w \Vdash \fm A$
 \end{definition}
 
-Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
+%Similarly to the classical case, in the case of $\IK$, the correspondence between syntax and semantics is recovered.
 
 \begin{theorem}[\cite{fischer1984,plotkin1986}]\label{thm:plotkin}
 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
@@ -232,9 +234,9 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 					$\mbox{\hbox to .9\linewidth{\dotfill}}$
 				}
 				\\
-				$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}$
+				$\vlinf{\rn{refl_\le}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}$
 				&
-				$\vlinf{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
+				$\vlinf{\rn{trans_\le}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
 				\\\\
 				\multicolumn{2}{c}{
 					$\vlinf{\rn{F_1}}{\text{\scriptsize $\lb u$ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
@@ -258,11 +260,11 @@ Similarly to the classical case, in the case of $\IK$, the correspondence betwee
 %
 %For modal logics it can take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson~\cite{simpson1994}, Vigan\`o~\cite{vigano2000}, and Negri~\cite{negri2005}. 
 %
-Simpson's~\cite{simpson1994} proposed labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
+%Simpson's~\cite{simpson1994} labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
 %
-Echoing the definition of bi-relational structures, we consider another extension of labelled deduction to the intuitionistic setting. 
+Echoing the definition of bi-relational structures, we consider an extension of labelled deduction to the intuitionistic setting
 %
-The idea is to use two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ (similarly to~\cite{maffezioli2013} for epistemic logic). 
+that uses two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ (similarly to~\cite{maffezioli2013} for epistemic logic). 
 %
 
 
@@ -279,9 +281,9 @@ The idea is to use two sorts of relational atoms, one for the modal relation $\r
 %
 We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
 %
-Most rules are similar to the ones of Simpson~\cite{simpson1994}, but some rules are even more explicitly in correspondence with the semantics by using the preorder atoms. 
+Most rules are similar to the ones of Simpson~\cite{simpson1994}, but some are more explicitly in correspondence with the semantics by using the preorder atoms. 
 %
-In particular, the rules introducing the $\BOX$-operator correspond to the definition~\eqref{eq:box}.
+For instance, the rules introducing the $\BOX$-connective correspond to the definition~\eqref{eq:box}.
 %
 Furthermore, our system has to incorporate the two semantic conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and the rules $\rn{refl}$ and $\rn{trans}$ are also necessary to ensure that the preorder atoms do behave as a preorder relation on labels.
 %
@@ -318,7 +320,7 @@ Furthermore, our system has to incorporate the two semantic conditions ($F_1$) a
 	\end{enumerate}
 \end{theorem}
 
-The proof is a careful adaptation of standard techniques (see~\cite{marin:morales:strassburger:hal}).
+The proof is a careful adaptation of standard techniques (see~\cite{marin:morales:strassburger:hal} for details).
 %%
 %In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
 %%
@@ -399,30 +401,6 @@ The proof is a careful adaptation of standard techniques (see~\cite{marin:morale
 
 \section{Fully nested sequent calculus}\label{sec:nested}
 
-%Nested sequents were introduced by Kashima \cite{kashima1994cut} and then independently rediscovered by Br\"{u}nnler \cite{brunnler2009deep} and Poggiolesi \cite{poggiolesi2009method}.
-%
-Nested sequents are a generalisation of sequents from a multiset
-of formulas to a tree of multisets of formulas.
-In nested sequent notation, brackets are used to indicate the parent-child relation in the tree, and can be interpreted as the modal $\BOX$ (similarly to how the comma is interpreted as $\OR$). for intuitionistic logic we need two-sided sequents, which are formally generated by:
-\begin{center}
-	$\Cx \coloncolonequals \lf{A_{1}}, ..., \lf{A_{n}}, \rt{B_{1}},..., \rt{B_{k}}, \BR{\Cx[1]},..., \BR{\Cx[m]}$
-\end{center}
-
-where $\fm{A_{1}}, . . . , \fm{A_{n}}$ are the formulas that would occur on the left of the turnstile if there was a turnstile, $\fm{B_{1}}, . . . , \fm{B_{k}}$ are the formulas that would occur on the right of the turnstile if there was a turnstile, and $\Cx[1], . . . , \Cx[m]$ are nested sequents. We use the $\bullet$ and $\circ$ as polarities indication for formulas.
-
-In order to capture intuitionistic modal logics, we build a nested sequent system with the two relations explicitly: one of for the accessibility relation $\rel$ associated with the Kripke semantics for normal modal logics (represented with one bracket in the sequent) and one for the preorder relation $\le$ associated with the Kripje semantics for intuitionistic logic (represented with two brackets in the system).
-
-In the intuitionistic setting, the validity of a modal formula has to be defined using both the $\rel$ and the $\le$ relation as:
-$\force{\lb x}{\fm{\BOX A}}$ iff for all $\lb y$ and $\lb z$ s.t. $\futs xy$ and $\accs yz$, $\force{\lb z}{\fm{A}}$. Our system reflects exactly this definition in the rules introducing the $\BOX$-operator:
-
-\begin{center}
-	$\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf A, \Cx[2]}}}
-	\quad
-	\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}$
-\end{center}
-
-\marianela{add F1 rule?}
-
 
 \begin{figure}%[h]
 	\centering
@@ -487,46 +465,37 @@ $\force{\lb x}{\fm{\BOX A}}$ iff for all $\lb y$ and $\lb z$ s.t. $\futs xy$ and
 \label{fig:nIK}
 \end{figure}
 
-
-\marianela{explain some specific rules: $\rrn\BOX$, $\rrn\IMP$. maybe $\rn F_1$?}
-
-\sonia{Say that teh meta theoretic result ie cut-elimination is much harder}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Extensions}
-
-\marianela{say something like the idea comes from proving termination for is4...}
-
-\paragraph{Labelled}
-
-In~\cite{simpson1994}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%Nested sequents were introduced by Kashima \cite{kashima1994cut} and then independently rediscovered by Br\"{u}nnler \cite{brunnler2009deep} and Poggiolesi \cite{poggiolesi2009method}.
 %
-For example, you can add the following rule:
-$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
-to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
-
-In~\cite{plotkin1986}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%Nested sequents are a generalisation of sequents from a multiset of formulas to a tree of multisets of formulas.
 %
-For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-%\begin{center}
-($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
-%\end{center}
-
-Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
-
-
-Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
+In standard nested sequent notation, brackets are used to indicate the parent-child relation in the modal accessibility tree. 
+%, and can be interpreted as the modal $\BOX$ (similarly to how the comma is interpreted as $\OR$). 
 %
-These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+Here again, we enhance the structure with a second type of bracketting to encode the preorder relation.
+%For intuitionistic logic we need two-sided sequents, which are formally generated by:
+%$\Cx \coloncolonequals \lf{A_{1}}, ..., \lf{A_{n}}, \rt{B_{1}},..., \rt{B_{k}}, \BR{\Cx[1]},..., \BR{\Cx[m]}$
+%where $\fm{A_{1}}, . . . , \fm{A_{n}}$ are the formulas that would occur on the left of the turnstile if there was a turnstile, $\fm{B_{1}}, . . . , \fm{B_{k}}$ are the formulas that would occur on the right of the turnstile if there was a turnstile, and $\Cx[1], . . . , \Cx[m]$ are nested sequents. We use the $\bullet$ and $\circ$ as polarities indication for formulas.
 
 
-\paragraph{Nested}
-Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
-\[
+\begin{definition}
+	A two-sided intuitionistic \emph{fully nested sequent} is constructed from the grammar:
+	$$\Cx \coloncolonequals \varnothing \mid \lf A, \Cx \mid \rt A, \Cx \mid \BR{\Cx} \mid \bBR{\Cx}$$
+	where the $\lf{(\cdot)}$ and $\rt{(\cdot)}$ annotations are used to indicate that the formulas would occur on the left-hand-side or right-hand-side of a sequent respectively in the absence of the sequent arrow. 
+\end{definition}
+
+The obtained nested sequent calculus $\nIKp$ is displayed in Figure~\ref{fig:nIK}.
+%
+The idea is similar to the fully labelled calculus but the shift of paradigm forced us to make different design choices.
+%
+In particular, the underlying tree-structure prevents us to express the rule $\rn{F_2}$, but its absence is compensated by the \emph{monotonicity rules} $\lrn{mon}$ and $\rrn{mon}$ which were admissible in $\labIKp$.
+%
+Another beneficial result of this addition is that rules $\rn{refl_\le}$ and $\rn{trans_\le}$ do not need equivalent here.
+
+A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
+%
+Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IS4}$ by simply adding the following rules:
+\[\small
 \vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
 \quad
 %\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
@@ -536,6 +505,125 @@ Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
 \quad
 \vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
 \]
+
+%In order to capture intuitionistic modal logics, we build a nested sequent system with the two relations explicitly: one of for the accessibility relation $\rel$ associated with the Kripke semantics for normal modal logics (represented with one bracket in the sequent) and one for the preorder relation $\le$ associated with the Kripje semantics for intuitionistic logic (represented with two brackets in the system).
+
+%In the intuitionistic setting, the validity of a modal formula has to be defined using both the $\rel$ and the $\le$ relation as:
+%$\force{\lb x}{\fm{\BOX A}}$ iff for all $\lb y$ and $\lb z$ s.t. $\futs xy$ and $\accs yz$, $\force{\lb z}{\fm{A}}$. Our system reflects exactly this definition in the rules introducing the $\BOX$-operator:
+%
+%\begin{center}
+%	$\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf A, \Cx[2]}}}
+%	\quad
+%	\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}$
+%\end{center}
+%
+%\marianela{add F1 rule?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Extensions}
+%
+%\paragraph{Labelled}
+%
+%the frame
+%condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
+%inference rule
+%\begin{equation}
+%\label{eq:Rtrans}
+%\vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+%	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
+%\end{equation}
+%where $\B$ stands for a set of relational atoms, and $\Gamma$ and
+%$\Delta$ for multi-sets of labelled formulas.
+%
+%The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
+%versions of the $\ax 4$-axiom
+%\begin{equation}
+%\label{eq:4ax}
+%\fm{\BOX A\IMP \BOX\BOX A}
+%\qquad
+%\fm{\DIA\DIA A\IMP\DIA A}
+%\quad
+%\end{equation}
+%which are equivalent in classical
+%modal logic. However, in intuitionistic modal logic they are not
+%equivalent, and even though the logic $\IK\ax 4$, i.e., the
+%intuitionistic version of the modal logic $\K\ax 4$, contains both
+%axioms, they can also be added independently to the logic $\IK$ (an
+%intuitionistic version of $\K$). The proof theory of these
+%new logics has not been studied before; no existing labelled (or
+%label-free) proof system can handle them, even though the
+%corresponding frame conditions
+%\begin{equation}
+%\label{eq:4frame}
+%\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
+%\quad
+%\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+%\;,
+%\end{equation}
+%%  \todo{add graphical representation of the conditions}
+%$$
+%\xymatrix{
+%	x' \ar@{.>}[drr]^R \\
+%	x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
+%}
+%\qquad\qquad
+%\xymatrix{
+%	&& z''  \\
+%	x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
+%}
+%$$
+%respectively, have already been studied
+%in~\cite{plotkin:stirling:86}.
+%
+%In~\cite{simpson1994}, Simpson extends his basic sequent system for $\IK$ to the geometric axiom family. 
+%%
+%For example, you can add the following rule:
+%$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
+%to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+%$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
+%
+%In~\cite{plotkin1986}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%%
+%For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+%%\begin{center}
+%($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%%\end{center}
+%
+%Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+%$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
+%
+%Consequently, we can easily translate the frame
+%conditions in~\eqref{eq:4frame} into inference rules:
+%\begin{equation}
+%\label{eq:4rules}
+%\vlinf{\rn{4^{\BOX}}}{\text{\footnotesize$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+%	\B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+%\qquad
+%\vlinf{\rn{4^{\DIA}}}{\text{\footnotesize$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+%	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
+%\end{equation}
+%This allows us to define cut-free deductive systems for a wide range
+%of logics that could not be treated before.
+%
+%%Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
+%%%
+%%These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
+%
+%
+%\paragraph{Nested}
+%Replace $\lrn\BOX$ and $\rrn\DIA$ above by the following:
+%\[
+%\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
+%\quad
+%%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
+%\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
+%\quad
+%\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
+%\quad
+%\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
+%\]
 %\[\mbox{\hbox to .9\linewidth{\dotfill}}\]
 %\[
 %\vlinf{\rn{refl_{\BR{\cdot}}}}{}{\Cx[1]{\Cx[2]}}{\Cx[1]{\BR{\Cx[2]}}}
