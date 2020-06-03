@@ -1391,7 +1391,20 @@ $$
 %		{\vlhtr{\DD_2}{\Cx{\bBR{\Cx[1], \lf{A}}, \lf{A}}}}}
 %}
 $$
-
+\sonia{$$
+\vlderivation{
+	\vliin{{\rn{mcut}}}{}{\Cx[1]{\bBR{\Cx[2], \rt{A}}}}
+	{\vlhtr{\DD_1}{\Cx[1]{\bBR{\Cx[2], \rt{A}}, \rt{A}}}}
+	{\vlin{\rn{id}}{}{\Cx[1]{\bBR{\Cx[2], \rt{A}, \lf{A}}, \lf{A}}}{
+		\vlhy{}
+		}}}
+\reducesto
+\vlderivation{
+	\vlin{\rrn{mon}}{}{\Cx[1]{\bBR{\Cx[2], \rt{A}}}}{
+		\vlhtr{\DD_1}{\Cx[1]{\bBR{\Cx[2], \rt{A}}, \rt{A}}}
+		}
+	}
+$$}
 \end{itemize}
 
 \textbf{Key cases}: In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decreasing inductive measure.
@@ -1826,6 +1839,77 @@ $$
 $$
 \end{itemize}
 
+\section{Example}
+
+$$
+\vlderivation{
+	\vlin{\rrn\IMP}{}{\BOX((\BOX a \IMP \BOT)\AND ((b \IMP \DIA b)\IMP \BOT))\IMP \BOX \BOT}{
+		\vlin{\rrn\BOX}{}{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND ((b \IMP \DIA b)\IMP \BOT))}, \rt{\BOX \BOT}}}{
+			\vlin{\lrn{mon} + \rn{w} + \lrn\BOX + \lrn\AND}{}{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND ((b \IMP \DIA b)\IMP \BOT))}, \bBR{\BR{\rt{\BOT}}}}}{
+				\vliin{\lrn\IMP+ \rn{w} }{}{\bBR{\bBR{\lf{G},\BR{\lf{\BOX a \IMP \BOT},\lf{B}, \rt{\BOT}}}}}{
+					\vlin{\rrn\BOX}{}{\bBR{\bBR{\lf{G},\BR{\rt{\BOX a}, \lf{B}, \rt{\BOT}}}}}{
+%						\vlin{\lrn{mon}}{}{\bBR{\lf{G}, \bBR{\lf{G},\BR{\lf{A},\bBR{\BR{\rt{a}}}, \lf{B}, \rt{\BOT}}}}}{
+%							\vliin{\lrn\IMP}{}{\bBR{\lf{G}, \bBR{\lf{G},\BR{\lf{A},\bBR{\BR{\rt{a}}, \lf{(b \IMP \DIA b)\IMP \BOT}}, \lf{B}, \rt{\BOT}}}}}{
+%								\vlin{\rrn\IMP}{}{\bBR{\lf{G}, \bBR{\lf{G},\BR{\lf{A},\bBR{\BR{\rt{a}},  \lf{B},\rt{b \IMP \DIA b}}, \lf{B}, \rt{\BOT}}}}}{
+									\vlin{\lrn[4]\BOX+ \rn{w} }{}{\bBR{\bBR{\lf{G},\BR{\bBR{\BR{\rt{a}}}, \lf{B}, \rt{\BOT}}}}}{
+										\vlin{\lrn{mon} + \rn{w} + \lrn\BOX+ \rn{w} + \lrn\AND+ \rn{w}}{}{
+											\bBR{\bBR{\BR{\lf{G},\bBR{\BR{\rt{a}}}, \lf{B}, \rt{\BOT}}}}
+											}{
+											\vliin{\lrn\IMP+ \rn{w}}{}{
+												\bBR{\bBR{\BR{\bBR{\BR{\lf{(b \IMP \DIA b)\IMP \BOT},\rt{a}}}, \lf{B}, \rt{\BOT}}}}
+												}{
+												\vlin{\rrn\IMP}{}{\bBR{\bBR{\BR{\bBR{ \BR{\rt{b \IMP \DIA b},\rt{a}}}, \lf{B}, \rt{\BOT}}}}}{
+													\vlin{\rn{F_1}}{}{
+														\bBR{\bBR{\BR{\bBR{\BR{\bBR{\lf b, \rt{ \DIA b}},\rt{a}}}, \lf{B}, \rt{\BOT}}}}
+														}{
+														\vlin{\lrn{mon}+\rn{w}}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}}}}, \lf{B}, \rt{\BOT}}}}}{
+															\vliin{\lrn\IMP+\rn{w}}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}} ,\lf{(b \IMP \DIA b)\IMP \BOT}}}, \rt{\BOT}}}}}{
+																\vlin{\rrn\IMP}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}} ,\rt{b \IMP \DIA b}}}, \rt{\BOT}}}}}{
+																	\vlin{\rrn{mon}+\rn{w}}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}} ,\bBR{\lf b, \rt{ \DIA b}}}}, \rt{\BOT}}}}}{
+																		\vlin{\rrn\DIA+\rn{w}}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}}, \rt{ \DIA b} ,\bBR{\lf b}}}, \rt{\BOT}}}}}{
+																			\vlin{\rn{id}}{}{\bBR{\bBR{\BR{ \bBR{\BR{\rt{a}}, \bBR{\BR{\lf b, \rt{ \DIA b}, \rt{b}} ,\bBR{\lf b}}}, \rt{\BOT}}}}}{}
+																			}
+																		}
+																	}
+																}{
+																\vlin{\lrn\BOT+\rn{w}}{}{\bBR{\bBR{\BR{ \bBR{\bBR{\BR{\lf{\BOT}}}}}}}}{
+																	\vlhy{}
+																	}
+																}
+															}
+														}
+													}
+												}{
+												\vlin{\lrn\BOT+\rn{w}}{}{\bBR{\bBR{\BR{\bBR{\BR{\lf{\BOT}}}}}}}{
+													\vlhy{}
+													}
+												}
+											}
+										}
+									}
+%								}{
+%								\vlin{\lrn\BOT}{}{\bBR{\bBR{\BR{\bBR{\BR{\rt{a}}, \lf{\BOT}}}}}}{
+%									\vlhy{}
+%									}
+%								}
+%							}
+%						}
+					}{
+					\vlin{\lrn\BOT+\rn{w}}{}{\bBR{\bBR{\BR{\lf{\BOT}}}}}{
+						\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+$$
+
+
+where $G = \BOX((\BOX a \IMP \BOT)\AND (b \IMP \DIA b)\IMP \BOT) = A \AND B$;
+$A = \BOX a \IMP \BOT$;
+$B = (b \IMP \DIA b)\IMP \BOT$.
+
 \section{Proof transformation from $\rn{NIK}$ to $\rn{NKK}$}
 
 \begin{itemize}
@@ -1924,34 +2008,7 @@ $$
 $$
 \end{itemize}
 
-$$
-\vlderivation{
-	\vlin{\rrn\IMP}{}
-	{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)\IMP \BOX \BOT}
-	{\vlin{\rrn\BOX}{}
-		{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \rt{\BOX \BOT}}}
-		{\vlin{mon_{L} + \lrn\BOX}{}
-			{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\BR{\rt{\BOT}}}}}
-			{\vlin{\lrn\AND}{}
-				{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)},\BR{\lf{(\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT}, \rt{\BOT}}}}}
-				{\vliin{\lrn\IMP}{}
-					{\bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}, \bBR{\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)},\BR{\lf{\BOX a \IMP \BOT},\lf{(b \IMP \BOX b)\IMP \BOT}, \rt{\BOT}}}}}
-					{\vliin{\lrn\IMP}{}
-						{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
-						{\vlin{}{}
-							{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},\rt{\BOX a}, T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
-							{\vlhy{missing sth}}}
-						{\vlin{\lrn\BOT}{}
-							{\bBR{G, \bBR{G,\BR{\lf{\BOT},T, \rt{b \IMP \BOX b}, \rt{\BOT}}}}}
-							{\vlhy{}}}}
-					{\vlin{\lrn\BOT}{}
-						{\bBR{G, \bBR{G,\BR{\lf{\BOX a \IMP \BOT},\lf{\BOT}, \rt{\BOT}}}}}
-						{\vlhy{}}}}}}}
-	}$$
-	
-where $G$ is equal to $\lf{\BOX((\BOX a \IMP \BOT)\AND (b \IMP \BOX b)\IMP \BOT)}$
 
-and $T$ is equal to $\lf{(b \IMP \BOX b)\IMP \BOT}$
 %% Bibliography
 %\bibliographystyle{plain}
 %\bibliography{references}
