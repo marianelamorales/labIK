@@ -74,16 +74,24 @@
 
 
 \section{Introduction}
+\marianela{I added in the first paragraph the labelled natural deduction with three cites referencing the classical case. I did that so then in the third paragraph I added the reference of Galmiche and Sahli.}
+%Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of e.g.~labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}.
 
-Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of e.g.~labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}.
+Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction~\cite{fitting1983,prawitz1965,siemens1977} and labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}. 
 
 These generalisations of the sequent framework, inspired by relational semantics, are needed to treat modalities uniformly. 
 %
 By extending the ordinary sequent structure with \emph{one} extra element, either relational atoms between labels or nested bracketing, they encode respectively graphs or trees in the sequents, giving them enough power to represent modalities. 
 
-Similarly, proof systems have been designed for intuitionistic modal logic both as labelled sequent systems~\cite{simpson1994} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara}.
+Similarly, proof systems have been designed for intuitionistic modal logic as labelled sequent systems~\cite{simpson1994}, labelled natural deduction systems~\cite{galmiche2010} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara}.
 %
-Surprisingly, in both settings, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
+Surprisingly, in nested and labelled sequents, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
+
+\marianela{If we want to make an specific distinction between our system and Galmiche/Sahli system I would say:
+	
+	In \cite{galmiche2010}, Galmiche and Salhi present label-free natural deduction systems
+	for the different intuitionistic modal logics that are not using the \rn d-axiom. In this article, we present a labelled sequent calculus and a nested sequent calculus. We consider that sequent calculus is much better	suited for automated proof search than natural deduction.}
+%
 
 This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
 %
