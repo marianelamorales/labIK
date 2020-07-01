@@ -93,6 +93,8 @@ Surprisingly, in nested and labelled sequents, extending the sequent structure w
 	for the different intuitionistic modal logics that are not using the \rn d-axiom. In this article, we present a labelled sequent calculus and a nested sequent calculus. We consider that sequent calculus is much better	suited for automated proof search than natural deduction.}
 %
 
+\marianela{I think if we write something like the thing above, it would be helpful to make the differencec between our system and the others. Let me know what you think}
+
 This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
 %
 More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
@@ -602,6 +604,9 @@ translate the conditions in~\eqref{eq:4frame} into separate inference rules for 
 \vlinf{\rn{4_{\DIA}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
 	\B, \accs xy, \accs yz, \accs {x}{u}, \futs z{u},\Left \SEQ \Right}  
 \end{equation*}
+\marianela{I think we can make clear that this part is already proven for $\labIKp$ by adding just a sentence here like below}
+
+These extesions for $\labIKp$ are already proveṇ̣~\cite{marin:morales:strassburger:hal} but we are studying these cases for $\nIKp$.
 %This allows us to define cut-free deductive systems for a wide range of logics that could not be treated before.
 
 %Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
@@ -624,6 +629,8 @@ Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,k
 \]
 
 The generalisation of these results to our fully structured framework is subject of ongoing study.
+
+%The generalisation of these results to our fully structured framework is subject of ongoing study.
 
 %% Appendix.
 %% Remove the \Appendix command if an 
