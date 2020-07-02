@@ -31,8 +31,229 @@
 \newcommand{\ob}{[}
 \newcommand{\cb}{]}
 
-\input{macros}
+%\input{macros}
+\definecolor{notgreen}{rgb}{.1,.6,.1}
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\red}[1]{{\color{red}{#1}}}
+\newcommand{\blue}[1]{{\color{blue}{#1}}}
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
 
+%%% General
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+%\newcommand{\G}{\mathcal{G}}
+
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Left}{\mathcal{L}}
+\newcommand{\Right}{\mathcal{R}}
+
+\newcommand*{\rel}{R}
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\invr}[1]{#1^\mathsf{inv}}
+
+\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+
+\newcommand*{\fm}[1]{#1}%{{\color{notgreen}{#1}}}
+\newcommand*{\lb}[1]{#1}%{{\color{blue}{#1}}}
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Logic
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\A}{\mathcal{A}}
+
+\newcommand{\force}[2]{#1\Vdash#2}
+\newcommand{\nforce}[2]{#1\nVdash#2}
+%
+\newcommand{\height}[1]{|#1|}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Systems
+\newcommand*{\K}{\mathsf{K}}
+\newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\lab}{\mathsf{lab}}
+\newcommand*{\n}{\mathsf{n}}
+
+%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Nested sequents
+\newcommand*\mdelim[3]{%
+	\mathopen{}\left#1%
+	#3%
+	\right#2\mathclose{}%
+}
+
+\makeatletter
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+\@ifnextchar\i{\br@two}{%
+\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+\def\br@{#1}%
+\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+\def\br@{#3}%
+\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+\newcommand*{\bBR}{%
+\@ifnextchar\i{\bbr@two}{%
+\@ifnextchar\bgroup{\bbr@one}{% 
+}}}
+\newcommand*{\bbr@one}[1]{%
+\def\br@{#1}%
+\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\bbr@two}[3]{%
+\def\br@{#3}%
+\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+%\newcommand*{\@makeoperator}[2]{
+%	\newcommand*{#1}{%
+%		\mathrm{#2}\mdelim{\lparen}{\rparen}
+%	}
+%}
+%%
+%\@makeoperator{\fm}{fm^{\n}}
+%\@makeoperator{\ofm}{fm^{\o}}
+%\@makeoperator{\hfm}{fm^{\h}}
+%%
+%\@makeoperator{\depth}{dp}
+%\@makeoperator{\rank}{rk}
+%\@makeoperator{\height}{ht}
+%\@makeoperator{\tree}{tree}
+%\@makeoperator{\graph}{graph}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% contexts
+\makeatletter
+\newcommand*{\cxs}{%
+\@ifnextchar\i{\cxs@two}{%
+\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+\def\cxs@{#1}%
+\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+\def\cxs@{#3}%
+\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+\cxs@one@decor%
+}
+\def\cxs@one@decor{%
+\@ifnextchar_{\cxs@one@sub}{%
+\@ifnextchar^{\cxs@one@sup}{%
+	\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+		\@ifnextchar[{\cxs@one@arg}%]
+		\cxs}}}%
+}
+\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
+
+%% Change these as needed, but keep the \cx@continuation at the end
+\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
+
+\def\cx@delete@star#1*{%
+\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+}
+
+\newcommand*{\@makecontextual}[2]{
+\newcommand*{#1}{%
+\@ifnextchar*{\cx@delete@star{#2}}{%
+	\@ifnextchar\f{\cx@delete@focus{#2}}{%
+		#2\cx@continuation}}%
+}%
+}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Ex}{}
+
+\@makecontextual{\Cx}{\Gamma}
+\@makecontextual{\Dx}{\Delta}
+\@makecontextual{\Lx}{\Lambda}
+\@makecontextual{\Rx}{\Pi}
+
+\@makecontextual{\LLx}{\Omega}
+\@makecontextual{\RRx}{\Xi}
+\@makecontextual{\CCx}{\Sigma}
+\@makecontextual{\DDx}{\Theta}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% intuitionistic
+\newcommand*{\rt}[1]{#1^\circ}
+\newcommand*{\lf}[1]{#1^\bullet}
+
+
+%%% Extracting symbols from MnSymbol 
+\DeclareFontFamily{U} {MnSymbolC}{}
+%
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+<-6>  MnSymbolC5
+<6-7>  MnSymbolC6
+<7-8>  MnSymbolC7
+<8-9>  MnSymbolC8
+<9-10> MnSymbolC9
+<10-12> MnSymbolC10
+<12->   MnSymbolC12}{}
+\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+<-6>  MnSymbolC-Bold5
+<6-7>  MnSymbolC-Bold6
+<7-8>  MnSymbolC-Bold7
+<8-9>  MnSymbolC-Bold8
+<9-10> MnSymbolC-Bold9
+<10-12> MnSymbolC-Bold10
+<12->   MnSymbolC-Bold12}{}
+%
+\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%
+\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+
+
+%%% Labelled sequents
+\newcommand{\SEQ}{\Rightarrow}
+\newcommand*{\DD}{\mathcal{D}}
+%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+%\newcommand*{\invr}[1]{#1^\bullet}
+%\newcommand*{\rel}{R}
+
+%%% Labelled rules
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%
+\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%
+\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
+\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
+
+\newcommand*{\labIKp}{\lab\IK_{\le}}
+\newcommand*{\nIKp}{\n\IK_{\le}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -74,26 +295,16 @@
 
 
 \section{Introduction}
-\marianela{I added in the first paragraph the labelled natural deduction with three cites referencing the classical case. I did that so then in the third paragraph I added the reference of Galmiche and Sahli.}
-%Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of e.g.~labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}.
-
-Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of labelled natural deduction~\cite{fitting1983,prawitz1965,siemens1977} and labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}. 
+Structural proof theoretic accounts of modal logic can adopt the paradigm of \emph{labelled deduction} in the form of e.g.~labelled sequent systems~\cite{vigano2000,negri2005}, or the one of \emph{unlabelled deduction} in the form of e.g.~nested sequent systems~\cite{brunnler2009deep,poggiolesi2009method}.
 
 These generalisations of the sequent framework, inspired by relational semantics, are needed to treat modalities uniformly. 
 %
 By extending the ordinary sequent structure with \emph{one} extra element, either relational atoms between labels or nested bracketing, they encode respectively graphs or trees in the sequents, giving them enough power to represent modalities. 
 
-Similarly, proof systems have been designed for intuitionistic modal logic as labelled sequent systems~\cite{simpson1994}, labelled natural deduction systems~\cite{galmiche2010} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara}.
+Similarly, proof systems have been designed for intuitionistic modal logic both as labelled sequent systems~\cite{simpson1994} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara,galmiche2018}.
 %
 Surprisingly, in nested and labelled sequents, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
-
-\marianela{If we want to make an specific distinction between our system and Galmiche/Sahli system I would say:
-	
-	In \cite{galmiche2010}, Galmiche and Salhi present label-free natural deduction systems
-	for the different intuitionistic modal logics that are not using the \rn d-axiom. In this article, we present a labelled sequent calculus and a nested sequent calculus. We consider that sequent calculus is much better	suited for automated proof search than natural deduction.}
 %
-
-\marianela{I think if we write something like the thing above, it would be helpful to make the differencec between our system and the others. Let me know what you think}
 
 This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
 %
@@ -604,9 +815,7 @@ translate the conditions in~\eqref{eq:4frame} into separate inference rules for 
 \vlinf{\rn{4_{\DIA}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
 	\B, \accs xy, \accs yz, \accs {x}{u}, \futs z{u},\Left \SEQ \Right}  
 \end{equation*}
-\marianela{I think we can make clear that this part is already proven for $\labIKp$ by adding just a sentence here like below}
 
-These extesions for $\labIKp$ are already proveṇ̣~\cite{marin:morales:strassburger:hal} but we are studying these cases for $\nIKp$.
 %This allows us to define cut-free deductive systems for a wide range of logics that could not be treated before.
 
 %Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
@@ -628,7 +837,9 @@ Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,k
 \vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
 \]
 
-The generalisation of these results to our fully structured framework is subject of ongoing study.
+%The generalisation of these results to our fully structured framework is subject of ongoing study.
+
+These extensions for $\labIKp$ are already proveṇ̣~\cite{marin:morales:strassburger:hal} but these results for our fully nested sequent system are subject of ongoing study. 
 
 %The generalisation of these results to our fully structured framework is subject of ongoing study.
 
