@@ -8,16 +8,12 @@
 % If you use a non-standard package you will have
 % to submit it when you submit the final version of
 % your paper.
+
 \usepackage{graphicx}
 \usepackage{amsmath}
-\usepackage{amssymb}
-
+\usepackage{amssymb,latexsym}
+\usepackage{stmaryrd}
 \usepackage{colonequals}
-
-\usepackage[matrix,arrow]{xy}
-\usepackage[noxy]{../../virginialake}
-%\vlnosmallleftlabels
-\vlnostructuressyntax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Setting the correct page numbers                      
@@ -27,149 +23,114 @@
 %\input{../procnum.tex}
 %\numbering{../aiml20db}{paper}
 
-\input{macros}
-
-%\definecolor{notgreen}{rgb}{.1,.6,.1}
-%\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
-%\newcommand{\red}[1]{{\color{red}{#1}}}
-%\newcommand{\blue}[1]{{\color{blue}{#1}}}
-%\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
-%\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
-%
-%%%% General
-%
-%\newcommand{\F}{\mathcal{F}}
-%\newcommand{\M}{\mathcal{M}}
-%%\newcommand{\G}{\mathcal{G}}
-%
-%\newcommand{\B}{\mathcal{B}}
-%\newcommand{\Left}{\mathcal{L}}
-%\newcommand{\Right}{\mathcal{R}}
-%
-%\newcommand*{\rel}{R}
-%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
-%\newcommand*{\invr}[1]{#1^\mathsf{inv}}
-%
-%\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
-%\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
-%\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
-%
-%\newcommand*{\fm}[1]{#1}%{{\color{notgreen}{#1}}}
-%\newcommand*{\lb}[1]{#1}%{{\color{blue}{#1}}}
-%\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
-%\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
-%\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Logic
-%\newcommand*{\ax}[1]{\mathsf{#1}}
-%\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
 %\newcommand*{\A}{\mathcal{A}}
 %
 %\newcommand{\force}[2]{#1\Vdash#2}
 %\newcommand{\nforce}[2]{#1\nVdash#2}
 %%
 %\newcommand{\height}[1]{|#1|}
+\newcommand*{\rel}{R}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Systems
 %\newcommand*{\K}{\mathsf{K}}
-%\newcommand*{\IK}{\mathsf{IK}}
-%\newcommand*{\lab}{\mathsf{lab}}
-%\newcommand*{\n}{\mathsf{n}}
+\newcommand*{\IK}{\mathsf{IK}}
 %
-%%%% Connectives
-%\newcommand*{\NOT}{\neg}
-%\newcommand*{\AND}{\mathbin{\wedge}}
-%\newcommand*{\TOP}{\mathord{\top}}
-%\newcommand*{\OR}{\mathbin{\vee}}
-%\newcommand*{\BOT}{\mathord{\bot}}
-%\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+\newcommand*{\lab}{\mathsf{lab}}
+\newcommand*{\n}{\mathsf{n}}
 %
-%\newcommand*{\BOX}{\mathord{\Box}}
-%\newcommand*{\DIA}{\mathord{\Diamond}}
+\newcommand*{\labIKp}{\lab\IK_{\le}}
+\newcommand*{\nIKp}{\n\IK_{\le}}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Nested sequents
-%\newcommand*\mdelim[3]{%
-%	\mathopen{}\left#1%
-%	#3%
-%	\right#2\mathclose{}%
-%}
+%%%%%%%%%%%%%%%%%
+%% intuitionistic annotations
+\newcommand*{\rt}[1]{#1^\circ}
+\newcommand*{\lf}[1]{#1^\bullet}
 %
-%\makeatletter
-%%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
-%\newcommand*{\BR}{%
-%\@ifnextchar\i{\br@two}{%
-%\@ifnextchar\bgroup{\br@one}{% 
-%}}}
-%\newcommand*{\br@one}[1]{%
-%\def\br@{#1}%
-%\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
-%}
-%\newcommand*{\br@two}[3]{%
-%\def\br@{#3}%
-%\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
-%}
-%%
-%\newcommand*{\bBR}{%
-%\@ifnextchar\i{\bbr@two}{%
-%\@ifnextchar\bgroup{\bbr@one}{% 
-%}}}
-%\newcommand*{\bbr@one}[1]{%
-%\def\br@{#1}%
-%\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
-%}
-%\newcommand*{\bbr@two}[3]{%
-%\def\br@{#3}%
-%\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
-%}
-%%
-%%\newcommand*{\@makeoperator}[2]{
-%%	\newcommand*{#1}{%
-%%		\mathrm{#2}\mdelim{\lparen}{\rparen}
-%%	}
-%%}
-%%%
-%%\@makeoperator{\fm}{fm^{\n}}
-%%\@makeoperator{\ofm}{fm^{\o}}
-%%\@makeoperator{\hfm}{fm^{\h}}
-%%%
-%%\@makeoperator{\depth}{dp}
-%%\@makeoperator{\rank}{rk}
-%%\@makeoperator{\height}{ht}
-%%\@makeoperator{\tree}{tree}
-%%\@makeoperator{\graph}{graph}
-%\makeatother
+\newcommand*\mdelim[3]{%
+	\mathopen{}\left#1%
+	#3%
+	\right#2\mathclose{}%
+}
+%
+\makeatletter
+%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+\newcommand*{\BR}{%
+	\@ifnextchar\i{\br@two}{%
+		\@ifnextchar\bgroup{\br@one}{% 
+}}}
+\newcommand*{\br@one}[1]{%
+	\def\br@{#1}%
+	\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\br@two}[3]{%
+	\def\br@{#3}%
+	\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
+\newcommand*{\bBR}{%
+	\@ifnextchar\i{\bbr@two}{%
+		\@ifnextchar\bgroup{\bbr@one}{% 
+}}}
+\newcommand*{\bbr@one}[1]{%
+	\def\br@{#1}%
+	\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+}
+\newcommand*{\bbr@two}[3]{%
+	\def\br@{#3}%
+	\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% contexts
-%\makeatletter
-%\newcommand*{\cxs}{%
-%\@ifnextchar\i{\cxs@two}{%
-%\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
-%}}}
-%\newcommand*{\cxs@one}[1]{%
-%\def\cxs@{#1}%
-%\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
-%\cxs@one@decor%
-%}
-%\newcommand*{\cxs@two}[3]{%
-%\def\cxs@{#3}%
-%\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
-%\cxs@one@decor%
-%}
+\makeatletter
+\newcommand*{\cxs}{%
+	\@ifnextchar\i{\cxs@two}{%
+		\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+}}}
+\newcommand*{\cxs@one}[1]{%
+	\def\cxs@{#1}%
+	\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+	%\cxs@one@decor%
+}
+\newcommand*{\cxs@two}[3]{%
+	\def\cxs@{#3}%
+	\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+	%\cxs@one@decor%
+}
 %\def\cxs@one@decor{%
 %\@ifnextchar_{\cxs@one@sub}{%
 %\@ifnextchar^{\cxs@one@sup}{%
-%	\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
-%		\@ifnextchar[{\cxs@one@arg}%]
-%		\cxs}}}%
+%\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+%	\@ifnextchar[{\cxs@one@arg}%]
+%	\cxs}}}%
 %}
 %\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
 %\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
 %\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
-%
-%%% Change these as needed, but keep the \cx@continuation at the end
+
+%% Change these as needed, but keep the \cx@continuation at the end
 %\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
 %\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
 %\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
@@ -177,81 +138,48 @@
 %\def\cx@delete@star#1*{%
 %\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
 %}
-%
-%\newcommand*{\@makecontextual}[2]{
-%\newcommand*{#1}{%
-%\@ifnextchar*{\cx@delete@star{#2}}{%
-%	\@ifnextchar\f{\cx@delete@focus{#2}}{%
-%		#2\cx@continuation}}%
-%}%
-%}
-%\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
-%
-%\@makecontextual{\Ex}{}
-%
-%\@makecontextual{\Cx}{\Gamma}
-%\@makecontextual{\Dx}{\Delta}
-%\@makecontextual{\Lx}{\Lambda}
-%\@makecontextual{\Rx}{\Pi}
-%
-%\@makecontextual{\LLx}{\Omega}
-%\@makecontextual{\RRx}{\Xi}
-%\@makecontextual{\CCx}{\Sigma}
-%\@makecontextual{\DDx}{\Theta}
-%\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% intuitionistic
-%\newcommand*{\rt}[1]{#1^\circ}
-%\newcommand*{\lf}[1]{#1^\bullet}
-%
-%
-%%%% Extracting symbols from MnSymbol 
-%\DeclareFontFamily{U} {MnSymbolC}{}
-%%
-%\DeclareFontShape{U}{MnSymbolC}{m}{n}{
-%<-6>  MnSymbolC5
-%<6-7>  MnSymbolC6
-%<7-8>  MnSymbolC7
-%<8-9>  MnSymbolC8
-%<9-10> MnSymbolC9
-%<10-12> MnSymbolC10
-%<12->   MnSymbolC12}{}
-%\DeclareFontShape{U}{MnSymbolC}{b}{n}{
-%<-6>  MnSymbolC-Bold5
-%<6-7>  MnSymbolC-Bold6
-%<7-8>  MnSymbolC-Bold7
-%<8-9>  MnSymbolC-Bold8
-%<9-10> MnSymbolC-Bold9
-%<10-12> MnSymbolC-Bold10
-%<12->   MnSymbolC-Bold12}{}
-%%
-%\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
-%%
-%\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
-%\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
-%
-%
-%%%% Labelled sequents
-%\newcommand{\SEQ}{\Rightarrow}
-%\newcommand*{\DD}{\mathcal{D}}
-%%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
-%%\newcommand*{\invr}[1]{#1^\bullet}
-%%\newcommand*{\rel}{R}
-%
-%%%% Labelled rules
-%\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
-%\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
-%\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
-%%
-%\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
-%\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
-%%
-%\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
-%\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
-%
-%\newcommand*{\labIKp}{\lab\IK_{\le}}
-%\newcommand*{\nIKp}{\n\IK_{\le}}
 
+\newcommand*{\@makecontextual}[2]{
+	\newcommand*{#1}{%
+		\@ifnextchar*{\cx@delete@star{#2}}{%
+			\@ifnextchar\f{\cx@delete@focus{#2}}{%
+				#2\cx@continuation}}%
+	}%
+}
+\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
+
+\@makecontextual{\Cx}{\Gamma}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%Rules
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+%\newcommand*{\invr}[1]{#1^\mathsf{inv}}
+%
+\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}
+\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Labelled sequents
+
+\newcommand*{\lb}[1]{#1}%{{\color{blue}{#1}}}
+\newcommand*{\fm}[1]{#1}%{{\color{notgreen}{#1}}}
+%
+\newcommand{\SEQ}{\Rightarrow}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Left}{\mathcal{L}}
+\newcommand{\Right}{\mathcal{R}}
+%
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Labelled rules
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %The following line defines the page header consisting of the surnames of the authors.
@@ -272,7 +200,7 @@
   \begin{abstract}
   %We present a nested sequent system for intuitionistic modal logic in which we capture explicitly two relations: one for the accessibility relation associated with the Kripke semantics for normal modal logics (represented with one bracket in a formula or context) and one for the preorder relation associated with the Kripke semantics for intuitionistic logic (represented with two brackets in a formula or context).
   %
-  We present a labelled sequent system and a nested sequent system for intuitionistic modal logics equipped with two relation symbols, one for the accesibility relation associated with the Kripke semantics for modal logics and one for the preorder relation associated with the Kripke semantics for intuitionistic logic. Both systems are in close correspondence with birelational Kripke semantics for intuitionistic modal logic.
+  We present a labelled sequent system and a nested sequent system for intuitionistic modal logics equipped with two relation symbols, one for the accessibility relation associated with the Kripke semantics for modal logics and one for the preorder relation associated with the Kripke semantics for intuitionistic logic. Both systems are in close correspondence with the birelational Kripke semantics for intuitionistic modal logic.
   \end{abstract}
 
   \begin{keyword}
@@ -414,7 +342,7 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 \begin{figure}
 	\centering
 	\fbox{
-		\includegraphics[scale=.8]{fig-labIK}
+		\includegraphics[scale=.9]{fig-labIK}
 	}		
 	\caption{System $\labIKp$}
 	\label{fig:labIK}
@@ -499,7 +427,7 @@ The proof is a careful adaptation of standard techniques (see~\cite{marin:morale
 \begin{figure}
 	\centering
 	\fbox{
-		\includegraphics[scale=.8]{fig-nIK}
+		\includegraphics[scale=.9]{fig-nIK}
 	}		
 \caption{System $\nIKp$}
 \label{fig:nIK}
@@ -533,25 +461,6 @@ In particular, the underlying tree-structure prevents us to express the rule $\r
 %
 Another beneficial result of this addition is that rules $\rn{refl_\le}$ and $\rn{trans_\le}$ do not need any equivalent here.
 
-%In order to capture intuitionistic modal logics, we build a nested sequent system with the two relations explicitly: one of for the accessibility relation $\rel$ associated with the Kripke semantics for normal modal logics (represented with one bracket in the sequent) and one for the preorder relation $\le$ associated with the Kripje semantics for intuitionistic logic (represented with two brackets in the system).
-
-%In the intuitionistic setting, the validity of a modal formula has to be defined using both the $\rel$ and the $\le$ relation as:
-%$\force{\lb x}{\fm{\BOX A}}$ iff for all $\lb y$ and $\lb z$ s.t. $\futs xy$ and $\accs yz$, $\force{\lb z}{\fm{A}}$. Our system reflects exactly this definition in the rules introducing the $\BOX$-operator:
-%
-%\begin{center}
-%	$\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf A, \Cx[2]}}}
-%	\quad
-%	\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}$
-%\end{center}
-%
-%\marianela{add F1 rule?}
-
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -561,87 +470,39 @@ As mentionned in the introduction, one of our motivation is to investigate decis
 %
 We will therefore illustrate the benefit of our approach taking transitivity as a test-case.
 
-%\paragraph{Labelled}
-%
-%The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
-%inference rule
-%\begin{equation}
-%\label{eq:Rtrans}
-%\vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-%	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
-%\end{equation}
-%where $\B$ stands for a set of relational atoms, and $\Gamma$ and
-%$\Delta$ for multi-sets of labelled formulas.
-
 The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be axiomatised by the conjunction of the two versions of the $\ax 4$-axiom:\vspace*{-.2cm}
-%\begin{equation*}
-%\label{eq:4ax}
-$$
+$$\small
 \ax{4_{\BOX}}\colon\fm{\BOX A\IMP \BOX\BOX A}
 \qquad\qquad\qquad
 \ax{4_{\DIA}}\colon\fm{\DIA\DIA A\IMP\DIA A}
-$$%\end{equation*}
+$$
 %
 which are equivalent in classical modal logic. 
 %
 However, in intuitionistic modal logic they are not and they can be added independently to the logic $\IK$. %(an intuitionistic version of $\K$). 
 %
 From~\cite{plotkin1986} we know they are in correspondance with the following frame conditions:\vspace*{-.2cm}
+{\small
 \begin{equation}
 \label{eq:4frame}
 \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs x{u}\AND\accs {u}z)
 \quad
 \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs z{u}\AND\accs {x}{u})
 \end{equation}
-%  \todo{add graphical representation of the conditions}
-%$$
-%\xymatrix{
-%	u \ar@{.>}[drr]^R \\
-%	x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
-%}
-%\qquad\qquad
-%\xymatrix{
-%	&& u  \\
-%	x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
-%}
-%$$
-%respectively%, have already been studied in~\cite{plotkin:stirling:86}.
+}
 
 Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule%\vspace*{-.2cm}
 
 \begin{center}
-\includegraphics[scale=.8]{fig-trans}
+\includegraphics[scale=.9]{fig-trans}
 \end{center}
 
-%For example, you can add the following rule:
-%$$\small
-%\vlinf{\rn{trans}_\rel}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
-%to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-%$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
-
-%In~\cite{plotkin1986}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
-%%
-%For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-%%\begin{center}
-%($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
-%%\end{center}
-
-Incorporating the preorder symbol into the syntax, however,  allowed us~\cite{marin:morales:strassburger:hal} to %also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-%$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
-%Consequently, we can easily 
+Incorporating the preorder symbol into the syntax, however,  allowed us~\cite{marin:morales:strassburger:hal} to 
 translate the conditions in~\eqref{eq:4frame} into separate inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:%\vspace*{-.1cm}
 
 \begin{center}
-	\includegraphics[scale=.8]{fig-trans2}
+	\includegraphics[scale=.9]{fig-trans2}
 \end{center}
-
-
-%This allows us to define cut-free deductive systems for a wide range of logics that could not be treated before.
-
-%Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin1986}.
-%%
-%These systems enjoy cut-elimination via usual arguments, the generality of the result is subject of ongoing study.
-
 
 A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
 %
@@ -654,8 +515,6 @@ Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,k
 %The generalisation of these results to our fully structured framework is subject of ongoing study.
 %
 These extensions for $\labIKp$ are already proven~\cite{marin:morales:strassburger:hal} but these results for our fully nested sequent system are subject of ongoing study. 
-
-%The generalisation of these results to our fully structured framework is subject of ongoing study.
 
 %% Appendix.
 %% Remove the \Appendix command if an 
