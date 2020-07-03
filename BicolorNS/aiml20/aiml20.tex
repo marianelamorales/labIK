@@ -227,22 +227,22 @@ These generalisations of the sequent framework, inspired by relational semantics
 %
 By extending the ordinary sequent structure with \emph{one} extra element, either relational atoms between labels or nested bracketing, they encode respectively graphs or trees in the sequents, giving them enough power to represent modalities. 
 
-Similarly, proof systems have been designed for intuitionistic modal logic both as labelled sequent systems~\cite{simpson1994} and as nested sequent systems~\cite{strassburger2013,kuznets:strassburger:maehara,galmiche2018}.
+Similarly, proof systems have been designed for \emph{intuitionistic} modal logic both as labelled~\cite{simpson1994} and as nested~\cite{strassburger2013,kuznets:strassburger:maehara,galmiche2018} sequent systems.
 %
 Surprisingly, in nested and labelled sequents, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
 %
 
 This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
 %
-More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
+More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently, restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
 
-This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing both the modal accesibility relation and the intuitionistic preorder relation. 
+This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing \emph{both} the modal accesibility relation and the intuitionistic preorder relation. 
 %
 A fully labelled framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
 %
 In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a fully nested framework, presented in Section~\ref{sec:nested}.
 %
-We would be particularly interested in a suitable system for logic $\mathsf{IS4}$, whose decidability is not known, and discuss this direction in Section~\ref{sec:extensions}.
+We would be particularly interested in a suitable system for logic $\mathsf{IS4}$, whose decidability is not known; we discuss this direction in Section~\ref{sec:extensions}.
 
 %We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic preorder relation. 
 %
@@ -346,7 +346,7 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 		\includegraphics[scale=.9]{fig-labIK}
 	}		
 	\caption{System $\labIKp$}
-	\label{fig:labIK}
+	\label{fig:labIKp}
 \end{figure}
 
 %Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
