@@ -1,0 +1,53 @@
+\documentclass{standalone}
+
+\usepackage{graphicx}
+\usepackage[matrix,arrow]{xy}
+\usepackage[noxy]{../../virginialake}
+%\vlnosmallleftlabels
+\vlnostructuressyntax
+
+\input{macros}
+
+\begin{document}
+	\begin{minipage}{\textwidth}
+	$$
+	\vlinf{\rn{id}}{}{\Cx{\lf A, \rt A}}{}
+	\quad
+	\vlinf{\lrn{\BOT}}{}{\Cx{\lf \BOT}}{}
+	$$
+%	
+	$$
+	\vlinf{\lrn\AND}{}{\Cx{\lf{A \AND B}}}{\Cx{\lf A, \lf B}}
+	\quad
+	\vliinf{\rrn\AND}{}{\Cx{\rt{A \AND B}}}{\Cx{\rt A}}{\Cx{\rt B}}
+	\quad
+	\vliinf{\lrn\OR}{}{\Cx{\lf{A \OR B}}}{\Cx{\lf A}}{\Cx{\lf B}}
+	\quad
+	\vlinf{\rrn\OR}{}{\Cx{\rt{A \OR B}}}{\Cx{\rt A, \rt B}}
+	$$
+%	
+	$$
+	\vliinf{\lrn\IMP}{}{\Cx[1]{\lf{A \IMP B}}}{\Cx[1]{\lf{A \IMP B}, \rt A}}{\Cx[1]{\lf B}}
+	\quad
+	\vlinf{\rrn\IMP}{}{\Cx{\rt{A \IMP B}}}{\Cx{\bBR{\lf A, \rt B}}}
+	$$
+%	
+	$$
+	\vlinf{\lrn\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf A, \Cx[2]}}}
+	\quad
+	\vlinf{\rrn\BOX}{}{\Cx{\rt{\BOX A}}}{\Cx{\bBR{\BR{\rt A}}}}
+	\quad
+	\vlinf{\lrn\DIA}{}{\Cx{\lf{\DIA A}}}{\Cx{\BR{\lf A}}}
+	\quad
+	\vlinf{\rrn\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt A, \Cx[2]}}}
+	$$
+%	
+	$$
+	\vlinf{\rrn{mon}}{}{\Cx[1]{\bBR{\rt A, \Cx[2]}}}{\Cx[1]{\rt A, \bBR{\rt A, \Cx[2]}}}
+	\quad
+	\vlinf{\lrn{mon}}{}{\Cx[1]{\lf A, \bBR{\Cx[2]}}}{\Cx[1]{\lf A, \bBR{\lf A, \Cx[2]}}}
+	\quad
+	\vlinf{\rn{F_1}}{}{\Cx[1]{\BR{\Cx[2], \bBR{\Cx[3]}}}}{\Cx[1]{\BR{\Cx[2]}, \bBR{{\BR{\Cx[3]}}}}}
+	$$
+	\end{minipage}
+\end{document}
