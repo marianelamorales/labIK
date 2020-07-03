@@ -27,233 +27,230 @@
 %\input{../procnum.tex}
 %\numbering{../aiml20db}{paper}
 
-% definitions specific to your article
-%\newcommand{\ob}{[}
-%\newcommand{\cb}{]}
+\input{macros}
 
-%\input{macros}
-\definecolor{notgreen}{rgb}{.1,.6,.1}
-\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
-\newcommand{\red}[1]{{\color{red}{#1}}}
-\newcommand{\blue}[1]{{\color{blue}{#1}}}
-\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
-\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
-
-%%% General
-
-\newcommand{\F}{\mathcal{F}}
-\newcommand{\M}{\mathcal{M}}
-%\newcommand{\G}{\mathcal{G}}
-
-\newcommand{\B}{\mathcal{B}}
-\newcommand{\Left}{\mathcal{L}}
-\newcommand{\Right}{\mathcal{R}}
-
-\newcommand*{\rel}{R}
-\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
-\newcommand*{\invr}[1]{#1^\mathsf{inv}}
-
-\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
-\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
-\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
-
-\newcommand*{\fm}[1]{#1}%{{\color{notgreen}{#1}}}
-\newcommand*{\lb}[1]{#1}%{{\color{blue}{#1}}}
-\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
-\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
-\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Logic
-\newcommand*{\ax}[1]{\mathsf{#1}}
-\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
-\newcommand*{\A}{\mathcal{A}}
-
-\newcommand{\force}[2]{#1\Vdash#2}
-\newcommand{\nforce}[2]{#1\nVdash#2}
+%\definecolor{notgreen}{rgb}{.1,.6,.1}
+%\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+%\newcommand{\red}[1]{{\color{red}{#1}}}
+%\newcommand{\blue}[1]{{\color{blue}{#1}}}
+%\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+%\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
 %
-\newcommand{\height}[1]{|#1|}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Systems
-\newcommand*{\K}{\mathsf{K}}
-\newcommand*{\IK}{\mathsf{IK}}
-\newcommand*{\lab}{\mathsf{lab}}
-\newcommand*{\n}{\mathsf{n}}
-
-%%% Connectives
-\newcommand*{\NOT}{\neg}
-\newcommand*{\AND}{\mathbin{\wedge}}
-\newcommand*{\TOP}{\mathord{\top}}
-\newcommand*{\OR}{\mathbin{\vee}}
-\newcommand*{\BOT}{\mathord{\bot}}
-\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
-
-\newcommand*{\BOX}{\mathord{\Box}}
-\newcommand*{\DIA}{\mathord{\Diamond}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Nested sequents
-\newcommand*\mdelim[3]{%
-	\mathopen{}\left#1%
-	#3%
-	\right#2\mathclose{}%
-}
-
-\makeatletter
-%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
-\newcommand*{\BR}{%
-\@ifnextchar\i{\br@two}{%
-\@ifnextchar\bgroup{\br@one}{% 
-}}}
-\newcommand*{\br@one}[1]{%
-\def\br@{#1}%
-\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
-}
-\newcommand*{\br@two}[3]{%
-\def\br@{#3}%
-\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
-}
+%%%% General
 %
-\newcommand*{\bBR}{%
-\@ifnextchar\i{\bbr@two}{%
-\@ifnextchar\bgroup{\bbr@one}{% 
-}}}
-\newcommand*{\bbr@one}[1]{%
-\def\br@{#1}%
-\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
-}
-\newcommand*{\bbr@two}[3]{%
-\def\br@{#3}%
-\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
-}
+%\newcommand{\F}{\mathcal{F}}
+%\newcommand{\M}{\mathcal{M}}
+%%\newcommand{\G}{\mathcal{G}}
 %
-%\newcommand*{\@makeoperator}[2]{
-%	\newcommand*{#1}{%
-%		\mathrm{#2}\mdelim{\lparen}{\rparen}
-%	}
+%\newcommand{\B}{\mathcal{B}}
+%\newcommand{\Left}{\mathcal{L}}
+%\newcommand{\Right}{\mathcal{R}}
+%
+%\newcommand*{\rel}{R}
+%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+%\newcommand*{\invr}[1]{#1^\mathsf{inv}}
+%
+%\newcommand*{\orn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+%\newcommand*{\rrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+%\newcommand*{\lrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%
+%\newcommand*{\fm}[1]{#1}%{{\color{notgreen}{#1}}}
+%\newcommand*{\lb}[1]{#1}%{{\color{blue}{#1}}}
+%\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+%\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+%\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Logic
+%\newcommand*{\ax}[1]{\mathsf{#1}}
+%\newcommand*{\kax}[1][]		{\ax{k_{#1}}}
+%\newcommand*{\A}{\mathcal{A}}
+%
+%\newcommand{\force}[2]{#1\Vdash#2}
+%\newcommand{\nforce}[2]{#1\nVdash#2}
+%%
+%\newcommand{\height}[1]{|#1|}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Systems
+%\newcommand*{\K}{\mathsf{K}}
+%\newcommand*{\IK}{\mathsf{IK}}
+%\newcommand*{\lab}{\mathsf{lab}}
+%\newcommand*{\n}{\mathsf{n}}
+%
+%%%% Connectives
+%\newcommand*{\NOT}{\neg}
+%\newcommand*{\AND}{\mathbin{\wedge}}
+%\newcommand*{\TOP}{\mathord{\top}}
+%\newcommand*{\OR}{\mathbin{\vee}}
+%\newcommand*{\BOT}{\mathord{\bot}}
+%\newcommand*{\IMP}{\mathbin{\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+%
+%\newcommand*{\BOX}{\mathord{\Box}}
+%\newcommand*{\DIA}{\mathord{\Diamond}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Nested sequents
+%\newcommand*\mdelim[3]{%
+%	\mathopen{}\left#1%
+%	#3%
+%	\right#2\mathclose{}%
+%}
+%
+%\makeatletter
+%%\newcommand*\BR[2][]{\mdelim{\lbrack\strut^{#1}}{\rbrack}{#2}}
+%\newcommand*{\BR}{%
+%\@ifnextchar\i{\br@two}{%
+%\@ifnextchar\bgroup{\br@one}{% 
+%}}}
+%\newcommand*{\br@one}[1]{%
+%\def\br@{#1}%
+%\mdelim{\lbrack}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+%}
+%\newcommand*{\br@two}[3]{%
+%\def\br@{#3}%
+%\mdelim{\lbrack\strut^{#2}}{\rbrack}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
 %}
 %%
-%\@makeoperator{\fm}{fm^{\n}}
-%\@makeoperator{\ofm}{fm^{\o}}
-%\@makeoperator{\hfm}{fm^{\h}}
+%\newcommand*{\bBR}{%
+%\@ifnextchar\i{\bbr@two}{%
+%\@ifnextchar\bgroup{\bbr@one}{% 
+%}}}
+%\newcommand*{\bbr@one}[1]{%
+%\def\br@{#1}%
+%\mdelim{\llbracket}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #1\fi}%
+%}
+%\newcommand*{\bbr@two}[3]{%
+%\def\br@{#3}%
+%\mdelim{\llbracket\strut^{#2}}{\rrbracket}{\ifx\br@\empty\mkern 3mu\else #3\fi}%
+%}
 %%
-%\@makeoperator{\depth}{dp}
-%\@makeoperator{\rank}{rk}
-%\@makeoperator{\height}{ht}
-%\@makeoperator{\tree}{tree}
-%\@makeoperator{\graph}{graph}
-\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% contexts
-\makeatletter
-\newcommand*{\cxs}{%
-\@ifnextchar\i{\cxs@two}{%
-\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
-}}}
-\newcommand*{\cxs@one}[1]{%
-\def\cxs@{#1}%
-\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
-\cxs@one@decor%
-}
-\newcommand*{\cxs@two}[3]{%
-\def\cxs@{#3}%
-\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
-\cxs@one@decor%
-}
-\def\cxs@one@decor{%
-\@ifnextchar_{\cxs@one@sub}{%
-\@ifnextchar^{\cxs@one@sup}{%
-	\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
-		\@ifnextchar[{\cxs@one@arg}%]
-		\cxs}}}%
-}
-\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
-\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
-\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
-
-%% Change these as needed, but keep the \cx@continuation at the end
-\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
-\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
-\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
-
-\def\cx@delete@star#1*{%
-\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
-}
-
-\newcommand*{\@makecontextual}[2]{
-\newcommand*{#1}{%
-\@ifnextchar*{\cx@delete@star{#2}}{%
-	\@ifnextchar\f{\cx@delete@focus{#2}}{%
-		#2\cx@continuation}}%
-}%
-}
-\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
-
-\@makecontextual{\Ex}{}
-
-\@makecontextual{\Cx}{\Gamma}
-\@makecontextual{\Dx}{\Delta}
-\@makecontextual{\Lx}{\Lambda}
-\@makecontextual{\Rx}{\Pi}
-
-\@makecontextual{\LLx}{\Omega}
-\@makecontextual{\RRx}{\Xi}
-\@makecontextual{\CCx}{\Sigma}
-\@makecontextual{\DDx}{\Theta}
-\makeatother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% intuitionistic
-\newcommand*{\rt}[1]{#1^\circ}
-\newcommand*{\lf}[1]{#1^\bullet}
-
-
-%%% Extracting symbols from MnSymbol 
-\DeclareFontFamily{U} {MnSymbolC}{}
+%%\newcommand*{\@makeoperator}[2]{
+%%	\newcommand*{#1}{%
+%%		\mathrm{#2}\mdelim{\lparen}{\rparen}
+%%	}
+%%}
+%%%
+%%\@makeoperator{\fm}{fm^{\n}}
+%%\@makeoperator{\ofm}{fm^{\o}}
+%%\@makeoperator{\hfm}{fm^{\h}}
+%%%
+%%\@makeoperator{\depth}{dp}
+%%\@makeoperator{\rank}{rk}
+%%\@makeoperator{\height}{ht}
+%%\@makeoperator{\tree}{tree}
+%%\@makeoperator{\graph}{graph}
+%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% contexts
+%\makeatletter
+%\newcommand*{\cxs}{%
+%\@ifnextchar\i{\cxs@two}{%
+%\@ifnextchar\bgroup{\cxs@one}{% % \bgroup is the same as {
+%}}}
+%\newcommand*{\cxs@one}[1]{%
+%\def\cxs@{#1}%
+%\mdelim{\lbrace}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #1\fi}%
+%\cxs@one@decor%
+%}
+%\newcommand*{\cxs@two}[3]{%
+%\def\cxs@{#3}%
+%\mdelim{\lbrace\strut^{#2}}{\rbrace}{\ifx\cxs@\empty\mkern 3mu\else #3\fi}%
+%\cxs@one@decor%
+%}
+%\def\cxs@one@decor{%
+%\@ifnextchar_{\cxs@one@sub}{%
+%\@ifnextchar^{\cxs@one@sup}{%
+%	\@ifnextchar\dots{\@firstoftwo{\dotsm\cxs@one@decor}}{%
+%		\@ifnextchar[{\cxs@one@arg}%]
+%		\cxs}}}%
+%}
+%\def\cxs@one@sub_#1{_{#1}\cxs@one@decor}
+%\def\cxs@one@sup^#1{^{#1}\cxs@one@decor}
+%\def\cxs@one@arg[#1]{{#1}\cxs@one@decor}
 %
-\DeclareFontShape{U}{MnSymbolC}{m}{n}{
-<-6>  MnSymbolC5
-<6-7>  MnSymbolC6
-<7-8>  MnSymbolC7
-<8-9>  MnSymbolC8
-<9-10> MnSymbolC9
-<10-12> MnSymbolC10
-<12->   MnSymbolC12}{}
-\DeclareFontShape{U}{MnSymbolC}{b}{n}{
-<-6>  MnSymbolC-Bold5
-<6-7>  MnSymbolC-Bold6
-<7-8>  MnSymbolC-Bold7
-<8-9>  MnSymbolC-Bold8
-<9-10> MnSymbolC-Bold9
-<10-12> MnSymbolC-Bold10
-<12->   MnSymbolC-Bold12}{}
+%%% Change these as needed, but keep the \cx@continuation at the end
+%\def\cx@delete@always#1{{#1}^{\ast}\cx@continuation}
+%\def\cx@delete@right#1*{{#1}^{\star}\cx@continuation}
+%\def\cx@delete@focus#1\f{{#1}^{\scriptscriptstyle\not{\langle}{\rangle}}\cx@continuation}
 %
-\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%\def\cx@delete@star#1*{%
+%\@ifnextchar*{\cx@delete@right{#1}}{\cx@delete@always{#1}}%
+%}
 %
-\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
-\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
-
-
-%%% Labelled sequents
-\newcommand{\SEQ}{\Rightarrow}
-\newcommand*{\DD}{\mathcal{D}}
-%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
-%\newcommand*{\invr}[1]{#1^\bullet}
-%\newcommand*{\rel}{R}
-
-%%% Labelled rules
-\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
-\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
-\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%\newcommand*{\@makecontextual}[2]{
+%\newcommand*{#1}{%
+%\@ifnextchar*{\cx@delete@star{#2}}{%
+%	\@ifnextchar\f{\cx@delete@focus{#2}}{%
+%		#2\cx@continuation}}%
+%}%
+%}
+%\newcommand*{\cx@continuation}[1][]{_{#1}\cxs}
 %
-\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
-\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%\@makecontextual{\Ex}{}
 %
-\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
-\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
-
-\newcommand*{\labIKp}{\lab\IK_{\le}}
-\newcommand*{\nIKp}{\n\IK_{\le}}
+%\@makecontextual{\Cx}{\Gamma}
+%\@makecontextual{\Dx}{\Delta}
+%\@makecontextual{\Lx}{\Lambda}
+%\@makecontextual{\Rx}{\Pi}
+%
+%\@makecontextual{\LLx}{\Omega}
+%\@makecontextual{\RRx}{\Xi}
+%\@makecontextual{\CCx}{\Sigma}
+%\@makecontextual{\DDx}{\Theta}
+%\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% intuitionistic
+%\newcommand*{\rt}[1]{#1^\circ}
+%\newcommand*{\lf}[1]{#1^\bullet}
+%
+%
+%%%% Extracting symbols from MnSymbol 
+%\DeclareFontFamily{U} {MnSymbolC}{}
+%%
+%\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+%<-6>  MnSymbolC5
+%<6-7>  MnSymbolC6
+%<7-8>  MnSymbolC7
+%<8-9>  MnSymbolC8
+%<9-10> MnSymbolC9
+%<10-12> MnSymbolC10
+%<12->   MnSymbolC12}{}
+%\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+%<-6>  MnSymbolC-Bold5
+%<6-7>  MnSymbolC-Bold6
+%<7-8>  MnSymbolC-Bold7
+%<8-9>  MnSymbolC-Bold8
+%<9-10> MnSymbolC-Bold9
+%<10-12> MnSymbolC-Bold10
+%<12->   MnSymbolC-Bold12}{}
+%%
+%\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%%
+%\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+%\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+%
+%
+%%%% Labelled sequents
+%\newcommand{\SEQ}{\Rightarrow}
+%\newcommand*{\DD}{\mathcal{D}}
+%%\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+%%\newcommand*{\invr}[1]{#1^\bullet}
+%%\newcommand*{\rel}{R}
+%
+%%%% Labelled rules
+%\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+%\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+%\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%%
+%\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+%\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%%
+%\newcommand*{\boxbrn}[1]{\brsym_\rn{#1}}%^{\lab}}}
+%\newcommand*{\diabrn}[1]{\diasym_\rn{#1}}
+%
+%\newcommand*{\labIKp}{\lab\IK_{\le}}
+%\newcommand*{\nIKp}{\n\IK_{\le}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -414,63 +411,13 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 
 \section{Fully labelled sequent calculus}\label{sec:labelled}
 
-\begin{figure}%[h]
+\begin{figure}
 	\centering
-	\small
 	\fbox{
-		\begin{minipage}{.95\textwidth}
-			\begin{tabular}{@{\!}c@{\quad}c}
-				$\vlinf{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A} }{}$
-				&
-				$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
-%				\quad
-%				$\vlinf{\rlabrn\top}{}{\B, \Left \SEQ \Right, \labels{x}{\TOP}}{}$
-				\\\\
-				$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
-				&
-				$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}$
-				\\\\
-				$\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}$
-				&
-				$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
-				\\\\
-				\multicolumn{2}{c}{
-					$\vlinf{\llabrn\IMP}{\text{\scriptsize $\lb y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, \futs xy, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
-				}
-				\\\\
-				\multicolumn{2}{c}{
-					$\vliinf{\rlabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}$ 
-					% 		&$\vliinf{\rlabrn\IMP}{\text{\scriptsize $x \le y \in \B$}}{\B, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \Left \SEQ \Right, \labels{y}{A}}{\B, \Left, \labels{y}{B} \SEQ \Right}$
-				}
-				\\\\
-				$\vlinf{\llabrn\BOX}{}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
-				&
-				$\vlinf{\rlabrn\BOX}{\text{\scriptsize $\lb y, \lb z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}$
-				\\\\
-				$\vlinf{\llabrn\DIA}{\text{\scriptsize $\lb y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$
-				&
-				$\vlinf{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
-				\\
-				\multicolumn{2}{c}{
-					$\mbox{\hbox to .9\linewidth{\dotfill}}$
-				}
-				\\
-				$\vlinf{\rn{refl_\le}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}$
-				&
-				$\vlinf{\rn{trans_\le}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
-				\\\\
-				\multicolumn{2}{c}{
-					$\vlinf{\rn{F_1}}{\text{\scriptsize $\lb u$ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
-				}
-				\\\\
-				\multicolumn{2}{c}{
-					$\vlinf{\rn{F_2}}{\text{\scriptsize $\lb u$ fresh}}{\B, \accs xy,\futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
-				}
-			\end{tabular}		
-		\end{minipage}
+		\includegraphics[scale=.8]{fig-labIK}
 	}		
 	\caption{System $\labIKp$}
-	\label{fig:labIKp}
+	\label{fig:labIK}
 \end{figure}
 
 %Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
@@ -529,91 +476,18 @@ Furthermore, our system must incorporate the conditions ($F_1$) and ($F_2$) into
 	\begin{enumerate}
 		\item\label{i} $A$ is a theorem of $\IK$ 
 		%
-		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with %\quad
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with \quad
 		%		
-		\smash{%\fbox{
-			\scalebox{.9}{$\vliinf{\labrn{cut}}{}{\B_1, \B_2, \Left \SEQ \Right}{\B_1, \Left \SEQ \Right, \labels{z}{C}}{\B_2, \Left, \labels{z}{C} \SEQ \Right}$}
-		}%}
+		\smash{\parbox[c]{5cm}{\includegraphics[scale=0.8]{cut}}}
 		%
 		\item\label{iii} $A$ is provable in $\labIKp$
 		%
-%		\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
+		%\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
 	\end{enumerate}
 \end{theorem}
 
 The proof is a careful adaptation of standard techniques (see~\cite{marin:morales:strassburger:hal} for details).
-%%
-%In particular, in the course of the proof of (i) $\rightarrow$ (ii), we have to derive the five $\kax$ axioms. 
-%%
-%As an example, we display the derivation of $\kax[4]$ which also illustrates the need of having the rule corresponding to $F_1$ in the system.
-%
-%\vspace*{-.9cm}
-%$$
-%\hspace*{-.5cm}
-%\scalebox{.9}{
-%	$
-%	\vlderivation{
-%		\vlin{\rlabrn\IMP}{\text{\scriptsize $y$ fresh}} {\SEQ \labels{x}{(\DIA A \IMP \BOX B) \SEQ \BOX (A \IMP B)}}{
-%			\vlin{\rlabrn\BOX}{\text{\scriptsize $z, w$ fresh}}{x \le y, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{y}{\BOX (A \IMP B)}}{
-%				\vlin {\rlabrn\IMP}{\text{\scriptsize $u$ fresh}}{x \le y, y\le z, z \rel w, \labels{y}{\DIA A \IMP \BOX B} \SEQ \labels{w}{A \IMP B}}{
-%					\vlin {\color{red}{\rn{F_1}}}{}{x \le y, y \le z, w \le u, z \rel w, \labels{y}{\DIA A \SEQ \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-%						\vlin {\rn{trans}}{}{x \le y, y \le z, w \le u, z \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-%							\vliin {\llabrn\IMP}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A} \SEQ \labels{u}{B}}{
-%								\vlin {\rlabrn\DIA}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}}{
-%									\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
-%										\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, u \le u, z \rel w, t \rel u, \labels{u}{A} \SEQ \labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}{
-%											\vlhy {}
-%										}
-%									}
-%								}
-%							}{
-%								%						\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
-%								%							\vlin {\llabrn\BOX}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B} \SEQ \labels{u}{B}}{
-%								%								\vlin {\rn{refl}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
-%								%									\vlin {\labrn{id_g}}{}{x \le y, y \le z, w \le u, z \le t, y \le t, t \le t, u \le u, z \rel w, t \rel u, \labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B} \SEQ \labels{u}{B}}{
-%								\vlhy {\qquad\vdots\qquad}
-%								%										}
-%								%									}
-%								%								}
-%								%							}
-%							}
-%						}
-%					}
-%				}
-%			}
-%		}
-%	}$
-%}$$
-%%\end{example}
-%
-%%\vspace*{-.5cm}
-%
-%Note that our system offers only an atomic version of the identity rule, though the above derivation uses a general version of the identity rule $\rn{id_g}$ that applies to generic formulas. 
-%%
-%We therefore have to show that such a rule is admissible in our system.
-%%
-%As an example, we display one step of this admissibility proof that also illustrates the need for the rule $F_2$.% (the other cases are standard).
-%
-%\vspace*{-.5cm}
-%%\begin{example}
-%$$
-%\scalebox{.9}{
-%	$
-%	\vlderivation{
-%		\vlin{\llabrn\DIA}{}{\B, x \le y, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
-%			\vlin{\color{red}{\rn{F_2}}}{}{\B, x \le y, x \rel z, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-%				\vlin{\rlabrn\DIA}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
-%					\vlin{\labrn{id_g}}{}{\B, x \le y, x \rel z, z \le u, y \rel u, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
-%						\vlhy{}
-%					}
-%				}
-%			}
-%		}
-%	}
-%	$
-%}
-%$$
-%%\end{example}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -733,11 +607,15 @@ From~\cite{plotkin1986} we know they are in correspondance with the following fr
 %$$
 %respectively%, have already been studied in~\cite{plotkin:stirling:86}.
 
-Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule:\vspace*{-.2cm}
-%
+Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule%\vspace*{-.2cm}
+
+\begin{center}
+\includegraphics[scale=.8]{fig-trans}
+\end{center}
+
 %For example, you can add the following rule:
-$$\small
-\vlinf{\rn{trans}_\rel}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
+%$$\small
+%\vlinf{\rn{trans}_\rel}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$$
 %to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
 %$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
@@ -751,15 +629,12 @@ $$\small
 Incorporating the preorder symbol into the syntax, however,  allowed us~\cite{marin:morales:strassburger:hal} to %also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
 %$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'}, \Left \SEQ \Right}$}$$
 %Consequently, we can easily 
-translate the conditions in~\eqref{eq:4frame} into separate inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:\vspace*{-.2cm}
-\begin{equation*}\small
-\label{eq:4rules}
-\vlinf{\rn{4_{\BOX}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-	\B, \accs xy, \accs yz, \accs {u}z, \futs x{u},\Left \SEQ \Right}
-\quad
-\vlinf{\rn{4_{\DIA}}}{\text{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-	\B, \accs xy, \accs yz, \accs {x}{u}, \futs z{u},\Left \SEQ \Right}  
-\end{equation*}
+translate the conditions in~\eqref{eq:4frame} into separate inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:%\vspace*{-.1cm}
+
+\begin{center}
+	\includegraphics[scale=.8]{fig-trans2}
+\end{center}
+
 
 %This allows us to define cut-free deductive systems for a wide range of logics that could not be treated before.
 
@@ -770,20 +645,14 @@ translate the conditions in~\eqref{eq:4frame} into separate inference rules for 
 
 A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
 %
-Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IK4}$ by simply adding the following rules:\vspace*{-.2cm}
-\[\small
-%\vlinf{\lrn[t]\BOX}{}{\Cx{\lf{\BOX A}}}{\Cx{\lf{\BOX A}, \lf A}}
-%\quad
-%\vlinf{\lrn[2]\BOX}{}{\Cx[1]{\lf{\BOX A}, \bBR{\BR{\Cx[2]}}}}{\Cx[1]{\bBR{\BR{\lf{\BOX A}, \Cx[2]}}}}
-\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
-%\quad
-%\vlinf{\rrn[t]\DIA}{}{\Cx{\rt{\DIA A}}}{\Cx{\rt{\DIA A}, \rt A}}
-\quad
-\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
-\]
+Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IK4}$ by simply adding the following rules:%\vspace*{-.2cm}
+
+\begin{center}
+	\includegraphics[scale = 0.8]{fig-trans3}
+\end{center}
 
 %The generalisation of these results to our fully structured framework is subject of ongoing study.
-
+%
 These extensions for $\labIKp$ are already proven~\cite{marin:morales:strassburger:hal} but these results for our fully nested sequent system are subject of ongoing study. 
 
 %The generalisation of these results to our fully structured framework is subject of ongoing study.
