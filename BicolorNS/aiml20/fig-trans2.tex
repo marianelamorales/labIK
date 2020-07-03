@@ -1,0 +1,20 @@
+\documentclass{standalone}
+
+\usepackage{graphicx}
+\usepackage[matrix,arrow]{xy}
+\usepackage[noxy]{../../virginialake}
+%\vlnosmallleftlabels
+\vlnostructuressyntax
+
+\input{macros}
+
+\begin{document}
+	
+$
+\vlinf{\rn{4_{\BOX}}}{\mbox{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {u}z, \futs x{u},\Left \SEQ \Right}
+\quad
+\vlinf{\rn{4_{\DIA}}}{\mbox{\footnotesize$\lb{u}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {x}{u}, \futs z{u},\Left \SEQ \Right}  
+$
+\end{document}

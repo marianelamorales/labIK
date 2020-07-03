@@ -1,0 +1,18 @@
+\documentclass{standalone}
+
+\usepackage{graphicx}
+\usepackage[matrix,arrow]{xy}
+\usepackage[noxy]{../../virginialake}
+%\vlnosmallleftlabels
+\vlnostructuressyntax
+
+\input{macros}
+
+\begin{document}
+	
+$
+\vlinf{\lrn[4]\BOX}{}{\Cx[1]{\lf{\BOX A}, \BR{\Cx[2]}}}{\Cx[1]{\lf{\BOX A}, \BR{\lf{\BOX A}, \Cx[2]}}}
+\quad
+\vlinf{\rrn[4]\DIA}{}{\Cx[1]{\rt{\DIA A}, \BR{\Cx[2]}}}{\Cx[1]{\rt{\DIA A}, \BR{\rt{\DIA A}, \Cx[2]}}}
+$
+\end{document}

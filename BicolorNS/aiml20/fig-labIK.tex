@@ -1,0 +1,69 @@
+\documentclass{standalone}
+
+\usepackage{graphicx}
+\usepackage[matrix,arrow]{xy}
+\usepackage[noxy]{../../virginialake}
+%\vlnosmallleftlabels
+\vlnostructuressyntax
+
+\input{macros}
+
+\begin{document}
+
+	\begin{minipage}{\textwidth}
+		$$
+		\vlinf{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A} }{}
+		\quad
+		\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}
+		$$
+%		
+		$$
+		\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}
+		\quad
+		\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}
+		$$
+%		
+		$$
+		\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}
+		\quad
+		\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}
+		$$
+%
+		$$
+		\vlinf{\llabrn\IMP}{\mbox{\scriptsize $\lb y$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \Left, \futs xy, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
+		$$
+%
+		$$
+%		\vliinf{\rlabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}$ 
+		$$
+%		
+		$$
+		\vlinf{\llabrn\BOX}{}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
+		\quad
+		\vlinf{\rlabrn\BOX}{\mbox{\scriptsize $\lb y, \lb z$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}
+		$$
+%
+		$$
+		\vlinf{\llabrn\DIA}{\mbox{\scriptsize $\lb y$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
+		\quad
+		\vlinf{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+		$$
+%		
+		$$\mbox{\hbox to .9\linewidth{\dotfill}}$$
+%
+		$$
+		\vlinf{\rn{refl_\le}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}
+		\quad
+		\vlinf{\rn{trans_\le}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}
+		$$
+%
+		$$
+		\vlinf{\rn{F_1}}{\mbox{\scriptsize $\lb u$ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}
+		$$
+%		
+		$$
+		\vlinf{\rn{F_2}}{\mbox{\scriptsize $\lb u$ fresh}}{\B, \accs xy,\futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }
+		$$
+	\end{minipage}
+
+\end{document}
