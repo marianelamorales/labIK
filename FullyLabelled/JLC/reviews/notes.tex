@@ -3,19 +3,6 @@
 \input{new-macros}
 
 \begin{document}
-\textbf{Review 2: TODO list}
-
-\begin{itemize}
-	\item \emph{Broken references “??” in pages 13 and 14}: Fixed. Done.
-	\item \emph{The section of "Extensions" has to be more detailed}
-	\item \emph{Remark 4.2. Show the “need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.}: 
-	
-	There are two options: 
-	1. Do not use the word ``need'';
-	2. Show that no other proofs of the axioms are possible.
-	
-	\item \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
-\end{itemize}
 
 
 \textbf{Review 1}
@@ -53,4 +40,49 @@
 
 The case for $\rlabrn{cont}$ is similar.
 \end{proof}
+
+\begin{itemize}
+	\item \emph{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
+\end{itemize}
+
+\begin{center}
+	$\vlderivation{
+		\vlin{\rlabrn\BOX}
+		{}
+		{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}
+		{\vlin{\rlabrn\IMP}{\lb w\mbox{ fresh}}
+			{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}
+			{\vlin{\rn F_1}{\lb u\mbox{ fresh}}
+				{\futs xy, \futs zw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
+				{\vlin{\rn g_{1100}}{\exists \lb{w'}, \lb{w''}}
+					{\futs xy, \futs zw, \futs yu, \accs uw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
+					{\vlin{\llabrn\BOX}{}
+						{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w''}, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
+						{\vlin{}{}
+							{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w''}, \accs yz, \labels{w}{\BOX A}, \labels{w''}{A} \SEQ \labels{w}{A}}
+							{}}}}}}
+	}$
+\end{center}
+
+
+\textbf{Review 2: TODO list}
+
+\begin{itemize}
+	\item \emph{Broken references “??” in pages 13 and 14}: {\color{green}Fixed.}
+	\item \emph{The section of ``Extensions" has to be more detailed:
+		\begin{itemize}
+			\item it does not help at all that the
+			applications of the rule g1111 are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example
+			derivation. {\color{green}Fixed.}
+			\item Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.
+		\end{itemize}}
+	\item \emph{Remark 4.2. Show the ``need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.}: 
+	
+	There are two options: 
+	1. Do not use the word ``need'';
+	2. Show that no other proofs of the axioms are possible.
+	
+	\item \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
+\end{itemize}
+
 \end{document}
