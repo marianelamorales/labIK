@@ -1,0 +1,369 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[margin=2cm]{geometry}
+
+\usepackage{amsmath} 
+%\usepackage{amssymb} 
+\usepackage{amsthm}
+
+\usepackage{latexsym} % For \Box and \Diamond
+\usepackage{colonequals} % for ::=
+%\usepackage{bm} % nice boldface for maths
+
+\usepackage[matrix,arrow]{xy}
+%\usepackage{xcolor}
+\usepackage[noxy]{virginialake}
+
+%\usepackage{array}
+\usepackage{graphicx} % For command \includegraphics and \scalebox                        
+%\usepackage{tikz}
+
+%\usepackage{lmodern} % Latin modern fonts in outline formats
+%\usepackage{mathtools} % a se­ries of pack­ages de­signed to en­hance the ap­pear­ance of doc­u­ments con­tain­ing a lot of math­e­mat­ics
+%\usepackage{enumerate} % adds an optional [style] argument to the enumerate environment
+
+%\usepackage{pgf} % macro package for creating graphics
+%\usepackage{pgffor}
+
+%\usepackage{hyperref} % handle cross-referencing commands with hypertext links
+
+%\usepackage{float} % for defining floating objects such as figures and tables
+%\floatstyle{boxed} 
+%\restylefloat{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Small equation environments
+\newdimen\mydisplayskip
+\mydisplayskip=.4\abovedisplayskip
+%\newenvironment{smallequation}
+%{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation\endcsname}{\csname endequation\endcsname\egroup}
+%%
+\newenvironment{smallequation*}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation*\endcsname}{\csname endequation*\endcsname\egroup}
+%%
+%\newenvironment{smallalign}
+%{\par\nobreak\noindent\bgroup\small\csname align\endcsname}{\csname endalign\endcsname\egroup}
+%%
+%\newenvironment{smallalign*}
+%{\par\nobreak\noindent\bgroup\small\csname align*\endcsname}{\csname endalign*\endcsname\egroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Theorem counter
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{fact}[theorem]{Fact}
+%\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%%
+\theoremstyle{definition}
+%\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{problem}[theorem]{Problem}
+%\newtheorem{construction}[theorem]{Construction}
+\newtheorem{remark}[theorem]{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% 
+%\tikzset{
+%	annotated cuboid/.pic={
+%		\tikzset{%
+%			every edge quotes/.append style={midway, auto},
+%			/cuboid/.cd,
+%			#1
+%		}
+%		\draw [every edge/.append style={pic actions, opacity=.5}, pic actions]
+%		(0,0,0) coordinate (o) -- ++(-\cubescale*\cubex,0,0) coordinate (a) -- ++(0,-\cubescale*\cubey,0) coordinate (b) edge coordinate [pos=1] (g) ++(0,0,-\cubescale*\cubez)  -- ++(\cubescale*\cubex,0,0) coordinate (c) -- cycle
+%		(o) -- ++(0,0,-\cubescale*\cubez) coordinate (d) -- ++(0,-\cubescale*\cubey,0) coordinate (e) edge (g) -- (c) -- cycle
+%		(o) -- (a) -- ++(0,0,-\cubescale*\cubez) coordinate (f) edge (g) -- (d) -- cycle;
+%		
+%		;
+%	},
+%	/cuboid/.search also={/tikz},
+%	/cuboid/.cd,
+%	width/.store in=\cubex,
+%	height/.store in=\cubey,
+%	depth/.store in=\cubez,
+%	units/.store in=\cubeunits,
+%	scale/.store in=\cubescale,
+%	width=10,
+%	height=10,
+%	depth=10,
+%	units=cm,
+%	scale=.1,
+%}
+%%tikz parameters
+%
+%\tikzstyle{point}=[circle,draw]
+%\usetikzlibrary{arrows,automata,shapes,decorations.markings,
+%	decorations.pathmorphing,backgrounds,fit,snakes,calc}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Extracting symbols from MnSymbol 
+\DeclareFontFamily{U} {MnSymbolC}{}
+%
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+	<-6>  MnSymbolC5
+	<6-7>  MnSymbolC6
+	<7-8>  MnSymbolC7
+	<8-9>  MnSymbolC8
+	<9-10> MnSymbolC9
+	<10-12> MnSymbolC10
+	<12->   MnSymbolC12}{}
+\DeclareFontShape{U}{MnSymbolC}{b}{n}{
+	<-6>  MnSymbolC-Bold5
+	<6-7>  MnSymbolC-Bold6
+	<7-8>  MnSymbolC-Bold7
+	<8-9>  MnSymbolC-Bold8
+	<9-10> MnSymbolC-Bold9
+	<10-12> MnSymbolC-Bold10
+	<12->   MnSymbolC-Bold12}{}
+%
+\DeclareSymbolFont{MnSyC}         {U}  {MnSymbolC}{m}{n}
+%
+\DeclareMathSymbol{\diamondplus}{\mathbin}{MnSyC}{124}
+\DeclareMathSymbol{\boxtimes}{\mathbin}{MnSyC}{117}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Virginialake add-ons
+\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
+\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
+%
+%
+\makeatletter
+\newbox\@conclbox
+\newdimen\@conclheight
+%
+%
+\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
+\newcommand\vlderiibase[5]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+	}}
+	%
+	\newcommand\vlderibase[4]{{%
+			\setbox\@conclbox=\hbox{$#3$}\relax%
+			\@conclheight=\ht\@conclbox%
+			\setbox\@conclbox=\hbox{$%
+				\vlderivationnc{%
+					\vlin{#1}{#2}{\box\@conclbox}{#4}%
+				}$}%
+			\lower\@conclheight\box\@conclbox%
+		}}
+		%
+		\newcommand\vlderidbase[4]{{%
+				\setbox\@conclbox=\hbox{$#3$}\relax%
+				\@conclheight=\ht\@conclbox%
+				\setbox\@conclbox=\hbox{$%
+					\vlderivationnc{%
+						\vlid{#1}{#2}{\box\@conclbox}{#4}%
+					}$}%
+				\lower\@conclheight\box\@conclbox%
+			}}
+			%
+			\makeatother
+			%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%% Comments  
+\definecolor{notgreen}{rgb}{.1,.6,.1}
+\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+\newcommand{\lutz}[1]{{\color{notgreen}[Lutz: #1]}}
+\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+
+%%%% General
+\newcommand*{\A}{\mathcal{A}}
+%\newcommand{\G}{\mathcal{G}}
+\newcommand*{\SG}{\fm{\mathcal{G}}}
+\newcommand{\SGi}[1]{\fm{\mathcal{G}_{#1}}}
+%
+\newcommand{\quand}{\quad\mbox{and}\quad}
+\newcommand{\qquand}{\qquad\mbox{and}\qquad}
+\newcommand{\quadcm}{\rlap{\quad,}}
+%
+\newcommand{\proviso}[1]{\mbox{\scriptsize #1}}
+
+%%%% Systems
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]{\ax{k_{#1}}}
+\newcommand{\fourax}{\ax{4}}
+\newcommand{\agklmn}{\mathsf{g_{klmn}}}
+%
+\newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\K}{\mathsf{K}}
+%
+\newcommand*{\IKfour}{\mathsf{IK4}}
+\newcommand*{\Kfour}{\mathsf{K4}}
+%
+%\newcommand*{\ISfour}{\mathsf{IS4}}
+%\newcommand*{\Sfour}{\mathsf{S4}}
+%
+\newcommand*{\labIKp}{\lab\IK_{\le}}
+
+%%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\supset}}%%\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+%
+%%%% Labelled sequents
+\newcommand{\lseq}[3]{#1 , #2 \SEQ #3}
+%
+\newcommand{\B}{\mathcal{R}}
+\newcommand{\Left}{\Gamma} %{\mathcal{L}}
+\newcommand{\Right}{\Delta} %{\mathcal{R}}
+%
+\newcommand*{\fm}[1]{{\color{notgreen}{#1}}}
+\newcommand*{\lb}[1]{{\color{blue}{#1}}}
+%
+\newcommand*{\rel}{R}
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
+%
+\newcommand{\SEQ}{\Longrightarrow}
+%
+
+%%%% Labelled rules
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\lab}{\mathsf{lab}}
+%
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%%
+%\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%%
+\newcommand*{\boxbrn}[1]{\boxtimes_\rn{#1}}%^{\lab}}}
+\newcommand*{\diabrn}[1]{\diamondplus_\rn{#1}}
+
+%%%% System labIK+gklmn
+\newcommand{\gklmn}{\boxtimes_{\mathsf{gklmn}}}
+\newcommand{\boxk}{\square_{R}^{k}}
+\newcommand{\boxlk}{\square_{L}^{k}}
+\newcommand{\diamk}{\lozenge_{L}^{k}}
+\newcommand{\diamrk}{\lozenge_{R}^{k}}
+
+%%%% Semantics
+\newcommand{\f}{f^{\mathcal{M}}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\F}{\mathcal{F}}
+%
+\newcommand{\inter}[1]{\lb{\llbracket #1\rrbracket}}
+%\newcommand{\force}[3]{#1,#2\Vdash#3}
+\newcommand{\nforce}[3]{#1,#2\not\Vdash#3}
+\newcommand{\cforce}[3]{#1,\lb{#2}\Vdash\fm{#3}}
+\newcommand{\cnforce}[3]{#1,\lb{#2}\not\Vdash\fm{#3}}
+
+%%%% Derivations
+\newcommand{\Dw}{\mathcal{D}^{\rn w}}
+\newcommand{\Dwone}{\mathcal{D}_{1}^{\rn w}}
+\newcommand{\Dwtwo}{\mathcal{D}_{2}^{\rn w}}
+%
+\newcommand{\D}{\mathcal{D}}
+\newcommand*{\DD}{\mathcal{D}}
+\newcommand{\Done}{\mathcal{D}_{1}}
+\newcommand{\Dtwo}{\mathcal{D}_{2}}
+%
+\newcommand{\height}[1]{|#1|}
+%
+\newcommand*{\reducesto}{\quad{\leadsto}\quad}
+\newcommand*{\invr}[1]{#1}%^\bullet}
+
+
+
+%%Symbols for System labK
+%\newcommand{\id}{id^{lab}}
+%\newcommand{\tolab}{\top^{lab}}
+%\newcommand{\vlab}{\wedge^{lab}}
+%\newcommand{\olab}{\vlor^{lab}}
+%\newcommand{\blab}{\square^{lab}}
+%\newcommand{\dlab}{\lozenge^{lab}}
+%
+%%Labelled proof system
+%\newcommand{\toprule}{\B \Rightarrow \Right, x  \colon   \top}
+%\newcommand{\vlabr}{\B \Rightarrow \Right, x  \colon   A}
+%\newcommand{\vlabu}{\B \Rightarrow \Right, x  \colon   B}
+%\newcommand{\olabr}{\B \Rightarrow \Right, x  \colon   A, x  \colon   B}
+%\newcommand{\blabr}{\B \Rightarrow \Right, x  \colon   \square A}
+%\newcommand{\blabu}{\B, x$R$y \Rightarrow \Right, y  \colon   A}
+%\newcommand{\dlabr}{\B, x$R$y \Rightarrow \Right, x  \colon   \lozenge A}
+%\newcommand{\dlabu}{\B, x$R$y \Rightarrow \Right, x  \colon   \lozenge A, y  \colon} 
+%
+%
+%%Symbols for system labIK
+%\newcommand{\botlab}{\bot_{L}^{lab}}
+%\newcommand{\toplab}{\top_{R}^{lab}}
+%\newcommand{\andleflab}{\wedge_{L}^{lab}}
+%\newcommand{\andriglab}{\wedge_{R}^{lab}}
+%\newcommand{\orleflab}{\vlor_{L}^{lab}}
+%\newcommand{\orriglabo}{\vlor_{R1}^{lab}}
+%\newcommand{\orriglabt}{\vlor_{R2}^{lab}}
+%\newcommand{\irlab}{\vljm_{R}^{lab}}
+%\newcommand{\illab}{\vljm_{L}^{lab}}
+%\newcommand{\dllab}{\lozenge_{L}^{lab}}
+%\newcommand{\drlab}{\lozenge_{R}^{lab}}
+%\newcommand{\bllab}{\square_{L}^{lab}}
+%\newcommand{\brlab}{\square_{R}^{lab}}
+%
+%%Symbols for System labheartIK
+%\newcommand{\ids}{id}
+%\newcommand{\idg}{id_{g}}
+%\newcommand{\refl}{refl}
+%\newcommand{\trans}{trans}
+%\newcommand{\cut}{cut}
+%\newcommand{\fone}{F1}
+%\newcommand{\ftwo}{F2}
+%\newcommand{\sbot}{\bot_{L}}
+%\newcommand{\Stop}{\top_{R}}
+%\newcommand{\svlef}{\wedge_{L}}
+%\newcommand{\svrig}{\wedge_{R}}
+%\newcommand{\solef}{\vlor_{L}}
+%\newcommand{\sorig}{\vlor_{R}}
+%\newcommand{\sorone}{\vlor_{R1}}
+%\newcommand{\sotwo}{\vlor_{R2}}
+%\newcommand{\sir}{\vljm_{R}}
+%\newcommand{\sil}{\vljm_{L}}
+%\newcommand{\sdl}{\lozenge_{L}}
+%\newcommand{\sdr}{\lozenge_{R}}
+%\newcommand{\sbl}{\square_{L}}
+%\newcommand{\sbr}{\square_{R}}
+%\newcommand{\smon}{mon_{L}}
+%%
+%\newcommand{\Gone}{\mathcal{G}_{1}}
+%\newcommand{\Gtwo}{\mathcal{G}_{2}}
+%
+%% System LABIK
+%\newcommand{\conjrig}{\G, \Left \Rightarrow \Right, x \colon A}
+%\newcommand{\conjrigh}{\G, \Left \Rightarrow \Right, x  \colon B}
+%\newcommand{\conjlef}{\G, \Left, x  \colon  A, x \colon B \Rightarrow \Right}

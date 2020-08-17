@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+
+\input{new-macros}
+
+\begin{document}
+\textbf{Review 2: TODO list}
+
+\begin{itemize}
+	\item \emph{Broken references “??” in pages 13 and 14}: Fixed. Done.
+	\item \emph{The section of "Extensions" has to be more detailed}
+	\item \emph{Remark 4.2. Show the “need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.}: 
+	
+	There are two options: 
+	1. Do not use the word ``need'';
+	2. Show that no other proofs of the axioms are possible.
+	
+	\item \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
+\end{itemize}
+
+
+\textbf{Review 1}
+
+\begin{itemize}
+	\item \emph{Also the proofs of the structural properties closely follow the methodology of the paper by Maffezioli, Naibo \& Negri. All this has to be said expressis verbis, and appropriate citations have to be added.
+	Perhaps even more importantly, the authors of the paper under review neglect an important caveat in the design of rules of contraction-free labelled sequent calculi: to guarantee that contraction be admissible one needs to ensure that a certain closure condition be satisfied, see:}
+	
+		\emph{• Negri, S. Proof analysis in modal logic. Journal of Philosophical Logic, 34, 507–544, 2005.}
+		\begin{center}
+			\includegraphics[scale=.18]{closure-condition-Negri}
+		\end{center}
+	
+\end{itemize}
+
+\begin{proposition}
+	
+	The rules $\llabrn{cont}$ and $\rlabrn{cont}$ are admissible for $\labIKp$.
+	\begin{center}
+		$\vlinf{\llabrn{cont}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}$\quad\quad$\vlinf{\rlabrn{cont}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}$
+	\end{center}
+\end{proposition}
+\begin{proof}
+	The rule $\llabrn{cont}$ can be derived using $\rn{refl}$ and $\llabrn{mon}$ which is admissible by Proposition 3.1.
+	
+	\begin{center}
+			$\vlderivation{
+				\vlin{\rn{refl}}{}
+				{\B, \Left, \labels{x}{A} \SEQ \Right}
+				{\vlin{\llabrn{mon}}{}
+					{\B, \futs{x}{x}, \Left, \labels{x}{A} \SEQ \Right}
+					{\vlhy{\B, \futs{x}{x}, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}}}
+			}$
+	\end{center}
+
+The case for $\rlabrn{cont}$ is similar.
+\end{proof}
+\end{document}
