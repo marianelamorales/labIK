@@ -308,7 +308,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 
 \bigskip
 
-\textbf{Sonia's version:}
+\textbf{Paper's version:}
 
 	
 
@@ -354,7 +354,8 @@ where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y'
 \bigskip
 
 \textbf{Marianela's version:}
-
+\marianela{I made this new version since the reviewer 2 said: \emph{it does not help at all that the	applications of the rule $\rn{g1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
+	Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
 \begin{smallequation*}\hspace*{-1.2cm}
 	\vlderivation{
 		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
@@ -373,9 +374,13 @@ where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y'
 									%											}
 									%										}{
 									\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-										\vlin{\rn{g1111}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-											\vlin{}{}{\B, {\mbox{ \color{red}{how to use again g1111??}}}}{
-												\vlhy{}
+										\vlin{\rn{g1111}}{\lb{z''}, \lb{v''}\mbox{ fresh}}{\B, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+												\vlin{\llabrn\OR+\rn{id}}{}
+												{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+												{\vlid{}{}
+													{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+													{}}
 											}
 										}
 									}
