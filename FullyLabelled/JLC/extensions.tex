@@ -305,44 +305,95 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	%
 	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
 	
-	\begin{smallequation*}\hspace*{-1.2cm}
-		\vlderivation{
-			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
-					\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
-%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
-%							\vlhy{}
-%						}
-%					}{
+
+\bigskip
+
+\textbf{Sonia's version:}
+
+	
+
+\begin{smallequation*}\hspace*{-1.2cm}
+	\vlderivation{
+		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+			\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+					%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
+					%							\vlhy{}
+					%						}
+					%					}{
 					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
 						\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
 							\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
 								\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
-%											\vlhy{}
-%											}
-%										}{
+									%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
+									%											\vlhy{}
+									%											}
+									%										}{
 									\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
 										\vlin{\llabrn\OR+\rn{id}}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
 											\vlid{}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
 												\vlhy{}
-												}
 											}
 										}
 									}
 								}
-%							}{
-%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
-%								\vlhy{}		
-%								}
 							}
+							%							}{
+							%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
+							%								\vlhy{}		
+							%								}
 						}
 					}
 				}
 			}
 		}
-	\end{smallequation*}
-	where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
+	}
+\end{smallequation*}
+where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
+
+\bigskip
+
+\textbf{Marianela's version:}
+
+\begin{smallequation*}\hspace*{-1.2cm}
+	\vlderivation{
+		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+			\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb y' \mbox{ fresh}}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+					%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
+					%							\vlhy{}
+					%						}
+					%					}{
+					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb z' \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
+						\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+							\vlin{g1111}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+								\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'},  \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+									%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
+									%											\vlhy{}
+									%											}
+									%										}{
+									\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+										\vlin{\rn{g1111}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlin{}{}{\B, {\mbox{ \color{red}{how to use again g1111??}}}}{
+												\vlhy{}
+											}
+										}
+									}
+								}
+							}
+							%							}{
+							%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
+							%								\vlhy{}		
+							%								}
+						}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+where $\B = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$.
+
 \end{remark}
 
 
