@@ -54,12 +54,12 @@ The case for $\rlabrn{cont}$ is similar.
 			{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}
 			{\vlin{\rn F_1}{\lb u\mbox{ fresh}}
 				{\futs xy, \futs zw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
-				{\vlin{\rn g_{1100}}{\exists \lb{w'}, \lb{w''}}
+				{\vlin{\rn g_{1011}}{ \lb{w'}\mbox{ fresh}}
 					{\futs xy, \futs zw, \futs yu, \accs uw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
-					{\vlin{\llabrn\BOX}{}
-						{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w''}, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
+					{\vlin{\llabrn\BOX+\rn{refl}}{}
+						{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w}{w'}, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
 						{\vlin{}{}
-							{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w''}, \accs yz, \labels{w}{\BOX A}, \labels{w''}{A} \SEQ \labels{w}{A}}
+							{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w}{w'}, \accs yz, \labels{w}{\BOX A}, \labels{w'}{A} \SEQ \labels{w}{A}}
 							{}}}}}}
 	}$
 \end{center}
