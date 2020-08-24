@@ -198,7 +198,7 @@
   \address{LIX, \'Ecole Polytechnique  \&  Inria Saclay, France}
   
   \begin{abstract}
-  We present a labelled sequent system and a nested sequent system for intuitionistic modal logics equipped with two relation symbols, one for the accessibility relation associated with the Kripke semantics for modal logics and one for the preorder relation associated with the Kripke semantics for intuitionistic logic. Both systems are in close correspondence with the birelational Kripke semantics for intuitionistic modal logic.
+  We present a labelled sequent system and a nested sequent system for intuitionistic modal logics equipped with two relation symbols, one for the accessibility relation associated with the Kripke semantics for modal logics and one for the preorder relation associated with the Kripke semantics for intuitionistic logic. Both systems are in close correspondence with the bi-relational Kripke semantics for intuitionistic modal logic.
   \end{abstract}
 
   \begin{keyword}
@@ -232,30 +232,32 @@ Similarly, proof systems have been designed for \emph{intuitionistic} modal logi
 Surprisingly, in nested and labelled sequents, extending the sequent structure with the same \emph{one} extra element is enough to obtain sound and complete systems.
 %
 
-This no longer matches the relational semantics of these logics, which requires to combine the relation for intuitionistic propositional logic and the one for modal logic. 
+This no longer matches the relational semantics of these logics, which requires to combine \emph{both} the relation for intuitionistic propositional logic and the one for modal logic. 
 %
 More importantly, it leads to deductive systems that are not entirely satisfactory; they cannot as modularly capture axiomatic extensions (or equivalently, restricted semantical conditions) and, in particular, can only provide decision procedures for a handful of them~\cite{simpson1994}.
 
-This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing \emph{both} the modal accesibility relation and the intuitionistic preorder relation. 
+This lead us to develop a \emph{fully structured} approach to intuitionistic modal proof theory capturing \emph{both} the modal accessibility relation and the intuitionistic preorder relation. 
 %
-A fully labelled framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
+A \emph{fully labelled} framework, described succintly in Section~\ref{sec:labelled}, has already allowed us to obtain modular systems for all intuitionistic Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
 %
-In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a fully nested framework, presented in Section~\ref{sec:nested}.
+In an attempt to make this system amenable for proof-search and decision procedures, we have started investigated a \emph{fully nested} framework, presented in Section~\ref{sec:nested}.
 %
 We would be particularly interested in a suitable system for logic $\mathsf{IS4}$, whose decidability is not known; we discuss this direction in Section~\ref{sec:extensions}.
 
-%We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accesibility relation and the intuitionistic preorder relation. 
+%We present a labelled sequent system and a nested sequent system for intuitionistic modal logics capturing both the modal accessibility relation and the intuitionistic preorder relation. 
 %
 %In the labelled calculus we made explicity both relations with $\rel$ and $\le$ into the system. 
 %
-%In the nested sequent system, we represent this relations with one bracket in a sequent (for the accesibility relation) and a with two brackets in a sequent (preorder relation).  
+%In the nested sequent system, we represent this relations with one bracket in a sequent (for the accessibility relation) and a with two brackets in a sequent (preorder relation).  
 %
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Intuitionistic modal logic}
 The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$. %standing most generally for \emph{necessity} and \emph{possibility}.
 %
-Starting with a set $\mathcal{A}$ of atomic propositions, denoted $\fm a$, modal formulas are constructed from the grammar:\vspace*{-.1cm}
+Starting with a set $\mathcal{A}$ of atomic propositions, denoted $\fm a$, modal formulas are constructed from the grammar:%\vspace*{-.2cm}
 %
 $$
 \fm A \coloncolonequals
@@ -268,7 +270,7 @@ The axiomatisation of intuitionistic modal logic $\IK$ \cite{plotkin1986,fischer
 is obtained from intuitionistic propositional logic by adding:
 \begin{itemize}
 	\item the \emph{necessitation rule}: $\fm{\BOX A}$ is a theorem if $\fm{A}$ is a theorem; and
-	\item the following five variants of the \emph{distributivity axiom}:\vspace*{-.1cm}
+	\item the following five variants of the \emph{distributivity axiom}:%\vspace*{-.2cm}
 	\begin{equation*}
 	\label{eq:ik}%\hskip-2em
 	\begin{array}[t]{r@{\;}l@{\quad}r@{\;}l@{\quad}r@{\;}l}
@@ -307,7 +309,7 @@ is obtained from intuitionistic propositional logic by adding:
 
 We write $\lb x \Vdash \fm a$ if $\fm a \in V(\lb x)$ and, by definition, it is never the case that $\lb x \Vdash \fm{\BOT}$. %and always have $\lb w \Vdash \fm{\TOP}$
 %
-The relation $\Vdash$ is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:\vspace*{-.1cm}
+The relation $\Vdash$ is extended to all formulas by induction, following the rules for both intuitionistic and modal Kripke models:%\vspace*{-.1cm}
 \begin{align}
 	&\lb x \Vdash \fm{A \AND B} && \text{iff}\qquad 
 	\lb x \Vdash \fm A \text{ and } \lb x \Vdash \fm B
@@ -338,43 +340,30 @@ The relation $\Vdash$ is extended to all formulas by induction, following the ru
 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
 \end{theorem}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Fully labelled sequent calculus}\label{sec:labelled}
 
 \begin{figure}
 	\centering
 	\fbox{
-		\includegraphics[scale=.9]{fig-labIK}
+		\includegraphics[scale=.85]{fig-labIK}
 	}		
 	\caption{System $\labIKp$}
 	\label{fig:labIKp}
 \end{figure}
 
-%Simpson~\cite{Simpson} followed the lines of Gentzen in a labelled context, namely, he developed a labelled natural deduction framework for modal logics and then converted it into sequent systems with the consequent restriction to one formula on the right-hand side of each sequent.
-%%
-%This worked as well in the labelled setting as in the ordinary sequent case: we followed Simpson's sequent system where intuitionistic labelled sequents are written $\B, \Left \SEQ \labels{z}{C}$ for some multiset of labelled formulas $\Left$, some formula $C$, some label $z$ and a set of relational atoms $\B$. 
-
-%\emph{Labelled deduction} has been proposed by Gabbay~\cite{gabbay1996} in the 80s as a unifying framework throughout proof theory in order to provide proof systems for a wide range of logics. 
-%
-%For modal logics it can take the form of labelled natural deduction and labelled sequent systems as used, for example, by Simpson~\cite{simpson1994}, Vigan\`o~\cite{vigano2000}, and Negri~\cite{negri2005}. 
-%
-%Simpson's~\cite{simpson1994} labelled sequent system for intuitionistic modal logic is representing explicitly only the accessibility relation $\rel$ in the syntax.
-%
 Echoing the definition of bi-relational structures, we consider an extension of labelled deduction to the intuitionistic setting
 %
-that uses two sorts of relational atoms, one for the modal relation $\rel$ and another one for the intuitionistic relation $\leq$ (similarly to~\cite{maffezioli2013} for epistemic logic). 
+that uses two sorts of relational atoms, one for the modal accessibility relation $\rel$ and another one for the intuitionistic preorder relation $\leq$ (similarly to~\cite{maffezioli2013} for epistemic logic). 
 %
-
-
 \begin{definition}
 	A two-sided intuitionistic \emph{fully labelled sequent} is of the form $\B, \Left \SEQ \Right$ where $\B$ denotes a set of relational atoms $\accs xy$ and preorder atoms $\futs xy$, and $\Left$ and $\Right$ are multi-sets of labelled formulas $\labels{x}{A}$ (for $\lb x$ and $\lb y$ taken from a countable set of labels and $A$ an intuitionistic modal formula).
 \end{definition}
-
-
-
-
-%Labelled sequents are formed from by labelled formulas of the form $\labels{x}{A}$ and relational or equality atoms of the form $x \rel y$ or $x = y $ respectively, where $x$,$y$ range over  a set of variables (called labels) and $A$ is a modal formula. A (onde-sided) \emph{labelled sequent} is then of the form $\B \SEQ \Right$ where $\B$ denotes a set of relational or equality atoms, and $\Right$ a multiset of labelled formulas.
-
-
 %
 We obtain a proof system $\labIKp$, displayed on Figure~\ref{fig:labIKp}, for intuitionistic modal logic in this formalism. 
 %
@@ -384,19 +373,6 @@ For instance, the rules introducing the $\BOX$-connective correspond to~\eqref{e
 %
 Furthermore, our system must incorporate the conditions ($F_1$) and ($F_2$) into the deductive rules $\rn{F_1}$ and $\rn{F_2}$, and rules $\rn{refl_\le}$ and $\rn{trans_\le}$ are necessary to ensure that the preorder atoms behave as a preorder on labels.
 %
-%As we mentioned, we obtain a proof system $\labIKp$ which allows us to give an extension of labelled deduction to the intuitionistic world and then we prove the next theorem:
-
-%\begin{theorem}
-%	\label{thm:sound-compl}
-%	A formula $A$ is provable in the calculus $\labIKp$ if and only if $A$ is valid in every bi-relational frame.
-%\end{theorem}
-%
-%On the one hand, we prove directly that each rule from our system is sound wrt.~bi-relational structures.
-%
-%On the other hand, we show that $\labIKp$ is complete wrt.~Simpson's $\lab\IK$, and the theorem then follows from Theorem~\ref{thm:simpson-sound-compl}. 
-
-%Finally we can prove the following theorem ensuring soundness and (cut-free) completeness of $\labIKp$.
-
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
 	%
@@ -407,11 +383,11 @@ Furthermore, our system must incorporate the conditions ($F_1$) and ($F_2$) into
 		%
 		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$ with \quad
 		%		
-		\smash{\parbox[c]{5cm}{\includegraphics[scale=0.8]{cut}}}
+		\smash{\parbox[c]{5cm}{\includegraphics[scale=0.8]{fig-cut}}}
 		%
 		\item\label{iii} $A$ is provable in $\labIKp$
 		%
-		%\item\label{iv} $A$ is valid in every birelational frames %satisfying the properties in $\CC$.
+		%\item\label{iv} $A$ is valid in every bi-relational frames %satisfying the properties in $\CC$.
 	\end{enumerate}
 \end{theorem}
 
@@ -428,7 +404,7 @@ The proof is a careful adaptation of standard techniques (see~\cite{marin:morale
 \begin{figure}
 	\centering
 	\fbox{
-		\includegraphics[scale=.9]{fig-nIK}
+		\includegraphics[scale=.85]{fig-nIK}
 	}		
 \caption{System $\nIKp$}
 \label{fig:nIK}
@@ -441,7 +417,7 @@ The proof is a careful adaptation of standard techniques (see~\cite{marin:morale
 In standard nested sequent notation, brackets $\BR{\cdot}$ are used to indicate the parent-child relation in the modal accessibility tree.
 %, and can be interpreted as the modal $\BOX$ (similarly to how the comma is interpreted as $\OR$). 
 %
-$\lf{(\cdot)}$ and $\rt{(\cdot)}$ annotations are used to indicate that the formulas would occur on the left-hand-side or right-hand-side of a sequent respectively in the absence of the sequent arrow.  
+$\lf{(\cdot)}$ and $\rt{(\cdot)}$ annotations are used to indicate that the formulas would occur on the left-hand-side or right-hand-side of a sequent, respectively, in the absence of the sequent arrow.  
 
 To make it fully structured again, we enhance the structure with a second type of bracketting $\bBR{\cdot}$ to encode the preorder relation.
 %For intuitionistic logic we need two-sided sequents, which are formally generated by:
@@ -456,66 +432,73 @@ To make it fully structured again, we enhance the structure with a second type o
 
 The obtained nested sequent calculus $\nIKp$ is displayed in Figure~\ref{fig:nIK}.
 %
-The idea is similar to the fully labelled calculus but the shift of paradigm forced us to make different design choices.
+The idea is similar to the fully labelled calculus but the shift of paradigm allowed us to make different design choices.
 %
-In particular, the underlying tree-structure prevents us to express the rule $\rn{F_2}$, but its absence is compensated by the \emph{monotonicity rules} $\lrn{mon}$ and $\rrn{mon}$ which were admissible in $\labIKp$.
+In particular, the underlying tree-structure prevents us to express the rule $\rn{F_2}$, but its absence is offset by the \emph{monotonicity rules} $\lrn{mon}$ and $\rrn{mon}$, which were admissible in $\labIKp$.
 %
-Another beneficial result of this addition is that rules $\rn{refl_\le}$ and $\rn{trans_\le}$ do not need any equivalent here.
+Another benefit of this addition is that rules $\rn{refl_\le}$ and $\rn{trans_\le}$ do not need any equivalent here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Extensions: example of transitivity}\label{sec:extensions}
 
-As mentionned in the introduction, one of our motivation is to investigate decision procedure for axiomatic extensions of $\IK$, for instance for $\mathsf{IS4}$, intuitionistic logic of reflexive transitive frames.
+As mentioned in the introduction, one of our motivation is to investigate decision procedure for axiomatic extensions of $\IK$, for instance $\mathsf{IS4}$, intuitionistic logic of reflexive transitive frames.
 %
-We will therefore illustrate the benefit of our approach taking transitivity as a test-case.
+We will therefore illustrate our approach taking transitivity as a test-case.
 
-The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be axiomatised by the conjunction of the two versions of the $\ax 4$-axiom:\vspace*{-.2cm}
-$$\small
+The frame condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be axiomatised by adding to $\IK$ the conjunction of the two versions of the $\ax 4$-axiom:%\vspace*{-.2cm}
+$$
 \ax{4_{\BOX}}\colon\fm{\BOX A\IMP \BOX\BOX A}
 \qquad\qquad\qquad
 \ax{4_{\DIA}}\colon\fm{\DIA\DIA A\IMP\DIA A}
 $$
 %
+%\vspace*{-.2cm}\noindent
 which are equivalent in classical modal logic. 
 %
-However, in intuitionistic modal logic they are not and they can be added independently to the logic $\IK$. %(an intuitionistic version of $\K$). 
+However, in intuitionistic modal logic they are not and they can be added to $\IK$ independently.
 %
-From~\cite{plotkin1986} we know they are in correspondance with the following frame conditions:\vspace*{-.2cm}
+From~\cite{plotkin1986} we know they are in correspondence respectively with the following frame conditions:%\vspace*{-.2cm}
+%
 {\small
 \begin{equation}
 \label{eq:4frame}
-\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs x{u}\AND\accs {u}z)
+\forall\lb{xyz}.\:((\accs xy\AND \accs yz)\IMP\exists\lb{u}.\:(\futs x{u}\AND\accs {u}z))
 \quad
-\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{u}.\:\futs z{u}\AND\accs {x}{u})
-\end{equation}
-}
-
-Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule%\vspace*{-.2cm}
-
+\forall\lb{xyz}.\:((\accs xy\AND \accs yz)\IMP\exists\lb{u}.\:(\futs z{u}\AND\accs {x}{u}))
+\end{equation}}
+%
+%\vspace*{-.6cm}
+Following Simpson~\cite{simpson1994} we could extend our basic sequent system for $\IK$ to $\mathsf{IK4} = \IK+(\ax{4_{\BOX}}\AND\ax{4_{\DIA}})$ with the rule%\vspace*{-.1cm}
+%
 \begin{center}
 \includegraphics[scale=.9]{fig-trans}
 \end{center}
 
-Incorporating the preorder symbol into the syntax, however,  allowed us~\cite{marin:morales:strassburger:hal} to 
+%\vspace*{-.2cm}
+Incorporating the preorder symbol into the syntax too, allowed us however to 
 translate the conditions in~\eqref{eq:4frame} into separate inference rules for $\ax{4_{\BOX}}$ and $\ax{4_{\DIA}}$:%\vspace*{-.1cm}
-
+%
 \begin{center}
 	\includegraphics[scale=.9]{fig-trans2}
 \end{center}
+%
+%\vspace*{-.2cm}\noindent
+These extensions for $\labIKp$ are sound and complete;
+more generally, Theorem~\ref{thm:cutfree-compl} can be extended to the class of intuitionisitc Scott-Lemmon logics~\cite{marin:morales:strassburger:hal}. 
 
-A great interest of a nested system is that the rules for axiomatic extensions are usually more suitable for proof-search procedures that in the labelled setting.
+Similar results for the fully nested sequent system are subject of ongoing study. 
 %
 Previous nested systems for intuitionistic modal logics~\cite{strassburger2013,kuznets:strassburger:maehara} can be extended from $\IK$ to $\mathsf{IK4}$ by simply adding the following rules:%\vspace*{-.2cm}
-
-\begin{center}
-	\includegraphics[scale = 0.8]{fig-trans3}
-\end{center}
-
-%The generalisation of these results to our fully structured framework is subject of ongoing study.
 %
-These extensions for $\labIKp$ are already proven~\cite{marin:morales:strassburger:hal} but these results for our fully nested sequent system are subject of ongoing study. 
+\begin{center}
+	\includegraphics[scale = .9]{fig-trans3}
+\end{center}
+%
+%\vspace*{-.2cm}\noindent
+A great interest of such rules is their logical rather than structural nature, making them usually more suitable for proof-search procedures than their labelled counterpart.
+
 
 %% Appendix.
 %% Remove the \Appendix command if an 
@@ -534,9 +517,9 @@ These extensions for $\labIKp$ are already proven~\cite{marin:morales:strassburg
 	\bibitem{galmiche2018}Galmiche, D. and Salhi, Y., \emph{Tree-sequent calculi and decision procedures for intuitionistic modal logics}, Journal of Logic and Computation~\textbf{28} (2018), pp. 967--989.
 	\bibitem{kuznets:strassburger:maehara} Kuznets, R. and Stra{\ss}burger, L., \emph{Maehara-style modal nested calculi}, Archive for Mathematical Logic~\textbf{58} (2018), pp. 359--385.
 	\bibitem{maffezioli2013} Maffezioli, P. and Naibo, A. and Negri, S.,\emph{The {C}hurch--{F}itch knowability paradox in the light of structural proof theory}, Synthese~\textbf{190} (2013), pp. 2677--2716.
-	\bibitem{marin:morales:strassburger:hal} Marin, S., Morales, M. and Stra{\ss}burger, L., \emph{A fully labelled proof system for intuitionistic modal logics} (2019), working paper or preprint.
-	\bibitem{negri2005} Negri, S., \emph{Proof analysis in modal logic}, Journal of Philosophical Logic~\textbf{34} (2005), pp. 107--128.
-	\bibitem{plotkin1986} Plotkin, G. and Stirling, C., \emph{A framework for intuitionistic modal logics}, Proceedings of the 1st Conference on Theoretical Aspects of Reasoning about Knowledge (TARK), (1986), pp. 399--406.
+	\bibitem{marin:morales:strassburger:hal} Marin, S., Morales, M. and Stra{\ss}burger, L., \emph{A fully labelled proof system for intuitionistic modal logics} (2019), ArXiv preprint.
+	\bibitem{negri2005} Negri, S., \emph{Proof analysis in modal logic}, J.~of Philosophical Logic~\textbf{34} (2005), pp. 107--128.
+	\bibitem{plotkin1986} Plotkin, G. and Stirling, C., \emph{A framework for intuitionistic modal logics}, Proceedings of the 1st Conf.~on Theoretical Aspects of Reasoning about Knowledge (1986), pp. 399--406.
 	\bibitem{poggiolesi2009} Poggiolesi, F., \emph{The method of tree-hypersequents for modal propositional logic}, Towards mathematical philosophy (2009), pp. 31--51.
 	\bibitem{simpson1994} Simpson, A. K., \emph{The proof theory and semantics of intuitionistic modal logic}, Ph.D. thesis, University of Edinburgh. College of Science and Engineering (1994).
 	\bibitem{strassburger2013} Stra{\ss}burger, L., \emph{Cut Elimination in Nested Sequents for Intuitionistic Modal Logics}, FoSSaCS'13,LNCS~\textbf{7794} (2013), pp. 209--224.

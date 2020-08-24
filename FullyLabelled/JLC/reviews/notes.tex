@@ -45,24 +45,26 @@ The case for $\rlabrn{cont}$ is similar.
 	\item \emph{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
 \end{itemize}
 
-\begin{center}
-	$\vlderivation{
-		\vlin{\rlabrn\BOX}
-		{}
-		{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}
-		{\vlin{\rlabrn\IMP}{\lb w\mbox{ fresh}}
-			{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}
-			{\vlin{\rn F_1}{\lb u\mbox{ fresh}}
-				{\futs xy, \futs zw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
-				{\vlin{\rn g_{1011}}{ \lb{w'}\mbox{ fresh}}
-					{\futs xy, \futs zw, \futs yu, \accs uw, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
-					{\vlin{\llabrn\BOX+\rn{refl}}{}
-						{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w}{w'}, \accs yz, \labels{w}{\BOX A} \SEQ \labels{w}{A}}
-						{\vlin{}{}
-							{\futs xy, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w}{w'}, \accs yz, \labels{w}{\BOX A}, \labels{w'}{A} \SEQ \labels{w}{A}}
-							{}}}}}}
-	}$
-\end{center}
+
+$$
+	\vlderivation{
+		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
+			\vlin{\rlabrn\IMP}{\lb w\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zw, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
+					\vlin{\rn g_{1110}}{ \lb{w'}\mbox{ fresh}}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
+						\vlin{\llabrn{mon}}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
+							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A}, \labels{w'}{\BOX A} \SEQ \labels{w}{A}}{
+								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A}, \labels{w'}{\BOX A}, \labels{w}{A} \SEQ \labels{w}{A}}{
+									\vlhy{}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+$$
 
 
 \textbf{Review 2: TODO list}

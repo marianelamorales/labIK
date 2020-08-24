@@ -1,15 +1,5 @@
 \documentclass{standalone}
 
-
-\usepackage{amsmath}
-\usepackage{amssymb,latexsym}
-
-\usepackage{graphicx}
-\usepackage[matrix,arrow]{xy}
-\usepackage[noxy]{../../virginialake}
-%\vlnosmallleftlabels
-\vlnostructuressyntax
-
 \input{macros}
 
 \begin{document}
@@ -38,7 +28,7 @@
 		$$
 %
 		$$
-		\vliinf{\rlabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ B \SEQ \Right}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+		\vliinf{\rlabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A} \IMP B \SEQ \Right}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
 		$$
 %		
 		$$
