@@ -49,14 +49,12 @@ The case for $\rlabrn{cont}$ is similar.
 $$
 	\vlderivation{
 		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
-			\vlin{\rlabrn\IMP}{\lb w\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
-				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zw, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
-					\vlin{\rn g_{1110}}{ \lb{w'}\mbox{ fresh}}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
-						\vlin{\llabrn{mon}}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A} \SEQ \labels{w}{A}}{
-							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A}, \labels{w'}{\BOX A} \SEQ \labels{w}{A}}{
-								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zw, \futs yu, \accs uw, \futs{w}{w'}, \accs{w'}{w}, \labels{w}{\BOX A}, \labels{w'}{\BOX A}, \labels{w}{A} \SEQ \labels{w}{A}}{
+			\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+					\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
 									\vlhy{}
-								}
 							}
 						}
 					}
