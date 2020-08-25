@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
 
 \input{new-macros}
 
@@ -17,14 +18,14 @@
 		\end{center}
 	
 \end{itemize}
-
-\begin{proposition}
+\todo{Add next remark to the paper with a small explanation:}
+\begin{remark}
 	
 	The rules $\llabrn{cont}$ and $\rlabrn{cont}$ are admissible for $\labIKp$.
 	\begin{center}
 		$\vlinf{\llabrn{cont}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}$\quad\quad$\vlinf{\rlabrn{cont}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}$
 	\end{center}
-\end{proposition}
+\end{remark}
 \begin{proof}
 	The rule $\llabrn{cont}$ can be derived using $\rn{refl}$ and $\llabrn{mon}$ which is admissible by Proposition 3.1.
 	
@@ -45,7 +46,7 @@ The case for $\rlabrn{cont}$ is similar.
 	\item \emph{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
 \end{itemize}
 
-
+\todo{Add next proof as an example and a paragraph explaning.}
 $$
 	\vlderivation{
 		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
@@ -64,6 +65,12 @@ $$
 	}
 $$
 
+\begin{itemize}
+	\item \emph{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in
+	detail, as otherwise the authors’ work would rather look a routine exercise.}: \todo{add a paragraph about constructive modal logics.}
+	\item \todo{Add a paragraph with all the references we are missing.}
+\end{itemize}
+
 
 \textbf{Review 2: TODO list}
 
@@ -74,15 +81,15 @@ $$
 			\item it does not help at all that the
 			applications of the rule g1111 are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example
 			derivation. {\color{green}Fixed.}
-			\item Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.
+			\item Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula. \todo{}
 		\end{itemize}}
 	\item \emph{Remark 4.2. Show the ``need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.}: 
 	
 	There are two options: 
-	1. Do not use the word ``need'';
-	2. Show that no other proofs of the axioms are possible.
+	\todo{Do not use the word ``need''.}
 	
-	\item \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
+	
+	\item \todo{LUTZ: \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}}
 \end{itemize}
 
 \end{document}
