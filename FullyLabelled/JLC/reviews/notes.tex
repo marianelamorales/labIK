@@ -18,7 +18,8 @@
 		\end{center}
 	
 \end{itemize}
-\todo{Add next remark to the paper with a small explanation:}
+\todo{Add next remark to the paper} 
+
 \begin{remark}
 	
 	The rules $\llabrn{cont}$ and $\rlabrn{cont}$ are admissible for $\labIKp$.
@@ -46,7 +47,7 @@ The case for $\rlabrn{cont}$ is similar.
 	\item \emph{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
 \end{itemize}
 
-\todo{Add next proof as an example and a paragraph explaning.}
+\todo{Add next proof as an example} \marianela{How should I introduce this in the extensions section?}
 $$
 	\vlderivation{
 		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
@@ -67,8 +68,12 @@ $$
 
 \begin{itemize}
 	\item \emph{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in
-	detail, as otherwise the authors’ work would rather look a routine exercise.}: \todo{add a paragraph about constructive modal logics.}
-	\item \todo{Add a paragraph with all the references we are missing.}
+	detail, as otherwise the authors’ work would rather look a routine exercise.}: \todo{add a paragraph about constructive modal logics.} \marianela{using the Skolemization thing (Review 2)?} 
+	\item \todo{Add a paragraph with all the references we are missing.} 
+	\item \emph{They then claim that their calculus is inspired by a ”multiple-conlusion nested sequent
+		system a la Maehara”. Such a calculus in fact has appeared in a work which the authors	cite as unpublished, but which seems to have been published in the meantime [Archive for Mathematical Logic (2019) 58:359–385], which reference needs to be updated accordingly.} \marianela{What did she mean?}
+	\item \emph{The rules of their calculus are identical (except for the ones that relate the two accessibility relations) to the rules for the intuitionistic-alethic fragment of the calculus for intuitionistic bimodal logic in this publication:
+		• Maffezioli, P., Naibo, A. \& Negri, S., The Church-Fitch knowability paradox in the light of structural proof theory. Synthese, vol. 190, 2677–2716, 2013.} {\color{green}Fixed: adding that we have internal cut.}
 \end{itemize}
 
 
@@ -81,15 +86,13 @@ $$
 			\item it does not help at all that the
 			applications of the rule g1111 are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example
 			derivation. {\color{green}Fixed.}
-			\item Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula. \todo{}
+			\item Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula. \todo{SONIA}
 		\end{itemize}}
-	\item \emph{Remark 4.2. Show the ``need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.}: 
-	
-	There are two options: 
-	\todo{Do not use the word ``need''.}
+	\item \emph{Remark 4.2. Show the ``need" you would likely have to show that no other proofs of the axioms are possible. That is of course the case, but unless you prove it formally, it is not fully correct to claim that the ``need'' is shown.} {\color{green}Fixed.}
 	
 	
 	\item \todo{LUTZ: \emph{Reconsider de abstract. It reads very “operational” and does not clearly state the contributions of the paper.}}
 \end{itemize}
-\todo{Add missing cases for cut elimination}
+
+We do not need contraction. We have an internal cut elimination. That's why it is a novelty.
 \end{document}
