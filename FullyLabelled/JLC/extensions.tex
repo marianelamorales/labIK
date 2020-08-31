@@ -399,6 +399,28 @@ where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y'
 \end{smallequation*}
 where $\B = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$.
 
+\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
+\todo{Add an explanation}
+
+\marianela{
+	
+	$$
+	\vlderivation{
+		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
+			\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+					\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+						\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+							\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	$$}
 \end{remark}
 
 
