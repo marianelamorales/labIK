@@ -4,6 +4,8 @@
 
 \section{Extensions}\label{sec:ext}
 
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
+
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
 %In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
@@ -93,11 +95,11 @@ for any natural numbers $k,l,m,n$.
 
 Indeed, they are known to obey a strong correspondence with the class of frames satisfying the condition illustrated on Figure~\ref{fig:gklmn}, which we call by analogy to the classical case, \emph{intuitionistic klmn-incestuality condition}.
 
-	\begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
-		An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$ if and only if the frame satisfies:
-		
-		if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
-	\end{theorem}
+\begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
+	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$ if and only if the frame satisfies:
+	
+	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
+\end{theorem}
 
 %\sonia{I don't think we need the actual \emph{correspondence} result. Soundness and completeness is enough for us}.
 
@@ -173,9 +175,9 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 \begin{proof} 
 	The proof is similar to the one of Theorem~\ref{thm:cutfree-compl}.
 	\begin{itemize}
-	\item $1 \implies 2$:
-%	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
-	Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$:
+		\item $1 \implies 2$:
+		%	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK + \DIA^k\BOX^l A \IMP \BOX^m\DIA^n A$, then $A$ is a theorem of $\labIKp + \gklmn + \rn{cut}$.
+		Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$:
 		\begin{smallequation*}
 			\vlderivation{
 				\vlin{\rlabrn\IMP}{}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
@@ -189,7 +191,6 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 												\vliq {\llabrn{\BOX}}{}{\futs{y_k}{y_k''}, \ldots, \futs{w}{w}, \labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
 													\vlin {\rn{id}}{}{\labels{y_k}{\BOX^l A},\labels{w}{A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
 														\vlhy{}
-														}
 													}
 												}
 											}
@@ -200,6 +201,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 						}
 					}
 				}
+			}
 		\end{smallequation*}
 		where we omit the accumulated relational context for space reason.
 		
@@ -222,9 +224,9 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 		Now let $\inter\cdot^*$ be the extension of $\inter\cdot$ such that $\inter{y'}^* = v$, $\inter{u}^* = w$, and $\inter\cdot^* = \inter\cdot$ otherwise.
 		%
 		Then, $ \nforce \M {\inter\cdot^*} {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$. Contradiction.
-		\end{itemize}
-		
-		The proof is completed by appealing to Theorem~\ref{thm:gklmn-correspondence} used as $4 \implies 1$ to close the equivalence.
+	\end{itemize}
+	
+	The proof is completed by appealing to Theorem~\ref{thm:gklmn-correspondence} used as $4 \implies 1$ to close the equivalence.
 \end{proof}
 
 %In order to have a completeness proof for the general case, we need to introduce the rules from the Lemma~\ref{lemma:admis}.
@@ -284,7 +286,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 %				}
 %			}
 %		\end{smallequation*}
-	
+
 
 
 
@@ -305,122 +307,122 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	%
 	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
 	
-
-\bigskip
-
-\textbf{Paper's version:}
-
 	
-
-\begin{smallequation*}\hspace*{-1.2cm}
-	\vlderivation{
-		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-			\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
-				\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
-					%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
-					%							\vlhy{}
-					%						}
-					%					}{
-					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
-						\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
-							\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
-								\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-									%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
-									%											\vlhy{}
-									%											}
-									%										}{
-									\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-										\vlin{\llabrn\OR+\rn{id}}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-											\vlid{}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-												\vlhy{}
+	\bigskip
+	
+	\textbf{Paper's version:}
+	
+	
+	
+	\begin{smallequation*}\hspace*{-1.2cm}
+		\vlderivation{
+			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+						%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
+						%							\vlhy{}
+						%						}
+						%					}{
+						\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
+							\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+								\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+									\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+										%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
+										%											\vlhy{}
+										%											}
+										%										}{
+										\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlin{\llabrn\OR+\rn{id}}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+												\vlid{}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+													\vlhy{}
+												}
 											}
 										}
 									}
 								}
+								%							}{
+								%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
+								%								\vlhy{}		
+								%								}
 							}
-							%							}{
-							%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
-							%								\vlhy{}		
-							%								}
 						}
 					}
 				}
 			}
 		}
-	}
-\end{smallequation*}
-where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
-
-\bigskip
-
-\textbf{Marianela's version:}
-\marianela{I made this new version since the reviewer 2 said: \emph{it does not help at all that the	applications of the rule $\rn{g1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
-	Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
-\begin{smallequation*}\hspace*{-1.2cm}
-	\vlderivation{
-		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-			\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb y' \mbox{ fresh}}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
-				\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
-					%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
-					%							\vlhy{}
-					%						}
-					%					}{
-					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb z' \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
-						\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
-							\vlin{g1111}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
-								\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'},  \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
-									%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
-									%											\vlhy{}
-									%											}
-									%										}{
-									\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-										\vlin{\rn{g1111}}{\lb{z''}, \lb{v''}\mbox{ fresh}}{\B, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-											\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-												\vlin{\llabrn\OR+\rn{id}}{}
-												{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
-												{\vlid{}{}
-													{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
-													{}}
+	\end{smallequation*}
+	where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
+	
+	\bigskip
+	
+	\textbf{Marianela's version:}
+	\marianela{I made this new version since the reviewer 2 said: \emph{it does not help at all that the	applications of the rule $\rn{g1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
+		Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
+	\begin{smallequation*}\hspace*{-1.2cm}
+		\vlderivation{
+			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb y' \mbox{ fresh}}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+					\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+						%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
+						%							\vlhy{}
+						%						}
+						%					}{
+						\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb z' \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
+							\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+								\vlin{g1111}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+									\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'},  \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+										%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
+										%											\vlhy{}
+										%											}
+										%										}{
+										\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlin{\rn{g1111}}{\lb{z''}, \lb{v''}\mbox{ fresh}}{\B, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+												\vlin{\llabrn\BOX+\rlabrn\DIA}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+													\vlin{\llabrn\OR+\rn{id}}{}
+													{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+													{\vlid{}{}
+														{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''},\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+														{}}
+												}
 											}
 										}
 									}
 								}
+								%							}{
+								%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
+								%								\vlhy{}		
+								%								}
 							}
-							%							}{
-							%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
-							%								\vlhy{}		
-							%								}
 						}
 					}
 				}
 			}
 		}
-	}
-\end{smallequation*}
-where $\B = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$.
-
-\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
-\todo{Add an explanation}
-
-\marianela{
+	\end{smallequation*}
+	where $\B = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$.
 	
-	$$
-	\vlderivation{
-		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
-			\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
-				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-					\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-						\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-							\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
-								\vlhy{}
+	\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
+	\todo{Add an explanation}
+	
+	\marianela{
+		
+		$$
+		\vlderivation{
+			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
+				\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+					\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+						\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
+									\vlhy{}
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	}
-	$$}
+		$$}
 \end{remark}
 
 

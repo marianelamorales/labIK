@@ -5,6 +5,8 @@
 %\todo{get bib-file right}
 
 \section{Introduction}\label{sec:intro}
+\review{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in detail, as otherwise the authors’ work would rather look a routine exercise.}
+\todo{add a paragraph about constructive modal logics.} 
 
 Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
 \emph{labelled proof calculi} have been widely used by proof theorist
@@ -27,16 +29,16 @@ logics and intuitionistic propositional logic, where, e.g., the frame
 condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
 inference rule
 \begin{equation}
-  \label{eq:Rtrans}
-  \vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-    \B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
+\label{eq:Rtrans}
+\vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
 where $\B$ stands for a set of relational atoms, and $\Gamma$ and
 $\Delta$ for multi-sets of labelled formulas.
 
 However,
 in this paper we are concerned with \emph{intuitionistic modal
-  logics}, whose Kripke semantics is based on \emph{birelational}
+	logics}, whose Kripke semantics is based on \emph{birelational}
 frames, i.e., they have two binary relations instead of one: one
 relation $R$ that corresponds to the accessibility relation in 
 Kripke frames for modal logics, and a relation $\le$ that
@@ -44,71 +46,71 @@ corresponds to the preorder relation in Kripke frames for
 intuitionistic logic. Consequently, standard labelled systems for
 these logics have certain shortcomings:
 \begin{enumerate}
-\item The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
-  versions of the $\fourax$-axiom
-  \begin{equation}
-    \label{eq:4ax}
-    \fm{\BOX A\IMP \BOX\BOX A}
-    \qquand
-    \fm{\DIA\DIA A\IMP\DIA A}
-    \quadcm
-  \end{equation}
-  which are equivalent in classical
-  modal logic. However, in intuitionistic modal logic they are not
-  equivalent, and even though the logic $\IKfour$, i.e., the
-  intuitionistic version of the modal logic $\Kfour$, contains both
-  axioms, they can also be added independently to the logic $\IK$ (an
-  intuitionistic version of $\K$). The proof theory of these
-  new logics has not been studied before; no existing labelled (or
-  label-free) proof system can handle them, even though the
-  corresponding frame conditions
-  \begin{equation}
-    \label{eq:4frame}
-    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
-    \quand
-    \forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
-    \;,
-  \end{equation}
-%  \todo{add graphical representation of the conditions}
-  $$
-  \xymatrix{
-  	x' \ar@{.>}[drr]^R \\
-  	x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
-  }
-  \qquad\qquad
-  \xymatrix{
-  	&& z''  \\
-  	x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
-  }
-  $$
-  respectively, have already been studied
-  in~\cite{plotkin:stirling:86}.
-%  \sonia{the general condition is correct but not the application to 4}
-  \item The correspondence between the syntax and the semantics is not
-  as clean as one would expect. As only the $R$-relation (and not the
-  $\le$-relation) of the frame is visible in an ordinary labelled
-  sequent, we only have that a sequent $\Gamma$ is provable if and
-  only if is satisfied in all \emph{graph-consistent}\footnote{This
-    means that every layer in the model can be lifted to any future of
-    any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
-  models, 
-%  \sonia{this is only true for logics outside of the path axioms.}
-%  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
-%  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
-  as already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
-  and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
+	\item The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
+	versions of the $\fourax$-axiom
+	\begin{equation}
+	\label{eq:4ax}
+	\fm{\BOX A\IMP \BOX\BOX A}
+	\qquand
+	\fm{\DIA\DIA A\IMP\DIA A}
+	\quadcm
+	\end{equation}
+	which are equivalent in classical
+	modal logic. However, in intuitionistic modal logic they are not
+	equivalent, and even though the logic $\IKfour$, i.e., the
+	intuitionistic version of the modal logic $\Kfour$, contains both
+	axioms, they can also be added independently to the logic $\IK$ (an
+	intuitionistic version of $\K$). The proof theory of these
+	new logics has not been studied before; no existing labelled (or
+	label-free) proof system can handle them, even though the
+	corresponding frame conditions
+	\begin{equation}
+	\label{eq:4frame}
+	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
+	\quand
+	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+	\;,
+	\end{equation}
+	%  \todo{add graphical representation of the conditions}
+	$$
+	\xymatrix{
+		x' \ar@{.>}[drr]^R \\
+		x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
+	}
+	\qquad\qquad
+	\xymatrix{
+		&& z''  \\
+		x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
+	}
+	$$
+	respectively, have already been studied
+	in~\cite{plotkin:stirling:86}.
+	%  \sonia{the general condition is correct but not the application to 4}
+	\item The correspondence between the syntax and the semantics is not
+	as clean as one would expect. As only the $R$-relation (and not the
+	$\le$-relation) of the frame is visible in an ordinary labelled
+	sequent, we only have that a sequent $\Gamma$ is provable if and
+	only if is satisfied in all \emph{graph-consistent}\footnote{This
+		means that every layer in the model can be lifted to any future of
+		any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
+	models, 
+	%  \sonia{this is only true for logics outside of the path axioms.}
+	%  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
+	%  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
+	as already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
+	and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two concerns we propose here to enrich usual 
 labelled sequent by allowing both, relational atoms of the
 form $\futs xy$ and of the form $\accs xy$. Consequently, we can easily translate the frame
 conditions in~\eqref{eq:4frame} into inference rules:
 \begin{equation}
-  \label{eq:4rules}
-  \vlinf{\rn{4^{\BOX}}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-     \B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
-  \qquand
-  \vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
-    \B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
+\label{eq:4rules}
+\vlinf{\rn{4^{\BOX}}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+\qquand
+\vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
 \end{equation}
 This allows us to define cut-free deductive systems for a wide range
 of logics that could not be treated before.  Furthermore, the relation
@@ -135,9 +137,9 @@ intuitionistic logic.
 Maffezioli, Naibo and Negri have considered in~\cite{maffezioli:etal:synthese13} a labelled system for intuitionistic bimodal epistemic logic which is multi-conclusion.
 %
 \marianela{
-Our system uses the same principle, both labelled and multi-conclusion sequents, but we use in a more general setting and extend it to a framework for many intuitionistic modal logics.
-%
-This eliminates the undesired discrepancy as, consequently, every rule in our system is invertible, i.e.~we never delete information in a bottom-up proof search.  Furthermore, we present in this contribution an internal cut elimination proof.}
+	Our system uses the same principle, both labelled and multi-conclusion sequents, but we use in a more general setting and extend it to a framework for many intuitionistic modal logics.
+	%
+	This eliminates the undesired discrepancy as, consequently, every rule in our system is invertible, i.e.~we never delete information in a bottom-up proof search.  Furthermore, we present in this contribution an internal cut elimination proof.}
 
 This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics.
 
