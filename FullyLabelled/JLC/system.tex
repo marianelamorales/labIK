@@ -104,15 +104,14 @@ single-conclusion.
 %
 In our system, this phenomenon is replaced by a re-positioning of the considered formulas to a fresh label.
 %
-\review{Also the proofs of the structural properties closely follow the methodology of the paper by Maffezioli, Naibo \& Negri. All this has to be said expressis verbis, and appropriate citations have to be added.}
-\marianela{we are not saying that in the next paragraph?}
 In the Kripke-semantics in~\eqref{eq:kripke} the two
 connectives $\IMP$ and $\BOX$ are the ones that make use of the
 pre-order relation $\le$. This relation is reflexive and transitive. In
 order to capture that in the proof system, we need to add the rules
-$\rn{refl}$ and $\rn{trans}$.
+$\rn{refl}$ and $\rn{trans}$.\footnote{These are the same as for {\bf G3I} as presented in~\cite{DN12}.\todo{Dyckhoff,Negri:Proof Analysis in Intermediate Logics}}
+
 %
-These can be obtained by applying the axioms-as-rules methodology as in~\cite{maffezioli:etal:synthese13}.
+%%These can be obtained by applying the axioms-as-rules methodology as in~\cite{maffezioli:etal:synthese13}.
 
 Finally, in the semantics, the two relations $\rel$ and $\le$ are
 strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These need to be reflected at the level of the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.
@@ -301,36 +300,6 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 	\end{itemize}
 \end{proof}
 
-\review{the authors of the paper under review neglect an important caveat in the design of rules of contraction-free labelled sequent calculi: to guarantee that contraction be admissible one needs to ensure that a certain closure condition be satisfied, see:
-
-\emph{• Negri, S. Proof analysis in modal logic. Journal of Philosophical Logic, 34, 507–544, 2005.}}
-
-\marianela{Should we mention Negri's paper here? }
-
-\marianela{In the same way as we did with monotonicity, trying to avoid the problems that contraction has in a cut elimination proof, it is preferable to have a system in which this rule is admissible.
-	\begin{remark}
-		
-		The rules $\llabrn{cont}$ and $\rlabrn{cont}$ are admissible for $\labIKp$.
-		\begin{center}
-			$\vlinf{\llabrn{cont}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}$\quad\quad$\vlinf{\rlabrn{cont}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}$
-		\end{center}
-	\end{remark}
-	\begin{proof}
-		The rule $\llabrn{cont}$ can be derived using $\rn{refl}$ and $\llabrn{mon}$ which is admissible by Proposition 3.1.
-		
-		\begin{center}
-			$\vlderivation{
-				\vlin{\rn{refl}}{}
-				{\B, \Left, \labels{x}{A} \SEQ \Right}
-				{\vlin{\llabrn{mon}}{}
-					{\B, \futs{x}{x}, \Left, \labels{x}{A} \SEQ \Right}
-					{\vlhy{\B, \futs{x}{x}, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}}}
-			}$
-		\end{center}
-		
-		The case for $\rlabrn{cont}$ is similar.
-	\end{proof}
-	}
 In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
 \begin{equation}
   \label{eq:cut}
@@ -381,3 +350,44 @@ Once we have shown cut elimination (the implication \ref{ii}$\implies$\ref{iii} 
   Theorem~\ref{thm:cutfree-compl}. The case for $\rlabrn{mon}$ is
   similar.
 \end{proof}
+
+\begin{remark}
+  As mentioned above, the monotonicity rules $\llabrn{mon}$ and $\rlabrn{mon}$ are a form of contraction. So, it is not a surprise that the contraction rules
+  \begin{equation*}
+    \vlinf{\llabrn{cont}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}
+    \hskip8em
+    \vlinf{\rlabrn{cont}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}
+  \end{equation*}
+  are admissible in our system, as they are derivable as follows:
+  \begin{equation*}
+    \vlderivation{
+      \vlin{\rn{refl}}{}
+	   {\B, \Left, \labels{x}{A} \SEQ \Right}
+	   {\vlin{\llabrn{mon}}{}
+	     {\B, \futs{x}{x}, \Left, \labels{x}{A} \SEQ \Right}
+	     {\vlhy{\B, \futs{x}{x}, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}}}
+    }
+    \hskip6em
+      \vlderivation{
+      \vlin{\rn{refl}}{}
+	   {\B, \Left \SEQ \Right, \labels{x}{A}}
+	   {\vlin{\rlabrn{mon}}{}
+	     {\B, \futs{x}{x}, \Left \SEQ \Right, \labels{x}{A}}
+	     {\vlhy{\B, \futs{x}{x}, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}}}
+    }
+  
+  \end{equation*}
+
+
+\review{the authors of the paper under review neglect an important caveat in the design of rules of contraction-free labelled sequent calculi: to guarantee that contraction be admissible one needs to ensure that a certain closure condition be satisfied, see:
+
+\emph{• Negri, S. Proof analysis in modal logic. Journal of Philosophical Logic, 34, 507–544, 2005.}}\lutz{I think the remark above takes care of that.}
+
+%\marianela{Should we mention Negri's paper here? }
+
+%\marianela{In the same way as we did with monotonicity, trying to avoid the problems that contraction has in a cut elimination proof, it is preferable to have a system in which this rule is admissible.
+%	}
+
+\review{Also the proofs of the structural properties closely follow the methodology of the paper by Maffezioli, Naibo \& Negri. All this has to be said expressis verbis, and appropriate citations have to be added.}
+%\marianela{we are not saying that in the next paragraph?}
+\lutz{I just checkt again, and I refuse to do that. I see two ways to proceed: Either we just ignore the comment, or we write in the answer to the reviewer that the whole procedure is standard (and we can even cite in the paper the Troelstra-Schwichtenberg Textbook). We do cite that paper somewher, but they should not get more credit than they deserve.}
