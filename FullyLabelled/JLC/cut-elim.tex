@@ -357,7 +357,39 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\item$\rn{F_1}$
+\item$\rn{refl}$:
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \Left \SEQ \Right}
+	{\vlin{\rn{refl}}{}{\B, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \futs xx, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right}}
+	\reducesto
+	\vlderibase{\rn{refl}}{}{\B, \Left \SEQ \Right}{\vliin{\rn{cut}}{}
+		{\B, \futs xx, \Left \SEQ \Right}
+		{\vlhtr{\DD_1}{\B, \futs xx, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{w}}{\B, \futs xx, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\item$\rn{trans}$:
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \futs xy, \futs yz, \Left \SEQ \Right}
+	{\vlin{\rn{trans}}{}
+		{\B, \futs xy, \futs yz, \Left \SEQ \Right, \labels{z}{C}}
+		{\vlhtr{\DD_1}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \futs xy, \futs yz, \Left, \labels{z}{C} \SEQ \Right}}
+\end{smallequation*}
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rn{trans}}{}
+	{\B, \futs xy, \futs yz, \Left \SEQ \Right}
+	{\vliin{\rn{cut}}{}
+		{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}
+		{\vlhtr{\DD_1}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{w}}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\item$\rn{F_1}$:
 \begin{smallequation*}
 	\vlderiibase{\rn{cut}}{}
 	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
