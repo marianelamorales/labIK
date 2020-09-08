@@ -356,15 +356,35 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 }
 \end{smallequation*}
-\item$\rn{F_1}$:
+
+\item$\rn{F_1}$
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
+	{\vlin{\rn{F_1}}{\lb u \mbox{ fresh}}
+		{\B, \accs xy, \futs yz, \Left \SEQ \Right, \labels{z}{C}}
+		{\vlhtr{\DD_1}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \accs xy, \futs yz, \Left, \labels{z}{C} \SEQ \Right}}
+\end{smallequation*}
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rn{F_1}}{\lb u \mbox{ fresh}}
+	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
+	{\vliin{\rn{cut}}{}
+		{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}
+		{\vlhtr{\DD_1}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\item$\rn{F_2}$:
 \begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \futs xz, \Left \SEQ \Right}
-	{\vlin{\rn{F_1}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlin{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right, \labels{z}{C}}}}
 	{\vlhtr{\DD_2}{\B, \accs xy, \futs xz, \Left, \labels{z}{C} \SEQ \Right}}
 \end{smallequation*}
 \begin{smallequation*}\hskip8em
 	\reducesto
-	\vlderibase{\rn{F_1}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\vliin{\labrn{cut}}{}
+	\vlderibase{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\vliin{\labrn{cut}}{}
 		{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right}
 		{\vlhtr{\DD_1}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right, \labels{z}{C}}}
 		{\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left, \labels{z}{C} \SEQ \Right}}}
