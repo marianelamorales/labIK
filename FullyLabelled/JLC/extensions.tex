@@ -6,44 +6,8 @@
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
+\subsection{Scott-Lemmon logics}
 
-\sonia{
-The rule corresponding to the $F_1$ was obtained through the standard axioms-to-rule procedure that is well known for geometric axioms. 
-%
-A similar rule can already be found in~\cite{maffezioli2014}.
-%
-It corresponds to attributing a positive polarity to both relational and pre-order atoms.
-
-$$\vlinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
-
-On the other hand, a different rule for $F_1$ could be obtained in the style of Vigano, that is, by polarising both relational and pre-order atoms negatively, as follows:
-
-$$\vliiinf{}{\lb u \mbox{ fresh}}{\B, \Gamma \SEQ \Delta}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \futs yz, \Gamma \SEQ \Delta}{\futs xu, \accs uz, \Gamma \SEQ \Delta}$$
-
-\lutz{we should say that this is pretty pointless wrt proof search.}
-It is also possible to design a "mixed" rule, by considering relational atoms positively and pre-order atoms negatively:
-
-$$\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
-
-
-Or vice-versa:
-
-$$\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
-
-In general, it is possible to design rules corresponding to axioms if given by \emph{bipolar formulas}. 
-%
-They are defined as the formulas in the level $N_2$ of the following hierarchy:
-
-$P_0 = N_0 \coloncolonequals xRy \mid x \le y$
-
-for $n \ge 1$, $P_n \coloncolonequals N_{n-1} \mid \exists x. P_n \mid P_n \AND P_n \mid P_n \OR P_n \mid \TOP \mid \BOT$
-
-$N_n \coloncolonequals P_{n-1} \mid \forall x. N_n \mid N_n \AND N_n \mid P_n \IMP N_n \mid \TOP$ 
-
-Indeed, this hierarchy exactly carves out the fragment of first-order logic that can be given equivalent rules manipulating only atoms~\cite{marin:etal:submitted}.
-\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
-}
 %In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
 %\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
 %%
@@ -459,6 +423,23 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	\end{remark}
 	
 	
+\subsection{Generalisation}
+
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
+
+\sonia{	
+	In general, it is possible to design rules corresponding to axioms if given by \emph{bipolar formulas}. 
+	%
+	They are defined as the formulas in the level $N_2$ of the following hierarchy:
 	
+	$P_0 = N_0 \coloncolonequals xRy \mid x \le y$
+	
+	for $n \ge 1$, $P_n \coloncolonequals N_{n-1} \mid \exists x. P_n \mid P_n \AND P_n \mid P_n \OR P_n \mid \TOP \mid \BOT$
+	
+	$N_n \coloncolonequals P_{n-1} \mid \forall x. N_n \mid N_n \AND N_n \mid P_n \IMP N_n \mid \TOP$ 
+	
+	Indeed, this hierarchy exactly carves out the fragment of first-order logic that can be given equivalent rules manipulating only atoms~\cite{marin:etal:submitted}.
+	\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
+}
 
 

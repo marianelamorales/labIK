@@ -390,3 +390,28 @@ Once we have shown cut elimination (the implication \ref{ii}$\implies$\ref{iii} 
 \review{Also the proofs of the structural properties closely follow the methodology of the paper by Maffezioli, Naibo \& Negri. All this has to be said expressis verbis, and appropriate citations have to be added.}
 %\marianela{we are not saying that in the next paragraph?}
 \lutz{I just checkt again, and I refuse to do that. I see two ways to proceed: Either we just ignore the comment, or we write in the answer to the reviewer that the whole procedure is standard (and we can even cite in the paper the Troelstra-Schwichtenberg Textbook). We do cite that paper somewher, but they should not get more credit than they deserve.}
+
+\todo{}
+\sonia{
+	The rule corresponding to the $F_1$ was obtained through the standard axioms-to-rule procedure that is well known for geometric axioms. 
+%
+A similar rule can already be found in~\cite{maffezioli2014}.
+%
+It corresponds to attributing a positive polarity to both relational and pre-order atoms.
+
+$$\vlinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
+
+On the other hand, a different rule for $F_1$ could be obtained in the style of Vigano, that is, by polarising both relational and pre-order atoms negatively, as follows:
+
+$$\vliiinf{}{\lb u \mbox{ fresh}}{\B, \Gamma \SEQ \Delta}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \futs yz, \Gamma \SEQ \Delta}{\futs xu, \accs uz, \Gamma \SEQ \Delta}$$
+
+\lutz{we should say that this is pretty pointless wrt proof search.}
+It is also possible to design a "mixed" rule, by considering relational atoms positively and pre-order atoms negatively:
+
+$$\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
+
+
+Or vice-versa:
+
+$$\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
+}
