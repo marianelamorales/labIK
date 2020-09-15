@@ -21,6 +21,7 @@ On the other hand, a different rule for $F_1$ could be obtained in the style of 
 
 $$\vliiinf{}{\lb u \mbox{ fresh}}{\B, \Gamma \SEQ \Delta}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \futs yz, \Gamma \SEQ \Delta}{\futs xu, \accs uz, \Gamma \SEQ \Delta}$$
 
+\lutz{we should say that this is pretty pointless wrt proof search.}
 It is also possible to design a "mixed" rule, by considering relational atoms positively and pre-order atoms negatively:
 
 $$\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
@@ -41,6 +42,7 @@ for $n \ge 1$, $P_n \coloncolonequals N_{n-1} \mid \exists x. P_n \mid P_n \AND 
 $N_n \coloncolonequals P_{n-1} \mid \forall x. N_n \mid N_n \AND N_n \mid P_n \IMP N_n \mid \TOP$ 
 
 Indeed, this hierarchy exactly carves out the fragment of first-order logic that can be given equivalent rules manipulating only atoms~\cite{marin:etal:submitted}.
+\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
 }
 %In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
 %\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
@@ -147,10 +149,39 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 
 Following again the axiom-as-rule idea, to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
 
-\begin{center}
-	$\vlinf{\gklmn}{\lb{y'}, \lb u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$
-\end{center}
+\begin{equation}
+  \label{eq:gklmn}
+  \vlinf{\gklmn}{\lb{y'}, \lb u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}
+\end{equation}
 
+\begin{remark}
+  Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and similarly for $\lb x R^{m} \lb z$. However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh (and therefore pairwise distinct), and similarly for $\lb z R^{n} \lb u$.
+  %
+  Below is an example derivation with a correct application of $\rn g_{1110}$ which (corresponding to Euklideaness) to derive $ \BOX(\BOX A \IMP A)$.
+  	$$
+		\vlderivation{
+			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
+				\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+					\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+						\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
+									\vlhy{}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		$$
+\end{remark}
+\todo{fix macro for the g-rule (not consistent at the moment)}
+
+\todo{it is maybe a bit fishy to say this ``freshness-thing'' only in a remark...}
+
+		\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
+		\lutz{Done by the remark above?}
 
 %We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
 %
@@ -427,29 +458,5 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	
 	
 	
-	\begin{remark}
-		\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
-		\todo{Lutz?}
-
-	
-	
-	$$
-		\vlderivation{
-			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
-				\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
-					\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-						\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-							\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
-								\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
-									\vlhy{}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		$$
-\end{remark}
 
 
