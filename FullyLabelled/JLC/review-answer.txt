@@ -1,0 +1,80 @@
+Dear Didier,
+
+thank you very much for the reviews. We are very grateful to the
+reviewers for their helpful comments, which enabled us to considerably
+improve our paper.
+
+We took all comments and remarks into account, and below we address
+the reviewers comments in detail.
+
+One of the main concerns of Reviewer 1 is that we have not cited all
+the relevant literature. We thank the reviewer for pointing out the
+missing references and added them accordingly.
+
+We anow address the other comments:
+
+>  Perhaps even more importantly, the authors of the paper under
+>  review neglect an important caveat in the design of rules of
+>  contraction-free labelled sequent calculi: to guarantee that
+>  contraction be admissible one needs to ensure that a certain
+>  closure condition be satisfied
+
+We already said in the submitted version that in our system
+contraction is derivable from the monotonicity rules, which in turn
+are admissible. We made this even more clear in the new version in
+Remark XXXXX.
+
+>  In Section 7, if the rules G_klmn are added without their
+>  contracted instances, the calculus will not be complete. For
+>  example, in the classical case, Euclidean transitivity ∀a, b,
+>  c(aRb&aRc → bRc) has the contracted instance ∀a, b(aRb → bRb) that
+>  allows for the derivation of BOX(BOX A → A). This, however, can
+>  hardly be derived without the rule’s contracted instance.
+
+In fact, the contracted instances are added. In the same way as for
+other rules, occurring labels can be equal. We failed to make this
+explicit in the first submitted version and corrected that mistake in
+Remark XXXXXXXXXX
+
+>  On top of this, the authors’ claim that labelled calculi ”work best
+>  for logics with standard Kripke semantics” is utterly wrong:
+>  labelled calculi have been developed for several variants of Kripke
+>  semantics, such as Lewis’s semantics for counterfactuals,
+>  neighbourhood semantics, Kripke semantics of impossible worlds, and
+>  so on.
+
+If something works best for A, it does not mean that it won't work for
+B. All we tried to say was that for logics with the standard Kripke
+semantics there is this close relationship between the semantics and
+the labels in the proof system.
+
+>  In conclusion, the paper does not look highly original. The
+>  birelational semantics is not a novelty, nor a calculus
+>  internalising that semantics appears an original idea.
+
+We never claim the birelational semantics to be a novelty (it goes
+back to the 1980s). Our paper is not about semantics but about about
+proof systems. And our system allows for extenstions that could not be
+studied before. We made this more clear in the new version (see
+Section 7).
+
+>  Also the reason for preferring one semantics for intuitionistic
+>  modal logic over another should be discussed in detail, as
+>  otherwise the authors’ work would rather look a routine exercise
+
+We are puzzled by this comment, as we just picked the standard
+semantics for intuitionistic modal logic, and semantics is not a
+concern of our paper. However, we added in the conclusion some
+comments on constructive modal logics, which are another variant of
+adding BOX and DIAMOND to intuitionistic propositional logic.
+
+
+The main concern of reviewer 2 is the lacking detail in the section on extensions. We tried to fix this
+
+TODO
+
+
+"need"
+
+abstract
+
