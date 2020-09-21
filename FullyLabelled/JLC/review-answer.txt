@@ -11,7 +11,7 @@ One of the main concerns of Reviewer 1 is that we have not cited all
 the relevant literature. We thank the reviewer for pointing out the
 missing references and added them accordingly.
 
-We anow address the other comments:
+We now address the other comments:
 
 >  Perhaps even more importantly, the authors of the paper under
 >  review neglect an important caveat in the design of rules of

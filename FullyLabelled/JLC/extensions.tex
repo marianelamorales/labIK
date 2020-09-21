@@ -6,8 +6,6 @@
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-\subsection{Scott-Lemmon logics}
-
 %In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
 %\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
 %%
@@ -71,7 +69,7 @@ The main goal of this section is to generate stronger logics adding new axioms t
 %}
 %$
 
-In the \emph{fully labelled} framework, we are able to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
+In the \emph{fully labelled} framework, we are able for the first time to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
 \begin{equation}
 \fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
 \end{equation}
@@ -110,6 +108,9 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 %\sonia{in the intuitionistic case, with the $\le$ proposition, the formula is geometric.}
 
 
+\todo{fix macro for the g-rule (not consistent at the moment)}
+
+\todo{fix: plus or comma in derivations}
 
 Following again the axiom-as-rule idea, to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
 
@@ -119,9 +120,11 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 \end{equation}
 
 \begin{remark}
-  Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and similarly for $\lb x R^{m} \lb z$. However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh (and therefore pairwise distinct), and similarly for $\lb z R^{n} \lb u$.
+  Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and similarly for $\lb x R^{m} \lb z$.
+ \sonia{ In case some of them coincide, they are not reapeated since $\B$ is a \emph{set} of atoms.}
+   However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh (and therefore pairwise distinct), and similarly for $\lb z R^{n} \lb u$.
   %
-  Below is an example derivation with a correct application of $\rn g_{1110}$ (which corresponds to Euklideaness) to derive $ \BOX(\BOX A \IMP A)$.
+  Below is an example derivation with a correct application of $\rn g_{1110}$ to derive $ \BOX(\BOX A \IMP A)$.
   	$$
 		\vlderivation{
 			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
@@ -140,7 +143,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 		}
 		$$
 \end{remark}
-\todo{fix macro for the g-rule (not consistent at the moment)}
+
 
 \todo{it is maybe a bit fishy to say this ``freshness-thing'' only in a remark...}
 
@@ -331,7 +334,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 \begin{remark}
 	As an illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
 	%
-	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but becomes provable if we directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP (yRu \AND zRu))$) to our system.
+	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but would become provable if we were tp directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP(yRu \AND zRu))$) to our system. (See details in Sec.6.3 of~\cite{simpson:phd})
 	%
 	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
 	
@@ -422,28 +425,30 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	
 	\end{remark}
 
-\todo{cite Simpson PhD sec 6.3}
+\todo{cite Simpson PhD sec 6.3}\sonia{done above}
 
-\todo{plus or comma}
-
-	
-\subsection{Generalisation}
 
 \review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
 
-\sonia{	
-	In general, it is possible to design rules corresponding to axioms if given by \emph{bipolar formulas}. 
-	%
-	They are defined as the formulas in the level $N_2$ of the following hierarchy:
-	
-	$P_0 = N_0 \coloncolonequals xRy \mid x \le y$
-	
-	for $n \ge 1$, $P_n \coloncolonequals N_{n-1} \mid \exists x. P_n \mid P_n \AND P_n \mid P_n \OR P_n \mid \TOP \mid \BOT$
-	
-	$N_n \coloncolonequals P_{n-1} \mid \forall x. N_n \mid N_n \AND N_n \mid P_n \IMP N_n \mid \TOP$ 
-	
-	Indeed, this hierarchy exactly carves out the fragment of first-order logic that can be given equivalent rules manipulating only atoms~\cite{marin:etal:submitted}.
-	\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
+\sonia{
+Here again, we chose the standard axiom-to-rule design for the gklmn rule, similar to Simpson'~\cite{simpson:phd}. 
+%
+However, we could also 
 }
 
+%\sonia{	
+%	In general, it is possible to design rules corresponding to axioms if given by \emph{bipolar formulas}. 
+%	%
+%	They are defined as the formulas in the level $N_2$ of the following hierarchy:
+%	
+%	$P_0 = N_0 \coloncolonequals xRy \mid x \le y$
+%	
+%	for $n \ge 1$, $P_n \coloncolonequals N_{n-1} \mid \exists x. P_n \mid P_n \AND P_n \mid P_n \OR P_n \mid \TOP \mid \BOT$
+%	
+%	$N_n \coloncolonequals P_{n-1} \mid \forall x. N_n \mid N_n \AND N_n \mid P_n \IMP N_n \mid \TOP$ 
+%	
+%	Indeed, this hierarchy exactly carves out the fragment of first-order logic that can be given equivalent rules manipulating only atoms~\cite{marin:etal:submitted}.
+%	\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
+%}
+%\todo{add example from\cite{maffezioli2014} }
 
