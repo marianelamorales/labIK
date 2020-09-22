@@ -431,19 +431,29 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 \review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
 
 \sonia{
-	The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted}.
+	The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (by assuming a positive bias on atoms).
 	%
-	On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00}. 
+	On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00 } (by assuming atoms are negative polarised). 
 	%
-	For example $F_1$ could be incorporated to the system as a pair of rules of the following form:
+	For reflexivity and transitivity of the preorder relation, this would give:
+	%
+	$$
+	\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
+	\qquad
+	\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
+	$$
+	%
+	We conjecture that $\ax{F_1}$ could be incorporated to the system as a pair of rules of the following form:
 	$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
 	\qquad
 	\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
 	%
-	Note however that it is read top-down and not appropriate for proof search.	
-	\lutz{we should say that this is pretty pointless wrt proof search.}
+	where $f$ and $g$ are (Skolem) function constants.
 	%
-	It is also possible to design a ``mixed" rule, by considering relational atoms positively and pre-order atoms negatively, or vice-versa.
+	Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
+%	\lutz{we should say that this is pretty pointless wrt proof search.}
+	%
+	It should also possible to design a ``mixed" rule, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave this investigation for future work.
 	%$$
 	%\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
 	%\qquad	
