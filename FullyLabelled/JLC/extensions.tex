@@ -6,68 +6,68 @@
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-%In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
-%\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
-%%
-%For example, you can add the following rule:
-%$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
-%to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-%$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
+In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
+\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
 %
-%In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
-%%
-%For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-%%\begin{center}
-%	($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
-%%\end{center}
-%
-%Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-%$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
-%
-%
-%Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
-%%
-%These systems enjoy cut-elimination via usual arguments. 
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
 
-%Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
 %
-%Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+%\begin{center}
+	($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%\end{center}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
+
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
 %
-%$\vlderivation{
-%	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-%		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-%			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-%				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-%					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-%						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-%							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
-%								\vlhy{}
-%							}
-%						}
-%					}
-%				}
-%			}
-%		}
-%	}
-%}
-%$
-%
-%Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
-%
-%$\vlderivation{
-%	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-%		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-%			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-%				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-%					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-%						\vlhy{}
-%					}
-%				}
-%			}
-%		}
-%	}
-%}
-%$
+These systems enjoy cut-elimination via usual arguments. 
+
+Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+
+Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+$
+
+Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$
 
 In the \emph{fully labelled} framework, we are able for the first time to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
 \begin{equation}
