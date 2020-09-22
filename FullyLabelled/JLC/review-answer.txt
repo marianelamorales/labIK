@@ -69,12 +69,50 @@ comments on constructive modal logics, which are another variant of
 adding BOX and DIAMOND to intuitionistic propositional logic.
 
 
-The main concern of reviewer 2 is the lacking detail in the section on extensions. We tried to fix this
+
+Reviewer 2 finds this paper well written, but has some technical
+concerns. We address them below.
+
+>  The main issue is indeed with the "wide range of logics”. While the
+>  base logic is discussed in detail, the range of logics is treated
+>  in an “Extensions” section that I believe could actually be more
+>  detailed.
 
 TODO
 
+>  Most importantly, I am not convinced by the gklmn rule. The side
+>  condition stipulates that y’ and u are fresh, whereas the frame
+>  property contains existential quantifications. I was thus expecting
+>  either a Skolemization in the style of Vigano in the “Labelled
+>  Non-Classical Logics” book, or a geometric rule with existential
+>  quantification in the style of Simpson [Sim94] or, perhaps even
+>  better, a “mixed” rule where the labels are assumed more or less in
+>  the style of an \exists elimination to derive a labeled formula.  I
+>  think that a thorough discussion of the alternatives, along with a
+>  more thorough proof of the correctness of the chosen solution, is
+>  needed.
 
-"need"
+We added Remark 7.5 to discuss this. Our rules are in fact in the
+style of Simpson, but we added a comparison to Vigano's method.
 
-abstract
+>  By the way, it does not help at all that the applications of the
+>  rule g1111 are merged with \Box_L and \Diamond_R in the example
+>  derivation.
+
+We fixed that.
+
+>  Also Remark 4.2 could benefit from some additional explanation. You
+>  write that the proof of Theorem 4.1 shows the “need” of the rules
+>  F_1, refl and trans. However, strictly speaking, the proof only
+>  shows how the rules are used and that they are helpful to prove the
+>  axioms. To show the “need" you would likely have to show that no
+>  other proofs of the axioms are possible. That is of course the
+>  case, but unless you prove it formally, it is not fully correct to
+>  claim that the “need” is shown. This is pedantic, I know.
+
+We just removed the "need". 
+
+
+
+
 
