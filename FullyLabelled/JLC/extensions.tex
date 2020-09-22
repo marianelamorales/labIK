@@ -124,7 +124,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
  \sonia{ In case some of them coincide, they are not reapeated since $\B$ is a \emph{set} of atoms.}
    However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh (and therefore pairwise distinct), and similarly for $\lb z R^{n} \lb u$.
   %
-  Below is an example derivation with a correct application of $\rn g_{1110}$ to derive $ \BOX(\BOX A \IMP A)$.
+  Below is an example derivation with a correct application of $\rn{g_{1110}}$ to derive $ \BOX(\BOX A \IMP A)$.
   	$$
 		\vlderivation{
 			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
@@ -377,7 +377,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 %	\end{smallequation*}
 %	where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
 	
-	\review{it does not help at all that the	applications of the rule $\rn{g1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
+	\review{it does not help at all that the	applications of the rule $\rn{g_1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
 	\marianela{I made this new version.
 		Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
 	\begin{smallequation*}\hspace*{-1.2cm}
@@ -391,7 +391,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 						%					}{
 						\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb z' \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
 							\vlin{\rlabrn\AND, \rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
-								\vlin{g_{1111}}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+								\vlin{\rn{g_{1111}}}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
 									\vlin{\llabrn\BOX, \rlabrn\DIA}{}{\futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'},  \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
 										%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
 										%											\vlhy{}
