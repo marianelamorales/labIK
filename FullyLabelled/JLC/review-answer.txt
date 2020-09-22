@@ -78,7 +78,8 @@ concerns. We address them below.
 >  in an “Extensions” section that I believe could actually be more
 >  detailed.
 
-TODO
+We extended this section with more explanation and also added a few
+more comments and remarks.
 
 >  Most importantly, I am not convinced by the gklmn rule. The side
 >  condition stipulates that y’ and u are fresh, whereas the frame
