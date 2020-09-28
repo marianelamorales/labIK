@@ -6,69 +6,6 @@
 
 The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
 
-In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
-\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
-%
-For example, you can add the following rule:
-$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
-to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
-
-In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
-%
-For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-%\begin{center}
-	($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
-%\end{center}
-
-Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
-
-
-Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
-%
-These systems enjoy cut-elimination via usual arguments. 
-
-Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
-
-Proof of $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
-
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
-								\vlhy{}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-$
-
-Proof of $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
-
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-$
-
 In the \emph{fully labelled} framework, we are able for the first time to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
 \begin{equation}
 \fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
@@ -107,11 +44,6 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 %
 %\sonia{in the intuitionistic case, with the $\le$ proposition, the formula is geometric.}
 
-
-\todo{fix macro for the g-rule (not consistent at the moment)}
-
-\todo{fix: plus or comma in derivations}\marianela{Done}
-
 Following again the axiom-as-rule idea, to have a sound and complete system adding the axiom $\agklmn$ to the system $\labIKp$, we introduce the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
 
 \begin{equation}
@@ -147,7 +79,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 
 \todo{it is maybe a bit fishy to say this ``freshness-thing'' only in a remark...}
 
-\todo{move this comment to the system (it also applies to boxL, F1,F2...), and then refer to it again here}\lutz{I tried to do that, but I could not find a good place, and it does not really make sense. So, I'd just leave it here.}
+%\todo{move this comment to the system (it also applies to boxL, F1,F2...), and then refer to it again here}\lutz{I tried to do that, but I could not find a good place, and it does not really make sense. So, I'd just leave it here.}
 
 		\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
 		\lutz{Done by the remark above?}
@@ -331,6 +263,74 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 %}
 %\end{equation*}
 
+In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
+\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
+%
+For example, you can add the following rule:
+$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
+to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
+$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
+
+In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
+%
+For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+%\begin{center}
+($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%\end{center}
+
+Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
+$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
+
+
+Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
+%
+These systems enjoy cut-elimination via usual arguments. 
+
+Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
+
+\begin{itemize}
+\item $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
+\end{itemize}
+\begin{center}
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+$
+\begin{itemize}
+\item $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
+\end{itemize}
+
+$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$
+\end{center}
+
+
 \begin{remark}
 	As an illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
 	%
@@ -425,10 +425,8 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	
 	\end{remark}
 
-\todo{cite Simpson PhD sec 6.3}\sonia{done above}
-
 \begin{remark}
-\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}\marianela{not sure what to do with this}
 
 \sonia{
 	The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (by assuming a positive bias on atoms).
