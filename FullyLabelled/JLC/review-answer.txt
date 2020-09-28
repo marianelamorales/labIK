@@ -77,7 +77,7 @@ technical concerns. We address them below.
 >  in an “Extensions” section that I believe could actually be more
 >  detailed.
 
-We put more emphasis on the section 7 in order to make clearer how to 
+We put more emphasis on the section 7 in order to make more clear how to 
 generate "stronger logics" adding new axioms to our system. We extended 
 this section with more explanation and we also added a few more comments 
 and remarks. For example, as a better way to understand the extensions, 
@@ -124,6 +124,16 @@ useful there are in our proofs.
 
 We also consider this comment of the Reviewer with the aim of better reflecting 
 our contribution in the paper.
+
+Finally, as the Reviwer 2 pointed out, we fixed some broken references.
+
+
+We want to thank the reviewers again for their time and for helping us improve our paper. 
+We hope to be able to show our interest in answering each of the points marked by each reviewer.
+
+
+
+
 
 
 
