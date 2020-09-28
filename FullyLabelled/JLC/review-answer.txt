@@ -32,7 +32,8 @@ Remark 3.4.
 
 In fact, the contracted instances are added. In the same way as for
 other rules, occurring labels can be equal. We failed to make this
-explicit in the first submitted version and corrected that mistake in Remark 7.2.
+explicit in the first submitted version and corrected that mistake in 
+Remark 7.2.
 
 >  On top of this, the authors’ claim that labelled calculi ”work best
 >  for logics with standard Kripke semantics” is utterly wrong:
@@ -76,9 +77,10 @@ technical concerns. We address them below.
 >  in an “Extensions” section that I believe could actually be more
 >  detailed.
 
-We put more emphasis on the section 7 in order to make clearer how to generate "stronger
-logics" adding new axioms to our system. We extended this section with more explanation and 
-we also added a few more comments and remarks. For example, as a better way to understand the extensions, 
+We put more emphasis on the section 7 in order to make clearer how to 
+generate "stronger logics" adding new axioms to our system. We extended 
+this section with more explanation and we also added a few more comments 
+and remarks. For example, as a better way to understand the extensions, 
 we also illustrated the specific case of adding to IK the 4-axiom.
 
 >  Most importantly, I am not convinced by the gklmn rule. The side
@@ -113,8 +115,8 @@ show better the use of the rule g1111.
 >  claim that the “need” is shown. This is pedantic, I know.
 
 In this case, we chose to change the word "need" with the word "use".
-Our intention on this, was to try to show how to apply those rules and how useful there are
-in our proofs.
+Our intention on this, was to try to show how to apply those rules and how 
+useful there are in our proofs.
 
 
 
