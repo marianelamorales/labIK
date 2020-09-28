@@ -8,7 +8,7 @@ the reviewers comments in detail.
 
 One of the main concerns of Reviewer 1 is that we have not cited all
 the relevant literature. We thank the reviewer for pointing out the
-missing references and added them accordingly.
+missing references and we added them accordingly.
 
 We now address the other comments:
 
@@ -21,7 +21,7 @@ We now address the other comments:
 We already said in the submitted version that in our system
 contraction is derivable from the monotonicity rules, which in turn
 are admissible. We made this even more clear in the new version in
-Remark XXXXX.
+Remark 3.4.
 
 >  In Section 7, if the rules G_klmn are added without their
 >  contracted instances, the calculus will not be complete. For
@@ -32,8 +32,7 @@ Remark XXXXX.
 
 In fact, the contracted instances are added. In the same way as for
 other rules, occurring labels can be equal. We failed to make this
-explicit in the first submitted version and corrected that mistake in
-Remark XXXXXXXXXX
+explicit in the first submitted version and corrected that mistake in Remark 7.2.
 
 >  On top of this, the authors’ claim that labelled calculi ”work best
 >  for logics with standard Kripke semantics” is utterly wrong:
@@ -42,18 +41,18 @@ Remark XXXXXXXXXX
 >  neighbourhood semantics, Kripke semantics of impossible worlds, and
 >  so on.
 
-If something works best for A, it does not mean that it won't work for
-B. All we tried to say was that for logics with the standard Kripke
-semantics there is this close relationship between the semantics and
-the labels in the proof system.
+If something works best for A, it does not mean that it won't work for B. 
+All we tried to say was that for logics with the standard Kripke semantics 
+there is this close relationship between the semantics and the labels in 
+the proof system.
 
 >  In conclusion, the paper does not look highly original. The
 >  birelational semantics is not a novelty, nor a calculus
 >  internalising that semantics appears an original idea.
 
 We never claim the birelational semantics to be a novelty (it goes
-back to the 1980s). Our paper is not about semantics but about about
-proof systems. And our system allows for extenstions that could not be
+back to the 1980s). Our paper is not about semantics but about
+proof systems. And our system allows for extenstions that could not be 
 studied before. We made this more clear in the new version (see
 Section 7).
 
@@ -69,16 +68,18 @@ adding BOX and DIAMOND to intuitionistic propositional logic.
 
 
 
-Reviewer 2 finds this paper well written, but has some technical
-concerns. We address them below.
+On the other side, Reviewer 2 finds this paper well written, but has some 
+technical concerns. We address them below.
 
 >  The main issue is indeed with the "wide range of logics”. While the
 >  base logic is discussed in detail, the range of logics is treated
 >  in an “Extensions” section that I believe could actually be more
 >  detailed.
 
-We extended this section with more explanation and also added a few
-more comments and remarks.
+We put more emphasis on the section 7 in order to make clearer how to generate "stronger
+logics" adding new axioms to our system. We extended this section with more explanation and 
+we also added a few more comments and remarks. For example, as a better way to understand the extensions, 
+we also illustrated the specific case of adding to IK the 4-axiom.
 
 >  Most importantly, I am not convinced by the gklmn rule. The side
 >  condition stipulates that y’ and u are fresh, whereas the frame
@@ -92,14 +93,15 @@ more comments and remarks.
 >  more thorough proof of the correctness of the chosen solution, is
 >  needed.
 
-We added Remark 7.5 to discuss this. Our rules are in fact in the
-style of Simpson, but we added a comparison to Vigano's method.
+\marianela{not sure what to put here} We added Remark 7.5 to discuss this. 
+Our rules are in fact in the style of Simpson, but we added a comparison to Vigano's method.
 
 >  By the way, it does not help at all that the applications of the
 >  rule g1111 are merged with \Box_L and \Diamond_R in the example
 >  derivation.
 
-We fixed that.
+Following this comment, we fixed the derivation on the paper in order to 
+show better the use of the rule g1111.
 
 >  Also Remark 4.2 could benefit from some additional explanation. You
 >  write that the proof of Theorem 4.1 shows the “need” of the rules
@@ -110,7 +112,12 @@ We fixed that.
 >  case, but unless you prove it formally, it is not fully correct to
 >  claim that the “need” is shown. This is pedantic, I know.
 
-We just removed the "need". 
+In this case, we chose to change the word "need" with the word "use".
+Our intention on this, was to try to show how to apply those rules and how useful there are
+in our proofs.
+
+
+
 
 
 
