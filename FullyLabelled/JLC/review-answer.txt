@@ -119,9 +119,11 @@ Our intention on this, was to try to show how to apply those rules and how
 useful there are in our proofs.
 
 
+>Reconsider de abstract. It reads very operational and does not clearly state the
+>contributions of the paper.
 
-
-
+We also consider this comment of the Reviewer with the aim of better reflecting 
+our contribution in the paper.
 
 
 
