@@ -18,9 +18,9 @@ We now address the other comments:
 >  contraction be admissible one needs to ensure that a certain
 >  closure condition be satisfied
 
-We already said in the submitted version that in our system
-contraction is derivable from the monotonicity rules, which in turn
-are admissible. We made this even more clear in the new version in
+We mentioned in the submitted version that contraction is derivable 
+in our system from the monotonicity rules, which in turn
+are admissible. We made this clearer in the new version in
 Remark 3.4.
 
 >  In Section 7, if the rules G_klmn are added without their
@@ -31,9 +31,9 @@ Remark 3.4.
 >  hardly be derived without the rule’s contracted instance.
 
 In fact, the contracted instances are added. In the same way as for
-other rules, occurring labels can be equal. We failed to make this
-explicit in the first submitted version and corrected that mistake in 
-Remark 7.2.
+other rules, occurring labels can be equal and substituted as needed. 
+We failed to make this explicit in the first submitted version and 
+corrected that mistake in Remark 7.2.
 
 >  On top of this, the authors’ claim that labelled calculi ”work best
 >  for logics with standard Kripke semantics” is utterly wrong:
@@ -42,31 +42,30 @@ Remark 7.2.
 >  neighbourhood semantics, Kripke semantics of impossible worlds, and
 >  so on.
 
-If something works best for A, it does not mean that it won't work for B. 
-All we tried to say was that for logics with the standard Kripke semantics 
+We meant to say that for logics with standard Kripke semantics 
 there is this close relationship between the semantics and the labels in 
-the proof system.
+the proof system which makes this method both efficient and elegant.
 
 >  In conclusion, the paper does not look highly original. The
 >  birelational semantics is not a novelty, nor a calculus
 >  internalising that semantics appears an original idea.
 
-We never claim the birelational semantics to be a novelty (it goes
-back to the 1980s). Our paper is not about semantics but about
-proof systems. And our system allows for extenstions that could not be 
-studied before. We made this more clear in the new version (see
-Section 7).
+We do not claim the birelational semantics to be a novelty of this work
+(We acknowledge that it dates back to the 1980s). Our paper is using the 
+semantical results of Plotkin and Sterling and others to design proof 
+systems for extensions of intuitionistic modal logic that had not been 
+studied before. We try to make this clearer in the new version (see Section 7).
 
 >  Also the reason for preferring one semantics for intuitionistic
 >  modal logic over another should be discussed in detail, as
 >  otherwise the authors’ work would rather look a routine exercise
 
-We are puzzled by this comment, as we just picked the standard
-semantics for intuitionistic modal logic, and semantics is not a
-concern of our paper. However, we added in the conclusion some
-comments on constructive modal logics, which are another variant of
-adding BOX and DIAMOND to intuitionistic propositional logic.
-
+We chose to work the standard birelational semantics for intuitionistic modal 
+logic IK. There are indeed other possible semantics that have been studied 
+for other constructive interpretations of modal logics such as birelational 
+semantics with impossible words or neighbourhood semantics. These could 
+potentially be studied in a similar framework to ours and we commented on 
+this topic in the conclusion.
 
 
 On the other side, Reviewer 2 finds this paper well written, but has some 
@@ -77,11 +76,11 @@ technical concerns. We address them below.
 >  in an “Extensions” section that I believe could actually be more
 >  detailed.
 
-We put more emphasis on the section 7 in order to make more clear how to 
-generate "stronger logics" adding new axioms to our system. We extended 
-this section with more explanation and we also added a few more comments 
-and remarks. For example, as a better way to understand the extensions, 
-we also illustrated the specific case of adding to IK the 4-axiom.
+We put more emphasis on Section 7 in this new version. We hope we made 
+it clearer how to generate "stronger logics" adding new axioms to our system. 
+We extended this section with more explanation and also added a few comments 
+and remarks. For example, as a better way to understand the rules and the 
+completeness proof, we present the specific case of the 4-axiom.
 
 >  Most importantly, I am not convinced by the gklmn rule. The side
 >  condition stipulates that y’ and u are fresh, whereas the frame
@@ -95,15 +94,21 @@ we also illustrated the specific case of adding to IK the 4-axiom.
 >  more thorough proof of the correctness of the chosen solution, is
 >  needed.
 
-\marianela{not sure what to put here} We added Remark 7.5 to discuss this. 
-Our rules are in fact in the style of Simpson, but we added a comparison to Vigano's method.
+We hope the additional Remark 7.4 answers these concerns. 
+We are indeed using the same method that Simpson (or Negri) applied to 
+geometric formulas, but in our case also allowing the preorder atoms to occur. 
+This method enforces that both relational and preorder atoms only appear on 
+the left-hand-side of a sequent, never on the right-hand-side. 
+As suggested, it should also be possible to treat the Scott-Lemmon axioms in 
+the style of Viganò and atoms would then appear on the right of sequents 
+only and indeed Skolemisation of some of the quantifiers would be required.
 
 >  By the way, it does not help at all that the applications of the
 >  rule g1111 are merged with \Box_L and \Diamond_R in the example
 >  derivation.
 
-Following this comment, we fixed the derivation on the paper in order to 
-show better the use of the rule g1111.
+Following this comment, we fixed the derivation which should now 
+show better the use of rule g1111.
 
 >  Also Remark 4.2 could benefit from some additional explanation. You
 >  write that the proof of Theorem 4.1 shows the “need” of the rules
@@ -114,24 +119,19 @@ show better the use of the rule g1111.
 >  case, but unless you prove it formally, it is not fully correct to
 >  claim that the “need” is shown. This is pedantic, I know.
 
-In this case, we chose to change the word "need" with the word "use".
-Our intention on this, was to try to show how to apply those rules and how 
-useful there are in our proofs.
+In this case, our intention was indeed to only show how to use those rules and how 
+critical there are in these specific cases.
 
-
->Reconsider de abstract. It reads very operational and does not clearly state the
+>Reconsider the abstract. It reads very operational and does not clearly state the
 >contributions of the paper.
 
-We also consider this comment of the Reviewer with the aim of better reflecting 
+We rewrote the abstract added some more context and with the aim of better reflecting 
 our contribution in the paper.
 
-Finally, as the Reviwer 2 pointed out, we fixed some broken references.
-
-
 We want to thank the reviewers again for their time and for helping us improve our paper. 
-We hope to be able to show our interest in answering each of the points marked by each reviewer.
+We hope to have addressed all their insightful comments both in this letter and in the new version of this paper. 
 
-Best Regards,
+Best regards,
 Sonia Marin, Marianela Morales and Lutz Strassburger
 
 
