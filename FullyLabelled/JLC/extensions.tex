@@ -59,7 +59,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 \begin{remark}
   Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and if $k=0$ then $\lb x=\lb y$; and similarly for $\lb x R^{m} \lb z$.
 (In case some of them coincide, they are not repeated since $\B$ is a \emph{set} of atoms.)
-   However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, and if $l=0$ then $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$, unless if $n = 0$ in which case $u=z$.
+   However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, and if $l=0$ then $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$, unless if $n = 0$ in which case $\lb u= \lb z$.
   
   For example, the derivation in~\eqref{eq:g-example} below requires the (valid) application of~$\rn{g_{1110}}$: 
   $$\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \Left \SEQ \Right}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \futs{y}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
@@ -95,8 +95,8 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 
 %\todo{move this comment to the system (it also applies to boxL, F1,F2...), and then refer to it again here}\lutz{I tried to do that, but I could not find a good place, and it does not really make sense. So, I'd just leave it here.}
 
-		%% \review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
-		%% \lutz{Done by the remark above?}
+		\review{In Section 7, if the rules G klmn are added without their contracted instances, the calculus will not be complete. For example, in the classical case, Euclidean transitivity $\forall a,b,c (\accs{a}{b} \& \accs{a}{c} \IMP \accs{b}{c})$ has the contracted instance $\forall a,b (\accs{a}{b} \IMP \accs{b}{b})$ that allows for the derivation of $ \BOX(\BOX A \IMP A)$. This, however, can hardly be derived without the rule’s contracted instance.}
+		\lutz{Done by the remark above?}
 
 %We start proving that our new system is complete with the base case of $\mathsf{k = l = m = n = 1}$:
 %
@@ -292,7 +292,7 @@ $$
 \qquad\mbox{or}\qquad
 \vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
 $$
-respectively.
+
 Indeed, they allow us to derive the corresponding axioms $\ax{4^{\DIA}}$ and $\ax{4^{\BOX}}$ as required above in the completeness proof:
 $$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
@@ -327,15 +327,20 @@ $$\vlderivation{
 	}
 }
 $$
+\todo{text colouring!}
 
 	As another illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$. (See details in Sec.6.3 of~\cite{simpson:phd}.)
 	%
 	Indeed, the formula $$\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
 	$$\vlinf{}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs{v}{x}, \accs{u}{x}, \Left \SEQ \Right}$$
 	%
+	
 	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$). 
 	%
 	By representing birelational semantics precisely with both $R$ and $\le$ relations and by adding the  rule $\rn{g_{1111}}$ defined above, we can no longer derive this formula, as illustrated by the representation of the failed proof search below:	
+	\review{it does not help at all that the	applications of the rule $\rn{g_1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
+	\marianela{I made this new version.
+		Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
 	\begin{smallequation*}\hspace*{-1.2cm}
 		\vlderivation{
 			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
@@ -395,34 +400,33 @@ $$
 %}
 %\todo{add example from\cite{maffezioli2014} }
 
-%% \review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}
-%% \todo{add coment on this}\sonia{done?}
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}
+\todo{add coment on this}\sonia{done?}
 
 \begin{remark}
-The rules $\gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$ in Section~ \ref{sec:system}) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (which amounts to considering a positive bias on atoms).
+The rules $\gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$ in Section~ \ref{sec:system}) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (amounts to considering a positive bias on atoms).
 %
 On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00} (by assuming atoms are negatively polarised). 
 %
-For reflexivity and transitivity of the preorder relation, this gives
+For reflexivity and transitivity of the preorder relation, this gives:
 %
 $$
 \vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
-\qquand
+\qquad
 \vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
 $$
-respectively.
 %
-Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent, and the derivations are to be read top-down, and therefore are not appropriate for proof search.	
+Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
 %	\lutz{we should say that this is pretty pointless wrt proof search.}
 
 Vigan\`o's method also assumes that the frame conditions are in a particular shape by prenexing and then skolemizing quantifiers. Following this process, we conjecture that for example $\ax{F_1}$ could be incorporated to a system as a pair of rules of the following form:
 $$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
-\qquand
+\qquad
 \vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
 %
 where $f$ and $g$ are (Skolem) function constants, and similar rules could be designed for Scott-Lemmon axioms too. 
 %
-It should even possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa. We leave the investigation of all these different shapes of rules for future work.
+It should even possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave the investigation of all these different shapes of rules for future work.
 %$$
 %\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
 %\qquad	
