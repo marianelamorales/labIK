@@ -279,21 +279,21 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 
 As we realise this theorem might look rather abstract, we come back to the example of the transitivity frame condition evoked in the introduction.
 %%
-The frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
 ($g_{2001}$) if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %%
-The frames that validate the axiom $\rn{4}_\rn\BOX \colon \fm{\BOX A \IMP \BOX \BOX }$ are exactly the ones satisfying the condition:
+The frames that validate the axiom $\ax{4^{\BOX}} \colon \fm{\BOX A \IMP \BOX \BOX }$ are exactly the ones satisfying the condition:
 ($g_{0120}$) if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
 
 
-We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\rn{4}_\rn\DIA$ or $\rn{4}_\rn\BOX$, respectively, by specialising the rule scheme above as:
+We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\ax{4^{\DIA}}$ or $\ax{4^{\BOX}}$, respectively, by specialising the rule scheme above as:
 $$
 \vlinf{\rn{g_{2001}}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}
 \qquad\mbox{or}\qquad
 \vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
 $$
 
-Indeed, they allow us to derive the corresponding axioms $\ax{4_{\DIA}}$ and $\ax{4_{\BOX}}$ as required above in the completeness proof:
+Indeed, they allow us to derive the corresponding axioms $\ax{4^{\DIA}}$ and $\ax{4^{\BOX}}$ as required above in the completeness proof:
 $$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
 		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
