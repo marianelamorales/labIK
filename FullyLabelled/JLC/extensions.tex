@@ -1,3 +1,4 @@
+\newcommand{\set}[1]{\{#1\}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,7 +31,7 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 \begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
 	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$ if and only if the frame satisfies:
 	
-	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
+	if $\lb x R^{k} \lb y$ and $\lb x R^{m} \lb z$ then there exists $\lb{y'}$ such that $\futs{y}{y'}$ and there exists $\lb u$ such that $\lb{y'}R^{l}\lb u$ and $\lb z R^{n} \lb u$.\footnote{The relation $R^h$ for $h\ge0$ is defined in the usual way: $R^0=\set{(v,v)|v\in W}$ and $R^{h+1}=R\circ R^h=\set{(v,w)|\exists u\in W.\; vRu \wedge uR^hw}$.}
 \end{theorem}
 
 \todo{explain notation $\rel^n$ and what when $n=0$?}
