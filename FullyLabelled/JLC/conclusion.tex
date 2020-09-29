@@ -1,22 +1,32 @@
 \section{Conclusion}
 
 
-In this paper we embrace the fully labelled approach to intuitionistic modal logic as pioneered by~\cite{maffezioli:etal:synthese13} and generalise it to the class of logics defined by (one-sided intuitionistic) Scott-Lemmon axioms.
+In this paper we embrace the fully labelled approach to intuitionistic modal logic as pioneered by~\cite{maffezioli:etal:synthese13} and generalise it to the class of logics defined by (one-sided) intuitionistic Scott-Lemmon axioms.
 %
 We establish that it is a valid approach to intuitionistic modal logic by proving soundness and completeness of our system, via a reductive cut-elimination argument.
 
-For a restricted class of logics defined by so-called \emph{path axioms}: $\fm{(\DIA^k\BOX A \IMP\BOX^m A) \AND (\DIA^k A \IMP \BOX^m\DIA A)}$ the standard labelled framework with one relation $R$ was enough for Simpson to get a strong connection between the sequent system, the axiomatisation and the birelational semantics~\cite{simpson:phd}.
+For a restricted class of these logics defined by so-called \emph{path axioms}: $\fm{(\DIA^k\BOX A \IMP\BOX^m A) \AND (\DIA^k A \IMP \BOX^m\DIA A)}$ the standard labelled framework with one relation $R$ was enough for Simpson to get a strong connection between the sequent system, the axiomatisation and the birelational semantics~\cite{simpson:phd}.
 %
 %\todo{For path axioms we must have that adding the rule for the two sides of the axiom is equivalent to adding the rule that doesn't make use of the pre-order. Is it possible to see that directly on the proof theoretical side?}
 %\sonia{probably not because the preorder is introduced/used in other rules for $\BOX$ and $\IMP$}
 %
 We believe that the framework presented here might be the more appropriate way to treat logics outside of the path axioms definable fragment.
 
-However, we have not showed that our system satisfies Simpson's 6th requirement, that is, "there is an intuitionistically comprehensible explanation of the meaning of the modalities relative to which [our system] is sound and complete".
+However, we have not showed that our system satisfies Simpson's 6th requirement, that is, ``there is an intuitionistically comprehensible explanation of the meaning of the modalities relative to which [the system] is sound and complete".
 %
 To make sure that his system satisfies this requirement, Simpson chose to depart from the direct correspondence with modal axioms and their corresponding class of Kripke frames, and to study intuitionistic purely as a fragment of intuitionistic first-order logic.
 %
-We instead took the way of a direct correspondence of our system with the class of frames defined by Scott-Lemmon axioms as uncovered by~\cite{plotkin:stirling:86}, but as this class of logics seems to be rather well-behaved, we believe it shoud be possible to prove the satisfaction of Simpson's 6th requirement too.
+We instead took the way of a direct correspondence of our system with the class of frames defined by Scott-Lemmon axioms as uncovered by~\cite{plotkin:stirling:86}, but as this class of logics seems to be rather well-behaved, we believe it should be possible to prove the satisfaction of Simpson's 6th requirement too.
+
+\review{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in detail, as otherwise the authors’ work would rather look a routine exercise.}
+\todo{add a paragraph in conclusion: saying that it is an interesting idea to apply method to CK, but extension is tricky \cite{ADS:lmcs}} \sonia{done?}
+We have considered in this work the logic known as $\IK$ (and its extensions) with respect to the birelational semantics that is its most well-studied semantics.
+%
+As we have mentioned, however, different basis can be considered for intuitionistic modal logic, for example the one called \emph{constructive modal logic} $\mathsf{CK}$ and any in between.
+%
+These can also be studied within the birelational framework with some additional conditions, and we are convinces the fully labelled framework, once extended with these conditions, will be suitable to treat constructive fragments equally.
+%
+However, treating extensions of those with axioms such as we did here for Scott-Lemmon logics is known to be complex~\cite{ADS:lmcs}.
 
 As for more general future work, there is a real necessity of a global view on intutionistic modal logics.
 %
@@ -24,39 +34,8 @@ The work of~\cite{dalmonte:grellois:olivetti:arxiv19} is a great first step in u
 %
 It would be interesting to know how and where the class of logics we considered can be included in their framework.
 
-\review{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in detail, as otherwise the authors’ work would rather look a routine exercise.}
-\todo{add a paragraph in conclusion: saying that it is an interesting idea to applly method to CK, but extension is tricky \cite{ADS:lmcs}} 
 
 
 
 
-\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}
-\todo{add coment on this}
 
-The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (by assuming a positive bias on atoms).
-%
-On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00 } (by assuming atoms are negative polarised). 
-%
-For reflexivity and transitivity of the preorder relation, this would give:
-%
-$$
-\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
-\qquad
-\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
-$$
-%
-We conjecture that $\ax{F_1}$ could be incorporated to the system as a pair of rules of the following form:
-$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
-\qquad
-\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
-%
-where $f$ and $g$ are (Skolem) function constants.
-%
-Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
-%	\lutz{we should say that this is pretty pointless wrt proof search.}
-%
-It should also possible to design a ``mixed" rule, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave this investigation for future work.
-%$$
-%\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
-%\qquad	
-%\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$

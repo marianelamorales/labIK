@@ -291,7 +291,7 @@ $$
 \vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
 $$
 
-Indeed, they allow us to derive their correspond axioms as required above in the completeness proof:
+Indeed, they allow us to derive the corresponding axioms $\ax{4_{\DIA}}$ and $\ax{4_{\BOX}}$ as required above in the completeness proof:
 $$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
 		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
@@ -327,12 +327,13 @@ $$\vlderivation{
 $$
 \todo{text colouring!}
 
-	As another illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
+	As another illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$. (See details in Sec.6.3 of~\cite{simpson:phd}.)
 	%
-	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
+	Indeed, the formula $$\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
 	$$\vlinf{}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs{v}{x}, \accs{u}{x}, \Left \SEQ \Right}$$
 	%
-	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$). (See details in Sec.6.3 of~\cite{simpson:phd}.)
+	
+	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$). 
 	%
 	By representing birelational semantics precisely with both $R$ and $\le$ relations and by adding the  rule $\rn{g_{1111}}$ defined above, we can no longer derive this formula, as illustrated by the representation of the failed proof search below:	
 	\review{it does not help at all that the	applications of the rule $\rn{g_1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
@@ -397,3 +398,35 @@ $$
 %}
 %\todo{add example from\cite{maffezioli2014} }
 
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}
+\todo{add coment on this}\sonia{done?}
+
+\begin{remark}
+The rules $\gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$ in Section~ \ref{sec:system}) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (amounts to considering a positive bias on atoms).
+%
+On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00 } (by assuming atoms are negatively polarised). 
+%
+For reflexivity and transitivity of the preorder relation, this gives:
+%
+$$
+\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
+\qquad
+\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
+$$
+%
+Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
+%	\lutz{we should say that this is pretty pointless wrt proof search.}
+
+Vigan\`o's method also assumes that the frame conditions are in a particular shape by prenexing and then skolemizing quantifiers. Following this process, we conjecture that for example $\ax{F_1}$ could be incorporated to a system as a pair of rules of the following form:
+$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
+\qquad
+\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
+%
+where $f$ and $g$ are (Skolem) function constants, and similar rules could be designed for Scott-Lemmon axioms too. 
+%
+It should even possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave the investigation of all these different shapes of rules for future work.
+%$$
+%\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
+%\qquad	
+%\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
+\end{remark}
