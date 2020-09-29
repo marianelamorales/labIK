@@ -15,18 +15,20 @@ sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{m
 labelled calculi have the advantage of being more uniform and being able to 
 accommode a larger class of logics.
 
-Standard labelled sequent calculi attach to every formla $\fm A$ a label
+Standard labelled sequent calculi for logics with
+standard Kripke semantics attach to every formla $\fm A$ a label
 $\lb x$, witten as $\labels xA$, and additionally use
-\emph{relational atoms} of the form $\accs xy$ where $\rel$ is a
-binary relation symbol. These calculi work best for logics with
-standard Kripke semantics, as in this case the relation $\rel$ is used
-to encode the accessibility relation in the Kripke models, and the
+\emph{relational atoms} of the form $\accs xy$ where 
+the binary relation symbol $\rel$
+%These calculi work best for logics with
+%standard Kripke semantics, as in this case the relation $\rel$ 
+is used to encode the accessibility relation in the Kripke models, such that
 frame conditions corresponding to the desired logic can be directly
 encoded as inference rules.
-\todo{Reviewer 1 complained about the ``best''}
+%\todo{Reviewer 1 complained about the ``best''}
 Prominent examples are classical modal
-logics and intuitionistic propositional logic, where, e.g., the frame
-condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$), can be straightforwardly translated into the
+logics and intuitionistic propositional logic, e.g., the frame
+condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be translated into the
 inference rule
 \begin{equation}
 \label{eq:Rtrans}
@@ -34,11 +36,11 @@ inference rule
 	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
 where $\B$ stands for a set of relational atoms, and $\Gamma$ and
-$\Delta$ for multi-sets of labelled formulas.
+$\Delta$ for multi-sets of labelled formulas~\cite{negri:vonplato:01}.
 
 However,
 in this paper we are concerned with \emph{intuitionistic modal
-	logics}, whose Kripke semantics is based on \emph{birelational}
+logics} whose Kripke semantics is based on \emph{birelational}
 frames, i.e., they have two binary relations instead of one: one
 relation $R$ that corresponds to the accessibility relation in 
 Kripke frames for modal logics, and a relation $\le$ that
@@ -50,26 +52,25 @@ these logics have certain shortcomings:
 	versions of the $\fourax$-axiom
 	\begin{equation}
 	\label{eq:4ax}
-	\fm{\BOX A\IMP \BOX\BOX A}
+	\ax{4^{\BOX}}\colon\fm{\BOX A\IMP \BOX\BOX A}
 	\qquand
-	\fm{\DIA\DIA A\IMP\DIA A}
-	\quadcm
+	\rn{4^{\DIA}}\colon\fm{\DIA\DIA A\IMP\DIA A}
+%	\quadcm
 	\end{equation}
 	which are equivalent in classical
 	modal logic. However, in intuitionistic modal logic they are not
-	equivalent, and even though the logic $\IKfour$, i.e., the
-	intuitionistic version of the modal logic $\Kfour$, contains both
-	axioms, they can also be added independently to the logic $\IK$ (an
-	intuitionistic version of $\K$). The proof theory of these
-	new logics has not been studied before; no existing labelled (or
-	label-free) proof system can handle them, even though the
+	equivalent, and even though the logic $\IKfour$ 
+	(intuitionistic version of modal logic $\Kfour$) contains both
+	axioms, they can also be added independently to the logic $\IK$ 
+	(intuitionistic version of $\K$). The proof theory of these
+	distinct logics has not been discussed before, but their
 	corresponding frame conditions
 	\begin{equation}
 	\label{eq:4frame}
 	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
 	\quand
 	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
-	\;,
+	\;
 	\end{equation}
 	%  \todo{add graphical representation of the conditions}
 	$$
@@ -83,26 +84,27 @@ these logics have certain shortcomings:
 		x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
 	}
 	$$
-	respectively, have already been studied
-	in~\cite{plotkin:stirling:86}.
+	respectively, have been studied in~\cite{plotkin:stirling:86}.
 	%  \sonia{the general condition is correct but not the application to 4}
 	\item The correspondence between the syntax and the semantics is not
 	as clean as one would expect. As only the $R$-relation (and not the
-	$\le$-relation) of the frame is visible in an ordinary labelled
-	sequent, we only have that a sequent $\Gamma$ is provable if and
-	only if is satisfied in all \emph{graph-consistent}\footnote{This
+	$\le$-relation) is visible in an ordinary labelled
+	sequent, we only have that a formula is provable in an extension of $\IK$ beyond paths axioms 
+	if and only if is satisfied in all \emph{graph-consistent}\footnote{This
 		means that every layer in the model can be lifted to any future of
 		any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
-	models, 
+	models satisfying the corresponding conditions, 
 	%  \sonia{this is only true for logics outside of the path axioms.}
 	%  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
 	%  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
-	as already observed in by Simpson in his PhD thesis~\cite{simpson:phd}
-	and considered as an inelegant solution (see also \cite{mar:str:tableaux17}).
+	as observed by Simpson
+	and considered as an inelegant solution~\cite{simpson:phd}. % (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two concerns we propose here to enrich usual 
 labelled sequent by allowing both, relational atoms of the
-form $\futs xy$ and of the form $\accs xy$. Consequently, we can easily translate the frame
+form $\futs xy$ and of the form $\accs xy$. 
+%%
+Consequently, following the same ``axiom-to-rule'' method as Simpson, we can translate the frame
 conditions in~\eqref{eq:4frame} into inference rules:
 \begin{equation}
 \label{eq:4rules}
@@ -113,9 +115,11 @@ conditions in~\eqref{eq:4frame} into inference rules:
 	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
 \end{equation}
 This allows us to define cut-free deductive systems for a wide range
-of logics that could not be treated before.  Furthermore, the relation
-between syntax and semantics is as one would expect: A sequent is
-provable in our system if and only if it is valid in all models.
+of logics that had been treated proof-theoretically before.  
+%%
+Furthermore, the relation
+between syntax and semantics can be recovered as one would expect: A formula is
+provable in this system if and only if it is valid in all models satisfying the corresponding frame condition.
 
 Besides that, there is another pleasant observation to make about our
 system. Ordinary labelled sequent systems for intuitionistic modal
@@ -141,7 +145,7 @@ with an internal cut elimination procedure.
 
 \review{The rules of their calculus are identical (except for the ones that relate the two accessibility relations) to the rules for the intuitionistic-alethic fragment	of the calculus for intuitionistic bimodal logic in this publication:
   • Maffezioli, P., Naibo, A. \& Negri, S., The Church-Fitch knowability paradox in the light of structural proof theory. Synthese, vol. 190, 2677–2716, 2013.}
-\lutz{done in previous paragraph? can this be removed: }
+\lutz{done in previous paragraph?}
 %\old{
 %Maffezioli, Naibo and Negri have considered in~\cite{maffezioli:etal:synthese13} a labelled system for intuitionistic bimodal epistemic logic which is multi-conclusion.}
 %%
@@ -150,7 +154,7 @@ with an internal cut elimination procedure.
 %	%
 %	This eliminates the undesired discrepancy as, consequently, every rule in our system is invertible, i.e.~we never delete information in a bottom-up proof search.  Furthermore, we present in this contribution an internal cut elimination proof.}
 
-This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:soundness} and~\ref{sec:completeness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture other intuitionistic modal logics.
+This paper is organized as follows, In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:completeness} and~\ref{sec:soundness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture intuitionistic Scott-Lemmon modal logics.
 
 \todo{Add Bozin and Dozen reference: \cite{bovzic1984models} and Maffezioli and Naibo \cite{maffezioli2014}}
 \lutz{I've added a refence to \cite{bovzic1984models} in sec.2, and \cite{maffezioli2014} in a footnote in sec.3}

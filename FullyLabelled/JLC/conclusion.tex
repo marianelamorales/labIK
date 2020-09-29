@@ -1,8 +1,5 @@
 \section{Conclusion}
 
-\review{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in detail, as otherwise the authors’ work would rather look a routine exercise.}
-\todo{add a paragraph in conclusion: saying that it is an interesting idea to applly method to CK, but extension is tricky \cite{ADS:lmcs}} 
-
 
 In this paper we embrace the fully labelled approach to intuitionistic modal logic as pioneered by~\cite{maffezioli:etal:synthese13} and generalise it to the class of logics defined by (one-sided intuitionistic) Scott-Lemmon axioms.
 %
@@ -26,3 +23,40 @@ As for more general future work, there is a real necessity of a global view on i
 The work of~\cite{dalmonte:grellois:olivetti:arxiv19} is a great first step in understanding them in the context of non-normal modalities and neighbourhood semantics.
 %
 It would be interesting to know how and where the class of logics we considered can be included in their framework.
+
+\review{Also the reason for preferring one semantics for intuitionistic modal logic over another should be discussed in detail, as otherwise the authors’ work would rather look a routine exercise.}
+\todo{add a paragraph in conclusion: saying that it is an interesting idea to applly method to CK, but extension is tricky \cite{ADS:lmcs}} 
+
+
+
+
+\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}
+\todo{add coment on this}
+
+The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (by assuming a positive bias on atoms).
+%
+On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00 } (by assuming atoms are negative polarised). 
+%
+For reflexivity and transitivity of the preorder relation, this would give:
+%
+$$
+\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
+\qquad
+\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
+$$
+%
+We conjecture that $\ax{F_1}$ could be incorporated to the system as a pair of rules of the following form:
+$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
+\qquad
+\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
+%
+where $f$ and $g$ are (Skolem) function constants.
+%
+Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
+%	\lutz{we should say that this is pretty pointless wrt proof search.}
+%
+It should also possible to design a ``mixed" rule, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave this investigation for future work.
+%$$
+%\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
+%\qquad	
+%\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$

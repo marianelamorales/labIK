@@ -8,17 +8,17 @@ The main goal of this section is to generate stronger logics adding new axioms t
 
 In the \emph{fully labelled} framework, we are able for the first time to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
 \begin{equation}
-\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
+\agklmn\colon\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
 \end{equation}
 for any natural numbers $k,l,m,n$.
 
 \begin{figure}
 	$$
 	\xymatrix{
-		& u' \ar@{.>}[ddr]^{R^l} \\
-		& u \ar@{.>}[u]^{\le} \\
-		w \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && x \\
-		& v \ar@{.>}[ur]_{R^n}
+		& y' \ar@{.>}[ddr]^{R^l} \\
+		& y \ar@{.>}[u]^{\le} \\
+		x \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && u \\
+		& z \ar@{.>}[ur]_{R^n}
 	}
 	$$
 	\caption{The intuitionistic klmn-incestuality condition}
@@ -32,6 +32,8 @@ Indeed, they are known to obey a strong correspondence with the class of frames 
 	
 	if $\lb w R^{k} \lb u$ and $\lb w R^{m} \lb v$ then there exists $\lb{u'}$ such that $\futs{u}{u'}$ and there exists $\lb x$ such that $\lb{u'}R^{l}\lb x$ and $\lb v R^{n} \lb x$.
 \end{theorem}
+
+\todo{explain notation $\rel^n$ and what when $n=0$?}
 
 %\sonia{I don't think we need the actual \emph{correspondence} result. Soundness and completeness is enough for us}.
 
@@ -48,15 +50,25 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 
 \begin{equation}
   \label{eq:gklmn}
-  \vlinf{\gklmn}{\lb{y'}, \lb u \mbox{ fresh}}{\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right}{\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}
+  \vlinf{\gklmn}{\lb{y'}, \lb {u} \mbox{ fresh}}{\B, \lb x \rel^{k} \lb y, \lb x \rel^{m} \lb z, \Left \SEQ \Right}{\B, \lb x \rel^{k} \lb y, \lb x \rel^{m} \lb z, \futs{y}{y'}, \lb{y'}\rel^{l} \lb u, \lb z \rel^{n} \lb u, \Left\SEQ\Right}
 \end{equation}
+
+\todo{actually when one of the number is 0 the u might not be fresh after substitution!! see $g_{1110}$  below}
 
 \begin{remark}
   Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and similarly for $\lb x R^{m} \lb z$.
- \sonia{ In case some of them coincide, they are not reapeated since $\B$ is a \emph{set} of atoms.}
+(In case some of them coincide, they are not reapeated since $\B$ is a \emph{set} of atoms.)
    However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh (and therefore pairwise distinct), and similarly for $\lb z R^{n} \lb u$.
   %
-  Below is an example derivation with a correct application of $\rn{g_{1110}}$ to derive $ \BOX(\BOX A \IMP A)$.
+  For example, the derivation below requires the (valid) application of $\rn{g_{1110}}$ 
+  $$\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \Left \SEQ \Right}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \futs{y}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
+  \quad\mbox{as}\quad
+  \vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \accs xz, \Left \SEQ \Right}{\B, \lb x \rel \lb z, \futs{z}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
+  $$
+  i.e., the case where $\lb y=\lb z$, in order to derive $ \fm{\BOX(\BOX A \IMP A)}$.
+  
+  \todo{this is the crucial point: the original rule has $y\le y'$ but the "contracted" instance has $z\le y'$}
+  
   	$$
 		\vlderivation{
 			\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
@@ -77,7 +89,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 \end{remark}
 
 
-\todo{it is maybe a bit fishy to say this ``freshness-thing'' only in a remark...}
+%\todo{it is maybe a bit fishy to say this ``freshness-thing'' only in a remark...}
 
 %\todo{move this comment to the system (it also applies to boxL, F1,F2...), and then refer to it again here}\lutz{I tried to do that, but I could not find a good place, and it does not really make sense. So, I'd just leave it here.}
 
@@ -263,41 +275,44 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 %}
 %\end{equation*}
 
-In~\cite{simpson:phd}, Simpson extends his basic sequent system for $\IK$ to the geometric frame conditions. 
-\sonia{Not fully. The system is extended with a rule for geometric frame conditions, but the completeness holds only for the restricted class of Horn clauses frame conditions.}
-%
-For example, you can add the following rule:
-$$\scalebox{.9}{$\vlinf{\boxbrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs wu, \Left \SEQ \Right}$}$$
-to it and obtain a sound and complete system wrt.~$\IK$ plus the axiom
-$\ax{4}\colon \fm{(\DIA\DIA A \IMP \DIA A) \AND (\BOX A \IMP \BOX\BOX A)}$, that is, wrt.~to all frames in which $\rel$ is transitive.
-
-In~\cite{plotkin:stirling:86}, Plotkin and Stirling give a more general correspondence result than Theorem~\ref{thm:plotkin}, that is, for intuitionistic modal logic extended with a family of axioms wrt.~some classes of bi-relational frames.
-%
-For example, the frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-%\begin{center}
-($\diabrn{4}$) if $\accs wv$ and $\accs vu$, there exists a $\lb{u'}\in W$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
-%\end{center}
-
-Incorporating the preorder symbol into the syntax of our sequents allows us to also obtain a sound and complete proof system for the intuitionistic modal logic extended with axiom $\rn{4}_\rn\DIA$, by designing the following rule:
-$$\scalebox{.9}{$\vlinf{\diabrn{4}}{\text{\footnotesize $u'$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}$}$$
+As we realise this theorem might look rather abstract, we come back to the example of the transitivity frame condition evoked in the introduction.
+%%
+The frames that validate the axiom $\rn{4}_\rn\DIA \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
+($g_{2001}$) if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%%
+The frames that validate the axiom $\rn{4}_\rn\BOX \colon \fm{\BOX A \IMP \BOX \BOX }$ are exactly the ones satisfying the condition:
+($g_{0120}$) if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
 
 
-Therefore, we decompose further the formalism of labelled sequents and extend the reach of labelled deduction to the logics studied in~\cite{plotkin:stirling:86}.
-%
-These systems enjoy cut-elimination via usual arguments. 
+We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\rn{4}_\rn\DIA$ or $\rn{4}_\rn\BOX$, respectively, by specialising the rule scheme above as:
+$$
+\vlinf{\rn{g_{2001}}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}
+\qquad\mbox{or}\qquad
+\vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
+$$
 
-Proofs of the axiom mentioned for $\DIA$ and $\BOX$ are below:
-
-\begin{itemize}
-\item $\ax{4_{\BOX}} \colon \fm{\BOX A \IMP \BOX\BOX A}$
-\end{itemize}
-\begin{center}
-$\vlderivation{
+Indeed, they allow us to derive their correspond axioms as required above in the completeness proof:
+$$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\rn{g_{2001}}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$$
+as well as,
+$$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
 		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
 			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\boxbrn{4}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\rn{trans}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{g_{0120}}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\rn{trans_\le}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
 						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
 							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
 								\vlhy{}
@@ -309,74 +324,17 @@ $\vlderivation{
 		}
 	}
 }
-$
-\begin{itemize}
-\item $\ax{4_{\DIA}} \colon \DIA\DIA A \IMP \DIA A$:
-\end{itemize}
+$$
+\todo{text colouring!}
 
-$\vlderivation{
-	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
-		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
-			\vlin{\diasym_\rn{4}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
-					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
-						\vlhy{}
-					}
-				}
-			}
-		}
-	}
-}
-$
-\end{center}
-
-
-\begin{remark}
-	As an illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
+	As another illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \rn{g_{1111}}$.
 	%
-	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but would become provable if we were tp directly add the rule corresponding to the directedness condition ($\forall xyz. \exists u. ((xRy \AND xRz) \IMP(yRu \AND zRu))$) to our system. (See details in Sec.6.3 of~\cite{simpson:phd})
+	Indeed, the formula $\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
+	$$\vlinf{}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs{v}{x}, \accs{u}{x}, \Left \SEQ \Right}$$
 	%
-	By adding the correct rule $\rn{g_{1111}}$ as defined above, we can mimic the birelational semantics precisely and we cannot derive this formula, as illustrated by the representation of the failed proof search below:
-	
-%	\begin{smallequation*}\hspace*{-1.2cm}
-%		\vlderivation{
-%			\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
-%				\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
-%					\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
-%						%						\vlin{\rn{id}}{}{\labels{y'}{\DIA a} \SEQ \labels{y'}{\DIA a}}{
-%						%							\vlhy{}
-%						%						}
-%						%					}{
-%						\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
-%							\vlin{\rlabrn\AND+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
-%								\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
-%									\vlin{\llabrn\OR+\rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-%										%										\vlin{\rn{id}}{}{\labels{u''}{a} \SEQ \labels{u''}{a}}{
-%										%											\vlhy{}
-%										%											}
-%										%										}{
-%										\vlin{g1111,\llabrn\BOX,\rlabrn\DIA}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-%											\vlin{\llabrn\OR+\rn{id}}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-%												\vlid{}{}{\B, \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
-%													\vlhy{}
-%												}
-%											}
-%										}
-%									}
-%								}
-%								%							}{
-%								%							\vlin{\rn{id}}{}{\labels{z'}{\DIA b} \SEQ \labels{z'}{\DIA b}}{
-%								%								\vlhy{}		
-%								%								}
-%							}
-%						}
-%					}
-%				}
-%			}
-%		}
-%	\end{smallequation*}
-%	where $\B = \futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y'}{y'}', \accs{y''}{u''}, \accs{z'}{u''}$.
-	
+	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$). (See details in Sec.6.3 of~\cite{simpson:phd}.)
+	%
+	By representing birelational semantics precisely with both $R$ and $\le$ relations and by adding the  rule $\rn{g_{1111}}$ defined above, we can no longer derive this formula, as illustrated by the representation of the failed proof search below:	
 	\review{it does not help at all that the	applications of the rule $\rn{g_1111}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example derivation.} 
 	\marianela{I made this new version.
 		Also I found a mistake in the other version: the first time g111 is used an $\rel$ is created as $\accs{y'}{y''}$ when it has to be $\futs{y'}{y''}$. Besides that, I added the fresh variables.}
@@ -422,41 +380,6 @@ $
 		}
 	\end{smallequation*}
 	where $\B = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$.
-	
-	\end{remark}
-
-\begin{remark}
-\review{Most importantly, I am not convinced by the gklmn rule. The side condition stipulates that $\lb y'$ and $\lb u$ are fresh, whereas the frame property contains existential quantifications. I was thus expecting either a Skolemization in the style of Vigano in the ``Labelled Non-Classical Logics" book, or a geometric rule with existential quantification in the style of Simpson [Sim94] or, perhaps even better, a “mixed” rule where the labels are	assumed more or less in the style of an $\exists$ elimination to derive a labeled formula.}\todo{Sonia}\marianela{not sure what to do with this}
-
-\sonia{
-	The rules $gklmn$ (similarly to those corresponding to reflexivity, transitivity, $F_1$ and $F_2$) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (by assuming a positive bias on atoms).
-	%
-	On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00 } (by assuming atoms are negative polarised). 
-	%
-	For reflexivity and transitivity of the preorder relation, this would give:
-	%
-	$$
-	\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
-	\qquad
-	\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
-	$$
-	%
-	We conjecture that $\ax{F_1}$ could be incorporated to the system as a pair of rules of the following form:
-	$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
-	\qquad
-	\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
-	%
-	where $f$ and $g$ are (Skolem) function constants.
-	%
-	Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and are to be read top-down, and therefore are not appropriate for proof search.	
-%	\lutz{we should say that this is pretty pointless wrt proof search.}
-	%
-	It should also possible to design a ``mixed" rule, by considering relational atoms positively and pre-order atoms negatively, or vice-versa, and we leave this investigation for future work.
-	%$$
-	%\vliinf{}{\lb u \mbox{ fresh}}{\B, \accs xy, \Gamma \SEQ \Delta}{\B, \accs xy, \futs yz, \Gamma \SEQ \Delta}{\accs xy, \futs xu, \accs uz, \Gamma \SEQ \Delta}
-	%\qquad	
-	%\vliinf{}{\lb u \mbox{ fresh}}{\B, \futs yz, \Gamma \SEQ \Delta}{\B, \futs yz, \accs xy, \Gamma \SEQ \Delta}{\futs yz, \futs xu, \accs uz, \Gamma \SEQ \Delta}$$
-}
 
 %\sonia{	
 %	In general, it is possible to design rules corresponding to axioms if given by \emph{bipolar formulas}. 
@@ -473,5 +396,4 @@ $
 %	\lutz{I think we should say this in another place in the paper, maybe an extra ``related work section''. It feels out of place here.}
 %}
 %\todo{add example from\cite{maffezioli2014} }
-\end{remark}
 
