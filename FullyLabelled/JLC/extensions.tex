@@ -310,12 +310,12 @@ $$
 as well as,
 $$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
-		\vliq{\rlabrn\BOX}{}{x \le w, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
-			\vlin{\rn{F_1}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-				\vlin{\rn{g_{0120}}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-					\vlin{\rn{trans_\le}}{}{x \le w, w \le w', {w' \rel v}, {v \le v'}, v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-						\vlin{\llabrn\BOX}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', t \le t', t' \rel u, w \le t, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
-							\vlin{\labrn{id}}{}{x \le w, w \le w', w' \rel v, v \le v', v' \rel u, w' \le t, t \rel v', w \le t, t \rel u, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+		\vliq{\rlabrn\BOX}{}{\futs xw, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\futs{v}{v'}}, \accs{v'}{u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{g_{0120}}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\accs{v}{v'}}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\rn{trans_\le}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\futs{v}{v'}}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{t}{t'}, \accs{t'}{u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\llabrn\BOX}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{t}{t'}, \accs{t'}{u}, \futs wt, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{w}{t}, \accs tu, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
 								\vlhy{}
 							}
 						}
