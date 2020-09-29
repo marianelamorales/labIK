@@ -117,16 +117,17 @@ show better the use of rule g1111.
 >  axioms. To show the “need" you would likely have to show that no
 >  other proofs of the axioms are possible. That is of course the
 >  case, but unless you prove it formally, it is not fully correct to
->  claim that the “need” is shown. This is pedantic, I know.
+>  claim that the “need” is shown. 
 
 In this case, our intention was indeed to only show how to use those rules and how 
 critical there are in these specific cases.
 
->Reconsider the abstract. It reads very operational and does not clearly state the
->contributions of the paper.
+> Finally, I suggest that the authors reconsider the abstract, which, 
+> in my opinion, does not do their paper justice. It reads very “operational” 
+> and does not clearly state the contributions of the paper.
 
-We rewrote the abstract added some more context and with the aim of better reflecting 
-our contribution in the paper.
+We rewrote the abstract adding some more context and with the aim of better reflecting 
+our contributions
 
 We want to thank the reviewers again for their time and for helping us improve our paper. 
 We hope to have addressed all their insightful comments both in this letter and in the new version of this paper. 
