@@ -12,6 +12,7 @@ In the \emph{fully labelled} framework, we are able for the first time to consid
 \agklmn\colon\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
 \end{equation}
 for any natural numbers $k,l,m,n$.
+\lutz{use the mathsf font. in the intro we also used the same for axiom and rule. So we can do the same here (just change the macro)}
 
 \begin{figure}
 	$$
@@ -58,12 +59,12 @@ Following again the axiom-as-rule idea, to have a sound and complete system addi
 
 \begin{remark}
   Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and if $k=0$ then $\lb x=\lb y$; and similarly for $\lb x R^{m} \lb z$.
-(In case some of them coincide, they are not repeated since $\B$ is a \emph{set} of atoms.)
-   However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, and if $l=0$ then $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$, unless if $n = 0$ in which case $\lb u=\lb z$.
+(In case some of them coincide, they are not repeated since $\B$ is a \emph{set} of relational atoms.)
+   However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, except if $l=0$, in which case $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$; but note that if $n = 0$ then $\lb u=\lb z$.
   
   For example, the derivation in~\eqref{eq:g-example} below requires the (valid) application of~$\rn{g_{1110}}$: 
   $$\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \Left \SEQ \Right}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \futs{y}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
-  \quad\mbox{as}\quad
+  \qquad\mbox{as}\qquad
   \vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \accs xz, \Left \SEQ \Right}{\B, \lb x \rel \lb z, \futs{z}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
   $$
   i.e., the case where $\lb y=\lb z$, in order to derive $ \fm{\BOX(\BOX A \IMP A)}$.
@@ -279,11 +280,9 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 
 As we realise this theorem might look rather abstract, we come back to the example of the transitivity frame condition evoked in the introduction.
 %%
-The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition:
-($g_{2001}$) if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the condition~$g_{2001}$: if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %%
-The frames that validate the axiom $\ax{4^{\BOX}} \colon \fm{\BOX A \IMP \BOX \BOX }$ are exactly the ones satisfying the condition:
-($g_{0120}$) if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
+The frames that validate the axiom $\ax{4^{\BOX}} \colon \fm{\BOX A \IMP \BOX \BOX A}$ are exactly the ones satisfying the condition~$g_{0120}$: if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
 
 
 We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\ax{4^{\DIA}}$ or $\ax{4^{\BOX}}$, respectively, by specialising the rule scheme above as:
@@ -333,7 +332,7 @@ $$
 	Indeed, the formula $$\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
 	$$\vlinf{}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs{v}{x}, \accs{u}{x}, \Left \SEQ \Right}$$
 	%
-	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$). 
+	corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists u. (\accs yu \AND \accs zu))$. 
 	%
 	By representing birelational semantics precisely with both $R$ and $\le$ relations and by adding the  rule $\rn{g_{1111}}$ defined above, we can no longer derive this formula, as illustrated by the representation of the failed proof search below:	
 	\begin{smallequation*}\hspace*{-1.2cm}
