@@ -67,7 +67,7 @@ are trying to eliminate it from derivations.
 	\vlinf{\labrn{mon_a}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}\Right}{
 		\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}\Right}
 	$$
-	is height-preserving admissible for $\labIKp$.
+	is height-preserving admissible for $\labIKp$.\lutz{in the second base case we need the atomic version of $\rlabrn{mon}$ as well, either we add it here, or we drop that case}
 \end{lemma}
 
 \begin{proof}
@@ -130,7 +130,8 @@ are trying to eliminate it from derivations.
           $\rlabrn{\AND}$ are invertible on both premises, and the
           rule $\llabrn{\IMP}$ is invertible on the right premise.
 %		Furthermore, the rule $\llabrn{\IMP}$ is
-%		height-preserving invertible for the right premise.
+          %		height-preserving invertible for the right premise.
+          \lutz{"height-preseving'' was commented out. For a reason or by mistake?} 
 	\end{lemma}
 
 	\begin{proof}
