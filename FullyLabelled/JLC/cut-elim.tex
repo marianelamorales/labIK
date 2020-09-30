@@ -285,7 +285,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \item $\llabrn\BOX$:
 \begin{smallequation*}\hskip-8em
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
-		\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX} \SEQ \Right, \labels{z}{C}}{
+		\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
 		}
 	}{
@@ -438,7 +438,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \end{itemize}
               \item[Key cases:]\label{key-cases}
-                In the case when the last rule in $\DD_1$ and in $\DD_2$ applies to the cut-formula, it is the complexity of the cut-formula that is the decresing inductive measure.
+                If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure.
                 \begin{itemize}
 				\item $C=A \AND B$:
 				
@@ -571,6 +571,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 }
 \end{smallequation*}
+\lutz{we need to explain why we can apply the IH}
                 \item $C=\DIA A$:
 
 \begin{smallequation*}
@@ -598,6 +599,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \vlhtr{\DD_2[y/y']}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
 }
 \end{smallequation*}
+\lutz{Same. we need to explain why we can apply the IH}
                 \end{itemize}
                 \end{description}
 \end{proof}
