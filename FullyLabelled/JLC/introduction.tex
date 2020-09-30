@@ -36,7 +36,7 @@ inference rule
 	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
 \end{equation}
 where $\B$ stands for a set of relational atoms, and $\Gamma$ and
-$\Delta$ for multi-sets of labelled formulas~\cite{negri:vonplato:01}.
+$\Delta$ for multi-sets of labelled formulas~\cite{negri:vonplato:01}.\lutz{right ref?}
 
 However,
 in this paper we are concerned with \emph{intuitionistic modal
@@ -78,7 +78,7 @@ these logics have certain shortcomings:
 		x' \ar@{.>}[drr]^R \\
 		x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
 	}
-	\qquad\qquad
+	\hskip10em
 	\xymatrix{
 		&& z''  \\
 		x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
@@ -89,7 +89,7 @@ these logics have certain shortcomings:
 	\item The correspondence between the syntax and the semantics is not
 	as clean as one would expect. As only the $R$-relation (and not the
 	$\le$-relation) is visible in an ordinary labelled
-	sequent, we only have that a formula is provable in an extension of $\IK$ beyond paths axioms 
+	sequent, we only have the result that a formula is provable in an extension of $\IK$ beyond paths axioms 
 	if and only if is satisfied in all \emph{graph-consistent}\footnote{This
 		means that every layer in the model can be lifted to any future of
 		any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
@@ -101,7 +101,7 @@ these logics have certain shortcomings:
 	and considered as an inelegant solution~\cite{simpson:phd}. % (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two concerns we propose here to enrich usual 
-labelled sequent by allowing both, relational atoms of the
+labelled sequents by allowing both, relational atoms of the
 form $\futs xy$ and of the form $\accs xy$. 
 %%
 Consequently, following the same ``axiom-to-rule'' method as Simpson, we can translate the frame
@@ -115,24 +115,24 @@ conditions in~\eqref{eq:4frame} into inference rules:
 	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
 \end{equation}
 This allows us to define cut-free deductive systems for a wide range
-of logics that had been treated proof-theoretically before.  
+of logics that had not been treated proof-theoretically before.  
 %%
 Furthermore, the relation
 between syntax and semantics can be recovered as one would expect: A formula is
 provable in this system if and only if it is valid in all models satisfying the corresponding frame condition.
 
 Besides that, there is another pleasant observation to make about our
-system. Ordinary labelled sequent systems for intuitionistic modal
+system. It is naturally a multi-conclusion system. Ordinary labelled sequent systems for intuitionistic modal
 logic are single-conclusion~\cite{simpson:phd}. 
 %
 The same is true for the corresponding nested sequent
 systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
-Maehara style multiple-conclusion systems in nested
+Maehara style multi-conclusion systems in nested
 sequents~\cite{str:2017maehara}, and therefore also in ordinary
 labelled sequents. However, also in these systems there are rules
 ($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
 premise, even though this is not the case in labelled
-systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83} for
+systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:83}\lutz{wrong ref} for
 intuitionistic logic. 
 
 A system similar to ours is presented
