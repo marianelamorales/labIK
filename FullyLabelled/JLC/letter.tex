@@ -1,0 +1,185 @@
+%\documentclass[preprint,authoryear,times,10pt]{elsart}  
+\documentclass[10pt]{article}  
+
+\input{new-macros}
+
+%\textbf{Comment:}\\ #1\\}
+\newcommand{\R}[1]{\textbf{R#1}:\,}
+\newcommand{\reponse}[1]{\textbf{#1}}
+
+\begin{document}
+
+\hfill \today
+\bigskip
+
+\noindent\textbf{Letter to the editors of the EICNCL Special Issue of JLC.}
+\bigskip
+
+\noindent{Dear Agata, Didier, Nicola, and Revantha,}
+\medskip
+
+Please find enclosed the revision of our paper entitled {\it A fully labelled 
+proof system for intuitionistic modal logics}, taking into accounts the reviews
+that we received concerning our first submission.
+%
+We detail below the main changes compared to the previous version that we operated 
+on the paper in order to address remarks and questions by the reviewers.
+\smallskip
+
+One of the main concerns of Reviewer 1 is that we had not cited all
+the relevant literature. We thank the reviewer for pointing out the
+missing references and we added them accordingly.
+
+We now address their other comments.
+
+\begin{quote}\it
+	Perhaps even more importantly, the authors of the paper under 
+	review neglect an important caveat in the design of rules of 
+	contraction-free labelled sequent calculi: to guarantee that 
+	contraction be admissible one needs to ensure that a certain 
+	closure condition be satisfied
+\end{quote}
+
+We mentioned in the submitted version that contraction is derivable 
+in our system from the monotonicity rules, which in turn
+are admissible. We made this clearer in the new version in
+Remark 3.4.
+
+\begin{quote}\it
+	In Section 7, if the rules $\gklmn$ are added without their 
+	contracted instances, the calculus will not be complete. For 
+	example, in the classical case, Euclidean transitivity $\forall a, b, 
+	c(aRb \AND aRc \IMP bRc)$ has the contracted instance $?a, b(aRb \IMP bRb)$ that 
+	allows for the derivation of $\BOX(\BOX A \IMP A)$. This, however, can 
+	hardly be derived without the rule?s contracted instance.
+\end{quote}
+
+In fact, the contracted instances are added. In the same way as for
+other rules, occurring labels can be equal and substituted as needed. 
+We failed to make this explicit in the first submitted version and 
+corrected that mistake in Remark 7.2.
+
+\begin{quote}\it
+	On top of this, the authors' claim that labelled calculi ``work best 
+	for logics with standard Kripke semantic'' is utterly wrong: 
+	labelled calculi have been developed for several variants of Kripke 
+	semantics, such as Lewis's semantics for counterfactuals, 
+	neighbourhood semantics, Kripke semantics of impossible worlds, and 
+	so on.
+\end{quote}
+
+We meant to say that for logics with standard Kripke semantics 
+there is this close relationship between the semantics and the labels in 
+the proof system which makes this method both efficient and elegant.
+
+\begin{quote}\it
+In conclusion, the paper does not look highly original. The 
+birelational semantics is not a novelty, nor a calculus 
+internalising that semantics appears an original idea.
+\end{quote}
+
+We do not claim the birelational semantics to be a novelty of this work.
+(We acknowledge that it dates back to the 1980s.) Our paper is using the 
+semantical results of Plotkin and Sterling, and others, to design proof 
+systems for extensions of intuitionistic modal logic that had not been 
+studied proof-theoretically before. We try to make this clearer in the new 
+version (see Section 7).
+
+\begin{quote}\it
+Also the reason for preferring one semantics for intuitionistic 
+modal logic over another should be discussed in detail, as 
+otherwise the authors? work would rather look a routine exercise
+\end{quote}
+
+We chose to work the standard birelational semantics for intuitionistic modal 
+logic IK. There are indeed other possible semantics that have been studied 
+for other constructive interpretations of modal logics such as birelational 
+semantics with impossible words or neighbourhood semantics. These could 
+potentially be studied in a similar framework to ours and we commented on 
+this topic in the conclusion.
+
+\medskip
+Reviewer 2 finds this paper well written, but has some 
+technical concerns. We address them below.
+
+\begin{quote}\it
+The main issue is indeed with the ``wide range of logics''. While the
+base logic is discussed in detail, the range of logics is treated
+in an ``Extensions'' section that I believe could actually be more
+detailed.
+\end{quote}
+
+We put more emphasis on Section 7 in this new version. We hope we made 
+it clearer how to generate ``stronger logics" adding new axioms to our system. 
+We extended this section with more explanation and also added a few comments 
+and remarks. For example, as a better way to understand the rules and the 
+completeness proof, we present the specific case of the 4-axioms.
+
+\begin{quote}\it
+Most importantly, I am not convinced by the $\gklmn$ rule. The side
+condition stipulates that $y?$ and $u$ are fresh, whereas the frame
+property contains existential quantifications. I was thus expecting
+either a Skolemization in the style of Vigan\`o in the ``Labelled
+Non-Classical Logics'' book, or a geometric rule with existential
+quantification in the style of Simpson [Sim94] or, perhaps even
+better, a ``mixed'' rule where the labels are assumed more or less in
+the style of an $\exists$ elimination to derive a labeled formula.  I
+think that a thorough discussion of the alternatives, along with a
+more thorough proof of the correctness of the chosen solution, is
+needed.
+\end{quote}
+
+We hope the additional Remark 7.4 answers these concerns. 
+We are indeed using the same method that Simpson (or Negri) applied to 
+geometric formulas, but in our case also allowing the preorder atoms to occur. 
+This method enforces that both relational and preorder atoms only appear on 
+the left-hand-side of a sequent, never on the right-hand-side. 
+As suggested by Reviewer 2, it should also be possible to treat the Scott-Lemmon axioms in 
+the style of Vigan\`o where atoms would then appear on the right of sequents 
+only and indeed Skolemisation of some of the quantifiers would be required.
+
+\begin{quote}\it
+By the way, it does not help at all that the applications of the
+rule $\rn{g_{1111}}$ are merged with $\llabrn\BOX$ and $\rlabrn\DIA$ in the example
+derivation.
+\end{quote}
+
+Following this comment, we fixed the derivation which should now 
+show better the use of rule $\rn{g_{1111}}$.
+
+\begin {quote}\it
+Also Remark 4.2 could benefit from some additional explanation. You
+write that the proof of Theorem 4.1 shows the ``need'' of the rules
+$\rn{F_1}$, $\rn{refl}$ and $\rn{trans}$. However, strictly speaking, the proof only
+shows how the rules are used and that they are helpful to prove the
+axioms. To show the ``need'' you would likely have to show that no
+other proofs of the axioms are possible. That is of course the
+case, but unless you prove it formally, it is not fully correct to
+claim that the ``need'' is shown. 
+\end{quote}
+
+In this case, our intention was indeed only to show how to use those rules and how 
+they play an interesting role in these specific cases.
+
+\begin{quote}\it
+Finally, I suggest that the authors reconsider the abstract, which, 
+in my opinion, does not do their paper justice. It reads very ?operational? 
+and does not clearly state the contributions of the paper.
+\end{quote}
+
+We rewrote the abstract adding some more context and with the aim of better reflecting 
+our contributions
+\medskip
+
+We finally want to thank the reviewers for their time and for helping us improve our paper. 
+We hope to have addressed all their insightful comments both in this letter and in the new version of this paper. 
+\bigskip
+
+Kind regards,
+\medskip
+
+Sonia Marin, Marianela Morales and Lutz Stra\ss burger
+
+
+
+\end{document}

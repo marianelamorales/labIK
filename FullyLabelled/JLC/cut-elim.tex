@@ -183,9 +183,11 @@ are trying to eliminate it from derivations.
 
                 \begin{description}
                 \item[Base cases:]\label{base-cases}
-                When the complexity of the cut-formula is $0$, i.e.~$C$ is atomic, or in general when the height of $\DD_1$ or $\DD_2$ is $0$, we can produce a cut-free derivation of the conclusion.
+                When the last rule in $\DD_1$ is an axiom, 
+%                the complexity of the cut-formula is $0$, i.e.~$C$ is atomic, or in general when the height of $\DD_1$ or $\DD_2$ is $0$, 
+                we can produce directly a cut-free derivation of the conclusion.
                 %
-                In the first two cases below, we appeal to Lemma~\ref{lem:adm-mon-at}, to use atomic monotonicity rules freely.
+                In the first case, we appeal to Lemma~\ref{lem:adm-mon-at}, to use the atomic monotonicity rule freely.
         \begin{itemize}
         	                \item 
         	                \begin{smallequation*}
@@ -202,35 +204,35 @@ are trying to eliminate it from derivations.
         	                }
         	            \end{smallequation*}
         	            
-        	            \item
-        	            \begin{smallequation*}
-        	            	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
-        	            		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
-        	            	}{
-        	            	\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
-        	            		\vlhy{}	
-        	            	}
-        	            }
-        	            \reducesto
-        	            \vlderibase{\rlabrn{mon_a}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
-        	            	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
-        	            }
-        	        \end{smallequation*}
-                
-                \item
-                \begin{smallequation*}
-                	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
-                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{\BOT}}
-                	}{
-                		\vlin{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
-                			\vlhy{}}
-                	}
-                	\reducesto
-                	\vlderivation{
-                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right}
-                	}
-                \end{smallequation*}
-            	Indeed, $\labels{x}{\BOT}$ is passive in $\DD_1$ as there is no right rule for $\BOT$ in $\labIKp$.
+%        	            \item
+%        	            \begin{smallequation*}
+%        	            	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+%        	            		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}		
+%        	            	}{
+%        	            	\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+%        	            		\vlhy{}	
+%        	            	}
+%        	            }
+%        	            \reducesto
+%        	            \vlderibase{\rlabrn{mon_a}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+%        	            	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+%        	            }
+%        	        \end{smallequation*}
+%                
+%                \item
+%                \begin{smallequation*}
+%                	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+%                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{\BOT}}
+%                	}{
+%                		\vlin{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+%                			\vlhy{}}
+%                	}
+%                	\reducesto
+%                	\vlderivation{
+%                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right}
+%                	}
+%                \end{smallequation*}
+%            	Indeed, $\labels{x}{\BOT}$ is passive in $\DD_1$ as there is no right rule for $\BOT$ in $\labIKp$.
             	
             
             	\item
@@ -473,7 +475,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \end{itemize}
               \item[Key cases:]\label{key-cases}
-                If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure, save for the modal cases, where it is important to note the combination of induction on both height and on formulat size . 
+                If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure, save for the modal cases, where it is important to note the combination of induction on both height and formula size . 
                 \begin{itemize}
 				\item $C=A \AND B$:
 				
