@@ -19,7 +19,7 @@ adapted to the system at hand.\footnote{As pointed out
 
 This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
 
-The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is the height of D when seen as a tree, i.e., the length of
+The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is the height of $\DD$ when seen as a tree, i.e., the length of
 the longest path in the tree from its root to one of its leaves.
 
 We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise(s) there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if for every
@@ -62,30 +62,34 @@ preserve the height, and second, we cannot prove it using $\rn{cut}$ rule as we
 are trying to eliminate it from derivations.
 
 \begin{lemma}\label{lem:adm-mon-at}
-	The atomic version of $\llabrn{mon}$
+	The atomic version of $\llabrn{mon}$ and $\rlabrn{mon}$
 	$$
-	\vlinf{\labrn{mon_a}}{}{\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}\Right}{
-		\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}\Right}
+	\vlinf{\llabrn{mon_a}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}}\Right}{
+		\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}, \labels{y}{a}}\Right}
+	\qquad
+	\vlinf{\rlabrn{mon_a}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
 	$$
-	is height-preserving admissible for $\labIKp$.\lutz{in the second base case we need the atomic version of $\rlabrn{mon}$ as well, either we add it here, or we drop that case}
+	are height-preserving admissible for $\labIKp$.
+%	\lutz{in the second base case we need the atomic version of $\rlabrn{mon}$ as well, either we add it here, or we drop that case}
 \end{lemma}
 
 \begin{proof}
-	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}, \labels{x'}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{x'}}{\Left, \labels{x}{a}}{\Right}$
+	We show the details for $\llabrn{mon_a}$, the argument is the same for $\rlabrn{mon_a}$.
+	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}, \labels{y}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}}{\Right}$
 	of the same (or smaller) height.
 	The inductive step is straightforward by permutation of rules.
 	The base cases are obtained as follows:
 	\begin{smallequation*}
 		\vlderivation{
-			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{
-				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x''}{a}}{
+			\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
+				\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{z}{a}}{
 					\vlhy{}
 				}
 			}
 		}
 		\reducesto
 		\vlderivation{
-			\vlin{\color{red}\labrn{trans}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x'}{x''}, \futs{x}{x''}, \Left, \labels{x}{a} \SEQ \Right, \labels{x''}{a}}{
+			\vlin{\color{red}\labrn{trans}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \futs{x}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
 					\vlhy{}
 				}}
 			}
@@ -93,29 +97,29 @@ are trying to eliminate it from derivations.
 
 	  	\begin{smallequation*}
 	  		\vlderivation{
-	  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
-	  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x}{a}}{
+	  			\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+	  				\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{x}{a}}{
 	  					\vlhy{}
 	  				}
 	  			}
 	  		}
 	  		\reducesto
 	  		\vlderivation{
-	  		\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+	  		\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
 	  				\vlhy{}
 	  			}}}
 	  	\end{smallequation*}
 			  	
 	  	\begin{smallequation*}
 	  		\vlderivation{
-	  			\vlin{\labrn{mon_a}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{
-	  				\vlin{\labrn{id}}{}{\B, \futs{x}{x'}, \labels{x}{a}, \labels{x'}{a} \SEQ \Right, \labels{x'}{a}}{
+	  			\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+	  				\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{y}{a}}{
 	  					\vlhy{}
 	  				}
 	  			}
 	  		}
 	  		\reducesto
-	  		\vlinf{\labrn{id}}{}{\B, \futs{x}{x'}, \Left, \labels{x}{a} \SEQ \Right, \labels{x'}{a}}{}
+	  		\vlinf{\labrn{id}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
 	  		\qedhere
 	  	\end{smallequation*}
 	  	
@@ -127,11 +131,11 @@ are trying to eliminate it from derivations.
 	  \label{lem:inv}
           All single-premise rules of $\labIKp$ are height-preserving
           invertible. Furthermore, the rules $\llabrn{\OR}$ and
-          $\rlabrn{\AND}$ are invertible on both premises, and the
-          rule $\llabrn{\IMP}$ is invertible on the right premise.
+          $\rlabrn{\AND}$ are height-preserving invertible on both premises, and the
+          rule $\llabrn{\IMP}$ is height-preserving invertible on the right premise.
 %		Furthermore, the rule $\llabrn{\IMP}$ is
           %		height-preserving invertible for the right premise.
-          \lutz{"height-preseving'' was commented out. For a reason or by mistake?} 
+%          \lutz{"height-preseving'' was commented out. For a reason or by mistake?} 
 	\end{lemma}
 
 	\begin{proof}
@@ -193,7 +197,7 @@ are trying to eliminate it from derivations.
         	                	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
         	                }
         	                \reducesto
-        	                \vlderibase{\llabrn{mon}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+        	                \vlderibase{\llabrn{mon_a}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
         	                	\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
         	                }
         	            \end{smallequation*}
@@ -208,25 +212,56 @@ are trying to eliminate it from derivations.
         	            	}
         	            }
         	            \reducesto
-        	            \vlderibase{\rlabrn{mon}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
+        	            \vlderibase{\rlabrn{mon_a}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{
         	            	\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
         	            }
         	        \end{smallequation*}
-        	        
-        	        \item
-        	        \begin{smallequation*}
-        	        	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
-        	        		\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}, \labels{z}{C}}{
-        	        			\vlhy{}	
-        	        		}
-        	        	}{
-        	        	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{z}{C} \SEQ \Right, \labels{y}{a}}		
-        	        }
-        	        \reducesto
-        	        \vlderibase{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
-        	        	\vlhy{}
-        	        	}
-        	    \end{smallequation*}
+                
+                \item
+                \begin{smallequation*}
+                	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{\BOT}}
+                	}{
+                		\vlin{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+                			\vlhy{}}
+                	}
+                	\reducesto
+                	\vlderivation{
+                		\vlhtr{\DD_1}{\B, \Left \SEQ \Right}
+                	}
+                \end{smallequation*}
+            	Indeed, $\labels{x}{\BOT}$ is passive in $\DD_1$ as there is no right rule for $\BOT$ in $\labIKp$.
+            	
+            
+            	\item
+            	\begin{smallequation*}
+            		\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+            			\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}, \labels{z}{C}}{
+            				\vlhy{}	
+            			}
+            		}{
+            			\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{z}{C} \SEQ \Right, \labels{y}{a}}		
+            		}
+            		\reducesto
+            		\vlderibase{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+            			\vlhy{}
+            		}
+            	\end{smallequation*}
+            
+            	\item
+            	\begin{smallequation*}
+            		\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+            			\vlin{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right, \labels{z}{C}}{
+            				\vlhy{}	
+            			}
+            		}{
+            			\vlhtr{\DD_2}{\B, \Left, \labels{x}{\BOT}, \labels{z}{C} \SEQ \Right}		
+            		}
+            		\reducesto
+            		\vlderibase{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+            			\vlhy{}
+            		}
+            	\end{smallequation*}
         \end{itemize}
                 \item[Commutative cases:]\label{commutative-cases}
 		In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
@@ -438,7 +473,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \end{itemize}
               \item[Key cases:]\label{key-cases}
-                If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure.
+                If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure, save for the modal cases, where it is important to note the combination of induction on both height and on formulat size . 
                 \begin{itemize}
 				\item $C=A \AND B$:
 				
@@ -571,7 +606,9 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 }
 \end{smallequation*}
-\lutz{we need to explain why we can apply the IH}
+%\lutz{we need to explain why we can apply the IH}
+The top $\rn{cut}$ is admissible by induction on the height, as the size of the cut-formula is constant. This however may increase the height above the right premiss of the bottom $\rn{cut}$ arbitrarily. The bottom $\rn{cut}$ is still admissible as the size of the cut-formula decreases.
+
                 \item $C=\DIA A$:
 
 \begin{smallequation*}
@@ -599,7 +636,8 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \vlhtr{\DD_2[y/y']}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
 }
 \end{smallequation*}
-\lutz{Same. we need to explain why we can apply the IH}
+%\lutz{Same. we need to explain why we can apply the IH}
+The induction hypothesis is applied here again twice as above, on the height for the top $\rn{cut}$ and on formula size for the bottom one.
                 \end{itemize}
                 \end{description}
 \end{proof}

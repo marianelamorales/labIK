@@ -7,15 +7,16 @@
 \section{Introduction}\label{sec:intro}
 
 Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
-\emph{labelled proof calculi} have been widely used by proof theorist
-to give sound, complete and cut-free deductive systems to a broad range
+\emph{labelled proof calculi} have been widely used by proof theorists
+to give sound, complete, and cut-free deductive systems to a broad range
 of logics. Unlike so-called \emph{internal calculi}, like
 hypersequents~\cite{avron:elc96}, nested
-sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann:tableaux15},
+sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 
+2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann:tableaux15},
 labelled calculi have the advantage of being more uniform and being able to 
 accommode a larger class of logics.
 
-Standard labelled sequent calculi for logics with
+Labelled sequent calculi for logics with
 standard Kripke semantics attach to every formla $\fm A$ a label
 $\lb x$, witten as $\labels xA$, and additionally use
 \emph{relational atoms} of the form $\accs xy$ where 
@@ -98,7 +99,7 @@ these logics have certain shortcomings:
 	%  \todo{check that Simpson's system is sound and complete for all logics defined by path axioms. Is it that the axiomatisation is also sound and complete for every models and not only graph-consistent ones?}
 	%  \sonia{yes, they are sound and complete for the general models, but they do not \emph{characterize} the frames, they are not \emph{frame conditions}, as opposed to the \emph{correspondence result} of Plotkin and Sterling.}
 	as observed by Simpson
-	and considered as an inelegant solution~\cite{simpson:phd}. % (see also \cite{mar:str:tableaux17}).
+	and considered an inelegant solution~\cite{simpson:phd}. % (see also \cite{mar:str:tableaux17}).
 \end{enumerate}
 In order to address these two concerns we propose here to enrich usual 
 labelled sequents by allowing both, relational atoms of the
@@ -129,7 +130,7 @@ The same is true for the corresponding nested sequent
 systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
 Maehara style multi-conclusion systems in nested
 sequents~\cite{str:2017maehara}, and therefore also in ordinary
-labelled sequents. However, also in these systems there are rules
+labelled sequents. However, even in these systems there are rules
 ($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
 premise, even though this is not the case in labelled
 systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:2014} for
@@ -139,7 +140,7 @@ A system similar to ours is presented
 in~\cite{maffezioli:etal:synthese13}, for intuitionistic bimodal
 epistemic logic. That system is also a multi-conclusion labelled system with
 more than one relation. In fact, the logical rules are essentially the
-same as ours. But we use a more general setting and provide deductive proof
+same as ours, but we use a more general setting and provide deductive proof
 systems for a larger class of intuitionistic modal logics, together
 with an internal cut elimination procedure.
 

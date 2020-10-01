@@ -46,7 +46,7 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 	$$
 	\vliiinf{\labrn{r}}{}{\SG}{\SGi1}{\cdots}{\SGi n}
 	$$ for $n\in\{0,1,2\}$, that whenever $\SGi1,\ldots,\SGi n$ are
-	valid in all birelational frame, then so is $\SG$. It follows a case analysis on $\rn r$:
+	valid in all birelational frame, then so is $\SG$. It follows from a case analysis on $\rn r$:
 	\begin{itemize}
 		\item $\rlabrn\bot$: This is trivial because $\bot$ is never forced.
 		\item $\rn{id}$: This follows immediately from Proposition~\ref{prop:mon-adm}.
@@ -54,7 +54,7 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 		is valid in all birelational frames, but $\B, \futs xy,	\accs yz,\Left, \labels{x}{\BOX A} \SEQ \Right$ is not. This means that
 		we have a model $\M$ and an interpretation $\inter\cdot$, such
 		that $\M,\inter\cdot\not\Vdash\B, \futs xy, \accs yz, \Left,	\labels{x}{\BOX A} \SEQ \Right$, i.e., $\inter x\le_\M\inter y$
-		and $\inter y\rel_\M\inter z$ and $\cforce \M x{\BOX A}$ and
+		and $\inter y\rel_\M\inter z$ and $\cforce \M x{\BOX A}$ but
 		$\cnforce \M wB$ for all $\labels wB\in\Right$. However, by the
 		definition of forcing in~\eqref{eq:kripke} we also have $\cforce
 		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
