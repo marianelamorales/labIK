@@ -1,0 +1,150 @@
+Dear Sonia Marin,  Marianela Morales, and Lutz Strassburger,
+
+We are pleased to announce that your paper
+
+A fully labelled proof system for intuitionistic modal logics
+
+is accepted for publication in the Special Issue of the JLC on External
+and Internal Calculi for Non Classical Logics.
+
+You have addressed the comments by the reviewers in your new version
+but they propose some additional improvements for the final version.
+These improvements are at the end of this message (after Editors of
+EICNCL.............).
+We ask you to take them into account for the final version.
+
+Could you send me the final source files (if possible only one .tex file
+and the corresponding generated .pdf file) of your final paper no later
+than 15 January 2021.
+
+We thank you again for your submission to this  Special Issue of JLC.
+
+Best wishes,
+
+Agata Ciabattoni, Didier Galmiche, Nicola Olivetti, and Revantha Ramanayake
+Editors of the EICNCL Special Issue of JLC
+
+-------------------------------------------------------------------------------------------------------------
+Requested improvements:
+
+The authors have addressed the comments by the referee, but in a way 
+that still
+leaves some room for improvement. I will now list (in order of 
+appearance in the
+paper) such issues.
+
+
+p. 2 The authors write: "In order to address these two concerns we 
+propose here
+to enrich usual labelled sequents by allowing both, relational atoms of 
+the form
+x ≤ y and of the form xRy"
+
+
+This has already been donein the paper by Maffezioli, Naibo and Negri. 
+There is
+also another paper that considers such additions for 
+intuitionisticmulti-modal logic
+with applications to decision procedures:
+
+
+D. Garg, V. Genovese, and S. Negri, Countermodels from sequent calculi 
+in multi-modal
+logics. LICS 2012, IEEE Computer Society, pp. 315–324, 2012.
+
+
+So a better formulation would be one that doesn't suggest that 
+consideration of the
+alethic accessibility replation with the intuitionistic preorder is a 
+novelty of the present
+paper:
+
+
+"As done earlier in the literatureon intuitionistic modal logic (cf....) 
+we consider here
+to enrich"
+
+
+
+We also find that the followingsentence is unclear:
+
+
+"A system similar to ours is presented in [MNN13], for intuitionistic 
+bimodal epistemic logic.
+That system is also a multi-conclusion labelled system with more than 
+one relation. In fact,
+the logical rules are essentially the same as ours, but we use a more 
+general setting and
+provide deductive proof systems for a larger class of intuitionistic 
+modal logics, together
+with an internal cut elimination procedure."
+
+More specifically, it is not clear what the authors mean by"internal cut 
+elimination procedure".
+At the beginning of the paper "internal calculi" are identified as those 
+calculi, such as hypersequent
+or nested calculi, that do not have explicit accessibility relations. 
+But then in which sense it the
+  cut elimination "internal"? Is it because there are no cuts on 
+relational atoms? This is the case
+also for the mentioned MNN paper.Please clarify.
+
+
+Theorem 3.3 refers to formulas but a sequent calculus derives, in fact, 
+sequents. In a Gentzen
+sequent calculus a sequent can be translated into a formula, and 
+conversely, but this is no
+longer the case in a labelled calculus because of the labelling and the 
+relational atoms.
+1,4 and 2,3 refer, respectively, to formulas and to labelled formulas, 
+so they cannot be equivalent.
+Observe also that the paper byMaffezioli, Naibo and Negri prove 
+completeness wrt sequents,
+not just wrt formulas, so it presents a more general approach.
+
+One of the main contributions of the mentioned paper by Maffezioli, 
+Naibo and Negri seems to be
+the proof-theoretical analysis for an extension with a frame property 
+that does not fall under the
+class of geometric implications and that requires an extension of the 
+usual methodology. In fact,
+their paper presents the first example of the method of "system of 
+rules", later systematized in :
+
+S. Negri. Proof analysis beyond geometric theories: from rule systems to 
+systems of rules.Journal of Logic and Computation,
+vol. 27, pp. 513-537, 2016.
+
+The frame properties and rules considered in the paper under review are 
+all of the geometric form,
+so it would be more correct to say that it is an in-depth study of 
+intuitionistic modal logic for a larger
+class of geometric frame properties rather than a generalization of the 
+results in the paper by
+Maffezioli,  Naibo and Negri.
+
+
+Section 7, with consideration of the Scott-Lemmon axioms seems to be the 
+most original part
+of the paper.
+
+
+In references, book and thesestitles should be capitalized (this is not 
+done consistently).
+
+
+Observe that the cited paper
+
+
+Tiziano Dalmonte, Charles Grellois, and Nicola Olivetti. Intuitionistic 
+non-normal modal logics:
+A general framework. CoRR, abs/1901.09812, 2019.
+
+
+has in the meanwhile been published in the JPL.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
