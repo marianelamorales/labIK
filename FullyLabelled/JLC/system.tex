@@ -299,7 +299,9 @@ Before, let us give another indication of the fact that $\labIKp$ is well-design
 	\end{itemize}
 \end{proof}
 
-In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination. The cut rule has the following shape:
+In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination.
+%
+The cut rule has the following shape:
 \begin{equation}
   \label{eq:cut}
   \vliiinf{\labrn{cut}}{}{
@@ -307,19 +309,22 @@ In the following sections, we will show that the system $\labIKp$ is sound and c
     \lseq\B\Left{\Right,\labels{z}{C}}}{}{
     \lseq\B{\Left,\labels{z}{C}}{\Right}}
 \end{equation}
-Then we can summarize soundness, completeness, and cut
-admissibility of $\labIKp$ in the following Theorem:
 
-\review{Theorem 3.3 refers to formulas but a sequent calculus derives, in fact, sequents. In a Gentzen
-	sequent calculus a sequent can be translated into a formula, and conversely, but this is no
-	longer the case in a labelled calculus because of the labelling and the relational atoms.
-	1,4 and 2,3 refer, respectively, to formulas and to labelled formulas, so they cannot be equivalent.
-	Observe also that the paper by  Maffezioli, Naibo and Negri prove completeness wrt sequents,
-	not just wrt formulas, so it presents a more general approach.}
+We say that a formula is \emph{provable} in $\labIKp$ (or $\labIKp+\labrn{cut}$, resp.) if for any label $\lb x$, the sequent $\SEQ \labels{x}{A}$ is derivable from only axioms using the rules in Figure~\ref{fig:labIKp} (with possible instances of $\labrn{cut}$, resp.).
+%
+We can summarize soundness, completeness, and cut
+admissibility of $\labIKp$ in the following result.
 
-\todo{footnote: completeness can be proved by proof search?? define what provable means?}
+%\review{Theorem 3.3 refers to formulas but a sequent calculus derives, in fact, sequents. In a Gentzen
+%	sequent calculus a sequent can be translated into a formula, and conversely, but this is no
+%	longer the case in a labelled calculus because of the labelling and the relational atoms.
+%	1,4 and 2,3 refer, respectively, to formulas and to labelled formulas, so they cannot be equivalent.
+%	Observe also that the paper by  Maffezioli, Naibo and Negri prove completeness wrt sequents,
+%	not just wrt formulas, so it presents a more general approach.}
 
-\sonia{Definition; a formula A is provable in $\labIKp$ (resp. $\labIKp+\rn{cut}$) if $ \SEQ\labels{x}{A}$ is derivable from axioms for any $x$ in the respective system.}
+\todo{footnote: completeness can be proved by proof search?}\sonia{moved to end of section~\ref{sec:completeness}}
+
+\todo{define what provable means?}\sonia{OK}
 
 \begin{theorem}\label{thm:cutfree-compl}
 	%	Let $\CC$ be a set of geometric frame properties as in~\eqref{eq:cla-geometric} and $\labbrn{\CC}$ be the corresponding set of rules following schema~\eqref{eq:modal-grs}.
