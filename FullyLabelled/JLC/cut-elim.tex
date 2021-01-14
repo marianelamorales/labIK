@@ -576,23 +576,27 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 
 \begin{smallequation*}
 	\hspace*{-7em}
-	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{
-		\vliin{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{
-			\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
-				\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
-			}
-			%			\vlhtr{\DD_{1\rn w}'}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}
-		}{
-		\vlhtr{\DD_{2}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
-	}
-}{
-\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right}{
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{\vlhtr{\DD_1'}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}}{\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right}{
 	\vlhtr{\DD_1[y/x']}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
 }{
 \vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
 }
 }
 \end{smallequation*}
+
+\begin{small}
+	{with}$\quad\DD_1' = \quad
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{
+		\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
+		}
+		%			\vlhtr{\DD_{1\rn w}'}{\B_1, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}
+	}{
+	\vlhtr{\DD_{2}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+}
+	$
+\end{small}
+
 %\todo{check that substitution!}
                 \item $C=\BOX A$:
 
@@ -621,16 +625,21 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 		%				}
 		%			}
 	}{
-	\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}{
+	\vlhtr{\DD_1'}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{small}
+{with}$\quad\DD_1' = \quad
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}{
 		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
 			\vlhtr{\DD_1^{\rn w}}{\B, \futs xu, \accs uv, \futs{x}{x'}, \accs{x'}{y'}, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
 		}
 	}{
-	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
-}
-}
-\end{smallequation*}
-%\lutz{we need to explain why we can apply the IH}
+	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}}$
+\end{small}
+\bigskip
+
 The top $\rn{cut}$ is admissible by induction on the height, as the size of the cut-formula is constant. This however may increase the height above the right premiss of the bottom $\rn{cut}$ arbitrarily. The bottom $\rn{cut}$ is still admissible as the size of the cut-formula decreases.
 
                 \item $C=\DIA A$:
