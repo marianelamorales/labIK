@@ -1,0 +1,1880 @@
+\documentclass[a4paper]{article}
+\usepackage{authblk}
+\input{new-macros}
+
+\title{A fully labelled proof system for intuitionistic modal logics}
+\author[1]{Sonia Marin} 
+\author[2,3]{Marianela Morales}
+\author[3,2]{Lutz Stra{\ss}burger}
+\affil[1]{University College London}
+\affil[2]{Laboratoire d'Informatique de l'\'Ecole Polytechnique}
+\affil[3]{Inria Saclay}
+
+\date{}
+	
+\begin{document}
+
+  \maketitle
+  
+ \begin{abstract}
+   %% \review{Reconsider abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
+   %% \lutz{Done?}
+   %% \sonia{Added two sentences at the beginning and modified it a bit.}
+   Labelled proof theory has been famously successful for modal logics by mimicking their relational semantics within deductive systems. Simpson in particular designed a framework to study a variety of intuitionistic modal logics integrating a binary relation symbol in the syntax.
+   %%
+   In this paper, we present a labelled sequent system for
+   intuitionistic modal logics such that there is not only one, but
+   two relation symbols appearing in sequents: one for the accessibility
+   relation associated with the Kripke semantics for normal modal logics and
+   one for the preorder relation associated with the Kripke semantics
+   for intuitionistic logic.
+   %%
+   This puts our system in close correspondence with the standard
+   birelational Kripke semantics for intuitionistic modal logics. 
+   %%
+   As a consequence it can be extended with arbitrary intuitionistic Scott-Lemmon axioms. 
+   %%
+   We show soundness and completeness, together with an internal cut elimination proof, encompassing a wider array of intuitionistic modal logics than any existing labelled system.
+ \end{abstract}
+ 
+ \section{Introduction}\label{sec:intro}
+ 
+ Since their introduction in the 1980s by Gabbay~\cite{gabbay:96},
+ \emph{labelled proof calculi} have been widely used by proof theorists
+ to give sound, complete, and cut-free deductive systems to a broad range
+ of logics. Unlike so-called \emph{internal calculi}, like
+ hypersequents~\cite{avron:elc96}, nested
+ sequents~\cite{kashima:sl94,brunnler:aml09,poggiolesi:tmp09}, 
+ 2-sequents~\cite{masini:apal92}, or linear nested sequents~\cite{lellmann:tableaux15},
+ labelled calculi have the advantage of being more uniform and being able to 
+ accommode a larger class of logics.
+ 
+ Labelled sequent calculi for logics with
+ standard Kripke semantics attach to every formla $\fm A$ a label
+ $\lb x$, written as $\labels xA$, and additionally use
+ \emph{relational atoms} of the form $\accs xy$ where 
+ the binary relation symbol $\rel$
+ %These calculi work best for logics with
+ %standard Kripke semantics, as in this case the relation $\rel$ 
+ is used to encode the accessibility relation in the Kripke models, such that
+ frame conditions corresponding to the desired logic can be directly
+ encoded as inference rules.
+ %\todo{Reviewer 1 complained about the ``best''}
+ Prominent examples are classical modal
+ logics and intuitionistic propositional logic, e.g., the frame
+ condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be translated into the
+ inference rule
+ \begin{equation}
+ \label{eq:Rtrans}
+ \vlinf{\rn{trans}}{}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+ 	\B, \accs xy, \accs yz, \accs xz, \Left \SEQ \Right}
+ \end{equation}
+ where $\B$ stands for a set of relational atoms, and $\Gamma$ and
+ $\Delta$ for multi-sets of labelled formulas~\cite{negri:jpl2005}.
+ 
+ However,
+ in this paper we are concerned with \emph{intuitionistic modal
+ 	logics} whose Kripke semantics is based on \emph{birelational}
+ frames, i.e., they have two binary relations instead of one: one
+ relation $R$ that corresponds to the accessibility relation in 
+ Kripke frames for modal logics, and a relation $\le$ that
+ corresponds to the preorder relation in Kripke frames for
+ intuitionistic logic. Consequently, standard labelled systems for
+ these logics have certain shortcomings:
+ \begin{enumerate}
+ 	\item The transitivity rule in~\eqref{eq:Rtrans} can be axiomatised by the conjunction of the two
+ 	versions of the $\fourax$-axiom
+ 	\begin{equation}
+ 	\label{eq:4ax}
+ 	\ax{4^{\BOX}}\colon\fm{\BOX A\IMP \BOX\BOX A}
+ 	\qquand
+ 	\rn{4^{\DIA}}\colon\fm{\DIA\DIA A\IMP\DIA A}
+ 	%	\quadcm
+ 	\end{equation}
+ 	which are equivalent in classical
+ 	modal logic. However, in intuitionistic modal logic they are not
+ 	equivalent, and even though the logic $\IKfour$ 
+ 	(intuitionistic version of modal logic $\Kfour$) contains both
+ 	axioms, they can also be added independently to the logic $\IK$ 
+ 	(intuitionistic version of $\K$). The proof theory of these
+ 	distinct logics has not been discussed before, but their
+ 	corresponding frame conditions
+ 	\begin{equation}
+ 	\label{eq:4frame}
+ 	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{x'}.\:\futs x{x'}\AND\accs {x'}z)
+ 	\quand
+ 	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
+ 	\;
+ 	\end{equation}
+ 	%  \todo{add graphical representation of the conditions}
+ 	$$
+ 	\xymatrix{
+ 		x' \ar@{.>}[drr]^R \\
+ 		x \ar@{.>}[u]^\le \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z
+ 	}
+ 	\hskip10em
+ 	\xymatrix{
+ 		&& z''  \\
+ 		x  \ar@{.>}[urr]^R \ar@{->}[r]_{R} & y \ar@{->}[r]_{R} & z \ar@{.>}[u]^\le
+ 	}
+ 	$$
+ 	respectively, have been studied in~\cite{plotkin:stirling:86}.
+ 	%  \sonia{the general condition is correct but not the application to 4}
+ 	\item The correspondence between the syntax and the semantics is not
+ 	as clean as one would expect. As only the $R$-relation (and not the
+ 	$\le$-relation) is visible in an ordinary labelled
+ 	sequent, we only have the result that a formula is provable in an extension of $\IK$ beyond paths axioms 
+ 	if and only if is satisfied in all \emph{graph-consistent}\footnote{This
+ 		means that every layer in the model can be lifted to any future of
+ 		any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
+ 	models satisfying the corresponding conditions, as observed by Simpson	and considered an inelegant solution~\cite{simpson:phd}.
+ \end{enumerate}
+ In order to address these two concerns we follow here the approach~\cite{garg2012,maffezioli:etal:synthese13} that enriches usual  labelled sequents by allowing both, relational atoms of the form $\futs xy$ and of the form $\accs xy$ and develop it into a uniform general framework. 
+ %%
+ Consequently, following the same ``axiom-to-rule'' method as Simpson, we can translate the frame
+ conditions in~\eqref{eq:4frame} into inference rules:
+ \begin{equation}
+ \label{eq:4rules}
+ \vlinf{\rn{4^{\BOX}}}{\proviso{$\lb{x'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+ 	\B, \accs xy, \accs yz, \accs {x'}z, \futs x{x'},\Left \SEQ \Right}
+ \qquand
+ \vlinf{\rn{4^{\DIA}}}{\proviso{$\lb{z'}$ fresh}}{\B, \accs xy, \accs yz, \Left \SEQ \Right}{
+ 	\B, \accs xy, \accs yz, \accs {x}{z'}, \futs z{z'},\Left \SEQ \Right}  
+ \end{equation}
+ This allows us to define cut-free deductive systems for a wide range
+ of logics that had not been treated proof-theoretically before.  
+ %%
+ Furthermore, the relation
+ between syntax and semantics can be recovered as one would expect: A formula is
+ provable in this system if and only if it is valid in all models satisfying the corresponding frame condition.
+ 
+ Besides that, there is another pleasant observation to make about our
+ system. It is naturally a multi-conclusion system. Ordinary labelled sequent systems for intuitionistic modal
+ logic are single-conclusion~\cite{simpson:phd}. 
+ %
+ The same is true for the corresponding nested sequent
+ systems~\cite{str:fossacs13,marin:str:aiml}. It is possible to express
+ Maehara style multi-conclusion systems in nested
+ sequents~\cite{str:2017maehara}, and therefore also in ordinary
+ labelled sequents. However, even in these systems there are rules
+ ($\rlabrn\IMP$ and $\rlabrn\BOX$) that force a single-conclusion
+ premise, even though this is not the case in labelled
+ systems~\cite{negri:jpl2005} or nested sequents~\cite{fitting:2014} for
+ intuitionistic logic. 
+ 
+ 
+ A system similar to ours is presented
+ in~\cite{maffezioli:etal:synthese13}, for intuitionistic bimodal
+ epistemic logic. That system is also a multi-conclusion labelled system with
+ more than one relation. In fact, the logical rules are essentially the
+ same as ours, but we use a more general setting and provide deductive proof
+ systems for a larger class of intuitionistic modal logics, together
+ with a syntactic cut elimination procedure.
+ 
+ This paper is organized as follows. In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:completeness} and~\ref{sec:soundness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture intuitionistic Scott-Lemmon modal logics.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %
+ %
+ \section{Intuitionistic modal logics}\label{sec:intmod}
+ 
+ 
+ 
+ The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
+ %
+ Starting with a set $\mathcal{A}$ of atomic propositions, denoted by lower case letters $\fm a$, $\fm b$, $\fm c$, \ldots, modal formulas, denoted by capital letters $\fm A$, $\fm B$, $\fm C$, \ldots, are constructed from the grammar:
+ %
+ $$
+ \fm A \coloncolonequals
+ \fm a \mid \fm{A \AND A} \mid \fm{A \OR A} \mid \fm \BOT \mid \fm{A \IMP A} \mid \fm{\BOX A} \mid \fm{\DIA A}
+ $$
+ %
+ 
+ Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
+ %%
+ Lacking De Morgan duality, there are many variants of the \emph{distributivity axiom} $\mathsf{k}$ that are classically but not intuitionistically equivalent. Five axioms have been considered as primitives in the literature. An intuitionistic variant of the modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
+ %
+ 
+ %The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi~\cite{Fischer}. It is obtained from intuitionistic propositional logic $\mathsf{IPL}$ by adding:
+ \begin{itemize}
+ 	\item the \emph{necessitation rule}: if $\fm A$ is a theorem then $\fm{\BOX A}$ is also a theorem; and
+ 	\item the following five variants of $\rn{k}$:
+ 	\begin{equation*}
+ 		\label{eq:ik}%\hskip-2em
+ 		\begin{array}[t]{r@{\;}l@{\qquad}r@{\;}l@{\qquad}r@{\;}l}
+ 			\kax[1]\colon&\fm{\BOX(A\IMP B)\IMP(\BOX A\IMP\BOX B)}
+ 			&
+ 			\kax[3]\colon&\fm{\DIA(A\OR B)\IMP(\DIA A\OR\DIA B)}
+ 			&
+ 			\kax[5]\colon&\fm{\DIA\BOT\IMP\BOT}
+ 			\\
+ 			\kax[2]\colon&\fm{\BOX(A\IMP B)\IMP(\DIA A\IMP\DIA B)}
+ 			&
+ 			\kax[4]\colon&\fm{(\DIA A\IMP \BOX B)\IMP\BOX(A\IMP B)}\\%x[1ex]
+ 		\end{array}
+ 	\end{equation*}
+ \end{itemize}
+ 
+ The idea is that intuitionistic propositional logic does not allow the principle of \emph{Excluded Middle}, so the modalities $\BOX$ and $\DIA$ are not de Morgan duals any more, but one can choose to design the axiomatisation in order to relate them in different ways. The most basic intuitionistic modal system one can think of would be to consider only the $\BOX$ modality as regulated by the $\kax$ axiom (or as called here $\kax[1]$), which gives the system \hbox{$\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$}. However this would give strictly no information on the behaviour of the $\DIA$ modality.
+ It seems that Fitch \cite{fitch:pm48} was the first one to propose a way to treat $\DIA$ in an intuitionistic system by considering the system  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$, which is now sometimes called $\rn{CK}$ for \emph{constructive modal logic}~\cite{bierman:depaiva:sl00,mendler:scheele:ic11}. Wijekesera \cite{wijesekera:apal90} also considered the axiom $\kax[5]$, which states that $\DIA$ distributes over 0-ary disjunctions, but did not assume that it would always distribute over binary disjunctions; the system he proposed was therefore  $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$  $\rn{+}$ $\kax[5]$. In these systems, however, the addition of the \emph{Excluded Middle} does not yield classical modal logic $\K$, that is, it is not possible to retrieve the De Morgan duality of $\BOX$ and $\DIA$ in this case.
+ 
+ The axiomatisation that is now generally accepted as \emph{intuitionistic modal logic} denoted by $\IK$ was given by Plotkin and Stirling \cite{plotkin:stirling:86} and is equivalent to the one proposed by Fischer-Servi \cite{fischer-servi:84} and by Ewald \cite{ewald:jsl86} in the case of intuitionistic tense logic. It is taken to be    $\rn{IPL}$ $\rn{+}$ $\rn{nec}$ $\rn{+}$ $\kax[1]$ $\rn{+}$ $\kax[2]$ $\rn{+}$ $\kax[3]$ $\rn{+}$ $\kax[4]$  $\rn{+}$ $\kax[5]$.
+ 
+ 
+ The Kripke semantics for $\IK$ was first defined by Fischer-Servi~\cite{fischer-servi:84}.
+ %
+ It combines the semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.\footnote{This semantics and some variants have also been studied in~\cite{bovzic1984models}. For an excellent survey on possible variants see~\cite{simpson:phd}.} 
+ 
+ \begin{definition}
+ 	A \emph{bi-relational frame} $\F$ is a triple $\langle W, \rel, \le \rangle$ 
+ 	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
+ 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.}\ a reflexive and transitive relation) satisfying:
+ 	\begin{enumerate}
+ 		\item[($\rn{F_1}$)] For all $\lb x, \lb y, \lb z \in W$, if $\accs xy$ and $\futs yz$, there exists $\lb u$ s.t.~$\futs xu$ and $\accs uz$.
+ 		
+ 		\begin{equation*}
+ 			\xymatrix{
+ 				\lb u \ar@{.>}[r]^R  & \lb z \\
+ 				\lb x \ar@{.>}[u]^{\le} \ar@{->}[r]^R  & \lb y \ar@{->}[u]_{\le}
+ 			}
+ 		\end{equation*}
+ 		
+ 		\item[($\rn{F_2}$)] For all $\lb x, \lb y, \lb z \in W$, if $\futs xz$ and $\accs xy$, there exists $\lb u$ s.t.~$\accs zu$ and $\futs yu$.
+ 		
+ 		\begin{equation*}
+ 			\xymatrix{
+ 				\lb z\ar@{.>}[r]^R & \lb u \\
+ 				\lb x \ar@{->}[u]^{\le} \ar@{->}[r]^R & \lb y \ar@{.>}[u]_{\le}
+ 			}
+ 		\end{equation*}
+ 	\end{enumerate}
+ 	%	
+ \end{definition}
+ 
+ \begin{definition}
+ 	\label{model}
+ 	A \emph{bi-relational model} $\M$ is a quadruple $\langle W, \rel,\le,V \rangle$ with $\langle W, \rel, \le \rangle$ a bi-relational frame and $V\colon W \to 2^\mathcal{A}$ a monotone valuation function, that is, a function mapping each world $\lb w$ to the subset of propositional atoms that are true at $\lb w$, additionally subject to:
+ 	if $\lb w \le \lb{w'}$ then $V(\lb w)\subseteq V(\lb{w'})$.
+ \end{definition}
+ 
+ We write $\M, \lb w \Vdash \fm a$ if $\fm a \in V(\lb w)$, and inductively extend the $\Vdash$ relation to all formulas, following the rules for both intuitionistic and modal Kripke models:
+ 
+ \begin{equation}\label{eq:kripke}
+ \begin{array}{rcl}
+ %\parbox{30em}{%
+ \M, \lb w \Vdash \fm{A \AND B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ and } \M, \lb w \Vdash \fm B\\
+ 
+ \M, \lb w \Vdash \fm{A \OR B} & \mbox{iff} & \M, \lb w \Vdash \fm A \mbox{ or } \M, \lb w \Vdash \fm B\\
+ 
+ \M, \lb w \Vdash \fm{A \IMP B} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ with } \futs w{w'}, \mbox{ if } \M, \lb{w'} \Vdash \fm A \mbox{ then } \M, \lb{w'} \Vdash \fm B\\
+ 
+ \M, \lb w \Vdash \fm{\BOX A} & \mbox{iff} & \mbox{for all } \lb{w'} \mbox{ and } \lb u \mbox{ with } \futs w{w'} \mbox{ and } \accs {w'}u \mbox{, we have } \M, \lb u \Vdash \fm A \hfill \\ %$(\ast)$
+ 
+ \M, \lb w \Vdash \fm{\DIA A} & \mbox{iff} & \mbox{there exists a } \lb u \mbox{ such that } \accs wu \mbox{ and } \M, \lb u \Vdash \fm A.
+ 
+ \end{array}
+ \end{equation}
+ Observe that we never have that $\M, \lb w \Vdash \fm\bot$. 
+ %
+ We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \not\Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
+ 
+ From the monotonicity of the valuation function $V$, we get a monotonicity property for the $\Vdash$ relation:
+ \begin{proposition}(Monotonicity) 
+ 	For any formula $\fm A$ and for any $\lb w, \lb{w'} \in W$, if $\futs w{w'}$ and $\M, \lb w \Vdash \fm A$, then $\M, \lb{w'} \Vdash \fm A$.
+ \end{proposition}
+ 
+ 
+ 
+ \begin{definition}
+ 	A formula $\fm A$ is \emph{satisfied} in a model $\M = \langle W, \rel, \le, V \rangle$, if for all $\lb w \in W$ we have $\M, \lb w \Vdash \fm A$.
+ 	%
+ 	A formula $\fm A$ is \emph{valid} in a frame $\F = \langle W, \rel, \le \rangle$, if for all valuations $V$, the formula $\fm A$ is satisfied in $\langle W, R, \le, V \rangle$.
+ \end{definition}
+ 
+ Similarly to the classical case, the correspondence between syntax and semantics for $\IK$ can be stated as follows.
+ 
+ \begin{theorem}[\cite{fischer-servi:84,plotkin:stirling:86}]\label{thm:plotkin}
+ 	A formula $\fm A$ is a theorem of $\IK$ if and only if $\fm A$ is valid in every bi-relational frame.
+ \end{theorem}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %
+ %
+ \section{The system}\label{sec:system}
+ 
+ In this section we present our fully labelled sequent proof system
+ for intuitionistic modal logics. The starting point is the notion of a
+ \emph{labelled formula} which is a pair $\labels xA$ of a label $\lb
+ x$ and a formula $\fm A$. 
+ A \emph{relation atom} is either an expression
+ $\accs xy$ or $\futs xy$ where $\lb x$ and $\lb y$ are labels. 
+ %
+ A \emph{(labelled) sequent} is a triple $\lseq\B\Left\Right$,
+ where $\B$ is a set of relational atoms and $\Left$ and $\Right$ are multi-sets of labelled formulas, all written as lists, separated by commas.
+ 
+ \begin{figure}[!t]
+ 	\begin{center}
+ 		\fbox{
+ 			%
+ 			\begin{tabular}{c@{\quad}c}
+ 				$\vlinf{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a} }{}$
+ 				&
+ 				$\vlinf{\llabrn\bot}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{}$
+ 				\\\\
+ 				$\vlinf{\llabrn\AND}{}{\B,\Left, \labels{x}{A \AND B} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}$
+ 				&
+ 				$\vliinf{\rlabrn\AND}{}{\B,\Left \SEQ \Right, \labels{x}{A \AND B}}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{B}}$
+ 				\\\\
+ 				$\vliinf{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{B} \SEQ \Right}$
+ 				&
+ 				$\vlinf{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}$
+ 				\\\\
+ 				\multicolumn{2}{c}{
+ 					$\vlinf{\rlabrn\IMP}{\lb y \mbox{ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$
+ 				}
+ 				\\\\
+ 				\multicolumn{2}{c}{
+ 					$\vliinf{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{\B, \futs xy, \labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{y}{A}}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}$ 
+ 				}
+ 				\\\\
+ 				$\vlinf{\llabrn\BOX}{}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}$
+ 				&
+ 				$\vlinf{\rlabrn\BOX}{\lb y, \lb z \mbox{ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{\B, \futs xy, \accs yz, \Left \SEQ \Right, \labels{z}{A}}$
+ 				\\\\
+ 				$\vlinf{\llabrn\DIA}{\lb y \mbox{ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$
+ 				&
+ 				$\vlinf{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}$
+ 				\\
+ 				\multicolumn{2}{c}{
+ 					$\mbox{\hbox to .9\linewidth{\dotfill}}$
+ 				}
+ 				\\
+ 				$\vlinf{\rn{refl}}{}{\B, \Left \SEQ \Right}{\B, \futs xx, \Left \SEQ \Right}$
+ 				&
+ 				$\vlinf{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left \SEQ \Right}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}$
+ 				\\\\
+ 				\multicolumn{2}{c}{
+ 					$\vlinf{\rn{F_1}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs yz, \Left \SEQ \Right}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right}$
+ 				}
+ 				\\\\
+ 				\multicolumn{2}{c}{
+ 					$\vlinf{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
+ 				}
+ 			\end{tabular}		
+ 			%\end{minipage}
+ 		}		
+ 	\end{center}
+ 	\caption{System $\labIKp$}
+ 	\label{fig:labIKp}
+ \end{figure}
+ 
+ Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
+ We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
+ Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this naive translation would also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+ \begin{equation}
+ \label{eq:nomon}
+ \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
+ \quad
+ \vliinf{\llabrn\IMP'}{}{\B,\Left, \labels{x}{A \IMP B} \SEQ \Right}{\B,\labels{x}{A \IMP B}, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left, \labels{x}{B} \SEQ \Right}
+ \quad
+ \vlinf{\llabrn\BOX'}{}{\B, \accs xz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \accs xz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
+ \end{equation}
+ that are not sufficient for a complete system, and we will see below
+ why. Before, let us first look at the rules $\rlabrn\IMP$ and
+ $\rlabrn\BOX$. In the multiple-conlusion nested sequent system
+ of~\cite{str:2017maehara}, these are the two rules that force
+ single-conclusion.  
+ %
+ In our system, this phenomenon is replaced by a re-positioning of the considered formulas to a fresh label.
+ %
+ In the Kripke-semantics in~\eqref{eq:kripke} the two
+ connectives $\IMP$ and $\BOX$ are the ones that make use of the
+ pre-order relation $\le$. This relation is reflexive and transitive. In
+ order to capture that in the proof system, we need to add the rules
+ $\rn{refl}$ and $\rn{trans}$.\footnote{These are the same as for {\bf G3I} as presented in~\cite{dyckhoff2012}.}
+ %
+ 
+ Finally, in the semantics, the two relations $\rel$ and $\le$ are
+ strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These need to be reflected at the level of the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.\footnote{The logic studied in~\cite{maffezioli2014} has similar semantic conditions (two binary relations in a Kripke frame) that lead to similar rules as ours in the proof system.}
+ %
+ These rules require to create new labels, and in order to be
+ complete, the system needs the \emph{monotonicity} rule $\llabrn{mon}$, shown on the left below. 
+ \begin{equation}
+ \label{eq:mono}
+ \vlinf{\llabrn{mon}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}\Right}{
+ 	\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}, \labels{y}{A}}\Right}
+ \hskip6em
+ \vlinf{\rlabrn{mon}}{}{\lseq{\B, \futs{x}{y}}{\Left}{\Right, \labels{y}{A}}}{
+ 	\lseq{\B, \futs{x}{y}}{\Left}{\Right, \labels{x}{A}, \labels{y}{A}}}
+ \end{equation}
+ Since this rule is a form of contraction, it would cause the same
+ problems as contraction in a cut elimination proof. Hence, it is
+ preferable to have a system in which this rule is admissible. This is
+ the reason why we have monotonicity incorporated in the rules
+ $\rn{id}$, $\llabrn\IMP$ and $\llabrn\BOX$ in Figure~\ref{fig:labIKp},
+ instead of using the rules in~\eqref{eq:nomon}. Then, not only
+ $\llabrn{mon}$ but also its right-hand side version $\rlabrn{mon}$,
+ shown on the right in~\eqref{eq:mono} above become admissible.
+ 
+ \begin{proposition}
+ 	\label{prop:mon-adm}
+ 	The rules $\llabrn{mon}$ and $\rlabrn{mon}$ are admissible for $\labIKp$. 
+ \end{proposition}
+ 
+ One can prove this proposition in the same way as one usually proves
+ admissibity of contraction in a sequent calculus, by induction on the
+ height of the derivation, which in fact would yield a stronger result,
+ namely that $\llabrn{mon}$ and $\rlabrn{mon}$ are \emph{height
+ 	preserving} admissible for $\labIKp$. However, we do not need this
+ result in this paper, and therefore we leave it to the interested
+ reader. Nonetheless, we will give a short proof of
+ Proposition~\ref{prop:mon-adm} at the end of this section.
+ 
+ Before, let us give another indication of the fact that $\labIKp$ is well-designed, namely that the general identity axiom is admissible.
+ 
+ \begin{proposition}
+ 	\label{prop:id}
+ 	The following general identity axiom~
+ 	{$\vlinf{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{}$}
+ 	~is admissible for $\labIKp$. 
+ \end{proposition}
+ 
+ \begin{proof}
+ 	As standard, we proceed by structural induction on $\fm A$. The two base cases $\fm A=\fm a$ and $\fm A=\fm\bot$ are trivial. The inductive cases are shown below.
+ 	\begin{itemize}
+		\item $\fm{A \AND B}$
+ 		\begin{smallequation*}
+ 			\vlderivation{
+ 				\vlin{\llabrn\AND}{}{\B, \futs xy, \Left, \labels{x}{A \AND B} \SEQ \Right, \labels{y}{A \AND B}}{
+ 					\vliin{\rlabrn\AND}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A \AND B}}{
+ 						\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{A}}{
+ 							\vlhy{}
+ 						}
+ 					}{
+ 					\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+ 						\vlhy{}
+ 					}
+ 				}
+ 			}
+ 		}
+ 	\end{smallequation*}
+ 	\item $\fm{A \OR B}$
+ 	%\begin{smallequation*}
+ 	%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
+ 	%	\reducesto
+ 	%\end{smallequation*}
+ 	\begin{smallequation*}
+ 		\vlderivation{
+ 			\vliin{\llabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
+ 				\vlin{\rlabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A \OR B}}{
+ 					\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{A} \SEQ \Right, \labels{y}{A}}{
+ 						\vlhy{}
+ 					}
+ 				}
+ 			}{
+ 			\vlin{\rlabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{B} \SEQ \Right, \labels{y}{A \OR B}}{
+ 				\vlin{\labrn{id_g}}{}{\B, \futs xy, \Left, \labels{x}{B} \SEQ \Right, \labels{y}{B}}{
+ 					\vlhy{}
+ 				}
+ 			}
+ 		}
+ 	}
+ \end{smallequation*}
+ 
+ \item $\fm{A \IMP B}$
+ %	\begin{smallequation*}
+ %		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{}
+ %		\reducesto
+ %	\end{smallequation*}
+ \begin{smallequation*}
+ 	\vlderivation{
+ 		\vlin{\rlabrn\IMP}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
+ 			\vlin{\rn{trans}}{}{\B, \futs xy, \futs yz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+ 				\vliin{\llabrn\IMP}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+ 					\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+ 						\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \futs zz, \Left, \labels{x}{A \IMP B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}, \labels{z}{A}}{
+ 							\vlhy{}
+ 						}
+ 					}
+ 				}{
+ 				\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+ 					\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \futs zz, \Left, \labels{z}{B}, \labels{z}{A} \SEQ \Right, \labels{z}{B}}{
+ 						\vlhy{}
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ }
+\end{smallequation*}
+
+\item $\fm{\BOX A}$
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\rlabrn\BOX}{\lb z, \lb w \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{y}{\BOX A}}{
+			\vlin{\rn{trans}}{}{\B, \futs xy, \futs yz, \accs zw, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+				\vlin{\llabrn\BOX}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{w}{A}}{
+					\vlin{\rn{refl}}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw; \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+						\vlin{\labrn{id_g}}{}{\B, \futs xy, \futs yz, \futs xz, \accs zw, \futs ww, \Left, \labels{z}{\BOX A}, \labels{w}{A} \SEQ \Right, \labels{w}{A}}{
+							\vlhy{}
+						}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+
+\item $\fm{\DIA A}$
+%	\begin{smallequation*}
+%		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{}
+%		\reducesto
+%	\end{smallequation*}
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\llabrn\DIA}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
+			\vlin{\color{red}\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \futs xy, \accs xz, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}}{
+					\vlin{\labrn{id_g}}{}{\B, \futs xy, \accs xz, \futs zu, \accs yu, \Left, \labels{z}{A} \SEQ \Right, \labels{y}{\DIA A}, \labels{u}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+\qedhere
+\end{itemize}
+\end{proof}
+
+In the following sections, we will show that the system $\labIKp$ is sound and complete. For the completeness proof we proceed via cut elimination.
+%
+The cut rule has the following shape:
+\begin{equation}
+\label{eq:cut}
+\vliiinf{\labrn{cut}}{}{
+	\lseq\B\Left\Right}{
+	\lseq\B\Left{\Right,\labels{z}{C}}}{}{
+	\lseq\B{\Left,\labels{z}{C}}{\Right}}
+\end{equation}
+
+We say that a formula is \emph{provable} in $\labIKp$ (or $\labIKp+\labrn{cut}$, resp.) if for any label $\lb x$, the sequent $\SEQ \labels{x}{A}$ is derivable from only axioms using the rules in Figure~\ref{fig:labIKp} (with possible instances of $\labrn{cut}$, resp.).
+%
+We can summarize soundness, completeness, and cut
+admissibility of $\labIKp$ in the following result.
+
+\begin{theorem}\label{thm:cutfree-compl}
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{i} $A$ is a theorem of $\IK$. 
+		%
+		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$.
+		\item\label{iii} $A$ is provable in $\labIKp$.
+		%
+		\item\label{iv} $A$ is valid in every birelational frame. 
+	\end{enumerate}
+\end{theorem}
+
+The proof of this theorem is the topic of the following sections. The
+equivalence of \ref{i} and \ref{iv} has already been stated in
+Theorem~\ref{thm:plotkin}~\cite{fischer-servi:84, plotkin:stirling:86}. The implication
+\ref{i}$\implies$\ref{ii} is shown in Section~\ref{sec:completeness},
+the implication~\ref{ii}$\implies$\ref{iii} is shown in
+Section~\ref{sec:cut-elim}, and finally, the implication \ref{iii}$\implies$\ref{iv} is shown in Section~\ref{sec:soundness}.
+
+Once we have shown cut elimination (the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}), the proof of Proposition~\ref{prop:mon-adm} becomes trivial.
+
+\begin{proof}[Proof of Proposition~\ref{prop:mon-adm}]
+	The rule $\llabrn{mon}$ can be derived using the general identity and cut:
+	\begin{smallequation*}
+		\vlderivation{
+			\vliiin{\labrn{cut}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}\Right}{
+				\vlin{\labrn{id_g}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}}{\Right, \labels{y}{A}}}{
+					\vlhy{}}}{
+				\vlhy{\quad}}{
+				\vlhy{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{A}, \labels{y}{A}}\Right}}
+		}
+	\end{smallequation*}
+	and both these rules are admissible by Proposition~\ref{prop:id} and
+	Theorem~\ref{thm:cutfree-compl}. The case for $\rlabrn{mon}$ is
+	similar.
+\end{proof}
+
+\begin{remark}
+	As mentioned above, the monotonicity rules $\llabrn{mon}$ and $\rlabrn{mon}$ are a form of contraction. So, it is not a surprise that the contraction rules
+	\begin{equation*}
+		\vlinf{\llabrn{cont}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{\B, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}
+		\hskip8em
+		\vlinf{\rlabrn{cont}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}
+	\end{equation*}
+	are admissible in our system, as they are derivable as follows:
+	\begin{equation*}
+		\vlderivation{
+			\vlin{\rn{refl}}{}
+			{\B, \Left, \labels{x}{A} \SEQ \Right}
+			{\vlin{\llabrn{mon}}{}
+				{\B, \futs{x}{x}, \Left, \labels{x}{A} \SEQ \Right}
+				{\vlhy{\B, \futs{x}{x}, \Left, \labels{x}{A}, \labels{x}{A} \SEQ \Right}}}
+		}
+		\hskip6em
+		\vlderivation{
+			\vlin{\rn{refl}}{}
+			{\B, \Left \SEQ \Right, \labels{x}{A}}
+			{\vlin{\rlabrn{mon}}{}
+				{\B, \futs{x}{x}, \Left \SEQ \Right, \labels{x}{A}}
+				{\vlhy{\B, \futs{x}{x}, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{A}}}}
+		}
+	\end{equation*}
+\end{remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Completeness}\label{sec:completeness}
+
+In this section we show our system at work, as most of the section
+consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prove completeness of $\labIKp+\rn{cut}$, i.e., the implication \ref{i}$\implies$\ref{ii} of Theorem~\ref{thm:cutfree-compl}, which is stated again below:
+
+\begin{theorem}\label{thm:completeness}
+	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK$ then $\fm A$ is provable in $\labIKp +\labrn{cut}$.
+\end{theorem}
+
+\begin{remark}
+	We have seen already in the proof of Proposition~\ref{prop:id} the
+	use of the rule $\rn{F_2}$. In the following proof of
+	Theorem~\ref{thm:completeness} we also see the use of the rules
+	$\rn{F_1}$, $\rn{refl}$, and $\rn{trans}$.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:completeness}]
+	We begin by showing how the axioms $\kax[1]$--$\kax[5]$ are proved in system $\labIKp$.
+	\begin{itemize}
+		\item $\kax[1]$:
+		\begin{smallequation*}
+			\vlderivation{
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\SEQ \labels{x}{\BOX (A \IMP B) \IMP (\BOX A \IMP \BOX B)}}
+				{\vlin {\rlabrn{\IMP}}
+					{\lb z \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\BOX(A \IMP B)}}{\labels{y}{\BOX A \IMP \BOX B}}}
+					{\vlin {\rlabrn{\BOX}}
+						{\lb w, \lb u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{z}{\BOX B}}}
+						{\vlin {\llabrn{\BOX}}
+							{}
+							{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}}{\labels{u}{B}}}
+							{\vlin {\color{red}\rn{trans}}
+								{}
+								{\lseq{\futs xy, \futs yz, \futs zw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
+								{\vlin {\llabrn{\BOX}}
+									{}
+									{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}}{\labels{u}{B}}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
+										{\vliin{\llabrn{\IMP}}
+											{}
+											{\lseq{\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}}}
+											{\vlin {\rn{id_g}}
+												{}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{u}{B}, \labels{u}{A}}}
+												{\vlhy {}}}
+											{\vlin {\rn{id_g}}
+												{}
+												{\lseq{\B}{\labels{y}{\BOX(A \IMP B)}, \labels{z}{\BOX A}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{u}{B}}}
+												{\vlhy {}}}}}}}}}}
+			}
+		\end{smallequation*}
+		where $\B$ is equal to: $\futs xy, \futs yz, \futs zw, \futs yw, \futs uu, \accs wu$.
+		\item $\kax[2]$:
+		\begin{smallequation*}
+			\vlderivation {
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{ \SEQ \labels{x}{\BOX (A \IMP B) \IMP (\DIA A \IMP \DIA B)}}
+				{\vlin {\rlabrn{\IMP}}
+					{\lb z \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\BOX (A \IMP B)}}{\labels{y}{(\DIA A \IMP \DIA B)}}}
+					{\vlin {\llabrn{\DIA}}
+						{\lb u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz}{\labels{y}{\BOX (A \IMP B)}, \labels{z}{\DIA A}}{\labels{z}{\DIA B}}}
+						{\vlin{\rlabrn{\DIA}}
+							{}
+							{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}}}
+							{\vlin {\llabrn{\BOX}}
+								{}
+								{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+								{\vlin {\color{red}\rn{refl}}
+									{}
+									{\lseq{\futs xy, \futs yz, \accs zu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+									{\vliin{\llabrn{\IMP}}
+										{}
+										{\lseq{\futs xy, \futs yz, \accs zu, \futs uu}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+										{\vlin {\rn{id_g}}
+											{}
+											{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}}{\labels{z}{\DIA B}, \labels{u}{B}, \labels{u}{A}}}
+											{\vlhy {}}}
+										{\vlin {\rn{id_g}}
+											{}
+											{\lseq{\B}{\labels{y}{\BOX (A \IMP B)}, \labels{u}{A}, \labels{u}{A \IMP B}, \labels{u}{B}}{\labels{z}{\DIA B}, \labels{u}{B}}}
+											{\vlhy {}}}								}}}}}}
+			}
+		\end{smallequation*}
+		
+		where $\B$ is equal to $\futs xy, \futs yz, \accs zu, \futs uu$.
+		\item $\kax[3]$:
+		\begin{smallequation*}
+			\vlderivation {
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\SEQ \labels{x}{\DIA (A \OR B) \IMP (\DIA A \OR \DIA B)}}
+				{\vlin {\llabrn{\DIA}}
+					{\lb z \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\DIA (A \OR B)}}{\labels{y}{\DIA A \OR \DIA B}}}
+					{\vliin{\llabrn{\OR}}{}{\lseq{\futs xy, \accs yz}{\labels{z}{A \OR B}}{\labels{y}{\DIA A \OR \DIA B}}}{\vlin {\rlabrn{\OR}}
+							{}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A \OR \DIA B}}}
+							{\vlin {\rlabrn{\DIA}}
+								{}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
+								{\vlin {\color{red}\rn{refl}}
+									{}
+									{\lseq{\futs xy, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
+									{\vlin {\rn{id_g}}
+										{}
+										{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{A}}{\labels{y}{\DIA A}, \labels{z}{A}, \labels{y}{\DIA B}}}
+										{\vlhy {}}}}}}{\vlin {\rlabrn{\OR}}
+							{}
+							{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A \OR \DIA B}}}
+							{\vlin {\rlabrn{\DIA}}
+								{}
+								{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}}}
+								{\vlin {\color{red}\rn{refl}}
+									{}
+									{\lseq{\futs xy, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
+									{\vlin {\rn{id_g}}
+										{}
+										{\lseq{\futs xy, \futs zz, \accs yz}{\labels{z}{B}}{\labels{y}{\DIA A}, \labels{y}{\DIA B}, \labels{z}{B}}}
+										{\vlhy {}}}}}}}}
+			}
+		\end{smallequation*}
+		\item $\kax[4]$:
+		\begin{smallequation*}
+			\vlderivation {
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\SEQ \labels{x}{(\DIA A \IMP \BOX B) \IMP \BOX (A \IMP B)}}
+				{\vlin {\rlabrn{\BOX}}
+					{\lb z, \lb w \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{y}{\BOX (A \IMP B)}}}
+					{\vlin {\rlabrn{\IMP}}
+						{\lb u \mbox{ fresh}}
+						{\lseq{\futs xy, \futs yz, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}}{\labels{w}{A \IMP B}}}
+						{\vlin {\color{red}{\rn{F_1}}}
+							{\lb t \mbox{ fresh}}
+							{\lseq{\futs xy, \futs yz, \futs wu, \accs zw}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+							{\vlin {\color{red}\rn{trans}}
+								{}
+								{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+								{\vliin {\llabrn{\IMP}}
+									{}
+									{\lseq{\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}}}
+									{\vlin {\rlabrn{\DIA}}
+										{}
+										{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}}}
+										{\vlin {\color{red}\rn{refl}}
+											{}
+											{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
+											{\vlin {\rn{id_g}}
+												{}
+												{\lseq{\B, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}}{\labels{u}{B}, \labels{t}{\DIA A}, \labels{u}{A}}}
+												{\vlhy {}}}}}
+									{\vlin {\color{red}\rn{refl}}
+										{}
+										{\lseq{\B}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
+										{\vlin {\llabrn{\BOX}}
+											{}
+											{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}}{\labels{u}{B}}}
+											{\vlin {\color{red}\rn{refl}}
+												{}
+												{\lseq{\B, \futs tt}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
+												{\vlin {\rn{id_g}}
+													{}
+													{\lseq{\B, \futs tt, \futs uu}{\labels{y}{\DIA A \IMP \BOX B}, \labels{u}{A}, \labels{t}{\BOX B}, \labels{u}{B}}{\labels{u}{B}}}
+													{\vlhy {}}}}}}}}}}}}
+		\end{smallequation*}
+		
+		where $\B$ is equal to $\futs xy, \futs yz, \futs wu, \futs zt, \futs yt, \accs zw, \accs tu$.
+		\item $\kax[5]$:
+		\begin{smallequation*}
+			\vlderivation {
+				\vlin{\rlabrn{\IMP}}
+				{\lb y \mbox{ fresh}}
+				{\SEQ \labels{x}{\DIA \BOT \IMP \BOT}}
+				{\vlin {\llabrn{\DIA}}
+					{\lb z \mbox{ fresh}}
+					{\lseq{\futs xy}{\labels{y}{\DIA \BOT}}{\labels{y}{\BOT}}}
+					{\vlin {\llabrn{\BOT}}
+						{}
+						{\lseq{\futs xy, \accs yz}{\labels{z}{\BOT}}{\labels{y}{\BOT}}}
+						{\vlhy {}}}}
+			}
+		\end{smallequation*}
+		
+	\end{itemize}
+	Next, we have to prove all axioms of intuitionistic propositional logic can be shown in $\labIKp$. We do this only for $\fm{A \AND B \IMP B}$ and leave the rest to the reader:
+	\begin{smallequation*}
+		\vlderivation {
+			\vlin{\rlabrn{\IMP}}
+			{\lb y \mbox{ fresh}}
+			{\SEQ \labels{x}{A \AND B \IMP B}}
+			{\vlin {\llabrn{\AND}}
+				{}
+				{\lseq{\futs xy}{\labels{y}{A \AND B}}{\labels{y}{B}}}
+				{\vlin {\color{red}\rn{refl}}
+					{}
+					{\lseq{\futs xy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
+					{\vlin {\rn{id_g}}
+						{}
+						{\lseq{\futs xy, \futs yy}{\labels{y}{A}, \labels{y}{B}}{\labels{y}{B}}}
+						{\vlhy {}}}}}
+		}
+	\end{smallequation*}
+	
+	
+	
+	Finally, we have to show how the rules of modus ponens and
+	necessitation can be simulated in our system. For modus ponens, this
+	is standard using the cut rule and for necessitation, we can
+	transform a proof of $\fm A$ into a proof of $\fm{\BOX A}$ as
+	follows.
+	A proof of $\fm A$ is in fact a proof $\DD$ of the sequent
+	$\SEQ{\labels{z}{A}}$ for some label $\lb z$. If $\lb x$ and $\lb y$
+	are fresh labels, we can transform $\DD$ into a proof $\DD'$ of the
+	sequent $\futs xy, \accs yz \SEQ \labels{z}{A}$ by adding $\futs xy,
+	\accs yz$ to every line. We can now apply the $\rlabrn\BOX$-rule to
+	obtain a proof of $\SEQ \labels{x}{\BOX A}$.
+	
+	This completes the proof of Theorem~\ref{thm:completeness}.
+\end{proof}
+
+
+Note that we could also have proved completeness via proof search and a countermodel construction argument, as rules are terminationg in $\labIKp$. 
+%
+This works well for $\IK$ (and a small number of its extensions) and have been used for example by~\cite{maffezioli:etal:synthese13}. 
+%
+Moreover, it would allow us to show completeness directly for any labelled sequents, not only specifically for formulas. 
+
+However, this technique would not be easily adaptable to the general extensions with consider here. 
+%
+We therefore compromised the generality of the result to the expressivitly of the logic themselves, and restricted the completeness to formulas expressible in $\IK$ and all the Scott-Lemmon logics.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Soundness}\label{sec:soundness}
+
+In order to prove the implication \ref{iii}$\implies$\ref{iv} from
+Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule
+of our system $\labIKp$ is sound. To make precise what that actually
+means, we have to extend the relation $\Vdash$, defined in
+Section~\ref{sec:intmod} from formulas to sequents. This is the
+purpose of the following definitions.
+
+\begin{definition}\label{def:force-seq}
+	Let $\M = \langle W, \rel_\M, \le_\M, V \rangle$ be a model, and let
+	$\SG$ be the sequent $\lseq\B\Left\Right$. 
+	%
+	A \emph{$\SG$-interpretation
+		in $\M$} is a mapping $\inter{\cdot}$ from the labels in $\SG$ to the set $W$ of worlds in $\M$, such that whenever $\accs xy$ in $\B$, then $\inter x\rel_\M\inter y$, and whenever $\futs xy$ in $\B$, then $\inter x\le_\M\inter y$. Now we can define 
+	\begin{equation}
+	\M,\inter\cdot\Vdash\SG\qquad\mbox{iff}\qquad
+	\parbox{20em}{if for all $\labels{x}{A} \in \Gamma$, we have $\M, \inter x \Vdash \fm A$, then there exists $\labels{z}{B} \in \Delta$ such that $\M, \inter z \Vdash \fm B$.}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def:valid-seq}
+	A sequent $\SG$ is \emph{satisfied} in $\M = \langle W, \rel, \le, V
+	\rangle$ iff for all $\SG$-interpretations $\inter\cdot$ we have
+	$\M,\inter\cdot\Vdash\SG$.
+	%%
+	A sequent $\SG$ is \emph{valid} in a frame $\F = \langle W, \rel,
+	\le \rangle$, if for all valuations $V$, the sequent $\SG$ is
+	satisfied in $\langle W, R, \le, V \rangle$.
+\end{definition}
+
+We are now ready to state and prove the main theorem of this section, of which
+the implication \ref{iii}$\implies$\ref{iv} in
+Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
+
+\begin{theorem}\label{thm:soundness}
+	If a sequent $\SG$ is provable in $\labIKp$, then it is valid in every birelational frame.
+\end{theorem}
+
+\begin{proof}
+	We proceed by induction on the height of the derivation of $\SG$, and we show for all rules in $\labIKp$
+	$$
+	\vliiinf{\labrn{r}}{}{\SG}{\SGi1}{\cdots}{\SGi n}
+	$$ for $n\in\{0,1,2\}$, that whenever $\SGi1,\ldots,\SGi n$ are
+	valid in all birelational frame, then so is $\SG$. It follows from a case analysis on $\rn r$:
+	\begin{itemize}
+		\item $\rlabrn\bot$: This is trivial because $\bot$ is never forced.
+		\item $\rn{id}$: This follows immediately from Proposition~\ref{prop:mon-adm}.
+		\item $\llabrn\BOX$: By way of contradiction, assume that $\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right$
+		is valid in all birelational frames, but $\B, \futs xy,	\accs yz,\Left, \labels{x}{\BOX A} \SEQ \Right$ is not. This means that
+		we have a model $\M$ and an interpretation $\inter\cdot$, such
+		that $\M,\inter\cdot\not\Vdash\B, \futs xy, \accs yz, \Left,	\labels{x}{\BOX A} \SEQ \Right$, i.e., $\inter x\le_\M\inter y$
+		and $\inter y\rel_\M\inter z$ and $\cforce \M x{\BOX A}$ but
+		$\cnforce \M wB$ for all $\labels wB\in\Right$. However, by the
+		definition of forcing in~\eqref{eq:kripke} we also have $\cforce
+		\M zA$, and consequently $\nforce \M{\inter\cdot}{\B, \futs xy, \accs yz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ
+			\Right}$. Contradiction.
+		%
+		\item $\rlabrn\BOX$: By way of contradiction, assume that $\B, \futs xy,
+		\accs yz, \Left \SEQ \Right, \labels{z}{A}$ is valid in all
+		birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{\BOX
+			A}$ is not, where $\lb y$ and $\lb z$ do not occur in $\B$ or
+		$\Left$ or $\Right$.
+		This means that we have a model $\M$ and an
+		interpretation $\inter\cdot$, such that
+		$\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}$. 
+		%
+		So in particular, there are worlds $\lb{y'}$ and $\lb{z'}$
+		in $\M$ such that $\inter x\le_\M \lb{y'}$ and
+		$\lb{y'}\rel_\M\lb{z'}$ and $\nforce\M{\lb{z'}}{\fm A}$. 
+		%
+		Now we let
+		$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter
+		y'=\lb{y'}$ and $\inter z'=\lb{z'}$ and $\inter\cdot'=\inter\cdot$
+		on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy,
+			\accs yz, \Left \SEQ \Right, \labels{z}{A}}$. Contradiction.
+		
+		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. So there exists a world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now we let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
+		
+		\item $\llabrn\DIA$: By way of contradiction, assume that $\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ is valid in all birelational frames, but $\B, \Left, \labels{x}{\DIA A} \SEQ \Right$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}$, i.e. $\cforce \M x{\DIA A}$. This means that there exists world $\lb{y'}$ in $\M$ such that $\inter x\rel_\M \lb{y'}$ and $\cforce \M {\lb{y'}}{A}$. Now we let $\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot' = \inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$. Contradiction.
+		
+	\end{itemize}
+	The other cases are similar (and simpler), and we leave them to the
+	reader. In particular, note that the cases for the rules $\rn{refl}$,
+	$\rn{trans}$, $\rn{F_1}$ and $\rn{F_2}$ are trivial, as all
+	birelations frames have to obey the corresponding conditions.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cut Admissibility}\label{sec:cut-elim}
+In this section we are going to prove the admissibility of cut for
+$\labIKp$. The presentations follows the standard textbook
+exposition (see, e.g., \cite{troelstra:schwichtenberg:00,negri:vonplato:01})
+adapted to the system at hand.\footnote{As pointed out
+	in~\cite{girard:87:a}, any minor change in a proof system demands
+	to do the whole cut elimination argument from scratch.}
+%%
+
+\begin{theorem}
+	\label{thm:cut-adm}
+	The $\labrn{cut}$ rule is admissible for $\labIKp$.
+\end{theorem}
+
+This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
+
+The \emph{height} of a derivation $\DD$, denoted by $\height\DD$, is the height of $\DD$ when seen as a tree, i.e., the length of
+the longest path in the tree from its root to one of its leaves.
+
+We say that a rule is \emph{height-preserving admissible} if for every derivation $\DD$ of its premise(s) there is a derivation $\DD'$ of its conclusion such that $\height{\DD'}\le\height\DD$. A rule is \emph{height-preserving invertible} if for every
+derivation of the conclusion of the rule there are derivations for each of its premises with at most the same height.
+
+The first lemma is the height-preserving admissibility of weakening on both relational atoms and labelled formulas.
+
+\begin{lemma}
+	\label{lem:weak-adm}
+	The weakening rule
+	~$\vlinf{\rn{weak}}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}{\lseq{\B}{\Left}{\Right}}$~
+	is height-preserving admissible for $\labIKp$.
+\end{lemma}
+
+\begin{proof}
+	By a straightforward induction on the height of the derivation, we can transform any derivation
+	\begin{equation*}
+		\vlderivation {\vlpd {\D}{}{\lseq{\B}{\Left}{\Right}}}
+		\qquad
+		\mbox{into}
+		\qquad
+		\vlderivation {\vlpd{\Dw}{}{\lseq{\B,\B'}{\Left,\Left'}{\Right,\Right'}}}
+	\end{equation*}
+	of the same (or smaller) height.
+\end{proof}
+
+
+The next lemma looks like a special case of
+Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
+preserve the height, and second, we cannot prove it using $\rn{cut}$ rule as we
+are trying to eliminate it from derivations.
+
+\begin{lemma}\label{lem:adm-mon-at}
+	The atomic version of $\llabrn{mon}$ and $\rlabrn{mon}$
+	$$
+	\vlinf{\llabrn{mon_a}}{}{\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}}\Right}{
+		\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}, \labels{y}{a}}\Right}
+	\qquad
+	\vlinf{\rlabrn{mon_a}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{a}}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{a}, \labels{y}{a}}
+	$$
+	are height-preserving admissible for $\labIKp$.
+	%
+\end{lemma}
+
+\begin{proof}
+	We show the details for $\llabrn{mon_a}$, the argument is the same for $\rlabrn{mon_a}$.
+	By induction on the height of $\D$, we prove that for any proof of $\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}, \labels{y}{a}}{\Right}$, there exists a proof of $\lseq{\B, \futs{x}{y}}{\Left, \labels{x}{a}}{\Right}$
+	of the same (or smaller) height.
+	The inductive step is straightforward by permutation of rules.
+	The base cases are obtained as follows:
+	\begin{smallequation*}
+		\vlderivation{
+			\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
+				\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{z}{a}}{
+					\vlhy{}
+				}
+			}
+		}
+		\reducesto
+		\vlderivation{
+			\vlin{\color{red}\labrn{trans}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \futs{x}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
+					\vlhy{}
+				}}
+			}
+		\end{smallequation*}
+		
+		\begin{smallequation*}
+			\vlderivation{
+				\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+					\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{x}{a}}{
+						\vlhy{}
+					}
+				}
+			}
+			\reducesto
+			\vlderivation{
+				\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+						\vlhy{}
+					}}}
+				\end{smallequation*}
+				
+				\begin{smallequation*}
+					\vlderivation{
+						\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+							\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{y}{a}}{
+								\vlhy{}
+							}
+						}
+					}
+					\reducesto
+					\vlinf{\labrn{id}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
+					\qedhere
+				\end{smallequation*}
+				
+			\end{proof}
+			
+			The next lemma shows that all the rules in our system are invertible, as already mentioned in the introduction. 
+			
+			\begin{lemma}
+				\label{lem:inv}
+				All single-premise rules of $\labIKp$ are height-preserving
+				invertible. Furthermore, the rules $\llabrn{\OR}$ and
+				$\rlabrn{\AND}$ are height-preserving invertible on both premises, and the
+				rule $\llabrn{\IMP}$ is height-preserving invertible on the right premise.
+				%
+			\end{lemma}
+			
+			\begin{proof}
+				For each rule $\rn{r}$, we need to show that if there exists a proof $\DD$ of the conclusion, there exists a proof $\DD^{\rn r_i}$ of the $i$-th premise, of the same (or smaller) height.
+				For $\rlabrn\AND$, $\llabrn\AND$, $\rlabrn\OR$, $\llabrn\OR$, and the right premise of $\llabrn\IMP$, we use a standard induction on the height of $\DD$.
+				%
+				For $\rlabrn\IMP$, $\rlabrn\BOX$, $\llabrn\DIA$ as well, but
+				we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r}$ when necessary.
+				%
+				The other rules can be shown invertible using Lemma~\ref{lem:weak-adm}. 
+			\end{proof}
+			
+			
+			
+			The next lemma is the central ingredient of our cut elimination proof.
+			
+			\begin{lemma}
+				\label{lem:reduction}
+				Given a derivation of shape
+				$$
+				\vlderivation{
+					\vliiin{\labrn{cut}}{}{\lseq\B\Left\Right}{
+						\vlhtr{\DD_1}{\lseq\B\Left{\Right,\labels{z}{C}}}}{
+						\vlhy{}}{
+						\vlhtr{\DD_2}{\lseq\B{\Left,\labels{z}{C}}{\Right}}}}
+				$$
+				where $\DD_1$ and $\DD_2$ are both cut-free, there is a cut-free
+				derivation of ${\lseq\B\Left\Right}$
+			\end{lemma}
+			
+			\begin{proof}
+				%
+				The proof is by a lexicographic induction on the complexity of the cut-formula $C$ and the sum of the heights $\height{\DD_1}+\height{\DD_2}$.
+				%
+				We perform a case analysis on the last rule used in $\DD_1$ above the $\rn{cut}$ and whether it applies to the cut-formula or not.
+				%
+				In case it does not, we are in a \emph{commutative} case; in case it does, we have to perform a similar analysis on $\DD_2$ to end up in a \emph{key} case.
+				
+				\begin{description}
+					\item[Base cases:]\label{base-cases}
+					When the last rule in $\DD_1$ is an axiom, 
+					%
+					we can produce directly a cut-free derivation of the conclusion.
+					%
+					In the first case, we appeal to Lemma~\ref{lem:adm-mon-at}, to use the atomic monotonicity rule freely.
+					\begin{itemize}
+						\item 
+						\begin{smallequation*}
+							\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+								\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+									\vlhy{}	
+								}
+							}{
+							\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}		
+						}
+						\reducesto
+						\vlderibase{\llabrn{mon_a}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right}{
+							\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right}
+						}
+					\end{smallequation*}
+					
+					\item
+					\begin{smallequation*}
+						\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+							\vlin{\labrn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}, \labels{z}{C}}{
+								\vlhy{}	
+							}
+						}{
+						\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{a}, \labels{z}{C} \SEQ \Right, \labels{y}{a}}		
+					}
+					\reducesto
+					\vlderibase{\rn{id}}{}{\B, \futs xy, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+						\vlhy{}
+					}
+				\end{smallequation*}
+				
+				\item
+				\begin{smallequation*}
+					\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+						\vlin{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right, \labels{z}{C}}{
+							\vlhy{}	
+						}
+					}{
+					\vlhtr{\DD_2}{\B, \Left, \labels{x}{\BOT}, \labels{z}{C} \SEQ \Right}		
+				}
+				\reducesto
+				\vlderibase{\llabrn{\BOT}}{}{\B, \Left, \labels{x}{\BOT} \SEQ \Right}{
+					\vlhy{}
+				}
+			\end{smallequation*}
+		\end{itemize}
+		\item[Commutative cases:]\label{commutative-cases}
+		In such a case, the complexity of the cut-formula stays constant, but the height of the derivation above the $\rn{cut}$ decreases.
+		\begin{itemize}
+			\item $\llabrn\IMP$:
+			\begin{smallequation*}
+				\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+					\vliin{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}}{
+						\vlhtr{\DD_1}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+					}{
+					\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+				}
+			}{
+			\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right}
+		}
+	\end{smallequation*}
+	
+	\begin{smallequation*}
+		\reducesto\qquad\vlderiibase{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+			\vlhtr{\DD_1'}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+		}{
+		\vlhtr{\DD_2'}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+	}
+\end{smallequation*}
+
+\begin{small}
+	{with}$\quad\DD_1' = \quad
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
+		\vlhtr{\DD_1}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
+	}{
+	\vlhtr{\DD_3^{\rn w}}{\B, \futs xy, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
+}	$
+
+{and}$\quad\DD_2'= \quad
+\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}{
+	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+}{
+\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, \futs xy, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+}$
+\end{small}
+
+where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}. We use the same naming scheme in the following cases.
+\item $\rlabrn\IMP$:
+\begin{smallequation*}\hskip-8em
+	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vlin{\rlabrn\IMP}{\text{\footnotesize $\lb{x'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{A \IMP B}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $\lb{x''}$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+		\vliin{\labrn{cut}}{}{\B, \futs{x}{x''}, \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
+			\vlhtr{\DD_1[x''/x']}{\B, \futs{x}{x''}, \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\IMP}}}{\B, \futs{x}{x''}, \Left, \labels{z}{C}, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}
+	}
+}
+\end{smallequation*}
+\item $\llabrn\BOX$:
+\begin{smallequation*}\hskip-8em
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{z}{C} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\rn w}}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A}, \labels{z}{C} \SEQ \Right}
+	}
+}
+\end{smallequation*}
+
+\item $\rlabrn\BOX$:
+\begin{smallequation*}\hskip-8em
+	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vlin{\rlabrn\BOX}{\text{\footnotesize $\lb{x'},\lb{y'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \accs{x'}{y'}, \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\BOX A}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $\lb u,\lb v$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\rlabrn\BOX}}}{\B, \futs xu, \accs uv, \Left, \labels{z}{C} \SEQ \Right, \labels{v}{A}}
+	}
+}
+\end{smallequation*}
+\item $\llabrn\DIA$:
+
+\begin{smallequation*}\hspace*{-5.5em}
+	\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \accs{x}{y'}, \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \Left, \labels{x}{\DIA A}, \labels{z}{C} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\llabrn\DIA}{\text{\footnotesize $\lb{y''}$ fresh (also in $\DD_2$)}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \accs{x}{y''}, \Left, \labels{y''}{A} \SEQ \Right}{
+			\vlhtr{\DD_1[y''/y']}{\B, \accs{x}{y''}, \Left, \labels{y''}{A} \SEQ \Right, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\invr{\llabrn\DIA}}}{\B, \accs{x}{y''}, \Left, \labels{y''}{A}, \labels{z}{C} \SEQ \Right}
+	}
+}
+\end{smallequation*}
+
+\item $\rlabrn\DIA$:
+
+\begin{smallequation*}\hspace*{-5.5em}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+		\vlin{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{z}{C}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}}
+}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+		\vliin{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}, \labels{z}{C}}
+		}{
+		\vlhtr{\DD_2^{\rn w}}{\B, \Left, \labels{z}{C} \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+	}
+}
+\end{smallequation*}
+
+\bigskip
+\item$\rn{refl}$:
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \Left \SEQ \Right}
+	{\vlin{\rn{refl}}{}{\B, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \futs xx, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \Left, \labels{z}{C} \SEQ \Right}}
+	\reducesto
+	\vlderibase{\rn{refl}}{}{\B, \Left \SEQ \Right}{\vliin{\rn{cut}}{}
+		{\B, \futs xx, \Left \SEQ \Right}
+		{\vlhtr{\DD_1}{\B, \futs xx, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{\rn w}}{\B, \futs xx, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\bigskip
+\item$\rn{trans}$:
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \futs xy, \futs yz, \Left \SEQ \Right}
+	{\vlin{\rn{trans}}{}
+		{\B, \futs xy, \futs yz, \Left \SEQ \Right, \labels{z}{C}}
+		{\vlhtr{\DD_1}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \futs xy, \futs yz, \Left, \labels{z}{C} \SEQ \Right}}
+\end{smallequation*}
+\begin{smallequation*}
+	\reducesto
+	\vlderibase{\rn{trans}}{}
+	{\B, \futs xy, \futs yz, \Left \SEQ \Right}
+	{\vliin{\rn{cut}}{}
+		{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right}
+		{\vlhtr{\DD_1}{\B, \futs xy, \futs yz, \futs xz, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{\rn w}}{\B, \futs xy, \futs yz, \futs xz, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\item$\rn{F_1}$:
+\begin{smallequation*}
+	\vlderiibase{\rn{cut}}{}
+	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
+	{\vlin{\rn{F_1}}{\lb u \mbox{ fresh}}
+		{\B, \accs xy, \futs yz, \Left \SEQ \Right, \labels{z}{C}}
+		{\vlhtr{\DD_1}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \accs xy, \futs yz, \Left, \labels{z}{C} \SEQ \Right}}
+\end{smallequation*}
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rn{F_1}}{\lb v \mbox{ fresh (also in $\DD_2$)}}
+	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
+	{\vliin{\rn{cut}}{}
+		{\B, \accs xy, \futs yz, \futs xv, \accs vz, \Left \SEQ \Right}
+		{\vlhtr{\DD_1[v/u]}{\B, \accs xy, \futs yz, \futs xv, \accs vz, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \futs yz, \futs xv, \accs vz, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\item$\rn{F_2}$:
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \futs xz, \Left \SEQ \Right}
+	{\vlin{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right, \labels{z}{C}}}}
+	{\vlhtr{\DD_2}{\B, \accs xy, \futs xz, \Left, \labels{z}{C} \SEQ \Right}}
+\end{smallequation*}
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderibase{\rn{F_2}}{\lb v \mbox{ fresh (also in $\DD_2$)}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\vliin{\labrn{cut}}{}
+		{\B, \accs xy, \futs xz, \futs yv, \accs zv, \Left \SEQ \Right}
+		{\vlhtr{\DD_1[v/u]}{\B, \accs xy, \futs xz, \futs yv, \accs zv, \Left \SEQ \Right, \labels{z}{C}}}
+		{\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \futs xz, \futs yv, \accs zv, \Left, \labels{z}{C} \SEQ \Right}}}
+\end{smallequation*}
+
+\end{itemize}
+\item[Key cases:]\label{key-cases}
+If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-formulas, then it is the complexity of the cut-formula that is the decreasing inductive measure, save for the modal cases, where it is important to note the combination of induction on both height and formula size . 
+\begin{itemize}
+	\item $C=A \AND B$:
+	
+	
+	\begin{smallequation*}\hspace*{-7.5em}
+		\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+			\vliin{\rlabrn\AND}{}{\B, \Left \SEQ \Right, \labels{x}{A \AND B}}{
+				\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{A}}}{
+				\vlhtr{\DD_2}{\B, \Left \SEQ \Right, \labels{x}{B}}}}		
+		{
+			\vlin{\llabrn\AND}{}{\B, \Left, \labels{x}{A \AND B} \SEQ \Right}{
+				\vlhtr{\DD_3}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}}
+		}
+	\end{smallequation*}
+	
+	\begin{smallequation*}\hskip8em
+		\reducesto
+		\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+			\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{A}}
+			%	
+		}		
+		{
+			\vliin{\labrn{cut}}{}{\B, \Left, \labels{x}{A} \SEQ \Right}{
+				\vlhtr{\DD_2^{\rn w}}{\B, \Left, \labels{x}{A} \SEQ \Right, \labels{x}{B}}
+			}{
+			\vlhtr{\DD_3}{\B, \Left, \labels{x}{A}, \labels{x}{B} \SEQ \Right}
+		}
+	}
+\end{smallequation*}
+
+\item $C=A \OR B$:
+
+\begin{smallequation*}\hspace*{-7.5em}
+	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+		\vlin{\rlabrn\OR}{}{\B, \Left \SEQ \Right, \labels{x}{A \OR B}}{
+			\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}}}		
+	{
+		\vliin{\llabrn\OR}{}{\B, \Left, \labels{x}{A \OR B} \SEQ \Right}{
+			\vlhtr{\DD_2}{\B, \Left, \labels{x}{A} \SEQ \Right}}{
+			\vlhtr{\DD_3}{\B, \Left, \labels{x}{B} \SEQ \Right}}
+	}
+\end{smallequation*}
+
+\begin{smallequation*}\hskip8em
+	\reducesto
+	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{
+			\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{A}, \labels{x}{B}}}{
+			\vlhtr{\DD_3^{\rn w}}{\B, \Left, \labels{x}{B} \SEQ \Right, \labels{x}{A}}}}		
+	{
+		\vlhtr{\DD_2}{\B, \Left, \labels{x}{A} \SEQ \Right}
+		%		
+	}
+\end{smallequation*}
+
+\item $C=A\IMP B$:
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{
+		\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
+			\vlhtr{\DD_1}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}}
+		}
+	}{
+	\vliin{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+	}{
+	\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}
+	\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{\vlhtr{\DD_1'}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}}{\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right}{
+			\vlhtr{\DD_1[y/x']}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
+		}{
+		\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+	}
+}
+\end{smallequation*}
+
+\begin{small}
+	{with}$\quad\DD_1' = \quad
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}{
+		\vlin{\rlabrn\IMP}{}{\B, \futs xy, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{y}{A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B, \futs xy, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{y}{A}}
+		}
+		%	
+	}{
+	\vlhtr{\DD_{2}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
+}
+$
+\end{small}
+
+
+\item $C=\BOX A$:
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1}{\B, \futs xu, \accs{u}{v}, \futs{x}{x'}, \accs{x'}{y'}, \Left \SEQ \Right, \labels{y'}{A}}	
+		}
+	}{
+	\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
+	}
+}
+\reducesto
+\end{smallequation*}
+
+\begin{smallequation*}\hspace*{-7em}
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right}{
+		%	
+		\vlhtr{\DD_1[u/x',v/y']}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}	
+	}{
+	\vlhtr{\DD_1'}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}
+}
+\end{smallequation*}
+
+\begin{small}
+	{with}$\quad\DD_1' = \quad
+	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}{
+		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
+			\vlhtr{\DD_1^{\rn w}}{\B, \futs xu, \accs uv, \futs{x}{x'}, \accs{x'}{y'}, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
+		}
+	}{
+	\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}}$
+\end{small}
+\bigskip
+
+The top $\rn{cut}$ is admissible by induction on the height, as the size of the cut-formula is constant. This however may increase the height above the right premiss of the bottom $\rn{cut}$ arbitrarily. The bottom $\rn{cut}$ is still admissible as the size of the cut-formula decreases.
+
+\item $C=\DIA A$:
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right}{
+		\vlin{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}
+		}
+	}{
+	\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ is fresh}}{\B, \accs xy, \Left, \labels{x}{\DIA A} \SEQ \Right}{
+		\vlhtr{\DD_2}{\B, \accs xy, \accs{x}{y'},\Left, \labels{y'}{A} \SEQ \Right}
+	}	
+}
+\end{smallequation*}
+
+\begin{smallequation*}
+	\vlderiibase{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right}{
+		\vliin{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_1}{\B, \accs xy, \Left \SEQ \Right, \labels{y}{A}, \labels{x}{\DIA A}}
+		}{
+		\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ is fresh}}{\B, \accs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{A}}{
+			\vlhtr{\DD_2^{\rn w}}{\B, \accs xy, \accs{x}{y'},\Left, \labels{y'}{A} \SEQ \Right, \labels{y}{A}}
+		}
+	}
+}{
+\vlhtr{\DD_2[y/y']}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
+}
+\end{smallequation*}
+%\lutz{Same. we need to explain why we can apply the IH}
+The induction hypothesis is applied here again twice as above, on the height for the top $\rn{cut}$ and on formula size for the bottom one.
+\end{itemize}
+\end{description}
+\end{proof}
+
+
+We can now complete the proof of Theorem~\ref{thm:cut-adm}.
+\begin{proof}[Proof of Theorem~\ref{thm:cut-adm}]
+	By induction on number of $\rn{cut}$ rules, always applying Lemma~\ref{lem:reduction} to the leftmost topmost cut.
+\end{proof}
+\newcommand{\set}[1]{\{#1\}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensions}\label{sec:ext}
+
+The main goal of this section is to generate stronger logics adding new axioms to our system. We say \emph{stronger logic} to refer to the fact that we are restricting the class of frames we want to consider, imposing some restrictions on the accessibility relation. 
+
+In the \emph{fully labelled} framework, we are able for the first time to consider the logics defined by \emph{one-sided intuitionistic Scott-Lemmon axioms}:
+\begin{equation}
+%\gklmn\colon
+\fm{\DIA^{k} \BOX^{l} A \IMP \BOX^{m}\DIA^{n} A}
+\end{equation}
+for any natural numbers $k,l,m,n$.
+
+\begin{figure}
+	$$
+	\xymatrix{
+		& y' \ar@{.>}[ddr]^{R^l} \\
+		& y \ar@{.>}[u]^{\le} \\
+		x \ar@{->}[ur]^{R^k}\ar@{->}[dr]_{R^m} && u \\
+		& z \ar@{.>}[ur]_{R^n}
+	}
+	$$
+	\caption{The intuitionistic klmn-incestuality condition}
+	\label{fig:gklmn}
+\end{figure}
+
+Indeed, they are known to obey a strong correspondence with the class of frames satisfying the condition illustrated on Figure~\ref{fig:gklmn}, which we call by analogy to the classical case, \emph{intuitionistic klmn-incestuality condition}.
+
+\begin{theorem}[\cite{plotkin:stirling:86}]\label{thm:gklmn-correspondence}
+	An intuitionistic modal frame $\langle W, \rel, \le \rangle$ validates $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$ if and only if the frame satisfies:
+	
+	if $\lb x R^{k} \lb y$ and $\lb x R^{m} \lb z$ then there exists $\lb{y'}$ such that $\futs{y}{y'}$ and there exists $\lb u$ such that $\lb{y'}R^{l}\lb u$ and $\lb z R^{n} \lb u$.\footnote{The relation $R^h$ for $h\ge1$ is defined in the usual way: $R^1=R$ and $R^{h+1}=R\circ R^h=\set{(\lb v,\lb w)|\exists \lb u\in W.\; \lb vR\lb u \wedge \lb uR^h\lb w}$.}
+\end{theorem}
+
+Following again the axiom-as-rule idea, to have a sound and complete system for $\IK$ extended by any such axiom, we introduce to the system $\labIKp$ the $\gklmn$ rule, for any natural numbers $k,l,m,n$.
+
+\begin{equation}
+\label{eq:gklmn}
+\vlinf{\gklmn}{\lb{y'}, \lb {u} \mbox{ fresh}}{\B, \lb x \rel^{k} \lb y, \lb x \rel^{m} \lb z, \Left \SEQ \Right}{\B, \lb x \rel^{k} \lb y, \lb x \rel^{m} \lb z, \futs{y}{y'}, \lb{y'}\rel^{l} \lb u, \lb z \rel^{n} \lb u, \Left\SEQ\Right}
+\end{equation}
+
+\begin{remark}
+	Observe, that in the rule $\gklmn$ above, $\lb xR^k\lb y$ is an abbrevation for $\lb xR\lb{x_1},\lb{x_1}R\lb{x_2},\ldots,\lb{x_{k-1}}R\lb y$, and the labels $\lb x,\lb{x_1},\ldots,\lb{x_{k-1}},\lb y$ do \emph{not} have to be distinct, and if $k=0$ then $\lb x=\lb y$; and similarly for $\lb x R^{m} \lb z$.
+	(In case some of them coincide, they are not repeated since $\B$ is a \emph{set} of relational atoms.)
+	However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, except if $l=0$, in which case $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$, but note that if $n = 0$ then $\lb u=\lb z$.
+	
+	For example, the derivation in~\eqref{eq:g-example} below requires the (valid) application of~$\rn{g_{1110}}$: 
+	$$\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \Left \SEQ \Right}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \futs{y}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
+	\qquad\mbox{as}\qquad
+	\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \accs xz, \Left \SEQ \Right}{\B, \lb x \rel \lb z, \futs{z}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
+	$$
+	i.e., the case where $\lb y=\lb z$, in order to derive $ \fm{\BOX(\BOX A \IMP A)}$.
+	
+	\begin{equation}
+	\label{eq:g-example}
+	\vlderivation{
+		\vlin{\rlabrn\BOX}{}{\SEQ \labels{x}{\BOX(\BOX A \IMP A)}}{
+			\vlin{\rlabrn\IMP}{\lb v\mbox{ fresh}}{\futs xy, \accs yz \SEQ \labels{z}{\BOX A \IMP A}}{
+				\vlin{\rn F_1}{\lb u\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+					\vlin{\rn g_{1110}}{ \lb{w}\mbox{ fresh}}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+						\vlin{\llabrn\BOX}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A} \SEQ \labels{v}{A}}{
+							\vlin{\rn{id}}{}{\futs xy, \accs yz, \futs zv, \futs yu, \accs uv, \futs{v}{w}, \accs{w}{v}, \labels{v}{\BOX A}, \labels{v}{A} \SEQ \labels{v}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	\end{equation}
+\end{remark}
+
+%
+
+We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\labIKp$ with any $\gklmn$ rule to provide a sound and cut-free complete system for this family of logics.
+
+\begin{theorem}\label{thm:cutfree-compl-gklmn}
+	For any formula $A$, the following are equivalent.
+	%
+	\begin{enumerate}
+		\item\label{1} $A$ is a theorem of $\IK + \fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$. 
+		%
+		\item\label{2} $A$ is provable in $\labIKp + \gklmn +\labrn{cut}$.
+		\item\label{3} $A$ is provable in $\labIKp + \gklmn $.
+		%
+		\item\label{4} $A$ is valid in every birelational frame satisfying the klmn-incestuality property.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof} 
+	The proof is similar to the one of Theorem~\ref{thm:cutfree-compl}.
+	\begin{itemize}
+		\item $1 \implies 2$:
+		%
+		Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$:
+		\begin{smallequation*}
+			\vlderivation{
+				\vlin{\rlabrn\IMP}{}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
+					\vliq{\rlabrn\BOX}{}{\futs{x}{x_0}, \labels{x_0}{\DIA^k\BOX^lA} \SEQ \labels{x_0}{\BOX^m\DIA^n A}}{
+						\vliq{\rn{F_1}}{}{\{\futs{x_i}{x_i'}, \accs{x_i'}{x_{i+1}}\}_{0\le i \le m-1}, \labels{x_0}{\DIA^k\BOX^l A} \SEQ \labels{x_m}{\DIA^n A}}{
+							\vliq{\llabrn\DIA}{}{\futs{x_{m-2}'}{x_{m-2}''}, \accs{x_{m-2}''}{x_{m-1}'},\{\futs{x_i'}{x_i''},\accs{x_i''}{x_{i+1}''}\}_{0\le i \le m-2}, \labels{x_0}{\DIA^k\BOX^l A} \SEQ \labels{x_m}{\DIA^n A}}{
+								\vliq{\rn{F_2}}{}{\accs{x_0}{y_1}, \{\accs{y_j}{y_{j+1}}\}_{1\le j \le k-1}, \labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+									\vlin {\gklmn}{}{\accs{x_0''}{y_1'},\{\accs{y_{j}'}{y_{j+1}'}\}_{1\le j \le k-1}, \labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+										\vliq {\rlabrn{\DIA}}{}{\futs{y_k'}{y_k''},\lb{y_k''}R^l\lb{w}, \lb{x_m}R^n\lb{w}, \labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A}}{
+											\vlin {\rn{trans}+\rn{refl}}{}{\labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+												\vliq {\llabrn{\BOX}}{}{\futs{y_k}{y_k''}, \ldots, \futs{w}{w}, \labels{y_k}{\BOX^l A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+													\vlin {\rn{id}}{}{\labels{y_k}{\BOX^l A},\labels{w}{A}\SEQ\labels{x_m}{\DIA^n A},\labels{w}{A}}{
+														\vlhy{}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		\end{smallequation*}
+		where we omit the accumulated relational context for space reason.
+		
+		\item $2 \implies 3$:
+		To prove that the rule $\rn{cut}$ is admissible for $\labIKp + \gklmn$, it is enough to insert a case for the rule $\gklmn$ in the proof of Theorem~\ref{thm:cutfree-compl}, which
+		is straightforward as the $\gklmn$ rule only manipulates the relational context.
+		
+		\item $3 \implies 4$:
+		As we already proved the rules of $\labIKp$ sound in Theorem~\ref{thm:soundness}, we only need to prove that $\gklmn$ is sound.
+		%
+		By way of contradiction, assume that $\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right$ is valid in any klmn-incestuous frame,
+		but that there is such a model $\M$ and an interpretation $\inter\cdot$, such
+		that $\M,\inter\cdot\not\Vdash\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right$.
+		%
+		That means, $\inter x \rel_\M^k \inter y$, $\inter x \rel_\M^m\inter z$, for all $\labels{x}{A} \in \Left$, $\cforce \M xA$ and for all $\labels wB\in\Right$,
+		$\cnforce \M wB$. 
+		%
+		Since $\M$ is klmn-incestuous, there exists $v,w\in W_\M$, such that $\inter y \le_\M \lb{v}$, $\lb{v} R_\M^l \lb{w}$, and $\inter z R_\M^n \lb{w}$.
+		%
+		Now let $\inter\cdot^*$ be the extension of $\inter\cdot$ such that $\inter{y'}^* = v$, $\inter{u}^* = w$, and $\inter\cdot^* = \inter\cdot$ otherwise.
+		%
+		Then, $ \nforce \M {\inter\cdot^*} {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$. Contradiction.
+	\end{itemize}
+	
+	The proof is completed by appealing to Theorem~\ref{thm:gklmn-correspondence} used as $4 \implies 1$ to close the equivalence.
+\end{proof}
+
+%
+
+As we realise this theorem might look rather abstract, we come back to the example of the transitivity frame condition evoked in the introduction.
+%%
+The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the $2001$- condition: if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+%%
+The frames that validate the axiom $\ax{4^{\BOX}} \colon \fm{\BOX A \IMP \BOX \BOX A}$ are exactly the ones satisfying the $0120$-condition: if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
+
+
+We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\ax{4^{\DIA}}$ or $\ax{4^{\BOX}}$, respectively, by specialising the rule scheme above as:
+$$
+\vlinf{\rn{g_{2001}}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}
+\qquad\mbox{or}\qquad
+\vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
+$$
+respectively.
+Indeed, they allow us to derive the corresponding axioms $\ax{4^{\DIA}}$ and $\ax{4^{\BOX}}$ as required above in the completeness proof:
+$$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
+		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
+			\vlin{\rn{g_{2001}}}{}{\futs xw, \accs wv, \accs vu, \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+				\vlin{\rlabrn\DIA}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}}{
+					\vlin{\labrn{id}}{}{\futs xw, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'},  \labels{u}{A} \SEQ \labels{w}{\DIA A}, \labels{u'}{A}}{
+						\vlhy{}
+					}
+				}
+			}
+		}
+	}
+}
+$$
+as well as,
+$$\vlderivation{
+	\vlin{\rlabrn\IMP}{}{\labels{x}{\BOX A \IMP \BOX\BOX A}}{	
+		\vliq{\rlabrn\BOX}{}{\futs xw, \labels{w}{\BOX A} \SEQ \labels{w}{\BOX\BOX A}}{
+			\vlin{\rn{F_1}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\futs{v}{v'}}, \accs{v'}{u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+				\vlin{\rn{g_{0120}}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\accs{v}{v'}}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+					\vlin{\rn{trans_\le}}{}{\futs xw, \futs{w}{w'}, {\accs{w'}{v}}, {\futs{v}{v'}}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{t}{t'}, \accs{t'}{u}, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+						\vlin{\llabrn\BOX}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{t}{t'}, \accs{t'}{u}, \futs wt, \labels{w}{\BOX A} \SEQ \labels{u}{A}}{
+							\vlin{\labrn{id}}{}{\futs xw, \futs{w}{w'}, \accs{w'}{v}, \futs{v}{v'}, \accs{v'}{u}, \futs{w'}{t}, \accs{t}{v'}, \futs{w}{t}, \accs tu, \labels{w}{\BOX A}, \labels{u}{\A} \SEQ \labels{u}{A}}{
+								\vlhy{}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+$$
+
+As another illustration of our system, we reconsider an example that was problematic in previous approaches to the logic $\IK + \fm{\DIA\BOX A \IMP \BOX\DIA A}$, corresponding to the $1111$-condition. (See details in Sec.6.3 of~\cite{simpson:phd}.)
+%
+Indeed, the formula $$\fm{\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}$$ is not a theorem of this logic, but would become provable if we were to directly add to our system the rule 
+$$\vlinf{}{}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \accs{v}{x}, \accs{u}{x}, \Left \SEQ \Right}$$
+%
+corresponding to the directedness condition $\forall \lb{xyz}. ((\accs xy \AND \accs xz) \IMP\exists \lb{u}. (\accs yu \AND \accs zu))$. 
+%
+By representing birelational semantics precisely with both $R$ and $\le$ relations and by adding the  rule $\rn{g_{1111}}$ defined above, we can no longer derive this formula, as illustrated by the representation of the failed proof search below:	
+\begin{smallequation*}
+	\vlderivation{
+		\vlin{\rlabrn\IMP,\llabrn\AND}{}{\SEQ\labels{x}{(\DIA(\BOX(a \OR b) \AND \DIA a) \AND \DIA(\BOX(a \OR b) \AND \DIA b)) \IMP \DIA(\DIA a \AND \DIA b)}}{
+			\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb y' \mbox{ fresh}}{\futs{x}{x'}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA a)}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}}{
+				\vlin{\rlabrn\AND, \rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA a \AND \DIA b}}{
+					\vlin{\llabrn\DIA, \llabrn\AND, \rlabrn\DIA}{\lb z' \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{x'}{\DIA(\BOX(a \OR b) \AND \DIA b)} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}}{
+						\vlin{\rlabrn\AND, \rn{id}}{}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a \AND \DIA b}}{
+							\vlin{\rn{g_{1111}}}{\lb{y''}, \lb{u''} \mbox{ fresh}}{\futs{x}{x'}, \accs{x'}{y'}, \accs{x'}{z'}, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+								\vlin{\llabrn\BOX, \rlabrn\DIA}{}{\B_1, \labels{y'}{\BOX(a \OR b)}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}}{
+									\vlin{\llabrn\OR, \rn{id}}{}{\B_1, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{a \OR b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+										\vlin{\rn{g_{1111}}}{\lb{z''}, \lb{v''} \mbox{ fresh}}{\B_1, \labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+											\vlin{\llabrn\BOX, \rlabrn\DIA}{}{\B_1, \B_2,\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{z'}{\DIA a}, \labels{u''}{a}}{
+												\vlin{\llabrn\OR, \rn{id}}{}
+												{\B_1, \B_2,\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a \OR b}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+												{\vlid{}{}
+													{\B_1, \B_2,\labels{y'}{\BOX(a \OR b)}, \labels{u''}{b}, \labels{y'}{\DIA a}, \labels{z'}{\BOX(a \OR b)}, \labels{v''}{a}, \labels{z'}{\DIA b} \SEQ \labels{x'}{\DIA(\DIA a \AND \DIA b)}, \labels{y'}{\DIA b}, \labels{v''}{b}, \labels{z'}{\DIA a}, \labels{u''}{a}}
+													{}}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+\end{smallequation*}
+where $\B_1 = \futs{x}{x'}, \futs{y'}{y''}, \accs{x'}{y'}, \accs{x'}{z'}, \accs{y''}{u''}, \accs{z'}{u''}$
+and $\B_2 = \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}$.
+
+%
+\begin{remark}
+	The rules $\gklmn$ (similarly to those corresponding to reflexivity, transitivity, $\rn{F_1}$ and $\rn{F_2}$ in Section~ \ref{sec:system}) are obtained through the standard axioms-to-rule procedure that is well known for geometric axioms, and applies more generally to bipolar axioms~\cite{marin:etal:submitted} (and amounts to considering a positive bias on atoms).
+	%
+	On the other hand, a different shape of rules can be obtained in the style of Vigan\`o~\cite{vigano:00} (by assuming atoms are negatively polarised). 
+	%
+	For reflexivity and transitivity of the preorder relation, this gives
+	%
+	$$
+	\vlinf{}{}{\Gamma \SEQ \Delta, \futs xx}{}
+	\qquand
+	\vliinf{}{}{\Gamma \SEQ \Delta, \futs xz}{\Gamma \SEQ \Delta, \futs xy}{\Gamma \SEQ \Delta, \futs yz}
+	$$
+	respectively.
+	%
+	Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and the derivations to be read top-down, and therefore are not appropriate for proof search.	
+	%
+	
+	Vigan\`o's method also assumes that the frame conditions are in a particular shape by prenexing and then skolemizing quantifiers. Following this process, we conjecture that for instance $\ax{F_1}$ could be incorporated to such a system as a pair of rules of the following form
+	$$\vliinf{}{}{\B, \Gamma \SEQ \Delta, \futs x{f(x,y,z)}}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}
+	\qquand
+	\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
+	%
+	where $f$ and $g$ are (Skolem) function constants, and that similar rules could be designed for Scott-Lemmon axioms too. 
+	%
+	It should even possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa. We leave the investigation of all these different shapes of rules for future work.
+\end{remark}
+
+\section{Conclusion}
+
+In this paper we embrace the fully labelled approach to intuitionistic modal logic as pioneered by~\cite{maffezioli:etal:synthese13} and we study it in-depth for the class of logics defined by (one-sided) intuitionistic Scott-Lemmon axioms.
+%
+We establish that it is a valid approach to intuitionistic modal logic by proving soundness and completeness of our system, via a reductive cut elimination argument.
+
+For a restricted class of these logics defined by so-called \emph{path axioms} $\fm{(\DIA^k\BOX A \IMP\BOX^m A) \AND (\DIA^k A \IMP \BOX^m\DIA A)}$ the standard labelled framework with one relation $R$ was enough for Simpson to get a strong connection between the sequent system, the axiomatisation and the birelational semantics~\cite{simpson:phd}.
+%
+%
+We believe that the framework presented here might be the more appropriate way to treat logics outside of the path axioms definable fragment.
+
+However, we have not shown that our system satisfies Simpson's 6th requirement, that is, ``there is an intuitionistically comprehensible explanation of the meaning of the modalities relative to which [the system] is sound and complete".
+%
+To make sure that his system satisfies this requirement, Simpson chose to depart from the direct correspondence with modal axioms and their corresponding class of Kripke frames, and to study intuitionistic modal logics purely as a fragment of intuitionistic first-order logic.
+%
+We instead took the way of a direct correspondence of our system with the class of frames defined by one-sided Scott-Lemmon axioms as uncovered by~\cite{plotkin:stirling:86}, but as this class of logics seems to be rather well-behaved, we believe it should be possible to prove the satisfaction of Simpson's 6th requirement too.
+
+We have considered in this work the logic known as $\IK$ (and its extensions) with respect to the birelational semantics that is its most well-studied semantics.
+%
+As we have mentioned, however, different basis can be considered for intuitionistic modal logic, for example the \emph{constructive modal logic} $\mathsf{CK}$~\cite{bierman:depaiva:sl00,mendler:scheele:ic11} and any in between.
+%
+These can also be studied within the birelational framework with some additional conditions, and we are convinced that the fully labelled framework, once extended with these conditions, will be suitable to treat constructive fragments equally.
+%
+However, treating extensions of $\mathsf{CK}$ with axioms such as we did here for Scott-Lemmon logics is known to be complex~\cite{arisaka:etal:lmcs15}.
+
+As for more general future work, there is a real necessity of a global view on intutionistic modal logics.
+%
+The work of~\cite{dalmonte:grellois:olivetti:JPL2020} is a great first step in understanding them in the context of non-normal modalities and neighbourhood semantics.
+%
+It would be interesting to know how and where the class of logics we considered can be included in their framework.
+
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %% Bibliography
+ %\nocite{*}
+ \bibliographystyle{alpha}
+ \bibliography{references}
+ 
+\end{document}
