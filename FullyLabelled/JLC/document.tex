@@ -54,12 +54,11 @@
  $\lb x$, written as $\labels xA$, and additionally use
  \emph{relational atoms} of the form $\accs xy$ where 
  the binary relation symbol $\rel$
- %These calculi work best for logics with
- %standard Kripke semantics, as in this case the relation $\rel$ 
+ %
  is used to encode the accessibility relation in the Kripke models, such that
  frame conditions corresponding to the desired logic can be directly
  encoded as inference rules.
- %\todo{Reviewer 1 complained about the ``best''}
+ %
  Prominent examples are classical modal
  logics and intuitionistic propositional logic, e.g., the frame
  condition of transitivity ($\forall \lb {xyz}.\:\accs xy\AND \accs yz\IMP\accs xz$) can be translated into the
@@ -106,7 +105,7 @@
  	\forall\lb{xyz}.\:\accs xy\AND \accs yz\IMP(\exists\lb{z'}.\:\futs z{z'}\AND\accs {x}{z'})
  	\;
  	\end{equation}
- 	%  \todo{add graphical representation of the conditions}
+ 	%  
  	$$
  	\xymatrix{
  		x' \ar@{.>}[drr]^R \\
@@ -119,7 +118,7 @@
  	}
  	$$
  	respectively, have been studied in~\cite{plotkin:stirling:86}.
- 	%  \sonia{the general condition is correct but not the application to 4}
+ 	%  
  	\item The correspondence between the syntax and the semantics is not
  	as clean as one would expect. As only the $R$-relation (and not the
  	$\le$-relation) is visible in an ordinary labelled
@@ -194,7 +193,6 @@
  Lacking De Morgan duality, there are many variants of the \emph{distributivity axiom} $\mathsf{k}$ that are classically but not intuitionistically equivalent. Five axioms have been considered as primitives in the literature. An intuitionistic variant of the modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
  %
  
- %The axiomatisation that is now generally accepted as intuitionistic modal logic $\IK$ was given by Plotkin and Stirling~\cite{Plotkin} and is equivalent to the one proposed by Fischer-Servi~\cite{Fischer}. It is obtained from intuitionistic propositional logic $\mathsf{IPL}$ by adding:
  \begin{itemize}
  	\item the \emph{necessitation rule}: if $\fm A$ is a theorem then $\fm{\BOX A}$ is also a theorem; and
  	\item the following five variants of $\rn{k}$:
@@ -226,7 +224,7 @@
  
  \begin{definition}
  	A \emph{bi-relational frame} $\F$ is a triple $\langle W, \rel, \le \rangle$ 
- 	%	of a non-empty set of worlds $W$ equipped with two binary relations $R$ and $\le$, where $R$ being the modal \emph{accessibility relation} and $\le$ a preorder (\emph{i.e.} a reflexive and transitive relation), satisfying the following conditions:
+ 	%
  	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.}\ a reflexive and transitive relation) satisfying:
  	\begin{enumerate}
  		\item[($\rn{F_1}$)] For all $\lb x, \lb y, \lb z \in W$, if $\accs xy$ and $\futs yz$, there exists $\lb u$ s.t.~$\futs xu$ and $\accs uz$.
@@ -360,7 +358,6 @@
  					$\vlinf{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right }$		
  				}
  			\end{tabular}		
- 			%\end{minipage}
  		}		
  	\end{center}
  	\caption{System $\labIKp$}
@@ -458,10 +455,7 @@
  		}
  	\end{smallequation*}
  	\item $\fm{A \OR B}$
- 	%\begin{smallequation*}
- 	%	\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{}
- 	%	\reducesto
- 	%\end{smallequation*}
+ 	%
  	\begin{smallequation*}
  		\vlderivation{
  			\vliin{\llabrn\OR}{}{\B, \futs xy, \Left, \labels{x}{A \OR B} \SEQ \Right, \labels{y}{A \OR B}}{
@@ -481,10 +475,7 @@
  \end{smallequation*}
  
  \item $\fm{A \IMP B}$
- %	\begin{smallequation*}
- %		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{}
- %		\reducesto
- %	\end{smallequation*}
+ %	
  \begin{smallequation*}
  	\vlderivation{
  		\vlin{\rlabrn\IMP}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A \IMP B}}{
@@ -525,10 +516,7 @@
 \end{smallequation*}
 
 \item $\fm{\DIA A}$
-%	\begin{smallequation*}
-%		\vlinf{\labrn{id_g}}{}{\B, x \le y; \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{}
-%		\reducesto
-%	\end{smallequation*}
+%
 \begin{smallequation*}
 	\vlderivation{
 		\vlin{\llabrn\DIA}{\lb z \mbox{ fresh}}{\B, \futs xy, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{y}{\DIA A}}{
@@ -1558,7 +1546,7 @@ The top $\rn{cut}$ is admissible by induction on the height, as the size of the 
 \vlhtr{\DD_2[y/y']}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}
 }
 \end{smallequation*}
-%\lutz{Same. we need to explain why we can apply the IH}
+%
 The induction hypothesis is applied here again twice as above, on the height for the top $\rn{cut}$ and on formula size for the bottom one.
 \end{itemize}
 \end{description}
