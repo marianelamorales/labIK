@@ -136,6 +136,8 @@
 %
 \newcommand{\proviso}[1]{\mbox{\scriptsize #1}}
 
+\newcommand{\set}[1]{\{#1\}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Systems
@@ -868,7 +870,7 @@ Once we have shown cut elimination (the implication \ref{ii}$\implies$\ref{iii} 
 \section{Completeness}\label{sec:completeness}
 
 In this section we show our system at work, as most of the section
-consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prove completeness of $\labIKp+\rn{cut}$, i.e., the implication \ref{i}$\implies$\ref{ii} of Theorem~\ref{thm:cutfree-compl}, which is stated again below:
+consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prove completeness of $\labIKp+\rn{cut}$, i.e., the implication \ref{i}$\implies$\ref{ii} of Theorem~\ref{thm:cutfree-compl}, which is stated again below.
 
 \begin{theorem}\label{thm:completeness}
 	For any formula $\fm A$. If $\fm A$ is a theorem of $\IK$ then $\fm A$ is provable in $\labIKp +\labrn{cut}$.
@@ -1058,7 +1060,7 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 		\end{smallequation*}
 		
 	\end{itemize}
-	Next, we have to prove all axioms of intuitionistic propositional logic can be shown in $\labIKp$. We do this only for $\fm{A \AND B \IMP B}$ and leave the rest to the reader:
+	Next, we have to prove that all axioms of intuitionistic propositional logic can be shown in $\labIKp$. We do this only for $\fm{A \AND B \IMP B}$ and leave the rest to the reader.
 	\begin{smallequation*}
 		\vlderivation {
 			\vlin{\rlabrn{\IMP}}
@@ -1080,8 +1082,8 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 	
 	
 	Finally, we have to show how the rules of modus ponens and
-	necessitation can be simulated in our system. For modus ponens, this
-	is standard using the cut rule and for necessitation, we can
+	necessitation can be simulated in our system. For modus ponens, it
+	is standardly done using the cut rule, and for necessitation, we can
 	transform a proof of $\fm A$ into a proof of $\fm{\BOX A}$ as
 	follows.
 	A proof of $\fm A$ is in fact a proof $\DD$ of the sequent
@@ -1090,14 +1092,14 @@ consists of derivations of axioms of $\IK$ in $\labIKp$. More precisely, we prov
 	sequent $\futs xy, \accs yz \SEQ \labels{z}{A}$ by adding $\futs xy,
 	\accs yz$ to every line. We can now apply the $\rlabrn\BOX$-rule to
 	obtain a proof of $\SEQ \labels{x}{\BOX A}$.
-	
-	This completes the proof of Theorem~\ref{thm:completeness}.
+%	
+%	This completes the proof of Theorem~\ref{thm:completeness}.
 \end{proof}
 
 
 Note that we could also have proved completeness via proof search and a countermodel construction argument, as rules are terminationg in $\labIKp$. 
 %
-This works well for $\IK$ (and a small number of its extensions) and have been used for example by~\cite{maffezioli:etal:synthese13}. 
+This works well for $\IK$ (and a small number of its extensions) and has been used for example by~\cite{maffezioli:etal:synthese13}. 
 %
 Moreover, it would allow us to show completeness directly for any labelled sequents, not only specifically for formulas. 
 
@@ -1114,7 +1116,7 @@ In order to prove the implication \ref{iii}$\implies$\ref{iv} from
 Theorem~\ref{thm:cutfree-compl} we need to show that each sequent rule
 of our system $\labIKp$ is sound. To make precise what that actually
 means, we have to extend the relation $\Vdash$, defined in
-Section~\ref{sec:intmod} from formulas to sequents. This is the
+Section~\ref{sec:intmod}, from formulas to sequents. This is the
 purpose of the following definitions.
 
 \begin{definition}\label{def:force-seq}
@@ -1125,17 +1127,17 @@ purpose of the following definitions.
 		in $\M$} is a mapping $\inter{\cdot}$ from the labels in $\SG$ to the set $W$ of worlds in $\M$, such that whenever $\accs xy$ in $\B$, then $\inter x\rel_\M\inter y$, and whenever $\futs xy$ in $\B$, then $\inter x\le_\M\inter y$. Now we can define 
 	\begin{equation}
 	\M,\inter\cdot\Vdash\SG\qquad\mbox{iff}\qquad
-	\parbox{20em}{if for all $\labels{x}{A} \in \Gamma$, we have $\M, \inter x \Vdash \fm A$, then there exists $\labels{z}{B} \in \Delta$ such that $\M, \inter z \Vdash \fm B$.}
+	\parbox{20em}{if for all $\labels{x}{A} \in \Gamma$, we have $\M, \inter x \Vdash \fm A$, then there exists $\labels{z}{B} \in \Delta$, such that $\M, \inter z \Vdash \fm B$.}
 	\end{equation}
 \end{definition}
 
 \begin{definition}\label{def:valid-seq}
 	A sequent $\SG$ is \emph{satisfied} in $\M = \langle W, \rel, \le, V
-	\rangle$ iff for all $\SG$-interpretations $\inter\cdot$ we have
+	\rangle$ if for all $\SG$-interpretations $\inter\cdot$ we have
 	$\M,\inter\cdot\Vdash\SG$.
 	%%
 	A sequent $\SG$ is \emph{valid} in a frame $\F = \langle W, \rel,
-	\le \rangle$, if for all valuations $V$, the sequent $\SG$ is
+	\le \rangle$ if, for all valuations $V$, the sequent $\SG$ is
 	satisfied in $\langle W, R, \le, V \rangle$.
 \end{definition}
 
@@ -1175,17 +1177,17 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 		interpretation $\inter\cdot$, such that
 		$\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}$. 
 		%
-		So in particular, there are worlds $\lb{y'}$ and $\lb{z'}$
+		In particular, there are worlds $\lb{y'}$ and $\lb{z'}$
 		in $\M$ such that $\inter x\le_\M \lb{y'}$ and
 		$\lb{y'}\rel_\M\lb{z'}$ and $\nforce\M{\lb{z'}}{\fm A}$. 
 		%
-		Now we let
-		$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter
+		Now we define
+		the extension $\inter\cdot'$ of $\inter\cdot$ as $\inter
 		y'=\lb{y'}$ and $\inter z'=\lb{z'}$ and $\inter\cdot'=\inter\cdot$
 		on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy,
 			\accs yz, \Left \SEQ \Right, \labels{z}{A}}$. Contradiction.
 		
-		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. So there exists a world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now we let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
+		\item $\rlabrn\IMP$: By way of contradiction, assume that $\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}$ is valid in all birelational frames, but $\B, \Left \SEQ \Right, \labels{x}{A \IMP B}$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}$. So there exists a world $\lb{y'}$ in $\M$ such that $\inter x\le_\M \lb{y'}$ and $\cforce\M{y'}{A}$ but $\nforce\M{\lb{y'}}{\fm B}$. Now let 	$\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot'=\inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}$. Contradiction.
 		
 		\item $\llabrn\DIA$: By way of contradiction, assume that $\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right$ is valid in all birelational frames, but $\B, \Left, \labels{x}{\DIA A} \SEQ \Right$ is not, where $\lb y$ does not occur in $\B$ or $\Left$ or $\Right$. This means that we have a model $\M$ and an interpretation $\inter\cdot$, such that $\nforce\M{\inter\cdot}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}$, i.e. $\cforce \M x{\DIA A}$. This means that there exists world $\lb{y'}$ in $\M$ such that $\inter x\rel_\M \lb{y'}$ and $\cforce \M {\lb{y'}}{A}$. Now we let $\inter\cdot'$ be the extension of $\inter\cdot$ such that $\inter y'=\lb{y'}$ and $\inter\cdot' = \inter\cdot$ on all other labels. Then $\nforce\M{\inter\cdot'}{\B, \accs xy, \Left, \labels{y}{A} \SEQ \Right}$. Contradiction.
 		
@@ -1193,7 +1195,7 @@ Theorem~\ref{thm:cutfree-compl} is an immediate consequence.
 	The other cases are similar (and simpler), and we leave them to the
 	reader. In particular, note that the cases for the rules $\rn{refl}$,
 	$\rn{trans}$, $\rn{F_1}$ and $\rn{F_2}$ are trivial, as all
-	birelations frames have to obey the corresponding conditions.
+	birelational frames have to obey the corresponding conditions.
 \end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1210,7 +1212,7 @@ adapted to the system at hand.\footnote{As pointed out
 
 \begin{theorem}
 	\label{thm:cut-adm}
-	The $\labrn{cut}$ rule is admissible for $\labIKp$.
+	All the occurences of the $\labrn{cut}$ rule in a proof $\DD$ in $\labIKp$ can be eliminated.
 \end{theorem}
 
 This theorem directly entails the implication \ref{ii}$\implies$\ref{iii} of Theorem~\ref{thm:cutfree-compl}. But before we can prove it, we need a series of auxiliary  lemmas.
@@ -1245,7 +1247,7 @@ The first lemma is the height-preserving admissibility of weakening on both rela
 
 The next lemma looks like a special case of
 Proposition~\ref{prop:mon-adm}, but it is not. First, we need to
-preserve the height, and second, we cannot prove it using $\rn{cut}$ rule as we
+preserve the height, and second, we cannot prove it using the $\rn{cut}$ rule as we
 are trying to eliminate it from derivations.
 
 \begin{lemma}\label{lem:adm-mon-at}
@@ -1267,44 +1269,36 @@ are trying to eliminate it from derivations.
 	The inductive step is straightforward by permutation of rules.
 	The base cases are obtained as follows:
 	\begin{smallequation*}
-		\vlderivation{
-			\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
+		\vlderibase{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
 				\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{z}{a}}{
 					\vlhy{}
 				}
 			}
-		}
 		\reducesto
-		\vlderivation{
-			\vlin{\color{red}\labrn{trans}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \futs{x}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
+		\vlderibase{\color{red}\labrn{trans}}{}{\B, \futs{x}{y}, \futs{y}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{y}{z}, \futs{x}{z}, \Left, \labels{x}{a} \SEQ \Right, \labels{z}{a}}{
 					\vlhy{}
-				}}
+				}
 			}
 		\end{smallequation*}
 		
-		\begin{smallequation*}
-			\vlderivation{
-				\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+		\begin{smallequation*} 
+ 			\vlderibase{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
 					\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{x}{a}}{
 						\vlhy{}
 					}
 				}
-			}
 			\reducesto
-			\vlderivation{
-				\vlin{\color{red}\labrn{refl}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
+			\vlderibase{\color{red}\labrn{refl}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \futs{x}{x}, \labels{x}{a} \SEQ \Right, \labels{x}{a}}{
 						\vlhy{}
-					}}}
+					}}
 				\end{smallequation*}
 				
 				\begin{smallequation*}
-					\vlderivation{
-						\vlin{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
+					\vlderibase{\llabrn{mon_a}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{
 							\vlin{\labrn{id}}{}{\B, \futs{x}{y}, \labels{x}{a}, \labels{y}{a} \SEQ \Right, \labels{y}{a}}{
 								\vlhy{}
 							}
 						}
-					}
 					\reducesto
 					\vlinf{\labrn{id}}{}{\B, \futs{x}{y}, \Left, \labels{x}{a} \SEQ \Right, \labels{y}{a}}{}
 					\qedhere
@@ -1312,14 +1306,14 @@ are trying to eliminate it from derivations.
 				
 			\end{proof}
 			
-			The next lemma shows that all the rules in our system are invertible, as already mentioned in the introduction. 
+			The next lemma shows that the rules in our system are invertible, as already mentioned in the introduction. 
 			
 			\begin{lemma}
 				\label{lem:inv}
 				All single-premise rules of $\labIKp$ are height-preserving
 				invertible. Furthermore, the rules $\llabrn{\OR}$ and
 				$\rlabrn{\AND}$ are height-preserving invertible on both premises, and the
-				rule $\llabrn{\IMP}$ is height-preserving invertible on the right premise.
+				rule $\llabrn{\IMP}$ is height-preserving invertible on the right premise only.
 				%
 			\end{lemma}
 			
@@ -1328,7 +1322,7 @@ are trying to eliminate it from derivations.
 				For $\rlabrn\AND$, $\llabrn\AND$, $\rlabrn\OR$, $\llabrn\OR$, and the right premise of $\llabrn\IMP$, we use a standard induction on the height of $\DD$.
 				%
 				For $\rlabrn\IMP$, $\rlabrn\BOX$, $\llabrn\DIA$ as well, but
-				we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r}$ when necessary.
+				we need to make sure that the obtained derivation uses a fresh label by using substitution inside $\DD^{\rn r_i}$ when necessary.
 				%
 				The other rules can be shown invertible using Lemma~\ref{lem:weak-adm}. 
 			\end{proof}
@@ -1365,7 +1359,7 @@ are trying to eliminate it from derivations.
 					%
 					we can produce directly a cut-free derivation of the conclusion.
 					%
-					In the first case, we appeal to Lemma~\ref{lem:adm-mon-at}, to use the atomic monotonicity rule freely.
+					In the first case, we appeal to Lemma~\ref{lem:adm-mon-at}, to use the atomic monotonicity rule freely and to Lemma~\ref{lem:weak-adm} to obtain $\DD_2^{\rn w}$ through weakening admissibility.
 					\begin{itemize}
 						\item 
 						\begin{smallequation*}
@@ -1429,32 +1423,43 @@ are trying to eliminate it from derivations.
 	\end{smallequation*}
 	
 	\begin{smallequation*}
-		\reducesto\qquad\vlderiibase{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
+		\reducesto\vlderiibase{\llabrn\IMP}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right}{
 			\vlhtr{\DD_1'}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}
 		}{
-		\vlhtr{\DD_2'}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+%		\vlhtr{\DD_2'}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
+			\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}{
+				\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+			}{
+				\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, \futs xy, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+			}
 	}
 \end{smallequation*}
 
+with
 \begin{small}
-	{with}$\quad\DD_1' = \quad
+	$\quad\DD_1' = \quad
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{y}{A}}{
 		\vlhtr{\DD_1}{\B, \futs xy, \Left, \labels{x}{A \IMP B} \SEQ \Right, \labels{z}{C}, \labels{y}{A}}
 	}{
 	\vlhtr{\DD_3^{\rn w}}{\B, \futs xy, \Left, \labels{x}{A \IMP B}, \labels{z}{C} \SEQ \Right, \labels{y}{A}}
-}	$
-
-{and}$\quad\DD_2'= \quad
-\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}{
-	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
-}{
-\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, \futs xy, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
-}$
+	}	
+	$
 \end{small}
 
-where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}. We use the same naming scheme in the following cases.
+%and
+%\begin{small}
+%$\quad\DD_2'= \quad
+%\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}{
+%	\vlhtr{\DD_2}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right, \labels{z}{C}}
+%}{
+%\vlhtr{\DD_3^{\invr{\llabrn\IMP}}}{\B, \futs xy, \Left, \labels{y}{B}, \labels{z}{C} \SEQ \Right}
+%}$
+%\end{small}
+
+ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\llabrn\IMP}$ is obtained using Lemma~\ref{lem:inv}. We use the same naming scheme in the following cases.
+
 \item $\rlabrn\IMP$:
-\begin{smallequation*}\hskip-8em
+\begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
 		\vlin{\rlabrn\IMP}{\text{\footnotesize $\lb{x'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \Left, \labels{x'}{A} \SEQ \Right, \labels{x'}{B}, \labels{z}{C}}
@@ -1464,7 +1469,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\rlabrn\IMP}{\text{\footnotesize $\lb{x''}$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{A \IMP B}}{
 		\vliin{\labrn{cut}}{}{\B, \futs{x}{x''}, \Left, \labels{x''}{A} \SEQ \Right, \labels{x''}{B}}{
@@ -1475,7 +1480,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 \item $\llabrn\BOX$:
-\begin{smallequation*}\hskip-8em
+\begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
 		\vlin{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right, \labels{z}{C}}
@@ -1485,7 +1490,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\llabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A} \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}{
@@ -1497,7 +1502,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \end{smallequation*}
 
 \item $\rlabrn\BOX$:
-\begin{smallequation*}\hskip-8em
+\begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
 		\vlin{\rlabrn\BOX}{\text{\footnotesize $\lb{x'},\lb{y'}$ fresh}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, \futs{x}{x'}, \accs{x'}{y'}, \Left \SEQ \Right, \labels{y'}{A}, \labels{z}{C}}
@@ -1507,7 +1512,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\rlabrn\BOX}{\text{\footnotesize $\lb u,\lb v$ fresh (also in $\DD_2$)}}{\B, \Left \SEQ \Right, \labels{x}{\BOX A}}{
 		\vliin{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}{
@@ -1519,7 +1524,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 \end{smallequation*}
 \item $\llabrn\DIA$:
 
-\begin{smallequation*}\hspace*{-5.5em}
+\begin{smallequation*}
 	\vlderiibase{\labrn{cut}}{}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
 		\vlin{\llabrn\DIA}{\text{\footnotesize $\lb{y'}$ fresh}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right, \labels{z}{C}}{
 			\vlhtr{\DD_1}{\B, \accs{x}{y'}, \Left, \labels{y'}{A} \SEQ \Right, \labels{z}{C}}
@@ -1529,7 +1534,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\llabrn\DIA}{\text{\footnotesize $\lb{y''}$ fresh (also in $\DD_2$)}}{\B, \Left, \labels{x}{\DIA A} \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, \accs{x}{y''}, \Left, \labels{y''}{A} \SEQ \Right}{
@@ -1552,7 +1557,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 }
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\rlabrn\DIA}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}}{
 		\vliin{\labrn{cut}}{}{\B, \accs xy, \Left \SEQ \Right, \labels{x}{\DIA A}, \labels{y}{A}}{
@@ -1606,7 +1611,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 		{\vlhtr{\DD_1}{\B, \accs xy, \futs yz, \futs xu, \accs uz, \Left \SEQ \Right, \labels{z}{C}}}}
 	{\vlhtr{\DD_2}{\B, \accs xy, \futs yz, \Left, \labels{z}{C} \SEQ \Right}}
 \end{smallequation*}
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\rn{F_1}}{\lb v \mbox{ fresh (also in $\DD_2$)}}
 	{\B, \accs xy, \futs yz, \Left \SEQ \Right}
@@ -1622,7 +1627,7 @@ where $\DD_3^{\rn w}$ is obtained using Lemma~\ref{lem:weak-adm} and $\DD_3^{\ll
 	{\vlin{\rn{F_2}}{\lb u \mbox{ fresh}}{\B, \accs xy, \futs xz, \Left \SEQ \Right, \labels{z}{C}}{\vlhtr{\DD_1}{\B, \accs xy, \futs xz, \futs yu, \accs zu, \Left \SEQ \Right, \labels{z}{C}}}}
 	{\vlhtr{\DD_2}{\B, \accs xy, \futs xz, \Left, \labels{z}{C} \SEQ \Right}}
 \end{smallequation*}
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderibase{\rn{F_2}}{\lb v \mbox{ fresh (also in $\DD_2$)}}{\B, \accs xy, \futs xz, \Left \SEQ \Right}{\vliin{\labrn{cut}}{}
 		{\B, \accs xy, \futs xz, \futs yv, \accs zv, \Left \SEQ \Right}
@@ -1648,7 +1653,7 @@ If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-f
 		}
 	\end{smallequation*}
 	
-	\begin{smallequation*}\hskip8em
+	\begin{smallequation*}
 		\reducesto
 		\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
 			\vlhtr{\DD_1}{\B, \Left \SEQ \Right, \labels{x}{A}}
@@ -1676,7 +1681,7 @@ If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-f
 	}
 \end{smallequation*}
 
-\begin{smallequation*}\hskip8em
+\begin{smallequation*}
 	\reducesto
 	\vlderiibase{\labrn{cut}}{}{\B, \Left \SEQ \Right}{
 		\vliin{\labrn{cut}}{}{\B, \Left \SEQ \Right, \labels{x}{A}}{
@@ -1702,11 +1707,10 @@ If the last rule in $\DD_1$ and the last rule in $\DD_2$ both apply to the cut-f
 	\vlhtr{\DD_3}{\B, \futs xy, \Left, \labels{y}{B} \SEQ \Right}
 }
 }
-\reducesto
 \end{smallequation*}
 
 \begin{smallequation*}
-	\hspace*{-7em}
+	\reducesto
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xy, \Left \SEQ \Right}{\vlhtr{\DD_1'}{\B, \futs xy, \Left \SEQ \Right, \labels{y}{A}}}{\vliin{\labrn{cut}}{}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right}{
 			\vlhtr{\DD_1[y/x']}{\B, \futs xy, \Left, \labels{y}{A} \SEQ \Right, \labels{y}{B}}
 		}{
@@ -1741,20 +1745,20 @@ $
 		\vlhtr{\DD_2}{\B, \futs xu, \accs uv, \Left, \labels{x}{\BOX A}, \labels{v}{A} \SEQ \Right}
 	}
 }
-\reducesto
 \end{smallequation*}
 
-\begin{smallequation*}\hspace*{-7em}
+\begin{smallequation*}
+	\reducesto
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left \SEQ \Right}{
 		%	
 		\vlhtr{\DD_1[u/x',v/y']}{\B, \futs xu, \accs uv, \Left \SEQ \Right, \labels{v}{A}}	
 	}{
-	\vlhtr{\DD_1'}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}
+	\vlhtr{\DD_2'}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}
 }
 \end{smallequation*}
 
 \begin{small}
-	{with}$\quad\DD_1' = \quad
+	{with}$\quad\DD_2' = 
 	\vlderiibase{\labrn{cut}}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right}{
 		\vlin{\rlabrn\BOX}{}{\B, \futs xu, \accs uv, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}}{
 			\vlhtr{\DD_1^{\rn w}}{\B, \futs xu, \accs uv, \futs{x}{x'}, \accs{x'}{y'}, \Left, \labels{v}{A} \SEQ \Right, \labels{x}{\BOX A}, \labels{y'}{A}}	
@@ -1802,9 +1806,9 @@ The induction hypothesis is applied here again twice as above, on the height for
 
 We can now complete the proof of Theorem~\ref{thm:cut-adm}.
 \begin{proof}[Proof of Theorem~\ref{thm:cut-adm}]
-	By induction on number of $\rn{cut}$ rules, always applying Lemma~\ref{lem:reduction} to the leftmost topmost cut.
+	By induction on number of $\rn{cut}$ rules in $\DD$, always applying Lemma~\ref{lem:reduction} to the leftmost topmost cut.
 \end{proof}
-\newcommand{\set}[1]{\{#1\}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1853,7 +1857,7 @@ Following again the axiom-as-rule idea, to have a sound and complete system for 
 	(In case some of them coincide, they are not repeated since $\B$ is a \emph{set} of relational atoms.)
 	However, in the premise, the  expression $\lb{y'}R^{l} \lb u$ stands for  $\lb{y'}R\lb{u_1},\ldots,\lb{u_{l-1}}R \lb u$ where all $\lb{u_1},\ldots,\lb{u_{l-1}},\lb u$ are fresh, and therefore pairwise distinct, except if $l=0$, in which case $\lb u=\lb{y'}$; similarly for $\lb z R^{n} \lb u$, but note that if $n = 0$ then $\lb u=\lb z$.
 	
-	For example, the derivation in~\eqref{eq:g-example} below requires the (valid) application of~$\rn{g_{1110}}$: 
+	For example, the derivation in~\eqref{eq:g-example} below requires the (valid) application of the rule
 	$$\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \Left \SEQ \Right}{\B, \lb x \rel \lb y, \lb x \rel \lb z, \futs{y}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
 	\qquad\mbox{as}\qquad
 	\vlinf{\rn g_{1110}}{\lb{y'} \mbox{ fresh}}{\B, \accs xz, \Left \SEQ \Right}{\B, \lb x \rel \lb z, \futs{z}{y'}, \lb{y'}\rel \lb z, \Left\SEQ\Right}
@@ -1885,15 +1889,15 @@ Following again the axiom-as-rule idea, to have a sound and complete system for 
 We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\labIKp$ with any $\gklmn$ rule to provide a sound and cut-free complete system for this family of logics.
 
 \begin{theorem}\label{thm:cutfree-compl-gklmn}
-	For any formula $A$, the following are equivalent.
+	For any formula $\fm A$, the following are equivalent.
 	%
 	\begin{enumerate}
-		\item\label{1} $A$ is a theorem of $\IK + \fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$. 
+		\item\label{1} $\fm A$ is a theorem of $\IK + \fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$. 
 		%
-		\item\label{2} $A$ is provable in $\labIKp + \gklmn +\labrn{cut}$.
-		\item\label{3} $A$ is provable in $\labIKp + \gklmn $.
+		\item\label{2} $\fm A$ is provable in $\labIKp + \gklmn +\labrn{cut}$.
+		\item\label{3} $\fm A$ is provable in $\labIKp + \gklmn $.
 		%
-		\item\label{4} $A$ is valid in every birelational frame satisfying the klmn-incestuality property.
+		\item\label{4} $\fm A$ is valid in every birelational frame satisfying the klmn-incestuality property.
 	\end{enumerate}
 \end{theorem}
 
@@ -1902,7 +1906,7 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 	\begin{itemize}
 		\item $1 \implies 2$:
 		%
-		Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$:
+		Same as Thm.~\ref{thm:completeness} with the additional derivation of $\fm{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}$
 		\begin{smallequation*}
 			\vlderivation{
 				\vlin{\rlabrn\IMP}{}{\SEQ \labels{x}{\DIA^k\BOX^l A \IMP \BOX^m\DIA^n A}}{
@@ -1941,12 +1945,12 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 		but that there is such a model $\M$ and an interpretation $\inter\cdot$, such
 		that $\M,\inter\cdot\not\Vdash\B, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \Left \SEQ \Right$.
 		%
-		That means, $\inter x \rel_\M^k \inter y$, $\inter x \rel_\M^m\inter z$, for all $\labels{x}{A} \in \Left$, $\cforce \M xA$ and for all $\labels wB\in\Right$,
+		That means, $\inter x \rel_\M^k \inter y$, $\inter x \rel_\M^m\inter z$, for all $\labels{x}{A} \in \Left$, $\cforce \M xA$, and for all $\labels wB\in\Right$,
 		$\cnforce \M wB$. 
 		%
 		Since $\M$ is klmn-incestuous, there exists $v,w\in W_\M$, such that $\inter y \le_\M \lb{v}$, $\lb{v} R_\M^l \lb{w}$, and $\inter z R_\M^n \lb{w}$.
 		%
-		Now let $\inter\cdot^*$ be the extension of $\inter\cdot$ such that $\inter{y'}^* = v$, $\inter{u}^* = w$, and $\inter\cdot^* = \inter\cdot$ otherwise.
+		Now let $\inter\cdot^*$ be the extension of $\inter\cdot$ such that $\inter{y'}^* = \lb v$, $\inter{u}^* = \lb w$, and $\inter\cdot^* = \inter\cdot$ otherwise.
 		%
 		Then, $ \nforce \M {\inter\cdot^*} {\B, \futs{y}{y'}, \lb x R^{k} \lb y, \lb x R^{m} \lb z, \lb{y'}R^{l} \lb u, \lb z R^{n} \lb u, \Left\SEQ\Right}$. Contradiction.
 	\end{itemize}
@@ -1958,19 +1962,19 @@ We can then show that Theorem~\ref{thm:cutfree-compl} generalises nicely to $\la
 
 As we realise this theorem might look rather abstract, we come back to the example of the transitivity frame condition evoked in the introduction.
 %%
-The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the $2001$- condition: if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
+The frames that validate the axiom $\ax{4^{\DIA}} \colon \fm{\DIA\DIA A \IMP \DIA A}$ are exactly the ones satisfying the $2001$-condition: if $\accs wv$ and $\accs vu$, there exists $\lb{u'}$ s.t.~$\futs{u}{u'}$ and $\accs{w}{u'}$.
 %%
 The frames that validate the axiom $\ax{4^{\BOX}} \colon \fm{\BOX A \IMP \BOX \BOX A}$ are exactly the ones satisfying the $0120$-condition: if $\accs wv$ and $\accs vu$, there exists $\lb{w'}$ s.t.~$\futs{w}{w'}$ and $\accs{w'}{u}$.
 
 
-We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\ax{4^{\DIA}}$ or $\ax{4^{\BOX}}$, respectively, by specialising the rule scheme above as:
+We can therefore obtain a sound and complete proof system for the intuitionistic modal logic $\IK$ extended with axiom $\ax{4^{\DIA}}$ or $\ax{4^{\BOX}}$, respectively, by specialising the rule scheme above as
 $$
 \vlinf{\rn{g_{2001}}}{\text{\footnotesize $\lb{u'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{u}{u'}, \accs{w}{u'} , \Left \SEQ \Right}
 \qquad\mbox{or}\qquad
 \vlinf{\rn{g_{0120}}}{\text{\footnotesize $\lb{w'}$ fresh}}{\B, \accs wv, \accs vu, \Left \SEQ \Right}{\B, \accs wv, \accs vu, \futs{w}{w'}, \accs{w'}{u} , \Left \SEQ \Right}
 $$
 respectively.
-Indeed, they allow us to derive the corresponding axioms $\ax{4^{\DIA}}$ and $\ax{4^{\BOX}}$ as required above in the completeness proof:
+Indeed, they allow us to derive the corresponding axioms $\ax{4^{\DIA}}$ and $\ax{4^{\BOX}}$ as required above in the completeness proof
 $$\vlderivation{
 	\vlin{\rlabrn\IMP}{}{\labels{x}{\DIA\DIA A \IMP \DIA A}}{
 		\vliq{\llabrn\DIA}{}{\futs xw, \labels{w}{\DIA\DIA A} \SEQ \labels{w}{\DIA A}}{
@@ -2060,7 +2064,7 @@ and $\B_2 = \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}$.
 	$$
 	respectively.
 	%
-	Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and the derivations to be read top-down, and therefore are not appropriate for proof search.	
+	Note however that these require (relational and preorder) atoms to appear on the right-hand-side of the sequent and the derivations to be read top-down, and therefore would not be appropriate for proof search.	
 	%
 	
 	Vigan\`o's method also assumes that the frame conditions are in a particular shape by prenexing and then skolemizing quantifiers. Following this process, we conjecture that for instance $\ax{F_1}$ could be incorporated to such a system as a pair of rules of the following form
@@ -2068,9 +2072,9 @@ and $\B_2 = \futs{z'}{z''}, \accs{z''}{v''}, \accs{y'}{v''}$.
 	\qquand
 	\vliinf{}{}{\B, \Gamma \SEQ \Delta, \accs {g(x,y,z)}z}{\B, \Gamma \SEQ \Delta, \accs xy}{\B, \Gamma \SEQ \Delta, \futs yz}$$
 	%
-	where $f$ and $g$ are (Skolem) function constants, and that similar rules could be designed for Scott-Lemmon axioms too. 
+	where $\lb f$ and $\lb g$ are (Skolem) function constants, and that similar rules could be designed for Scott-Lemmon axioms too. 
 	%
-	It should even possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa. We leave the investigation of all these different shapes of rules for future work.
+	It should even be possible to design ``mixed" rules, by considering relational atoms positively and pre-order atoms negatively, or vice-versa. We leave the investigation of all these different shapes of rules for future work.
 \end{remark}
 
 \section{Conclusion}
@@ -2079,7 +2083,7 @@ In this paper we embrace the fully labelled approach to intuitionistic modal log
 %
 We establish that it is a valid approach to intuitionistic modal logic by proving soundness and completeness of our system, via a reductive cut elimination argument.
 
-For a restricted class of these logics defined by so-called \emph{path axioms} $\fm{(\DIA^k\BOX A \IMP\BOX^m A) \AND (\DIA^k A \IMP \BOX^m\DIA A)}$ the standard labelled framework with one relation $R$ was enough for Simpson to get a strong connection between the sequent system, the axiomatisation and the birelational semantics~\cite{simpson:phd}.
+For a restricted class of these logics defined by so-called \emph{path axioms} $\fm{(\DIA^k\BOX A \IMP\BOX^m A) \AND (\DIA^k A \IMP \BOX^m\DIA A)}$ the standard labelled framework with one relation $R$ was enough for Simpson to get a strong connection between the sequent system, the axiomatisation, and the birelational semantics~\cite{simpson:phd}.
 %
 %
 We believe that the framework presented here might be the more appropriate way to treat logics outside of the path axioms definable fragment.
@@ -2092,13 +2096,13 @@ We instead took the way of a direct correspondence of our system with the class 
 
 We have considered in this work the logic known as $\IK$ (and its extensions) with respect to the birelational semantics that is its most well-studied semantics.
 %
-As we have mentioned, however, different basis can be considered for intuitionistic modal logic, for example the \emph{constructive modal logic} $\mathsf{CK}$~\cite{bierman:depaiva:sl00,mendler:scheele:ic11} and any in between.
+As we have mentioned, however, different basis can be considered for non-classical modal logic, for example the \emph{constructive modal logic} $\mathsf{CK}$~\cite{bierman:depaiva:sl00,mendler:scheele:ic11} and any in between.
 %
-These can also be studied within the birelational framework with some additional conditions, and we are convinced that the fully labelled framework, once extended with these conditions, will be suitable to treat constructive fragments equally.
+These can also be studied within the birelational semantics with some additional conditions, and we are convinced that the fully labelled framework, once extended with these conditions, will be suitable to treat constructive fragments equally.
 %
 However, treating extensions of $\mathsf{CK}$ with axioms such as we did here for Scott-Lemmon logics is known to be complex~\cite{arisaka:etal:lmcs15}.
 
-As for more general future work, there is a real necessity of a global view on intutionistic modal logics.
+As for more general future work, there is a real necessity of a global view on intuitionistic modal logics.
 %
 The work of~\cite{dalmonte:grellois:olivetti:JPL2020} is a great first step in understanding them in the context of non-normal modalities and neighbourhood semantics.
 %
