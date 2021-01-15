@@ -1,7 +1,255 @@
 \documentclass[a4paper]{article}
-\usepackage{authblk}
-\input{new-macros}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{authblk}
+\usepackage[margin=2cm]{geometry}
+
+\usepackage{amsmath} 
+%\usepackage{amssymb} 
+\usepackage{amsthm}
+
+\usepackage{latexsym} % For \Box and \Diamond
+\usepackage{colonequals} % for ::=
+%\usepackage{bm} % nice boldface for maths
+
+\usepackage[matrix,arrow]{xy}
+%\usepackage{xcolor}
+\usepackage[noxy]{virginialake}
+
+%\usepackage{array}
+\usepackage{graphicx} % For command \includegraphics and \scalebox                        
+%\usepackage{tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Small equation environments
+\newdimen\mydisplayskip
+\mydisplayskip=.4\abovedisplayskip
+%\newenvironment{smallequation}
+%{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation\endcsname}{\csname endequation\endcsname\egroup}
+%%
+\newenvironment{smallequation*}
+{\par\nobreak\vskip\mydisplayskip\noindent\bgroup\small\csname equation*\endcsname}{\csname endequation*\endcsname\egroup}
+%%
+%\newenvironment{smallalign}
+%{\par\nobreak\noindent\bgroup\small\csname align\endcsname}{\csname endalign\endcsname\egroup}
+%%
+%\newenvironment{smallalign*}
+%{\par\nobreak\noindent\bgroup\small\csname align*\endcsname}{\csname endalign*\endcsname\egroup}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Theorem counter
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{conjecture}[theorem]{Conjecture}
+%\newtheorem{fact}[theorem]{Fact}
+%\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%%
+\theoremstyle{definition}
+%\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{problem}[theorem]{Problem}
+%\newtheorem{construction}[theorem]{Construction}
+\newtheorem{remark}[theorem]{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Virginialake add-ons
+\newcommand{\vlderivationauxnc}[1]{#1{\box\derboxone}\vlderivationterm}
+\newcommand{\vlderivationnc}{\vlderivationinit\vlderivationauxnc}
+%
+%
+\makeatletter
+\newbox\@conclbox
+\newdimen\@conclheight
+%
+%
+\newcommand{\vlhtr}[2]{\vlpd{#1}{}{#2}}
+\newcommand\vlderiibase[5]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vliin{#1}{#2}{\box\@conclbox}{#4}{#5}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+}}
+%
+\newcommand\vlderibase[4]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vlin{#1}{#2}{\box\@conclbox}{#4}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+}}
+%
+\newcommand\vlderidbase[4]{{%
+		\setbox\@conclbox=\hbox{$#3$}\relax%
+		\@conclheight=\ht\@conclbox%
+		\setbox\@conclbox=\hbox{$%
+			\vlderivationnc{%
+				\vlid{#1}{#2}{\box\@conclbox}{#4}%
+			}$}%
+		\lower\@conclheight\box\@conclbox%
+}}
+%
+\makeatother
+%\left( 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MACROS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Comments  
+%\definecolor{notgray}{rgb}{.8,.8,.8}
+%\newcommand{\marianela}[1]{{\color{purple}[Marianela: #1]}}
+%\newcommand{\review}[1]{{\color{gray}[Reviewer: #1]}}
+%\newcommand{\sonia}[1]{{\color{blue}[Sonia: #1]}}
+%\newcommand{\lutz}[1]{{\color{notgreen}[Lutz: #1]}}
+%\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+%
+%\newcommand{\old}[1]{{\color{notgray}[OLD: #1]}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% General
+\newcommand*{\A}{\mathcal{A}}
+%\newcommand{\G}{\mathcal{G}}
+\newcommand*{\SG}{\fm{\mathcal{G}}}
+\newcommand{\SGi}[1]{\fm{\mathcal{G}_{#1}}}
+%
+\newcommand{\quand}{\quad\mbox{and}\quad}
+\newcommand{\qquand}{\qquad\mbox{and}\qquad}
+\newcommand{\quadcm}{\rlap{\quad,}}
+%
+\newcommand{\proviso}[1]{\mbox{\scriptsize #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Systems
+\newcommand*{\ax}[1]{\mathsf{#1}}
+\newcommand*{\kax}[1][]{\ax{k_{#1}}}
+\newcommand{\fourax}{\ax{4}}
+\newcommand{\agklmn}{{g_{klmn}}}
+%
+\newcommand*{\IK}{\mathsf{IK}}
+\newcommand*{\K}{\mathsf{K}}
+%
+\newcommand*{\IKfour}{\mathsf{IK4}}
+\newcommand*{\Kfour}{\mathsf{K4}}
+%
+%\newcommand*{\ISfour}{\mathsf{IS4}}
+%\newcommand*{\Sfour}{\mathsf{S4}}
+%
+\newcommand*{\labIKp}{\lab\IK_{\le}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Connectives
+\newcommand*{\NOT}{\neg}
+\newcommand*{\AND}{\mathbin{\wedge}}
+\newcommand*{\TOP}{\mathord{\top}}
+\newcommand*{\OR}{\mathbin{\vee}}
+\newcommand*{\BOT}{\mathord{\bot}}
+\newcommand*{\IMP}{\mathbin{\supset}}%%\scalebox{.9}{\raise.2ex\hbox{$\supset$}}}}
+
+\newcommand*{\BOX}{\mathord{\Box}}
+\newcommand*{\DIA}{\mathord{\Diamond}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Labelled sequents
+\definecolor{notgreen}{rgb}{.1,.6,.1}
+
+\newcommand{\lseq}[3]{#1 , #2 \SEQ #3}
+%
+\newcommand{\B}{\mathcal{R}}
+\newcommand{\Left}{\Gamma} %{\mathcal{L}}
+\newcommand{\Right}{\Delta} %{\mathcal{R}}
+%
+\newcommand*{\fm}[1]{{\color{notgreen}{#1}}}
+\newcommand*{\lb}[1]{{\color{blue}{#1}}}
+%
+\newcommand*{\rel}{R}
+\newcommand*{\labels}[2]{\lb{#1}\mathord{:}\fm{#2}}
+\newcommand*{\accs}[2]{\lb{#1}R\lb{#2}}
+\newcommand*{\futs}[2]{\lb{#1}\le{\lb{#2}}}
+%
+\newcommand{\SEQ}{\Longrightarrow}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Labelled rules
+\newcommand*{\rn}[1]  {\ensuremath{\mathsf{#1}}}
+\newcommand*{\lab}{\mathsf{lab}}
+%
+\newcommand*{\labrn}[2][]  {\rn{#2}_{#1}}%^{\lab}}}
+\newcommand*{\rlabrn}[2][]  {\rn{#2}_\rn{R#1}}%^\lab}}
+\newcommand*{\llabrn}[2][]  {\rn{#2}_\rn{L#1}}%^\lab}}
+%%
+%\newcommand*{\brsym}{\boxtimes}%\mathord{\scalebox{.8}{$\blacksquare$}}}
+\newcommand*{\diasym}{\diamondplus}%\mathord{\blacklozenge}}
+%%
+\newcommand*{\boxbrn}[1]{\boxtimes_\rn{#1}}%^{\lab}}}
+\newcommand*{\diabrn}[1]{\diamondplus_\rn{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% System labIK+gklmn
+\newcommand{\gklmn}{{\mathsf{g_{klmn}}}}%%\boxtimes
+\newcommand{\boxk}{\square_{R}^{k}}
+\newcommand{\boxlk}{\square_{L}^{k}}
+\newcommand{\diamk}{\lozenge_{L}^{k}}
+\newcommand{\diamrk}{\lozenge_{R}^{k}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Semantics
+\newcommand{\f}{f^{\mathcal{M}}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\F}{\mathcal{F}}
+%
+\newcommand{\inter}[1]{\lb{\llbracket #1\rrbracket}}
+%\newcommand{\force}[3]{#1,#2\Vdash#3}
+\newcommand{\nforce}[3]{#1,#2\not\Vdash#3}
+\newcommand{\cforce}[3]{#1,\lb{#2}\Vdash\fm{#3}}
+\newcommand{\cnforce}[3]{#1,\lb{#2}\not\Vdash\fm{#3}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Derivations
+\newcommand{\Dw}{\mathcal{D}^{\rn w}}
+\newcommand{\Dwone}{\mathcal{D}_{1}^{\rn w}}
+\newcommand{\Dwtwo}{\mathcal{D}_{2}^{\rn w}}
+%
+\newcommand{\D}{\mathcal{D}}
+\newcommand*{\DD}{\mathcal{D}}
+\newcommand{\Done}{\mathcal{D}_{1}}
+\newcommand{\Dtwo}{\mathcal{D}_{2}}
+%
+\newcommand{\height}[1]{|#1|}
+%
+\newcommand*{\reducesto}{\quad{\leadsto}\quad}
+\newcommand*{\invr}[1]{#1}%^\bullet}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{A fully labelled proof system for intuitionistic modal logics}
 \author[1]{Sonia Marin} 
 \author[2,3]{Marianela Morales}
@@ -9,17 +257,15 @@
 \affil[1]{University College London}
 \affil[2]{Laboratoire d'Informatique de l'\'Ecole Polytechnique}
 \affil[3]{Inria Saclay}
-
 \date{}
+
+
 	
 \begin{document}
 
   \maketitle
   
  \begin{abstract}
-   %% \review{Reconsider abstract. It reads very “operational” and does not clearly state the contributions of the paper.}
-   %% \lutz{Done?}
-   %% \sonia{Added two sentences at the beginning and modified it a bit.}
    Labelled proof theory has been famously successful for modal logics by mimicking their relational semantics within deductive systems. Simpson in particular designed a framework to study a variety of intuitionistic modal logics integrating a binary relation symbol in the syntax.
    %%
    In this paper, we present a labelled sequent system for
@@ -122,15 +368,15 @@
  	\item The correspondence between the syntax and the semantics is not
  	as clean as one would expect. As only the $R$-relation (and not the
  	$\le$-relation) is visible in an ordinary labelled
- 	sequent, we only have the result that a formula is provable in an extension of $\IK$ beyond paths axioms 
- 	if and only if is satisfied in all \emph{graph-consistent}\footnote{This
+ 	sequent, we only have the result that a formula is provable in an extension of $\IK$ \emph{beyond paths axioms }
+ 	if and only if it is satisfied in all \emph{graph-consistent}\footnote{This
  		means that every layer in the model can be lifted to any future of
  		any world in that layer. See~\cite{simpson:phd} and~\cite{mar:str:tableaux17} for a formal definition and discussion.}   
- 	models satisfying the corresponding conditions, as observed by Simpson	and considered an inelegant solution~\cite{simpson:phd}.
+ 	models satisfying the corresponding standard (\emph{classical}) conditions, as observed by Simpson	and considered an inelegant solution~\cite{simpson:phd}.
  \end{enumerate}
  In order to address these two concerns we follow here the approach~\cite{garg2012,maffezioli:etal:synthese13} that enriches usual  labelled sequents by allowing both, relational atoms of the form $\futs xy$ and of the form $\accs xy$ and develop it into a uniform general framework. 
  %%
- Consequently, following the same ``axiom-to-rule'' method as Simpson, we can translate the frame
+ Consequently, following the ``axiom-to-rule'' method, we can translate the frame
  conditions in~\eqref{eq:4frame} into inference rules:
  \begin{equation}
  \label{eq:4rules}
@@ -148,7 +394,8 @@
  provable in this system if and only if it is valid in all models satisfying the corresponding frame condition.
  
  Besides that, there is another pleasant observation to make about our
- system. It is naturally a multi-conclusion system. Ordinary labelled sequent systems for intuitionistic modal
+ system: It is naturally a multi-conclusion system. 
+ Ordinary labelled sequent systems for intuitionistic modal
  logic are single-conclusion~\cite{simpson:phd}. 
  %
  The same is true for the corresponding nested sequent
@@ -170,12 +417,12 @@
  systems for a larger class of intuitionistic modal logics, together
  with a syntactic cut elimination procedure.
  
- This paper is organized as follows. In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:completeness} and~\ref{sec:soundness}, we show soundness and completeness of the system with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the possible extension to the system to capture intuitionistic Scott-Lemmon modal logics.
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- %
- %
- \section{Intuitionistic modal logics}\label{sec:intmod}
+ This paper is organized as follows. In the next section (Section~\ref{sec:intmod}) we recall the standard syntax and semantics of intuitionistic modal logics. Then, in Section~\ref{sec:system} we present our system for the intuitionistic modal logic $\IK$. In Sections~\ref{sec:completeness} and~\ref{sec:soundness}, we show its soundness and completeness with cut. The cut elimination theorem, proved in Section~\ref{sec:cut-elim}, then entails soundness and completeness for the cut-free system. Finally, in Section~\ref{sec:ext} we discuss the extension of the system to capture intuitionistic Scott-Lemmon modal logics.
  
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \section{Intuitionistic modal logics}\label{sec:intmod}
  
  
  The language of {intuitionisitic modal logic} is the one of intuitionistic propositional logic with the modal operators $\BOX$ and $\DIA$, standing most generally for \emph{necessity} and \emph{possibility}.
@@ -188,9 +435,9 @@
  $$
  %
  
- Obtaining the intuitionistic variant of $\mathsf{K}$ is more involved than the classical variant. 
+ Obtaining the intuitionistic version of $\mathsf{K}$ is more involved than the classical one. 
  %%
- Lacking De Morgan duality, there are many variants of the \emph{distributivity axiom} $\mathsf{k}$ that are classically but not intuitionistically equivalent. Five axioms have been considered as primitives in the literature. An intuitionistic variant of the modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
+ Lacking De Morgan duality, there are many variants of the \emph{distributivity axiom} $\mathsf{k}$ that are classical but not intuitionistic consequences of one another. Five axioms have been considered as primitives in the literature. An intuitionistic version of modal logic $\K$ can then be obtained from ordinary intuitionistic propositional logic $\rn{IPL}$ by adding:
  %
  
  \begin{itemize}
@@ -220,12 +467,12 @@
  
  The Kripke semantics for $\IK$ was first defined by Fischer-Servi~\cite{fischer-servi:84}.
  %
- It combines the semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.\footnote{This semantics and some variants have also been studied in~\cite{bovzic1984models}. For an excellent survey on possible variants see~\cite{simpson:phd}.} 
+ It combines the semantics for intuitionistic propositional logic and the one for classical modal logic, using two distinct relations on the set of worlds.\footnote{This semantics and some variants have also been studied in~\cite{bovzic1984models}. For an excellent survey on possible alternatives see~\cite{simpson:phd}.} 
  
  \begin{definition}
  	A \emph{bi-relational frame} $\F$ is a triple $\langle W, \rel, \le \rangle$ 
  	%
- 	of a set of worlds $W$ equipped with an {accessibility relation} $\rel$ and a preorder $\le$ (\emph{i.e.}\ a reflexive and transitive relation) satisfying:
+ 	of a set of worlds $W$ equipped with an \emph{accessibility} relation $\rel$ and a preorder $\le$ (\emph{i.e.}\ a reflexive and transitive relation) satisfying:
  	\begin{enumerate}
  		\item[($\rn{F_1}$)] For all $\lb x, \lb y, \lb z \in W$, if $\accs xy$ and $\futs yz$, there exists $\lb u$ s.t.~$\futs xu$ and $\accs uz$.
  		
@@ -275,9 +522,9 @@
  %
  We write $\M, \lb w \not\Vdash \fm A$ if it is not the case that $\M, \lb w \Vdash \fm A$, but contrarily to the classical case, we do not have $\M, \lb w \Vdash \fm{\neg A}$ iff $\M, \lb w \not\Vdash \fm A$ (since $\fm{\neg A}$ is defined as $\fm{A \IMP \bot}$).
  
- From the monotonicity of the valuation function $V$, we get a monotonicity property for the $\Vdash$ relation:
- \begin{proposition}(Monotonicity) 
- 	For any formula $\fm A$ and for any $\lb w, \lb{w'} \in W$, if $\futs w{w'}$ and $\M, \lb w \Vdash \fm A$, then $\M, \lb{w'} \Vdash \fm A$.
+ From the monotonicity of the valuation function $V$, a monotonicity property for the $\Vdash$ relation is obtained.
+ \begin{proposition}%(Monotonicity) 
+ 	For any formula $\fm A$ and any $\lb w, \lb{w'} \in W$, if $\futs w{w'}$ and $\M, \lb w \Vdash \fm A$, then $\M, \lb{w'} \Vdash \fm A$.
  \end{proposition}
  
  
@@ -364,9 +611,9 @@
  	\label{fig:labIKp}
  \end{figure}
  
- Now we can present the inference rules for \emph{system $\labIKp$} for the logic $\IK$.
+ Now we can present the inference rules of \emph{system $\labIKp$} for the logic $\IK$.
  We obtained this system, shown in Figure~\ref{fig:labIKp}, as follows.
- Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can straightforwardly translated into the labelled setting, and which yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as we show them in Figure~\ref{fig:labIKp}. However, this naive translation would also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
+ Our starting point was the multiple-conlusion nested sequent system \emph{\`a la} Maehara (as presented in~\cite{str:2017maehara}), which can be straightforwardly translated into the labelled setting, and yields the rules $\llabrn\bot$, $\llabrn\AND$, $\rlabrn\AND$, $\llabrn\OR$, $\rlabrn\OR$, $\llabrn\DIA$, and $\rlabrn\DIA$ as shown in Figure~\ref{fig:labIKp}. However, this naive translation would also yield the rules $\rn{id'}$, $\llabrn\IMP'$, and~$\llabrn\BOX'$:
  \begin{equation}
  \label{eq:nomon}
  \vlinf{\rn{id}'}{}{\B, \Left, \labels{x}{a} \SEQ \Right, \labels{x}{a} }{}
@@ -375,23 +622,22 @@
  \quad
  \vlinf{\llabrn\BOX'}{}{\B, \accs xz, \Left, \labels{x}{\BOX A} \SEQ \Right}{\B, \accs xz, \Left, \labels{x}{\BOX A}, \labels{z}{A} \SEQ \Right}
  \end{equation}
- that are not sufficient for a complete system, and we will see below
- why. Before, let us first look at the rules $\rlabrn\IMP$ and
- $\rlabrn\BOX$. In the multiple-conlusion nested sequent system
- of~\cite{str:2017maehara}, these are the two rules that force
+ that are not sufficient for a complete system. Notice also that the rules $\rlabrn\IMP$ and
+ $\rlabrn\BOX$, in the multiple-conlusion nested sequent system
+ of~\cite{str:2017maehara}, are the two rules that force
  single-conclusion.  
  %
  In our system, this phenomenon is replaced by a re-positioning of the considered formulas to a fresh label.
- %
- In the Kripke-semantics in~\eqref{eq:kripke} the two
+ 
+ In the Kripke semantics in~\eqref{eq:kripke} the two
  connectives $\IMP$ and $\BOX$ are the ones that make use of the
  pre-order relation $\le$. This relation is reflexive and transitive. In
  order to capture that in the proof system, we need to add the rules
- $\rn{refl}$ and $\rn{trans}$.\footnote{These are the same as for {\bf G3I} as presented in~\cite{dyckhoff2012}.}
+ $\rn{refl}$ and $\rn{trans}$.\footnote{These are the same as for {\bf G3I}, presented in~\cite{dyckhoff2012}.}
  %
  
  Finally, in the semantics, the two relations $\rel$ and $\le$ are
- strongly connected through the two conditions $\rn{F_1}$ and $\rn{F_2}$. These need to be reflected at the level of the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.\footnote{The logic studied in~\cite{maffezioli2014} has similar semantic conditions (two binary relations in a Kripke frame) that lead to similar rules as ours in the proof system.}
+ strongly connected through the two conditions ($\rn{F_1}$) and ($\rn{F_2}$). These need to be reflected at the level of the proof system, which is done by the two rules $\rn{F_1}$ and $\rn{F_2}$.\footnote{The logic studied in~\cite{maffezioli2014} has similar semantic conditions (two binary relations in a Kripke frame) that lead to similar rules as ours in the proof system.}
  %
  These rules require to create new labels, and in order to be
  complete, the system needs the \emph{monotonicity} rule $\llabrn{mon}$, shown on the left below. 
@@ -545,21 +791,21 @@ The cut rule has the following shape:
 	\lseq\B{\Left,\labels{z}{C}}{\Right}}
 \end{equation}
 
-We say that a formula is \emph{provable} in $\labIKp$ (or $\labIKp+\labrn{cut}$, resp.) if for any label $\lb x$, the sequent $\SEQ \labels{x}{A}$ is derivable from only axioms using the rules in Figure~\ref{fig:labIKp} (with possible instances of $\labrn{cut}$, resp.).
+We say that a formula $\fm A$ is \emph{provable} in $\labIKp$ (or $\labIKp+\labrn{cut}$, resp.) if for any label $\lb x$, the sequent $\SEQ \labels{x}{A}$ is derivable from only axioms using the rules in Figure~\ref{fig:labIKp} (with possible instances of $\labrn{cut}$, resp.).
 %
 We can summarize soundness, completeness, and cut
 admissibility of $\labIKp$ in the following result.
 
 \begin{theorem}\label{thm:cutfree-compl}
-	For any formula $A$, the following are equivalent.
+	For any formula $\fm A$, the following are equivalent.
 	%
 	\begin{enumerate}
-		\item\label{i} $A$ is a theorem of $\IK$. 
+		\item\label{i} $\fm A$ is a theorem of $\IK$. 
 		%
-		\item\label{ii} $A$ is provable in $\labIKp +\labrn{cut}$.
-		\item\label{iii} $A$ is provable in $\labIKp$.
+		\item\label{ii} $\fm A$ is provable in $\labIKp +\labrn{cut}$.
+		\item\label{iii} $\fm A$ is provable in $\labIKp$.
 		%
-		\item\label{iv} $A$ is valid in every birelational frame. 
+		\item\label{iv} $\fm A$ is valid in every birelational frame. 
 	\end{enumerate}
 \end{theorem}
 
